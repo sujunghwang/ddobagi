@@ -41,5 +41,7 @@ public class UserQuiz {
 	@JoinColumn(name = "quiz_id", updatable = false, insertable = false)
 	private Quiz quiz;
 
-	private boolean isCorrected;
+	private boolean isNowCorrected;
+
+	private boolean isFirstCorrected;
 }

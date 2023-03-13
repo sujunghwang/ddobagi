@@ -26,9 +26,6 @@ public class CultureTrans {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	// @Column(name = "culture_id")
-	// private Long cultureId;
-
 	private String title;
 
 	private String description;
