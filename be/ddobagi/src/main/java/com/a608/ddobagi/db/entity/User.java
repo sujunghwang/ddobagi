@@ -7,19 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *packageName    : com.a608.ddobagi.entity
- * fileName       : User
- * author         : modsiw
- * date           : 2023/03/10
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023/03/10        modsiw       최초 생성
- */
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 @Entity
-public class User {
+@Getter
+@NoArgsConstructor
+public class User extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +31,16 @@ public class User {
 
 	private int age;
 
+	@Enumerated(EnumType.STRING)
+	private Role role;
+
+	@Builder
+	public User(String loginId, String pw, String name, Lang userLang, int age, Role role) {
+		this.loginId = loginId;
+		this.pw = pw;
+		this.name = name;
+		this.userLang = userLang;
+		this.age = age;
+		this.role = role;
+	}
 }
