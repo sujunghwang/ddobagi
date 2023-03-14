@@ -9,24 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-/**
- *packageName    : com.a608.ddobagi.entity
- * fileName       : UserScript
- * author         : modsiw
- * date           : 2023/03/10
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023/03/10        modsiw       최초 생성
- */
-
 @Entity
 public class UserScript {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	private int pronounce;
 
 	@Column(name = "user_id")
 	private Long userId;

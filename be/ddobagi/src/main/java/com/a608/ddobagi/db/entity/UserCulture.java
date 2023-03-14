@@ -9,17 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-/**
- *packageName    : com.a608.ddobagi.entity
- * fileName       : UserCulture
- * author         : modsiw
- * date           : 2023/03/10
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023/03/10        modsiw       최초 생성
- */
 @Entity
 public class UserCulture {
 
