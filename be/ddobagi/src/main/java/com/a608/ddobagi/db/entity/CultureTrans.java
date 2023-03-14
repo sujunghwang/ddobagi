@@ -7,18 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *packageName    : com.a608.ddobagi.entity
- * fileName       : CultureTrans
- * author         : modsiw
- * date           : 2023/03/10
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023/03/10        modsiw       최초 생성
- */
-
 @Entity
 public class CultureTrans {
 

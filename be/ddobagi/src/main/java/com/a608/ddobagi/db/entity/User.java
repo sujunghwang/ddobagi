@@ -1,5 +1,8 @@
 package com.a608.ddobagi.db.entity;
 
+import java.time.LocalDate;
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,6 +29,9 @@ public class User extends BaseEntity {
 
 	private String name;
 
+	//생년월일 추가
+	private LocalDate birth;
+
 	@Enumerated(EnumType.STRING)
 	private Lang userLang;
 
@@ -42,5 +48,19 @@ public class User extends BaseEntity {
 		this.userLang = userLang;
 		this.age = age;
 		this.role = role;
+	}
+
+	//== 비즈니스 로직==//
+
+	public void setAge(int age) {
+		this.age = calAge(birth);
+	}
+
+	public int calAge(LocalDate birth) {
+		Calendar now = Calendar.getInstance(); //년월일시분초
+		int currentYear = now.get(Calendar.YEAR);
+		int userYear = birth.getYear();
+		int age = currentYear - userYear;
+		return age;
 	}
 }
