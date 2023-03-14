@@ -13,10 +13,10 @@ server:
 spring:
   datasource:
     #     develop ??? ?
-#    driver-class-name: org.mariadb.jdbc.Driver
-#    url: jdbc:mariadb://i8a810.p.ssafy.io:3939/bundler?useUnicode=true&characterEncoding=utf-8
-#    username: root
-#    password: my-secret-pw
+    #    driver-class-name: org.mariadb.jdbc.Driver
+    #    url: jdbc:mariadb://i8a810.p.ssafy.io:3939/bundler?useUnicode=true&characterEncoding=utf-8
+    #    username: root
+    #    password: my-secret-pw
 
     # ssafy ??? local ?
     #        driver-class-name: org.mariadb.jdbc.Driver
@@ -24,11 +24,11 @@ spring:
     #        username: root
     #        password: ssafy
 
-#     ?? ??? local ?
-        url: jdbc:mysql://localhost:3306/ddobagi?useUnicode=true&characterEncoding=utf-8
-        username: ssafy
-        password: ssafy
-        driver-class-name: com.mysql.cj.jdbc.Driver
+    #     ?? ??? local ?
+    url: jdbc:mysql://localhost:3306/ddobagi?useUnicode=true&characterEncoding=utf-8
+    username: ssafy
+    password: ssafy
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
     # ??? dummy test ?
     #    driver-class-name: org.mariadb.jdbc.Driver
@@ -36,22 +36,8 @@ spring:
     #    username: root
     #    password: my-secret-pw
 
-
   output.ansi.enabled: always
-#  jpa:
-#    open-in-view: false
-#    hibernate:
-#      ddl-auto: create # create, update, none
-##      naming:
-##        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-#    show-sql: true
-#    generate-ddl: true
-#    properties:
-#      hibernate:
-#        #        dialect:
-#        #        default_schema:
-#        format_sql: true
-#    defer-datasource-initialization: true
+
   jpa:
     hibernate:
       ddl-auto: create # (1) ??? ?? ??
@@ -60,18 +46,12 @@ spring:
     properties:
       hibernate:
         format_sql: true # (3) SQL pretty print
-#        dialect: org.hibernate.dialect.MariaDB103Dialect
-
-    jpa:
-      hibernate:
-        ddl-auto: create
-      #      use-new-id-generator-mappings: false
-      properties:
-        hibernate:
-          format_sql: true
 
   jackson:
     serialization:
       write-dates-as-timestamps: false
     time-zone: Asia/Seoul
+
+jwt:
+  secret: n0syh2pcj1W9hGmeXsEFrfSiSqh3BE8ZOV4HOkAM2yFpFSQ9E3pWV4TQCgwvAmYaTveCepecwcZpBbFFdjfakskejrlfrpgodigksmsrjswlcka
 
