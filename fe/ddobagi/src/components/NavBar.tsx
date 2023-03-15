@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./NavBar.module.scss"
+import SelectLanguage from "../container/LanguageSelectorContainer";
 
 function NavBar() {
 
@@ -13,11 +14,7 @@ function NavBar() {
         <div>한국어 연습</div>     
         <div>한국 문화</div>     
         <div>언어 선택</div>     
-        <div>
-          <div>한국어</div>
-          <div>中文</div>
-          <div>Tiếng Việt</div>
-        </div>
+        <SelectLanguage />
         <div>로그인</div>     
         <div>로그아웃</div>
       </div>     
