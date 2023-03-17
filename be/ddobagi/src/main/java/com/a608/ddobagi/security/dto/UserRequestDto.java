@@ -1,5 +1,7 @@
 package com.a608.ddobagi.security.dto;
 
+import java.time.LocalDate;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -24,15 +26,17 @@ public class UserRequestDto {
 	private String pw;
 	private String name;
 	private String userLang;
-	private int age;
+	private LocalDate birth;
+	// private int age;
 
 	public User toEntity(PasswordEncoder passwordEncoder) {
 		return User.builder()
 			.loginId(loginId)
-			.pw(pw)
+			.pw(passwordEncoder.encode(pw))
 			.name(name)
 			.userLang(Lang.valueOf(userLang))
-			.age(age)
+			// .age(age)
+			.birth(birth)
 			.role(Role.ROLE_USER)
 			.build();
 

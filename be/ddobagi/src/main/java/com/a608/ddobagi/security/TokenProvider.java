@@ -14,6 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.a608.ddobagi.security.dto.TokenDto;
 import com.a608.ddobagi.security.dto.UserRequestDto;
@@ -27,6 +28,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
@@ -37,7 +41,6 @@ public class TokenProvider {
 	private static final String BEARER_TYPE = "bearer";
 	private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;
 	private final Key key;
-	private UserRepository userRepository;
 
 	// 주의점: 여기서 @Value는 `springframework.beans.factory.annotation.Value`소속이다! lombok의 @Value와 착각하지 말것!
 	//     * @param secretKey
@@ -47,11 +50,10 @@ public class TokenProvider {
 	}
 
 	// 토큰 생성
-	public TokenDto generateTokenDto(Authentication authentication, UserRequestDto requestDto) {
+	public TokenDto generateTokenDto(Authentication authentication,
+		UserRequestDto requestDto, com.a608.ddobagi.db.entity.User user) {
 
 		//유저 찾기
-		com.a608.ddobagi.db.entity.User user = userRepository.findByLoginId(requestDto.getLoginId()).get();
-
 		String authorities = authentication.getAuthorities().stream()
 			.map(GrantedAuthority::getAuthority)
 			.collect(Collectors.joining(","));

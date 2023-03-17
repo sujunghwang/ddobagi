@@ -11,12 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@Data
 public class User extends BaseEntity {
 
 	@Id
@@ -41,26 +43,26 @@ public class User extends BaseEntity {
 	private Role role;
 
 	@Builder
-	public User(String loginId, String pw, String name, Lang userLang, int age, Role role) {
+	public User(String loginId, String pw, String name, Lang userLang, LocalDate birth, Role role) {
 		this.loginId = loginId;
 		this.pw = pw;
 		this.name = name;
 		this.userLang = userLang;
-		this.age = age;
+		this.birth = birth;
+		this.age = calAge(birth);
 		this.role = role;
 	}
 
 	//== 비즈니스 로직==//
 
-	public void setAge(int age) {
-		this.age = calAge(birth);
-	}
+	// public void setAge(LocalDate birth) {
+	// 	this.age = calAge(birth);
+	// }
 
 	public int calAge(LocalDate birth) {
 		Calendar now = Calendar.getInstance(); //년월일시분초
 		int currentYear = now.get(Calendar.YEAR);
 		int userYear = birth.getYear();
-		int age = currentYear - userYear;
-		return age;
+		return currentYear - userYear;
 	}
 }
