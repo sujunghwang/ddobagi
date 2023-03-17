@@ -40,8 +40,8 @@ public class AuthService {
 		UsernamePasswordAuthenticationToken authenticationToken = requestDto.toAuthentication();
 
 		Authentication authentication = managerBuilder.getObject().authenticate(authenticationToken);
-
-		return tokenProvider.generateTokenDto(authentication, requestDto);
+		User user = userRepository.findByLoginId(requestDto.getLoginId()).get();
+		return tokenProvider.generateTokenDto(authentication, requestDto, user);
 	}
 
 
