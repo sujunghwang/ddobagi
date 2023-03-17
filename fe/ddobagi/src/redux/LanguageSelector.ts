@@ -15,7 +15,7 @@ type LanguageSelectorState = {
 }
 
 const initialState : LanguageSelectorState = {
-  language: 'KR'
+  language: ''
 }
 
 function LanguageSelector(
