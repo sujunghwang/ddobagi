@@ -16,7 +16,7 @@ public class UserScript {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private int pronounce;
+	private float pronounce;
 
 	@Column(name = "user_id")
 	private Long userId;
