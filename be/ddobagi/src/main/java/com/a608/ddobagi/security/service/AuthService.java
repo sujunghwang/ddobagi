@@ -12,7 +12,7 @@ import com.a608.ddobagi.security.TokenProvider;
 import com.a608.ddobagi.security.dto.TokenDto;
 import com.a608.ddobagi.security.dto.UserRequestDto;
 import com.a608.ddobagi.security.dto.UserResponseDto;
-import com.a608.ddobagi.security.repository.UserRepository;
+import com.a608.ddobagi.db.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
