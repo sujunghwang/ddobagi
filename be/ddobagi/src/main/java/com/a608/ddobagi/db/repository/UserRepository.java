@@ -1,4 +1,4 @@
-package com.a608.ddobagi.security.repository;
+package com.a608.ddobagi.db.repository;
 
 import java.util.Optional;
 
