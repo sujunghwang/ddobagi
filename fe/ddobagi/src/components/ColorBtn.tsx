@@ -1,5 +1,7 @@
 import React from "react";
+import styles from "./ColorBtn.module.scss";
 import { Button } from "@mui/material";
+
 
 type BtnProp = {
   content: string;
@@ -8,32 +10,31 @@ type BtnProp = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-function ColorBtn({ content, color, width, onClick }: BtnProp) {
+function ColorBtn({ content, color, width, onClick }: BtnProp) : JSX.Element {
+
   return (
-    <Button
-      variant="contained"
-      sx={{
-        width: width,
-        color: "#000000",
-        backgroundColor: color,
-        borderRadius: 50,
-        fontFamily: "CookieRun-Regular",
-        fontSize: 20,
-        borderColor: "rgba(0, 0, 0, .25)",
-        borderWidth: "0px 4px 4px 0px",
-        borderStyle: "solid",
-        transition: "border-width .1s ",
-        "&:hover": {
+    <div className={styles.Container}>
+      <Button
+        variant="contained"
+        sx={{
+          width: width,
+          color: "#000000",
           backgroundColor: color,
-          borderWidth: "0px",
-        },
-        marginX: "15px",
-      }}
-      disableElevation
-      onClick={onClick}
-    >
-      {content}
-    </Button>
+          borderRadius: 50,
+          fontFamily: "CookieRun-Regular",
+          fontSize: 20,
+          transition: "top .1s ",
+          "&:hover": {
+            backgroundColor: color,
+          },
+        }}
+        disableElevation
+        onClick={onClick}
+      >
+        {content}
+      </Button>
+      {/* <div className={styles.Btn}></div> */}
+    </div>
   );
 }
 

@@ -2,11 +2,10 @@ import React from "react";
 import Input from "@mui/joy/Input";
 
 type Props = {
-
+  closeModal: Function;
 };
 
-function InfoEdit({ }: Props) {
-
+function InfoEdit({ closeModal }: Props) {
   return (
     <div>
       <div>아이디</div>

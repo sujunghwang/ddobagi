@@ -3,7 +3,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import LanguageIcon from "@mui/icons-material/Language";
 import styles from "./NavBar.module.scss";
 
 type SelectLanguageProps = {
@@ -20,7 +19,6 @@ function SelectLanguage({ language, changeLanguageBy }: SelectLanguageProps) {
     <div>
       <FormControl sx={{ minWidth: 130 }} size="small">
         <InputLabel id="select-label" className={styles.SelectLabel}>
-          <LanguageIcon />
           Language
         </InputLabel>
         <Select

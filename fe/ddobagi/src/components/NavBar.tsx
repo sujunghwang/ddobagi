@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import styles from "./NavBar.module.scss";
 import SelectLanguage from "../container/LanguageSelectorContainer";
-import ModalPortal from "./modal/Portal";
 import UserInfoModal from "./modal/UserInfoModal";
-import { Transition } from "react-transition-group";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,19 +10,26 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate, useLocation } from "react-router-dom";
 import ColorBtn from "../components/ColorBtn";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/RootReducer";
 
 function NavBar() {
+  //언어 변수
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+  );
+  //
+
+  //모달 관련 함수
   const [modal, setModal] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<string>("");
   const closeModal = () => setModal(false);
+  // 모달 관련 함수 종료
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
 
@@ -52,6 +57,16 @@ function NavBar() {
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
+  };
+  //
+
+  // 로그인 확인 변수
+  const userStr = localStorage.getItem("user");
+
+  //로그아웃 함수
+  const logout = () => {
+    localStorage.clear();
+    navigateToHome();
   };
 
   const handleCloseNavMenu = () => {
@@ -92,15 +107,23 @@ function NavBar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                <MenuItem
-                  key="보호자M"
-                  onClick={() => {
-                    navigateToParents();
-                    handleCloseNavMenu();
-                  }}
-                >
-                  <Typography textAlign="center">보호자</Typography>
-                </MenuItem>
+                {userStr && (
+                  <MenuItem
+                    key="보호자M"
+                    onClick={() => {
+                      navigateToParents();
+                      handleCloseNavMenu();
+                    }}
+                  >
+                    <Typography textAlign="center">
+                      {language === "CN"
+                        ? "监护人"
+                        : language === "VI"
+                        ? "người giám hộ"
+                        : "보호자"}
+                    </Typography>
+                  </MenuItem>
+                )}
                 <MenuItem
                   key="한국어 연습M"
                   onClick={() => {
@@ -108,7 +131,13 @@ function NavBar() {
                     handleCloseNavMenu();
                   }}
                 >
-                  <Typography textAlign="center">한국어 연습</Typography>
+                  <Typography textAlign="center">
+                    {language === "CN"
+                      ? "学习"
+                      : language === "VI"
+                      ? "học hỏi"
+                      : "한국어 연습"}
+                  </Typography>
                 </MenuItem>
                 <MenuItem
                   key="한국 문화M"
@@ -117,37 +146,67 @@ function NavBar() {
                     handleCloseNavMenu();
                   }}
                 >
-                  <Typography textAlign="center">한국 문화</Typography>
+                  <Typography textAlign="center">
+                    {language === "CN"
+                      ? "韩国文化"
+                      : language === "VI"
+                      ? "văn hoá"
+                      : "한국 문화"}
+                  </Typography>
                 </MenuItem>
-                <MenuItem
-                  key="내 정보M"
-                  onClick={() => {
-                    navigateToMyPage();
-                    handleCloseNavMenu();
-                  }}
-                >
-                  <Typography textAlign="center">내 정보</Typography>
-                </MenuItem>
+                {userStr && (
+                  <MenuItem
+                    key="내 정보M"
+                    onClick={() => {
+                      navigateToMyPage();
+                      handleCloseNavMenu();
+                    }}
+                  >
+                    <Typography textAlign="center">
+                      {language === "CN"
+                        ? "我的简历"
+                        : language === "VI"
+                        ? "Thông tin của tôi"
+                        : "내 정보"}
+                    </Typography>
+                  </MenuItem>
+                )}
                 <SelectLanguage />
-                <ColorBtn
-                  content="로그인"
-                  color="#FFD93D"
-                  width="130px"
-                  onClick={() => {
-                    setModal(true);
-                    setModalContent("Login");
-                    handleCloseNavMenu();
-                  }}
-                />
-                <ColorBtn
-                  content="로그아웃"
-                  color="#FF6B6B"
-                  width="130px"
-                  onClick={() => {
-                    setModal(false);
-                    handleCloseNavMenu();
-                  }}
-                />
+                {userStr === null && (
+                  <ColorBtn
+                    content={
+                      language === "CN"
+                        ? "登录"
+                        : language === "VI"
+                        ? "đăng nhập"
+                        : "로그인"
+                    }
+                    color="#FFD93D"
+                    width="130px"
+                    onClick={() => {
+                      setModal(true);
+                      setModalContent("Login");
+                      handleCloseNavMenu();
+                    }}
+                  />
+                )}
+                {userStr && (
+                  <ColorBtn
+                    content={
+                      language === "CN"
+                        ? "登出"
+                        : language === "VI"
+                        ? "đăng xuất"
+                        : "로그아웃"
+                    }
+                    color="#FF6B6B"
+                    width="130px"
+                    onClick={() => {
+                      setModal(false);
+                      handleCloseNavMenu();
+                    }}
+                  />
+                )}
               </Menu>
             </Box>
             <img
@@ -180,19 +239,25 @@ function NavBar() {
                   },
                 }}
               >
-                <div
-                  key="보호자"
-                  className={styles.Router}
-                  onClick={navigateToParents}
-                  style={{
-                    borderWidth:
-                      location.pathname === "/parentpage"
-                        ? "0px 3px 4px 0px"
-                        : "0px 0px 0px 0px",
-                  }}
-                >
-                  보호자
-                </div>
+                {userStr && (
+                  <div
+                    key="보호자"
+                    className={styles.Router}
+                    onClick={navigateToParents}
+                    style={{
+                      borderWidth:
+                        location.pathname === "/parentpage"
+                          ? "0px 3px 4px 0px"
+                          : "0px 0px 0px 0px",
+                    }}
+                  >
+                    {language === "CN"
+                      ? "监护人"
+                      : language === "VI"
+                      ? "người giám hộ"
+                      : "보호자"}
+                  </div>
+                )}
                 <div
                   key="한국어 연습"
                   className={styles.Router}
@@ -204,7 +269,11 @@ function NavBar() {
                         : "0px 0px 0px 0px",
                   }}
                 >
-                  한국어 연습
+                  {language === "CN"
+                    ? "学习"
+                    : language === "VI"
+                    ? "học hỏi"
+                    : "한국어 연습"}
                 </div>
                 <div
                   key="한국 문화"
@@ -217,58 +286,77 @@ function NavBar() {
                         : "0px 0px 0px 0px",
                   }}
                 >
-                  한국 문화
+                  {language === "CN"
+                    ? "韩国文化"
+                    : language === "VI"
+                    ? "văn hoá"
+                    : "한국 문화"}
                 </div>
-                <div
-                  key="내 정보"
-                  className={styles.Router}
-                  onClick={navigateToMyPage}
-                  style={{
-                    borderWidth:
-                      location.pathname === "/mypage"
-                        ? "0px 3px 4px 0px"
-                        : "0px 0px 0px 0px",
-                  }}
-                >
-                  내 정보
-                </div>
+                {userStr && (
+                  <div
+                    key="내 정보"
+                    className={styles.Router}
+                    onClick={navigateToMyPage}
+                    style={{
+                      borderWidth:
+                        location.pathname === "/mypage"
+                          ? "0px 3px 4px 0px"
+                          : "0px 0px 0px 0px",
+                    }}
+                  >
+                    {language === "CN"
+                      ? "我的简历"
+                      : language === "VI"
+                      ? "Thông tin của tôi"
+                      : "내 정보"}
+                  </div>
+                )}
 
                 <SelectLanguage />
-                <ColorBtn
-                  content="로그인"
-                  color="#FFD93D"
-                  width="130px"
-                  onClick={() => {
-                    setModal(true);
-                    setModalContent("Login");
-                  }}
-                />
-                <ColorBtn
-                  content="로그아웃"
-                  color="#FF6B6B"
-                  width="130px"
-                  onClick={() => {
-                    setModal(false);
-                  }}
-                />
+
+                {userStr === null && (
+                  <ColorBtn
+                    content={
+                      language === "CN"
+                        ? "登录"
+                        : language === "VI"
+                        ? "đăng nhập"
+                        : "로그인"
+                    }
+                    color="#FFD93D"
+                    width="130px"
+                    onClick={() => {
+                      setModal(true);
+                      setModalContent("Login");
+                    }}
+                  />
+                )}
+                {userStr && (
+                  <ColorBtn
+                    content={
+                      language === "CN"
+                        ? "登出"
+                        : language === "VI"
+                        ? "đăng xuất"
+                        : "로그아웃"
+                    }
+                    color="#FF6B6B"
+                    width="130px"
+                    onClick={logout}
+                  />
+                )}
               </Box>
             </Box>
           </Toolbar>
         </Container>
       </AppBar>
 
-      <ModalPortal>
-        <Transition unmountOnExit in={modal} timeout={500}>
-          {(state) => (
-            <UserInfoModal
-              show={state}
-              closeModal={closeModal}
-              modalContent={modalContent}
-              setModalContent={setModalContent}
-            />
-          )}
-        </Transition>
-      </ModalPortal>
+      <UserInfoModal
+        closeModal={closeModal}
+        modalContent={modalContent}
+        setModalContent={setModalContent}
+        modal={modal}
+      />
     </div>
   );
 }
