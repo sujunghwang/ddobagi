@@ -1,0 +1,91 @@
+.FContainer {
+  border-radius: 30px;
+  margin: 1rem 5rem 5rem 5rem;
+  box-shadow: inset 0px 10px 0px rgba(0, 0, 0, 0.25);
+  overflow: auto;
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+
+.FContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.SContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  gap: 4rem;
+}
+.CardContainer {
+  position: relative;
+  width: 345;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.Crown {
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  transform: translate(-50%, 15%);
+  z-index: 1;
+}
+
+.LeftIcon {
+  font-size: 4rem;
+  opacity: 0.5;
+  position: absolute;
+  z-index: 2;
+  left: 5rem;
+  transform: translate(0, 130%) scaleX(-1);
+  cursor: pointer;
+}
+
+.RightIcon {
+  font-size: 4rem;
+  opacity: 0.5;
+  position: absolute;
+  z-index: 2;
+  right: 5rem;
+  transform: translate(0, 130%);
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .FContainer {
+    border-radius: 30px;
+    margin: 1rem 1rem 5rem 1rem;
+    box-shadow: inset 0px 10px 0px rgba(0, 0, 0, 0.25);
+    overflow: auto;
+    padding-top: 10px;
+    box-sizing: border-box;
+  }
+  .SContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 2rem;
+    gap: 4rem;
+  }
+  .LeftIcon {
+    font-size: 4rem;
+    opacity: 0.5;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    transform: translate(0, 130%) scaleX(-1);
+    cursor: pointer;
+  }
+
+  .RightIcon {
+    font-size: 4rem;
+    opacity: 0.5;
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    transform: translate(0, 130%);
+    cursor: pointer;
+  }
+}
