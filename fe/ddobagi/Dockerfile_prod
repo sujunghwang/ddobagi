@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 FROM nginx:alpine
-COPY --from=build /react/build /usr/share/nginx/html
+COPY --from=build /ddobagi/build /usr/share/nginx/html
 
 # # nginx 이미지를 사용합니다. 뒤에 tag가 없으면 latest 를 사용.
 # FROM nginx
