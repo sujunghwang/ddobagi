@@ -1,8 +1,8 @@
 package com.a608.ddobagi.api.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,13 +55,14 @@ public class UserService {
 	private final ScriptRepository scriptRepository;
 	private final QuizRepository quizRepository;
 	private final CultureRepository cultureRepository;
-	PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 
 	public UserResponseDto findUser(Long userId) {
 		User user = userRepository.findById(userId).orElseThrow(
 			() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
 
 		return UserResponseDto.builder()
+			.userId(user.getId())
 			.loginId(user.getLoginId())
 			.name(user.getName())
 			.age(user.getAge())
@@ -75,6 +76,7 @@ public class UserService {
 			() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
 
 		User modifyUser = userRepository.save(user.toBuilder()
+			.id(userId)
 			.birth(requestDto.getBirth())
 			.name(requestDto.getName())
 			.pw(passwordEncoder.encode(requestDto.getPw()))
@@ -94,12 +96,10 @@ public class UserService {
 		User user = userRepository.findById(userId).orElseThrow(
 			() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
 
-		String inputPw = passwordEncoder.encode(requestDto.getPw());
-
-		if (inputPw.equals(user.getPw())) {
+		if (passwordEncoder.matches(requestDto.getPw(), user.getPw())) {
 			return true;
 		} else {
-			throw new IllegalIdentifierException(userId + " 의 비밀번호가 일치하지 않습니다.");
+			throw new IllegalArgumentException(userId + " 의 비밀번호가 일치하지 않습니다.");
 		}
 	}
 
@@ -120,32 +120,32 @@ public class UserService {
 		// ===== 퀴즈, 스크립트, 문화 진행률 ==== //
 		if (userScriptRepository.countByUserId(userId) != 0L) {
 			scriptProgress = (int)(userScriptRepository.countByUserId(userId)
-				/ scriptRepository.countBy());
+				/ scriptRepository.countBy() * 100);
 		}
 
 		if (userQuizRepository.countByUserId(userId) != 0L) {
 			quizProgress = (int)(userQuizRepository.countByUserId(userId)
-				/ quizRepository.countBy());
+				/ quizRepository.countBy() * 100);
 		}
 
 		if (userCultureRepository.countByUserId(userId) != 0L) {
 			cultureProgress = (int)(userCultureRepository.countByUserId(userId)
-				/ cultureRepository.countBy());
+				/ cultureRepository.countBy() * 100);
 		}
 
 		// ===== 카테고리 진행률 ===== //
 		if (userRepository.categoryUserDoneCnt(categorySchool, userId) != 0L) {
 			schoolCategoryProgress = (int)(userRepository.categoryUserDoneCnt(categorySchool, userId)
-				/ userRepository.categoryCnt(categorySchool));
+				/ userRepository.categoryCnt(categorySchool) * 100);
 		}
 		if (userRepository.categoryUserDoneCnt(categoryHome, userId) != 0L) {
 			homeCategoryProgess = (int)(userRepository.categoryUserDoneCnt(categoryHome, userId)
-				/ userRepository.categoryCnt(categoryHome));
+				/ userRepository.categoryCnt(categoryHome) * 100);
 		}
 
 		if (userRepository.categoryUserDoneCnt(categoryStore, userId) != 0L) {
 			storeCategoryProgress = (int)(userRepository.categoryUserDoneCnt(categoryStore, userId)
-				/ userRepository.categoryCnt(categoryStore));
+				/ userRepository.categoryCnt(categoryStore) * 100);
 		}
 
 		if (userRepository.categoryUserDoneCnt(categoryPlayground, userId) != 0L) {
@@ -164,4 +164,13 @@ public class UserService {
 			.build();
 	}
 
+	public List<UserResponseDto> findUserList() {
+		List<User> all = userRepository.findAll();
+
+		List<UserResponseDto> collect = all.stream()
+			.map(UserResponseDto::new)
+			.collect(Collectors.toList());
+
+		return collect;
+	}
 }

@@ -1,6 +1,7 @@
 package com.a608.ddobagi.api.dto.respoonse;
 
 import com.a608.ddobagi.db.entity.Lang;
+import com.a608.ddobagi.db.entity.User;
 
 import lombok.Builder;
 import lombok.Data;
@@ -22,17 +23,26 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserResponseDto {
 
+	private Long userId;
 	private String loginId;
 	private String name;
 	private int age;
 	private String userLang;
 
 	@Builder
-	public UserResponseDto(String loginId, String name, int age, String userLang) {
+	public UserResponseDto(Long userId, String loginId, String name, int age, String userLang) {
+		this.userId = userId;
 		this.loginId = loginId;
 		this.name = name;
 		this.age = age;
 		this.userLang = userLang;
 	}
 
+	public UserResponseDto(User user) {
+		this.userId = user.getId();
+		this.loginId = user.getLoginId();
+		this.name = user.getName();
+		this.age = user.getAge();
+		this.userLang = user.getUserLang().toString();
+	}
 }

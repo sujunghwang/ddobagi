@@ -66,4 +66,9 @@ public class UserController {
 	public ApiResponse<UserProgressResponseDto> getUserProgress(@PathVariable Long userId) {
 		return new ApiResponse<>(userService.findUserProgress(userId));
 	}
+
+	@GetMapping()
+	public ApiResponse<List<UserResponseDto>> getUserList() {
+		return new ApiResponse<>(userService.findUserList());
+	}
 }

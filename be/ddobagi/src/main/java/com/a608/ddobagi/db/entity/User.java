@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-@Data
 public class User extends BaseEntity {
 
 	@Id
@@ -43,7 +42,8 @@ public class User extends BaseEntity {
 	private Role role;
 
 	@Builder(toBuilder = true)
-	public User(String loginId, String pw, String name, Lang userLang, LocalDate birth, Role role) {
+	public User(Long id, String loginId, String pw, String name, Lang userLang, LocalDate birth, Role role) {
+		this.id = id;
 		this.loginId = loginId;
 		this.pw = pw;
 		this.name = name;
