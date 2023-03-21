@@ -19,6 +19,6 @@ import com.a608.ddobagi.db.entity.UserQuiz;
  * -----------------------------------------------------------
  * 2023/03/21        modsiw       최초 생성
  */
-public interface UserQuizRepository extends JpaRepository<Long, UserQuiz> {
+public interface UserQuizRepository extends JpaRepository<UserQuiz, Long> {
 	Long countByUserId(Long userId);
 }

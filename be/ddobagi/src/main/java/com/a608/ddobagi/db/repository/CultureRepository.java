@@ -15,7 +15,7 @@ import com.a608.ddobagi.db.entity.Culture;
  * -----------------------------------------------------------
  * 2023/03/21        modsiw       최초 생성
  */
-public interface CultureRepository extends JpaRepository<Long, Culture> {
+public interface CultureRepository extends JpaRepository<Culture,Long> {
 
 	Long countBy();
 }
