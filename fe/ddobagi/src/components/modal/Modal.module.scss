@@ -1,0 +1,47 @@
+.FContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.CContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.HContainer {
+  width: 45%;
+}
+
+.IContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.CloseBtn {
+  cursor: pointer;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
+.BtnMargin{
+  margin-top: 20px;
+}
+
+@media (min-width: 901px) {
+  .Logo {
+    width: 200;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  .Logo {
+    width: 80%;
+    margin-bottom: 30px;
+  }
+}
