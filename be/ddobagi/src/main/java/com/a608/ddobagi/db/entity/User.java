@@ -42,7 +42,7 @@ public class User extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	@Builder
+	@Builder(toBuilder = true)
 	public User(String loginId, String pw, String name, Lang userLang, LocalDate birth, Role role) {
 		this.loginId = loginId;
 		this.pw = pw;
