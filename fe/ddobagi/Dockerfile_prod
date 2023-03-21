@@ -1,11 +1,13 @@
 # syntax=docker/dockerfile:1
-FROM node:18
+FROM node:18 AS build
 WORKDIR /ddobagi
 COPY package.json .
 RUN npm install
 COPY . .
-EXPOSE 8082
-CMD [ "npm", "start" ]
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=build /react/build /usr/share/nginx/html
 
 # # nginx 이미지를 사용합니다. 뒤에 tag가 없으면 latest 를 사용.
 # FROM nginx
