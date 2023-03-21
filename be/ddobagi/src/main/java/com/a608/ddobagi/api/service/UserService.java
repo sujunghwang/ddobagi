@@ -1,6 +1,7 @@
 package com.a608.ddobagi.api.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,10 +43,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserService {
 
-	private static final String categorySchool = "SCHOOL";
-	private static final String categoryHome = "HOME";
-	private static final String categoryStore = "STORE";
-	private static final String categoryPlayground = "PLAYGROUND";
+	private static final String CATEGORY_SCHOOL = "SCHOOL";
+	private static final String CATEGORY_HOME = "HOME";
+	private static final String CATEGORY_STORE = "STORE";
+	private static final String CATEGORY_PLAYGROUND = "PLAYGROUND";
+	private static final Long ZERO = 0L;
+	private static final int HUNDRED = 100;
 
 	private final UserRepository userRepository;
 	private final UserQuizRepositoryImpl userQuizRepositoryImpl;
@@ -118,39 +121,39 @@ public class UserService {
 		int cultureProgress = 0;
 
 		// ===== 퀴즈, 스크립트, 문화 진행률 ==== //
-		if (userScriptRepository.countByUserId(userId) != 0L) {
+		if (!Objects.equals(userScriptRepository.countByUserId(userId), ZERO)) {
 			scriptProgress = (int)(userScriptRepository.countByUserId(userId)
-				/ scriptRepository.countBy() * 100);
+				/ scriptRepository.countBy() * HUNDRED);
 		}
 
-		if (userQuizRepository.countByUserId(userId) != 0L) {
+		if (!Objects.equals(userQuizRepository.countByUserId(userId), ZERO)) {
 			quizProgress = (int)(userQuizRepository.countByUserId(userId)
-				/ quizRepository.countBy() * 100);
+				/ quizRepository.countBy() * HUNDRED);
 		}
 
-		if (userCultureRepository.countByUserId(userId) != 0L) {
+		if (!Objects.equals(userCultureRepository.countByUserId(userId), ZERO)) {
 			cultureProgress = (int)(userCultureRepository.countByUserId(userId)
-				/ cultureRepository.countBy() * 100);
+				/ cultureRepository.countBy() * HUNDRED);
 		}
 
 		// ===== 카테고리 진행률 ===== //
-		if (userRepository.categoryUserDoneCnt(categorySchool, userId) != 0L) {
-			schoolCategoryProgress = (int)(userRepository.categoryUserDoneCnt(categorySchool, userId)
-				/ userRepository.categoryCnt(categorySchool) * 100);
+		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId), ZERO)) {
+			schoolCategoryProgress = (int)(userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId)
+				/ userRepository.categoryCnt(CATEGORY_SCHOOL) * HUNDRED);
 		}
-		if (userRepository.categoryUserDoneCnt(categoryHome, userId) != 0L) {
-			homeCategoryProgess = (int)(userRepository.categoryUserDoneCnt(categoryHome, userId)
-				/ userRepository.categoryCnt(categoryHome) * 100);
-		}
-
-		if (userRepository.categoryUserDoneCnt(categoryStore, userId) != 0L) {
-			storeCategoryProgress = (int)(userRepository.categoryUserDoneCnt(categoryStore, userId)
-				/ userRepository.categoryCnt(categoryStore) * 100);
+		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId), ZERO)) {
+			homeCategoryProgess = (int)(userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId)
+				/ userRepository.categoryCnt(CATEGORY_HOME) * HUNDRED);
 		}
 
-		if (userRepository.categoryUserDoneCnt(categoryPlayground, userId) != 0L) {
-			playgroundCategoryProgress = (int)(userRepository.categoryUserDoneCnt(categoryPlayground, userId)
-				/ userRepository.categoryCnt(categoryPlayground));
+		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId), ZERO)) {
+			storeCategoryProgress = (int)(userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId)
+				/ userRepository.categoryCnt(CATEGORY_STORE) * HUNDRED);
+		}
+
+		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId), ZERO)) {
+			playgroundCategoryProgress = (int)(userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId)
+				/ userRepository.categoryCnt(CATEGORY_PLAYGROUND));
 		}
 
 		return UserProgressResponseDto.builder()
