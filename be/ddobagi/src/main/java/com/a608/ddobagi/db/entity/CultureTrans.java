@@ -1,13 +1,11 @@
 package com.a608.ddobagi.db.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+
+import javax.persistence.*;
 
 @Entity
+@Getter
 public class CultureTrans {
 
 	@Id
@@ -21,4 +19,18 @@ public class CultureTrans {
 	@Enumerated(EnumType.STRING)
 	private Lang lang;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "culture_id")
+	private Culture culture;
+
+
+	/* 연관관계 편의 메소드 */
+	public void setCulture(Culture culture) {
+		if(this.culture != null) {
+			// 다대일측에서 연관관계를 지정할 때 기존 연관관계는 끊어주어야 한다.
+			this.culture.getCultureTransList().remove(this);
+		}
+		this.culture = culture;
+		culture.getCultureTransList().add(this);
+	}
 }

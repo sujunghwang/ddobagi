@@ -1,5 +1,7 @@
 package com.a608.ddobagi.db.entity;
 
+import lombok.Getter;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +14,7 @@ import javax.persistence.OneToMany;
 
 
 @Entity
+@Getter
 public class Culture {
 
 	@Id
@@ -22,7 +25,7 @@ public class Culture {
 
 	private String thumbnail;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "culture_id")
+	@OneToMany(mappedBy = "culture", cascade = CascadeType.ALL)
+//	@JoinColumn(name = "culture_id")
 	private List<CultureTrans> cultureTransList;
 }

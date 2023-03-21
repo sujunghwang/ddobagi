@@ -1,28 +1,22 @@
 package com.a608.ddobagi.db.entity;
 
+import lombok.Getter;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
+@Getter
 public class Script {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	// @Column(name = "situation_id")
-	// private Long situtationId;
+	private String defaultContent;
 
 	private LocalTime startTime;
 
@@ -31,13 +25,25 @@ public class Script {
 	@Enumerated(EnumType.STRING)
 	private ScriptRole scriptRole;
 
-	private String defaultContent;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "situation_id")
+	private Situation situation;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "script_id")
-	private List<ScriptTrans> subScriptList = new ArrayList<>();
+	@OneToMany(mappedBy = "script", cascade = CascadeType.ALL)
+//	@JoinColumn(name = "script_id")
+	private List<ScriptTrans> scriptTransList = new ArrayList<>();
 
 	@OneToMany(mappedBy = "script", cascade = CascadeType.ALL)
 	private List<UserScript> userScriptList = new ArrayList<>();
 
+
+	/* 연관관계 편의 메소드 */
+	public void setSituation(Situation situation) {
+		if(this.situation != null) {
+			// 다대일측에서 연관관계를 지정할 때 기존 연관관계는 끊어주어야 한다.
+			this.situation.getScriptList().remove(this);
+		}
+		this.situation = situation;
+		situation.getScriptList().add(this);
+	}
 }
