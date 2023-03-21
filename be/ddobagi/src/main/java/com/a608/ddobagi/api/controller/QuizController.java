@@ -24,7 +24,12 @@ public class QuizController {
     @GetMapping("/{situationId}")
     public ResponseEntity<?> getQuizCnt(@PathVariable long situationId) {
         // 총 단어 퀴즈 문제 수 조회
-        System.out.println(quizService.findQuizCnt(situationId));
         return ResponseEntity.ok(quizService.findQuizCnt(situationId));
+    }
+
+    @GetMapping("/{userId}/{situationId}/tried")
+    public ResponseEntity<?> getTriedQuizCnt(@PathVariable Long userId, @PathVariable long situationId) {
+        // 푼 단어 퀴즈 문제 수 조회
+        return ResponseEntity.ok(quizService.findTriedQuizCnt(userId, situationId));
     }
 }

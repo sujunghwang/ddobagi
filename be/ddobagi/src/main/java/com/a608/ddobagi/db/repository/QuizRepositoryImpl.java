@@ -1,6 +1,10 @@
 package com.a608.ddobagi.db.repository;
 
 import com.a608.ddobagi.api.dto.respoonse.QuizResponseDto;
+import com.a608.ddobagi.db.entity.QQuiz;
+import com.a608.ddobagi.db.entity.QUserQuiz;
+import com.a608.ddobagi.db.entity.UserQuiz;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,7 @@ import java.util.List;
 import static com.a608.ddobagi.db.entity.QQuiz.quiz; //q타입 클래스 직접 import 해서 사용
 import static com.a608.ddobagi.db.entity.QScript.script;
 import static com.a608.ddobagi.db.entity.QScriptTrans.scriptTrans;
+import static com.a608.ddobagi.db.entity.QUserQuiz.userQuiz;
 
 @Repository
 public class QuizRepositoryImpl {
@@ -40,4 +45,14 @@ public class QuizRepositoryImpl {
                 .fetch();
     }
 
+    public List<Tuple> selectTriedQuiz(long userId, long situationId) {
+        // 유저가 푼 문제 리스트 조회
+        return query
+                .select(userQuiz,quiz)
+                .from(userQuiz)
+                .join(userQuiz.quiz, quiz)
+                .on(quiz.situation.id.eq(situationId))
+                .where(userQuiz.user.id.eq(userId))
+                .fetch();
+    }
 }

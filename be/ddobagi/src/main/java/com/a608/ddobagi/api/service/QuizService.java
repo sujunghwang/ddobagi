@@ -29,11 +29,15 @@ public class QuizService {
     }
 
     public Long findQuizCnt(long situationId){
-        // 총 단어 퀴즈 문제 수 조회
-
         // situationId로 situation찾기
         Situation situation = situationRepository.findById(situationId);
-        
+
+        // 총 단어 퀴즈 문제 수 조회
         return quizRepository.countBySituation(situation);
+    }
+
+    public int findTriedQuizCnt(long userId, long situationId) {
+        // 푼 단어 퀴즈 문제 수 조회
+        return quizRepositoryImpl.selectTriedQuiz(userId,situationId).size();
     }
 }
