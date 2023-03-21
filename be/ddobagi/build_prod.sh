@@ -35,5 +35,5 @@ fi
 echo "image rm end"
 
 echo "docker run start"
-docker run -dp 8081:80 --name ddobagi-backend-prod --network ddobagi-net ddobagi-backend-prod
+docker run -dp 8081:8081 --name ddobagi-backend-prod --network ddobagi-net ddobagi-backend-prod
 echo "docker run end"
