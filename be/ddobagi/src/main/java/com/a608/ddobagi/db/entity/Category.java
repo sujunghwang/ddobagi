@@ -1,10 +1,13 @@
 package com.a608.ddobagi.db.entity;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 public class Category {
 
 	@Id
@@ -13,12 +16,12 @@ public class Category {
 
 	private String common;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "category_id")
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+//	@JoinColumn(name = "category_id")
 	private List<CategoryTrans> categoryTransList;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "category_id")
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+//	@JoinColumn(name = "category_id")
 	private List<Situation> situationList = new ArrayList<>();
 	/*
 	SCHOOL,
@@ -26,4 +29,14 @@ public class Category {
 	STORE,
 	PLAYGROUND
 	 */
+
+
+	/* 연관관계 편의 메소드 */
+//	public void addCategoryTrans(CategoryTrans categoryTrans) {
+//		this.categoryTransList.add(categoryTrans);
+//		if (categoryTrans.getCategory() != this) {
+//			categoryTrans.setCategory(this);
+//		}
+//	}
+
 }
