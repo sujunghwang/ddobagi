@@ -1,5 +1,7 @@
 package com.a608.ddobagi.api.service;
 
+import java.util.List;
+
 import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -7,10 +9,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.a608.ddobagi.api.dto.request.CheckPwRequestDto;
 import com.a608.ddobagi.api.dto.request.UserUpdateRequestDto;
+import com.a608.ddobagi.api.dto.respoonse.UserProgressResponseDto;
+import com.a608.ddobagi.api.dto.respoonse.UserQuizReviewResponseDto;
 import com.a608.ddobagi.api.dto.respoonse.UserResponseDto;
 import com.a608.ddobagi.db.entity.Lang;
 import com.a608.ddobagi.db.entity.User;
+import com.a608.ddobagi.db.repository.CultureRepository;
+import com.a608.ddobagi.db.repository.QuizRepository;
+import com.a608.ddobagi.db.repository.ScriptRepository;
+import com.a608.ddobagi.db.repository.UserCultureRepository;
+import com.a608.ddobagi.db.repository.UserQuizRepository;
+import com.a608.ddobagi.db.repository.UserQuizRepositoryImpl;
 import com.a608.ddobagi.db.repository.UserRepository;
+import com.a608.ddobagi.db.repository.UserScriptRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,9 +42,21 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserService {
 
+	private static final String categorySchool = "SCHOOL";
+	private static final String categoryHome = "HOME";
+	private static final String categoryStore = "STORE";
+	private static final String categoryPlayground = "PLAYGROUND";
+
 	private final UserRepository userRepository;
+	private final UserQuizRepositoryImpl userQuizRepositoryImpl;
+	private final UserQuizRepository userQuizRepository;
+	private final UserScriptRepository userScriptRepository;
+	private final UserCultureRepository userCultureRepository;
+	private final ScriptRepository scriptRepository;
+	private final QuizRepository quizRepository;
+	private final CultureRepository cultureRepository;
 	PasswordEncoder passwordEncoder;
-	
+
 	public UserResponseDto findUser(Long userId) {
 		User user = userRepository.findById(userId).orElseThrow(
 			() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
@@ -66,6 +89,7 @@ public class UserService {
 			.build();
 	}
 
+	//비밀번호 확인
 	public boolean checkPassword(Long userId, CheckPwRequestDto requestDto) {
 		User user = userRepository.findById(userId).orElseThrow(
 			() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
@@ -77,6 +101,67 @@ public class UserService {
 		} else {
 			throw new IllegalIdentifierException(userId + " 의 비밀번호가 일치하지 않습니다.");
 		}
+	}
+
+	//오답 리스트
+	public List<UserQuizReviewResponseDto> findUserQuizReviewList(Long userId) {
+		return userQuizRepositoryImpl.findUserQuizReviewList(userId);
+	}
+
+	public UserProgressResponseDto findUserProgress(Long userId) {
+		int schoolCategoryProgress = 0;
+		int homeCategoryProgess = 0;
+		int storeCategoryProgress = 0;
+		int playgroundCategoryProgress = 0;
+		int scriptProgress = 0;
+		int quizProgress = 0;
+		int cultureProgress = 0;
+
+		// ===== 퀴즈, 스크립트, 문화 진행률 ==== //
+		if (userScriptRepository.countByUserId(userId) != 0L) {
+			scriptProgress = (int)(userScriptRepository.countByUserId(userId)
+				/ scriptRepository.countBy());
+		}
+
+		if (userQuizRepository.countByUserId(userId) != 0L) {
+			quizProgress = (int)(userQuizRepository.countByUserId(userId)
+				/ quizRepository.countBy());
+		}
+
+		if (userCultureRepository.countByUserId(userId) != 0L) {
+			cultureProgress = (int)(userCultureRepository.countByUserId(userId)
+				/ cultureRepository.countBy());
+		}
+
+		// ===== 카테고리 진행률 ===== //
+		if (userRepository.categoryUserDoneCnt(categorySchool, userId) != 0L) {
+			schoolCategoryProgress = (int)(userRepository.categoryUserDoneCnt(categorySchool, userId)
+				/ userRepository.categoryCnt(categorySchool));
+		}
+		if (userRepository.categoryUserDoneCnt(categoryHome, userId) != 0L) {
+			homeCategoryProgess = (int)(userRepository.categoryUserDoneCnt(categoryHome, userId)
+				/ userRepository.categoryCnt(categoryHome));
+		}
+
+		if (userRepository.categoryUserDoneCnt(categoryStore, userId) != 0L) {
+			storeCategoryProgress = (int)(userRepository.categoryUserDoneCnt(categoryStore, userId)
+				/ userRepository.categoryCnt(categoryStore));
+		}
+
+		if (userRepository.categoryUserDoneCnt(categoryPlayground, userId) != 0L) {
+			playgroundCategoryProgress = (int)(userRepository.categoryUserDoneCnt(categoryPlayground, userId)
+				/ userRepository.categoryCnt(categoryPlayground));
+		}
+
+		return UserProgressResponseDto.builder()
+			.schoolCategoryProgress(schoolCategoryProgress)
+			.homeCategoryProgress(homeCategoryProgess)
+			.storeCategoryProgress(storeCategoryProgress)
+			.playgroundCategoryProgress(playgroundCategoryProgress)
+			.scriptProgress(scriptProgress)
+			.quizProgress(quizProgress)
+			.cultureProgress(cultureProgress)
+			.build();
 	}
 
 }
