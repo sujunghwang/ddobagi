@@ -4,13 +4,9 @@ import com.a608.ddobagi.db.entity.Lang;
 import lombok.Getter;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Getter
-public class QuizRes {
+public class QuizResponseDto {
 
     private Lang lang;
 
