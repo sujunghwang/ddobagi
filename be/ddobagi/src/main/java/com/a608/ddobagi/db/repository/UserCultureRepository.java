@@ -15,6 +15,6 @@ import com.a608.ddobagi.db.entity.UserCulture;
  * -----------------------------------------------------------
  * 2023/03/21        modsiw       최초 생성
  */
-public interface UserCultureRepository extends JpaRepository<Long, UserCulture> {
+public interface UserCultureRepository extends JpaRepository<UserCulture, Long> {
 	Long countByUserId(Long userId);
 }

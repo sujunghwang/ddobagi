@@ -2,7 +2,6 @@ package com.a608.ddobagi.db.entity;
 
 import lombok.Getter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;

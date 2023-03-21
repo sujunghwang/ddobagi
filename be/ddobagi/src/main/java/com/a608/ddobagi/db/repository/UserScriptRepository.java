@@ -15,6 +15,6 @@ import com.a608.ddobagi.db.entity.UserScript;
  * -----------------------------------------------------------
  * 2023/03/21        modsiw       최초 생성
  */
-public interface UserScriptRepository extends JpaRepository<Long, UserScript> {
+public interface UserScriptRepository extends JpaRepository<UserScript, Long> {
 	Long countByUserId(Long userId);
 }

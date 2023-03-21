@@ -1,6 +1,5 @@
 package com.a608.ddobagi.db.repository;
 
-import com.a608.ddobagi.api.dto.respoonse.QuizRes;
 import com.a608.ddobagi.db.entity.Quiz;
 import com.a608.ddobagi.db.entity.QuizTrans;
 import com.a608.ddobagi.db.entity.Script;
@@ -31,34 +30,34 @@ public class QuizRepositoryImpl {
     @Autowired
     private JPAQueryFactory query;
 
-    public QuizRes selectQuiz(long quizId){
-        List<Quiz> x = query.select(quiz).from(quiz).join(quiz.quizTransList, quizTrans).fetchJoin().fetch();
-
-        System.out.println("=============");
-        System.out.println(x);
-
-
-        return query
-                .select(Projections.fields(QuizRes.class,
-                        quiz.id,
-                        quiz.beforeSentence,
-                        quiz.afterSentence,
-                        quiz.answer,
-                        quiz.option1,
-                        quiz.option2,
-                        quiz.option3,
-                        quiz.quizTransList,
-                        quiz.script,
-                        script.defaultContent,
-                        script.startTime,
-                        script.endTime,
-                        script.subScriptList)
-                ).from(quiz)
-                .innerJoin(quiz.quizTransList, quizTrans)
-//                .on(quiz.id.eq(quizTrans.))
-//                .innerjoin(quiz.script, script)
-//                .innerjoin(script.subScriptList, scriptTrans)
-                .fetchOne();
-    }
+//     public QuizRes selectQuiz(long quizId){
+//         List<Quiz> x = query.select(quiz).from(quiz).join(quiz.quizTransList, quizTrans).fetchJoin().fetch();
+//
+//         System.out.println("=============");
+//         System.out.println(x);
+//
+//
+//         return query
+//                 .select(Projections.fields(QuizRes.class,
+//                         quiz.id,
+//                         quiz.beforeSentence,
+//                         quiz.afterSentence,
+//                         quiz.answer,
+//                         quiz.option1,
+//                         quiz.option2,
+//                         quiz.option3,
+//                         quiz.quizTransList,
+//                         quiz.script,
+//                         script.defaultContent,
+//                         script.startTime,
+//                         script.endTime,
+//                         script.subScriptList)
+//                 ).from(quiz)
+//                 .innerJoin(quiz.quizTransList, quizTrans)
+// //                .on(quiz.id.eq(quizTrans.))
+// //                .innerjoin(quiz.script, script)
+// //                .innerjoin(script.subScriptList, scriptTrans)
+//                 .fetchOne();
+//     }
 
 }
