@@ -25,4 +25,10 @@ public class CenterController {
         // 구군 조회
         return ResponseEntity.ok(centerService.findGugun(sidoCode));
     }
+
+    @GetMapping()
+    public ResponseEntity<?> getCenterList(@RequestParam("gugun") String gugunName) {
+        // 센터 조회
+        return ResponseEntity.ok(centerService.findCenter(gugunName));
+    }
 }
