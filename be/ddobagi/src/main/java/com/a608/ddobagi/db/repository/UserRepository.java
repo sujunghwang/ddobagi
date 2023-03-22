@@ -12,9 +12,11 @@ import com.a608.ddobagi.db.entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByLoginId(String loginId);
+
 	User findUserByLoginId(String loginId);
 
 	boolean existsByLoginId(String loginId);
+
 	Optional<User> findByName(String Name);
 
 	Optional<User> findById(Long id);
@@ -24,6 +26,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	@Query("select count(us) from UserScript us where us.script.situation.category.common = :common and us.user.id = :userId")
 	Long categoryUserDoneCnt(@Param("common") String common, @Param("userId") Long userId);
-
-
+	
 }

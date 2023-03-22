@@ -1,8 +1,9 @@
 package com.a608.ddobagi.api.service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +35,8 @@ import lombok.RequiredArgsConstructor;
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2023/03/20        modsiw       최초 생성
+ * 2023/03/20       modsiw      최초 생성
+ * 2023/03/21		modsiw		부모님 페이지 통계 추가
  */
 
 @Service
@@ -42,10 +44,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserService {
 
-	private static final String categorySchool = "SCHOOL";
-	private static final String categoryHome = "HOME";
-	private static final String categoryStore = "STORE";
-	private static final String categoryPlayground = "PLAYGROUND";
+	private static final String CATEGORY_SCHOOL = "SCHOOL";
+	private static final String CATEGORY_HOME = "HOME";
+	private static final String CATEGORY_STORE = "STORE";
+	private static final String CATEGORY_PLAYGROUND = "PLAYGROUND";
+	private static final Long ZERO = 0L;
+	private static final int HUNDRED = 100;
 
 	private final UserRepository userRepository;
 	private final UserQuizRepositoryImpl userQuizRepositoryImpl;
@@ -55,13 +59,14 @@ public class UserService {
 	private final ScriptRepository scriptRepository;
 	private final QuizRepository quizRepository;
 	private final CultureRepository cultureRepository;
-	PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 
 	public UserResponseDto findUser(Long userId) {
 		User user = userRepository.findById(userId).orElseThrow(
 			() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
 
 		return UserResponseDto.builder()
+			.userId(user.getId())
 			.loginId(user.getLoginId())
 			.name(user.getName())
 			.age(user.getAge())
@@ -75,6 +80,7 @@ public class UserService {
 			() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
 
 		User modifyUser = userRepository.save(user.toBuilder()
+			.id(userId)
 			.birth(requestDto.getBirth())
 			.name(requestDto.getName())
 			.pw(passwordEncoder.encode(requestDto.getPw()))
@@ -94,12 +100,10 @@ public class UserService {
 		User user = userRepository.findById(userId).orElseThrow(
 			() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
 
-		String inputPw = passwordEncoder.encode(requestDto.getPw());
-
-		if (inputPw.equals(user.getPw())) {
+		if (passwordEncoder.matches(requestDto.getPw(), user.getPw())) {
 			return true;
 		} else {
-			throw new IllegalIdentifierException(userId + " 의 비밀번호가 일치하지 않습니다.");
+			throw new IllegalArgumentException(userId + " 의 비밀번호가 일치하지 않습니다.");
 		}
 	}
 
@@ -118,39 +122,39 @@ public class UserService {
 		int cultureProgress = 0;
 
 		// ===== 퀴즈, 스크립트, 문화 진행률 ==== //
-		if (userScriptRepository.countByUserId(userId) != 0L) {
+		if (!Objects.equals(userScriptRepository.countByUserId(userId), ZERO)) {
 			scriptProgress = (int)(userScriptRepository.countByUserId(userId)
-				/ scriptRepository.countBy());
+				/ scriptRepository.countBy() * HUNDRED);
 		}
 
-		if (userQuizRepository.countByUserId(userId) != 0L) {
+		if (!Objects.equals(userQuizRepository.countByUserId(userId), ZERO)) {
 			quizProgress = (int)(userQuizRepository.countByUserId(userId)
-				/ quizRepository.countBy());
+				/ quizRepository.countBy() * HUNDRED);
 		}
 
-		if (userCultureRepository.countByUserId(userId) != 0L) {
+		if (!Objects.equals(userCultureRepository.countByUserId(userId), ZERO)) {
 			cultureProgress = (int)(userCultureRepository.countByUserId(userId)
-				/ cultureRepository.countBy());
+				/ cultureRepository.countBy() * HUNDRED);
 		}
 
 		// ===== 카테고리 진행률 ===== //
-		if (userRepository.categoryUserDoneCnt(categorySchool, userId) != 0L) {
-			schoolCategoryProgress = (int)(userRepository.categoryUserDoneCnt(categorySchool, userId)
-				/ userRepository.categoryCnt(categorySchool));
+		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId), ZERO)) {
+			schoolCategoryProgress = (int)(userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId)
+				/ userRepository.categoryCnt(CATEGORY_SCHOOL) * HUNDRED);
 		}
-		if (userRepository.categoryUserDoneCnt(categoryHome, userId) != 0L) {
-			homeCategoryProgess = (int)(userRepository.categoryUserDoneCnt(categoryHome, userId)
-				/ userRepository.categoryCnt(categoryHome));
-		}
-
-		if (userRepository.categoryUserDoneCnt(categoryStore, userId) != 0L) {
-			storeCategoryProgress = (int)(userRepository.categoryUserDoneCnt(categoryStore, userId)
-				/ userRepository.categoryCnt(categoryStore));
+		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId), ZERO)) {
+			homeCategoryProgess = (int)(userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId)
+				/ userRepository.categoryCnt(CATEGORY_HOME) * HUNDRED);
 		}
 
-		if (userRepository.categoryUserDoneCnt(categoryPlayground, userId) != 0L) {
-			playgroundCategoryProgress = (int)(userRepository.categoryUserDoneCnt(categoryPlayground, userId)
-				/ userRepository.categoryCnt(categoryPlayground));
+		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId), ZERO)) {
+			storeCategoryProgress = (int)(userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId)
+				/ userRepository.categoryCnt(CATEGORY_STORE) * HUNDRED);
+		}
+
+		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId), ZERO)) {
+			playgroundCategoryProgress = (int)(userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId)
+				/ userRepository.categoryCnt(CATEGORY_PLAYGROUND));
 		}
 
 		return UserProgressResponseDto.builder()
@@ -162,6 +166,24 @@ public class UserService {
 			.quizProgress(quizProgress)
 			.cultureProgress(cultureProgress)
 			.build();
+	}
+
+	public List<UserResponseDto> findUserList() {
+		List<User> all = userRepository.findAll();
+
+		List<UserResponseDto> collect = all.stream()
+			.map(UserResponseDto::new)
+			.collect(Collectors.toList());
+
+		return collect;
+	}
+
+	public UserProgressResponseDto findUserProgressForParents(Long userId) {
+		return findUserProgress(userId);
+	}
+
+	public List<UserQuizReviewResponseDto> getUserQuizReviewForParents(Long userId) {
+		return userQuizRepositoryImpl.findUserQuizReviewListForParents(userId);
 	}
 
 }

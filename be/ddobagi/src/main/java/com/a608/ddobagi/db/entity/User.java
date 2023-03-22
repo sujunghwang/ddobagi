@@ -1,5 +1,6 @@
 package com.a608.ddobagi.db.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Calendar;
 
@@ -18,8 +19,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-@Data
-public class User extends BaseEntity {
+public class User extends BaseEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +43,8 @@ public class User extends BaseEntity {
 	private Role role;
 
 	@Builder(toBuilder = true)
-	public User(String loginId, String pw, String name, Lang userLang, LocalDate birth, Role role) {
+	public User(Long id, String loginId, String pw, String name, Lang userLang, LocalDate birth, Role role) {
+		this.id = id;
 		this.loginId = loginId;
 		this.pw = pw;
 		this.name = name;
@@ -54,10 +55,6 @@ public class User extends BaseEntity {
 	}
 
 	//== 비즈니스 로직==//
-
-	// public void setAge(LocalDate birth) {
-	// 	this.age = calAge(birth);
-	// }
 
 	public int calAge(LocalDate birth) {
 		Calendar now = Calendar.getInstance(); //년월일시분초

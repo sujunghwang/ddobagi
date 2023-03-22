@@ -1,12 +1,16 @@
 package com.a608.ddobagi.db.entity;
 
+import java.io.Serializable;
+
 import lombok.Getter;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Getter
-public class SituationTrans {
+public class SituationTrans implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +23,7 @@ public class SituationTrans {
 	@Enumerated(EnumType.STRING)
 	private Lang lang;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "situation_id")
 	private Situation situation;

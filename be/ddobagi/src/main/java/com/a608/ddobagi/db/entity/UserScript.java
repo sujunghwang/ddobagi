@@ -1,5 +1,7 @@
 package com.a608.ddobagi.db.entity;
 
+import java.io.Serializable;
+
 import lombok.Getter;
 
 import javax.persistence.Column;
@@ -11,9 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Getter
-public class UserScript {
+public class UserScript implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,16 +27,12 @@ public class UserScript {
 
 	private float pronounce;
 
-//	@Column(name = "user_id")
-//	private Long userId;
-//
-//	@Column(name = "script_id")
-//	private Long scriptId;
-
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "script_id")
 	private Script script;

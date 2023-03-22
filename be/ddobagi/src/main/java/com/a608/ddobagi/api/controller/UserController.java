@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,12 +47,12 @@ public class UserController {
 	}
 
 	@PutMapping("/{userId}")
-	public ApiResponse<UserResponseDto> modifyUser(@PathVariable Long userId, UserUpdateRequestDto requestDto) {
+	public ApiResponse<UserResponseDto> modifyUser(@PathVariable Long userId, @RequestBody UserUpdateRequestDto requestDto) {
 		return new ApiResponse<>(userService.modifyUser(userId, requestDto));
 	}
 
 	@PostMapping("/{userId}/password")
-	public ApiResponse<Boolean> validateUserPassword(@PathVariable Long userId, CheckPwRequestDto requestDto) {
+	public ApiResponse<Boolean> validateUserPassword(@PathVariable Long userId, @RequestBody CheckPwRequestDto requestDto) {
 		return new ApiResponse<>(userService.checkPassword(userId, requestDto));
 	}
 
@@ -64,5 +65,10 @@ public class UserController {
 	@GetMapping("/{userId}/progress")
 	public ApiResponse<UserProgressResponseDto> getUserProgress(@PathVariable Long userId) {
 		return new ApiResponse<>(userService.findUserProgress(userId));
+	}
+
+	@GetMapping()
+	public ApiResponse<List<UserResponseDto>> getUserList() {
+		return new ApiResponse<>(userService.findUserList());
 	}
 }
