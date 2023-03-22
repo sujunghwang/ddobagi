@@ -8,6 +8,8 @@ import CategoryList from "./pages/CategoryList";
 import CultureList from "./pages/CultureList";
 import ParentPage from "./pages/ParentPage";
 import MyPage from "./pages/MyPage";
+import ConversationStudy from "./components/learning/ConversationStudy";
+import WordStudy from "./components/learning/ConversationStudy";
 
 function App() {
   return (
@@ -28,8 +30,11 @@ function App() {
             </Route>
           </Route>
           <Route path="/learning" element={<Learning />}>
-            <Route path="/learning/conversation/:id" element={<Learning />} />
-            <Route path="/learning/quiz/:id" element={<Learning />} />
+            <Route
+              path="/learning/conversation/:id"
+              element={<ConversationStudy />}
+            />
+            <Route path="/learning/quiz/:id" element={<WordStudy />} />
           </Route>
           {/* <Route path = "/*" element={< />}/> */}
         </Routes>

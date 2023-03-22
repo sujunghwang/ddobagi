@@ -14,6 +14,7 @@ type Props = {
   situationTitle: string;
   categoryName: string;
   color: string;
+  progress: number;
 };
 
 function StudyEntryModal({
@@ -22,6 +23,7 @@ function StudyEntryModal({
   situationTitle,
   categoryName,
   color,
+  progress,
 }: Props) {
   const exit = () => closeModal();
   const backGroundImgColor =
@@ -49,10 +51,22 @@ function StudyEntryModal({
   // 네비게이션을 위한 함수들
   const navigate = useNavigate();
   const navigateToConversation = (id: string) => {
-    navigate(`/learning/conversation/${id}`);
+    navigate(`/learning/conversation/${id}`, {
+      state: {
+        categoryName: categoryName,
+        situationTitle: situationTitle,
+        progress: progress,
+      },
+    });
   };
   const navigateToWord = (id: string) => {
-    navigate(`/learning/quiz/${id}`);
+    navigate(`/learning/quiz/${id}`, {
+      state: {
+        categoryName: categoryName,
+        situationTitle: situationTitle,
+        progress: progress,
+      },
+    });
   };
 
   return (

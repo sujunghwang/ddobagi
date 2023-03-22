@@ -95,6 +95,7 @@ function VideoCard({
         situationTitle={situationTitle}
         categoryName={categoryName}
         color={color}
+        progress={progress}
       />
     </div>
   );
