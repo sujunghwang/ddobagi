@@ -1,28 +1,21 @@
 package com.a608.ddobagi.db.repository;
 
-import com.a608.ddobagi.db.entity.Quiz;
-import com.a608.ddobagi.db.entity.QuizTrans;
-import com.a608.ddobagi.db.entity.Script;
+import com.a608.ddobagi.api.dto.respoonse.QuizResponseDto;
+import com.a608.ddobagi.db.entity.QQuiz;
+import com.a608.ddobagi.db.entity.QUserQuiz;
+import com.a608.ddobagi.db.entity.UserQuiz;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jdk.swing.interop.SwingInterOpUtils;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.*;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.a608.ddobagi.db.entity.QQuiz.quiz; //q타입 클래스 직접 import 해서 사용
-import static com.a608.ddobagi.db.entity.QQuizTrans.quizTrans;
 import static com.a608.ddobagi.db.entity.QScript.script;
 import static com.a608.ddobagi.db.entity.QScriptTrans.scriptTrans;
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.FetchType.LAZY;
+import static com.a608.ddobagi.db.entity.QUserQuiz.userQuiz;
 
 @Repository
 public class QuizRepositoryImpl {
@@ -30,34 +23,39 @@ public class QuizRepositoryImpl {
     @Autowired
     private JPAQueryFactory query;
 
-//     public QuizRes selectQuiz(long quizId){
-//         List<Quiz> x = query.select(quiz).from(quiz).join(quiz.quizTransList, quizTrans).fetchJoin().fetch();
-//
-//         System.out.println("=============");
-//         System.out.println(x);
-//
-//
-//         return query
-//                 .select(Projections.fields(QuizRes.class,
-//                         quiz.id,
-//                         quiz.beforeSentence,
-//                         quiz.afterSentence,
-//                         quiz.answer,
-//                         quiz.option1,
-//                         quiz.option2,
-//                         quiz.option3,
-//                         quiz.quizTransList,
-//                         quiz.script,
-//                         script.defaultContent,
-//                         script.startTime,
-//                         script.endTime,
-//                         script.subScriptList)
-//                 ).from(quiz)
-//                 .innerJoin(quiz.quizTransList, quizTrans)
-// //                .on(quiz.id.eq(quizTrans.))
-// //                .innerjoin(quiz.script, script)
-// //                .innerjoin(script.subScriptList, scriptTrans)
-//                 .fetchOne();
-//     }
+    public List<Tuple> selectQuiz(long userId, long quizId){
+        // 단어 퀴즈 문제 및 보기를 번역된 언어와 함께 조회
+        return query
+                .select(
+                        quiz.beforeSentence,
+                        quiz.afterSentence,
+                        quiz.answer,
+                        quiz.option1,
+                        quiz.option2,
+                        quiz.option3,
+                        script.defaultContent,
+                        script.startTime,
+                        script.endTime,
+                        scriptTrans.lang,
+                        scriptTrans.transContent,
+                        userQuiz.isFirstCorrected,
+                        userQuiz.isNowCorrected)
+                .from(quiz)
+                .join(quiz.script, script)
+                .join(script.scriptTransList, scriptTrans)
+                .join(userQuiz).on(userQuiz.quiz.eq(quiz))
+                .where(quiz.id.eq(quizId),userQuiz.user.id.eq(userId))
+                .fetch();
+    }
 
+    public List<Tuple> selectTriedQuiz(long userId, long situationId) {
+        // 유저가 푼 문제 리스트 조회
+        return query
+                .select(userQuiz,quiz)
+                .from(userQuiz)
+                .join(userQuiz.quiz, quiz)
+                .on(quiz.situation.id.eq(situationId))
+                .where(userQuiz.user.id.eq(userId))
+                .fetch();
+    }
 }
