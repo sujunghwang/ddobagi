@@ -35,7 +35,8 @@ import lombok.RequiredArgsConstructor;
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2023/03/20        modsiw       최초 생성
+ * 2023/03/20       modsiw      최초 생성
+ * 2023/03/21		modsiw		부모님 페이지 통계 추가
  */
 
 @Service
@@ -176,4 +177,13 @@ public class UserService {
 
 		return collect;
 	}
+
+	public UserProgressResponseDto findUserProgressForParents(Long userId) {
+		return findUserProgress(userId);
+	}
+
+	public List<UserQuizReviewResponseDto> getUserQuizReviewForParents(Long userId) {
+		return userQuizRepositoryImpl.findUserQuizReviewListForParents(userId);
+	}
+
 }
