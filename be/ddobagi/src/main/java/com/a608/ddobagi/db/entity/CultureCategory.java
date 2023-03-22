@@ -33,10 +33,10 @@ public class CultureCategory implements Serializable {
 
 	private String common;
 
-	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cultureCategory", cascade = CascadeType.ALL)
 	private List<CultureCategoryTrans> cultureCategoryTransList;
 
-	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cultureCategory", cascade = CascadeType.ALL)
 	private List<Culture> cultureList = new ArrayList<>();
 
 	/*
