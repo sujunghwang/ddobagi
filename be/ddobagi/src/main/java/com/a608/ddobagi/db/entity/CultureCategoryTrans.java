@@ -47,7 +47,7 @@ public class CultureCategoryTrans implements Serializable {
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id")
+	@JoinColumn(name = "culture_category_id")
 	private CultureCategory cultureCategory;
 
 
