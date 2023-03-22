@@ -3,16 +3,22 @@ package com.a608.ddobagi.api.service;
 import com.a608.ddobagi.api.dto.request.UserQuizSaveRequestDto;
 import com.a608.ddobagi.api.dto.respoonse.QuizResponseDto;
 import com.a608.ddobagi.api.dto.respoonse.UserQuizSaveResponseDto;
-import com.a608.ddobagi.db.entity.Quiz;
-import com.a608.ddobagi.db.entity.Situation;
-import com.a608.ddobagi.db.entity.User;
-import com.a608.ddobagi.db.entity.UserQuiz;
+import com.a608.ddobagi.db.entity.*;
 import com.a608.ddobagi.db.repository.*;
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.a608.ddobagi.db.entity.QQuiz.quiz;
+import static com.a608.ddobagi.db.entity.QScriptTrans.scriptTrans;
+import static com.a608.ddobagi.db.entity.QScript.script;
+import static com.a608.ddobagi.db.entity.QUserQuiz.userQuiz;
 
 @Service
 @RequiredArgsConstructor
@@ -33,9 +39,34 @@ public class QuizService {
     UserRepository userRepository;
 
 
-    public List<QuizResponseDto> findQuiz(long quizId) {
+    public QuizResponseDto findQuiz(long userId, long quizId) {
         // 단어 퀴즈 문제 및 보기를 번역된 언어와 함께 조회
-        return quizRepositoryImpl.selectQuiz(quizId);
+        List<Tuple> quizList = quizRepositoryImpl.selectQuiz(userId, quizId);
+
+        String beforeSentence = quizList.get(0).get(quiz.beforeSentence);
+        String afterSentence = quizList.get(0).get(quiz.afterSentence);
+        String answer = quizList.get(0).get(quiz.answer);
+        String option1 = quizList.get(0).get(quiz.option1);
+        String option2 = quizList.get(0).get(quiz.option2);
+        String option3 = quizList.get(0).get(quiz.option3);
+        String defaultContent = quizList.get(0).get(script.defaultContent);
+        LocalTime startTime = quizList.get(0).get(script.startTime);
+        LocalTime endTime = quizList.get(0).get(script.endTime);
+        boolean isNowCorrected = quizList.get(0).get(userQuiz.isNowCorrected);
+        boolean isFirstCorrected = quizList.get(0).get(userQuiz.isNowCorrected);
+
+        QuizResponseDto quizResponse = new QuizResponseDto(beforeSentence,afterSentence,answer,option1,option2,option3,defaultContent,startTime,endTime,isNowCorrected,isFirstCorrected);
+        Map<Lang, Map<String,String>> lang = new HashMap<>();
+        
+        // 언어별 번역내용 map에 저장
+        for(Tuple quiz: quizList){
+            Map<String, String> map= new HashMap<>();
+            map.put("transContent",quiz.get(scriptTrans.transContent));
+            lang.put(quiz.get(scriptTrans.lang),map);
+        }
+        quizResponse.setLang(lang);
+
+        return quizResponse;
     }
 
     public Long findQuizCnt(long situationId) {

@@ -23,12 +23,12 @@ public class QuizRepositoryImpl {
     @Autowired
     private JPAQueryFactory query;
 
-    public List<QuizResponseDto> selectQuiz(long quizId){
+    public List<Tuple> selectQuiz(long userId, long quizId){
         // 단어 퀴즈 문제 및 보기를 번역된 언어와 함께 조회
         return query
-                .select(Projections.fields(QuizResponseDto.class,
-                        quiz.afterSentence,
+                .select(
                         quiz.beforeSentence,
+                        quiz.afterSentence,
                         quiz.answer,
                         quiz.option1,
                         quiz.option2,
@@ -37,11 +37,14 @@ public class QuizRepositoryImpl {
                         script.startTime,
                         script.endTime,
                         scriptTrans.lang,
-                        scriptTrans.transContent))
+                        scriptTrans.transContent,
+                        userQuiz.isFirstCorrected,
+                        userQuiz.isNowCorrected)
                 .from(quiz)
                 .join(quiz.script, script)
                 .join(script.scriptTransList, scriptTrans)
-                .where(quiz.id.eq(quizId))
+                .join(userQuiz).on(userQuiz.quiz.eq(quiz))
+                .where(quiz.id.eq(quizId),userQuiz.user.id.eq(userId))
                 .fetch();
     }
 

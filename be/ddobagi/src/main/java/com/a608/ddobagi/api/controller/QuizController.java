@@ -14,10 +14,10 @@ public class QuizController {
     @Autowired
     private QuizService quizService;
 
-    @GetMapping("/{situationId}/{quizId}")
-    public ResponseEntity<?> getQuizDetail(@PathVariable Long quizId) {
+    @GetMapping("/{userId}/{situationId}/{quizId}")
+    public ResponseEntity<?> getQuizDetail(@PathVariable Long userId, @PathVariable Long quizId) {
         // 단어 문제 및 보기 조회 (번역 포함)
-        return ResponseEntity.ok(quizService.findQuiz(quizId));
+        return ResponseEntity.ok(quizService.findQuiz(userId, quizId));
     }
 
     @GetMapping("/{situationId}")
@@ -32,7 +32,7 @@ public class QuizController {
         return ResponseEntity.ok(quizService.findTriedQuizCnt(userId, situationId));
     }
 
-    @PostMapping("/{userId}/{situationId}/{quizId}")
+    @PostMapping("/{userId}/{quizId}")
     public ResponseEntity<?> saveUserQuiz(@PathVariable Long userId, @PathVariable Long quizId, @RequestBody UserQuizSaveRequestDto requestDto) {
         // 단어 퀴즈 문제 정답 여부 저장
         return ResponseEntity.ok(quizService.saveUserQuiz(userId, quizId, requestDto));
