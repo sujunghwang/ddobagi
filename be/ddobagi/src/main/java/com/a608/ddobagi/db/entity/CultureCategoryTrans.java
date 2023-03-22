@@ -43,7 +43,8 @@ public class CultureCategoryTrans implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Lang lang;
 
-	private String category_name;
+	private String categoryName;
+
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
