@@ -1,5 +1,8 @@
 package com.a608.ddobagi.db.entity;
 
+import java.io.Serializable;
+
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.Entity;
@@ -10,9 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Getter
-public class UserQuiz {
+public class UserQuiz implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,17 +27,14 @@ public class UserQuiz {
 
 	private boolean isFirstCorrected;
 
-//	@Column(name = "quiz_id")
-//	private Long quizId;
-//
-//	@Column(name = "user_id")
-//	private Long userId;
-
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "quiz_id")
 	private Quiz quiz;
+
 }

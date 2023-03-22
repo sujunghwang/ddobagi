@@ -1,12 +1,16 @@
 package com.a608.ddobagi.db.entity;
 
+import java.io.Serializable;
+
 import lombok.Getter;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Getter
-public class CategoryTrans {
+public class CategoryTrans implements Serializable {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +21,7 @@ public class CategoryTrans {
 
 	private String category_name;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
 	private Category category;
@@ -35,9 +40,5 @@ public class CategoryTrans {
 		// 파라미터로 들어온 category Entity에 categoryTrans 연관 관계 설정
 		category.getCategoryTransList().add(this);
 
-//		// 이부분이 없으면 무한 루프에 걸린다.
-//		if(!category.getCategoryTransList().contains(this)) {
-//			category.addCategoryTrans(this);
-//		}
 	}
 }
