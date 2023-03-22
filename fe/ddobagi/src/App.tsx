@@ -8,6 +8,7 @@ import CategoryList from "./pages/CategoryList";
 import CultureList from "./pages/CultureList";
 import ParentPage from "./pages/ParentPage";
 import MyPage from "./pages/MyPage";
+import CultureDetail from "./components/Culture/CultureDetail";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/categorylist" element={<CategoryList />} />
             <Route path="/culturelist" element={<CultureList />} />
+            <Route path = "/cultureitem" element={<CultureDetail />}/>
             {/* <Route path = "/cultureitem/:id" element={<Landing />}/> */}
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/parentpage" element={<ParentPage />}>
