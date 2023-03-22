@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class SidoCodeResponseDto {
+public class GugunCodeResponseDto {
 
-    private String sidoCode;
+    private String gugunCode;
 
-    private String sidoName;
+    private String gugunName;
 }
