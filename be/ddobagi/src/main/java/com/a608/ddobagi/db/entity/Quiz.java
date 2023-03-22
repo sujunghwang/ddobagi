@@ -5,14 +5,17 @@ import lombok.Getter;
 import static javax.persistence.CascadeType.*;
 import static javax.persistence.FetchType.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Getter
-public class Quiz {
+public class Quiz implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,16 +33,17 @@ public class Quiz {
 
 	private String option3;
 
+	@JsonIgnore
 	@OneToOne(fetch = LAZY, cascade = ALL) //일대일관계에서는 외래키를 어디에나 둬도 된다. 주로 액세스많이 하는곳에 하는걸 추천합니다.
 	@JoinColumn(name = "script_id") //quiz를 저장할때 script도 persist해준다.
 	private Script script;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "situation_id")
 	private Situation situation;
 
 	@OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
-//	@JoinColumn(name = "quiz_id")
 	private List<QuizTrans> quizTransList = new ArrayList<>();
 
 
