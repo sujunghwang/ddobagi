@@ -2,6 +2,7 @@ package com.a608.ddobagi.db.entity;
 
 import lombok.Getter;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,7 +16,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Getter
-public class Culture {
+public class Culture implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +27,5 @@ public class Culture {
 	private String thumbnail;
 
 	@OneToMany(mappedBy = "culture", cascade = CascadeType.ALL)
-//	@JoinColumn(name = "culture_id")
 	private List<CultureTrans> cultureTransList;
 }

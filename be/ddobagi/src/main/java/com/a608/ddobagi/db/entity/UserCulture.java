@@ -1,6 +1,10 @@
 package com.a608.ddobagi.db.entity;
 
+import java.io.Serializable;
+
+import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,9 +15,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Getter
-public class UserCulture {
+@RequiredArgsConstructor
+public class UserCulture implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,17 +28,20 @@ public class UserCulture {
 
 	private boolean isCompleted;
 
-//	@Column(name = "user_id")
-//	private Long userId;
-//
-//	@Column(name = "culture_id")
-//	private Long cultureId;
-
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "culture_id")
 	private Culture culture;
+
+	@Builder
+	public UserCulture(boolean isCompleted, User user, Culture culture) {
+		this.isCompleted = isCompleted;
+		this.user = user;
+		this.culture = culture;
+	}
 }

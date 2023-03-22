@@ -2,15 +2,18 @@ package com.a608.ddobagi.db.entity;
 
 import lombok.Getter;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Getter
-public class Script {
+public class Script implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +28,12 @@ public class Script {
 	@Enumerated(EnumType.STRING)
 	private ScriptRole scriptRole;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "situation_id")
 	private Situation situation;
 
 	@OneToMany(mappedBy = "script", cascade = CascadeType.ALL)
-//	@JoinColumn(name = "script_id")
 	private List<ScriptTrans> scriptTransList = new ArrayList<>();
 
 	@OneToMany(mappedBy = "script", cascade = CascadeType.ALL)
