@@ -58,7 +58,7 @@ function UserInfoModal({
           <div onClick={exit} className={styles.CloseBtn}>
             <CloseIcon />
           </div>
-          <img src="img/Logo_Nologin.png" alt="logo" className={styles.Logo} />
+          <img src="img/Logo.png" alt="logo" className={styles.Logo} />
           {modalContent === "Login" && (
             <Login setModalContent={setModalContent} closeModal={closeModal} />
           )}

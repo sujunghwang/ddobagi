@@ -202,7 +202,7 @@ function NavBar() {
                     color="#FF6B6B"
                     width="130px"
                     onClick={() => {
-                      setModal(false);
+                      logout()
                       handleCloseNavMenu();
                     }}
                   />
@@ -210,7 +210,7 @@ function NavBar() {
               </Menu>
             </Box>
             <img
-              src="img/Logo_Nologin.png"
+              src="img/Logo.png"
               alt="logo"
               onClick={navigateToHome}
               className={styles.LogoXs}
@@ -225,7 +225,7 @@ function NavBar() {
               }}
             >
               <img
-                src="img/Logo_Nologin.png"
+                src="img/Logo.png"
                 alt="logo"
                 className={styles.Logo}
                 onClick={navigateToHome}
