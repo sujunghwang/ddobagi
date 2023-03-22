@@ -20,43 +20,59 @@ function CategoryList() {
     (state: RootState) => state.languageChange.language
   );
   //
-  // axios통신으로 리스트를 받아옴//
+  // axios통신으로 리스트를 받아와야 하는 부분//
   const testArray: Videolist[] = TemporaryArray as Videolist[];
   // 가져온 리스트의 타입을 캐스팅
+
+  // 카테고리명을 변수화 ( 모달에 넘겨주기 위함 )
+  const house =
+    language === "CN" ? "在家里" : language === "VI" ? "ở nhà" : "집에서";
+  const school =
+    language === "CN" ? "在学校" : language === "VI" ? "Ở trường" : "학교에서";
+  const store =
+    language === "CN"
+      ? "学习"
+      : language === "VI"
+      ? "tại cửa hàng"
+      : "가게에서";
+  const playGround =
+    language === "CN"
+      ? "在操场上"
+      : language === "VI"
+      ? "tại sân chơi"
+      : "놀이터에서";
+  //
+
   return (
     <div className={styles.FContainer}>
       <img src="img/BlueHeader.png" alt="" className={styles.Header} />
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
       </div>
-      <div className={styles.CategoryName}>
-        {language === "CN" ? "在家里" : language === "VI" ? "ở nhà" : "집에서"}
-      </div>
-      <VideoScroll color={"#FF6B6B"} videolist={testArray} />
-      <div className={styles.CategoryName}>
-        {language === "CN"
-          ? "在学校"
-          : language === "VI"
-          ? "Ở trường"
-          : "학교에서"}
-      </div>
-      <VideoScroll color={"#92B4EC"} videolist={testArray} />
-      <div className={styles.CategoryName}>
-        {language === "CN"
-          ? "学习"
-          : language === "VI"
-          ? "tại cửa hàng"
-          : "가게에서"}
-      </div>
-      <VideoScroll color={"#FFE69A"} videolist={testArray} />
-      <div className={styles.CategoryName}>
-        {language === "CN"
-          ? "在操场上"
-          : language === "VI"
-          ? "tại sân chơi"
-          : "놀이터에서"}
-      </div>
-      <VideoScroll color={"#84D88F"} videolist={testArray} />
+      <div className={styles.CategoryName}>{house}</div>
+      <VideoScroll
+        color={"#FF6B6B"}
+        videolist={testArray}
+        categoryName={house}
+      />
+      <div className={styles.CategoryName}>{school}</div>
+      <VideoScroll
+        color={"#92B4EC"}
+        videolist={testArray}
+        categoryName={school}
+      />
+      <div className={styles.CategoryName}>{store}</div>
+      <VideoScroll
+        color={"#FFE69A"}
+        videolist={testArray}
+        categoryName={store}
+      />
+      <div className={styles.CategoryName}>{playGround}</div>
+      <VideoScroll
+        color={"#84D88F"}
+        videolist={testArray}
+        categoryName={playGround}
+      />
       <div>푸터 들어가는 자리</div>
     </div>
   );

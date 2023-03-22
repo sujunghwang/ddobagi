@@ -15,9 +15,10 @@ interface Videolist {
 type VidProp = {
   color: string;
   videolist: Videolist[];
+  categoryName: string;
 };
 
-function VideoScroll({ color, videolist }: VidProp) {
+function VideoScroll({ color, videolist, categoryName }: VidProp) {
   const componentRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -53,8 +54,13 @@ function VideoScroll({ color, videolist }: VidProp) {
             situationTitle={item.situationTitle}
             situationId={item.situationId}
             isCompleted={item.isCompleted}
+            color={color}
+            categoryName={categoryName}
           />
         ))}
+        <div className="noselect" style={{ color: color }}>
+          e
+        </div>
       </div>
     </div>
   );

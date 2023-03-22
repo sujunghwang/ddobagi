@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { styled } from "@mui/material/styles";
@@ -8,8 +8,7 @@ import { CardActionArea } from "@mui/material";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
-
-import Box from "@mui/material/Box";
+import StudyEntryModal from "./modal/StudyEntryModal";
 import styles from "./VideoScroll.module.scss";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -31,6 +30,8 @@ type CardProp = {
   situationTitle: string;
   situationId: number;
   isCompleted: boolean;
+  color: string;
+  categoryName: string;
 };
 
 function VideoCard({
@@ -39,15 +40,29 @@ function VideoCard({
   situationTitle,
   situationId,
   isCompleted,
+  color,
+  categoryName,
 }: CardProp) {
+  //모달 관련 함수
+  const [modal, setModal] = useState<boolean>(false);
+  const closeModal = () => setModal(false);
+  // 모달 관련 함수 종료
+
   return (
     <div className={styles.CardContainer}>
       {isCompleted && (
-        <img className={styles.Crown} src="img/Crown.png" alt="crown" />
+        <img
+          className={`${styles.Crown} noselect`}
+          src="img/Crown.png"
+          alt="crown"
+        />
       )}
       <Card
         sx={{
           borderRadius: 5,
+        }}
+        onClick={() => {
+          setModal(true);
         }}
       >
         <CardActionArea>
@@ -74,6 +89,13 @@ function VideoCard({
           </CardContent>
         </CardActionArea>
       </Card>
+      <StudyEntryModal
+        closeModal={closeModal}
+        modal={modal}
+        situationTitle={situationTitle}
+        categoryName={categoryName}
+        color={color}
+      />
     </div>
   );
 }

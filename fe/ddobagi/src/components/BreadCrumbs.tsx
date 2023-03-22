@@ -81,7 +81,6 @@ function BreadCrumbs() {
       };
       breads.push(item);
     }
-    console.log(breads);
     return breads;
   };
   const Breads = routers();

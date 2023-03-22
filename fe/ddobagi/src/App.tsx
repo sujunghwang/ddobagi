@@ -28,8 +28,8 @@ function App() {
             </Route>
           </Route>
           <Route path="/learning" element={<Learning />}>
-            {/* <Route path = "/learning/conversation/:id" element={< />}/> */}
-            {/* <Route path = "/learning/quiz/:id" element={< />}/> */}
+            <Route path="/learning/conversation/:id" element={<Learning />} />
+            <Route path="/learning/quiz/:id" element={<Learning />} />
           </Route>
           {/* <Route path = "/*" element={< />}/> */}
         </Routes>
