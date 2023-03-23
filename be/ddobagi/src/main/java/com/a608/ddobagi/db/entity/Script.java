@@ -21,9 +21,9 @@ public class Script implements Serializable {
 
 	private String defaultContent;
 
-	private LocalTime startTime;
+	private Long startTime;
 
-	private LocalTime endTime;
+	private Long endTime;
 
 	@Enumerated(EnumType.STRING)
 	private ScriptRole scriptRole;

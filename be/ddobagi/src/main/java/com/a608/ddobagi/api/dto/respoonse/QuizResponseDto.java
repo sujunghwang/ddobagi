@@ -27,9 +27,9 @@ public class QuizResponseDto {
 
     private String defaultContent;
 
-    private LocalTime startTime;
+    private Long startTime;
 
-    private LocalTime endTime;
+    private Long endTime;
 
     private Map<Lang, Map<String,String>> lang = new HashMap<>();
 
@@ -38,7 +38,7 @@ public class QuizResponseDto {
     private boolean isFirstCorrected;
 
     public QuizResponseDto(String beforeSentence, String afterSentence, String answer, String option1, String option2, String option3,
-                                   String defaultContent, LocalTime startTime, LocalTime endTime, boolean isNowCorrected, boolean isFirstCorrected) {
+                                   String defaultContent, Long startTime, Long endTime, boolean isNowCorrected, boolean isFirstCorrected) {
         this.beforeSentence = beforeSentence;
         this.afterSentence = afterSentence;
         this.answer = answer;

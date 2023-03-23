@@ -12,8 +12,8 @@ package com.a608.ddobagi.db.entity;
  * 2023/03/10        modsiw       최초 생성
  */
 public enum Lang {
-	KOR,
-	CHI,
-	VIE,
-	ENG
+	KR,
+	CN,
+	VI,
+	EN
 }
