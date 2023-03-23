@@ -6,17 +6,20 @@ import { useNavigate } from "react-router-dom";
 import { RootState } from "../redux/RootReducer";
 import { Box, Grid, Typography } from '@mui/material';
 import ParentHeader from "../assets/ParentHeader.png"
+// import Background from '../components/ParentPage/Background';
+// import studyBtn from '../components/ParentPage/studyBtn';
+import "../components/ParentPage/hovertest.scss";
 
 // interface StudyButtonProps {
 //   studyBtn: string;
 // }
 
-function ParentPage1() {
-    //언어 함수
+function ParentPage3() {
+    //언어 변수
     const language = useSelector(
       (state: RootState) => state.languageChange.language
     );
-    // 언어 함수 끝
+    //
     // 탭 선택 함수
     const navigate = useNavigate();
     const navigateToParent1 = () => {
@@ -29,7 +32,6 @@ function ParentPage1() {
       navigate("/parentpage/news");
     };
     // 탭 선택 함수 끝
-
   return(
     <div className={styles.FContainer}>
       <img src={ParentHeader} alt="" className={styles.Header} />
@@ -122,42 +124,32 @@ function ParentPage1() {
         sx={{
           display:"flex",
           justifyContent:"center",
-          marginTop: "30px"
+          marginTop: "30px",
+          flexDirection: "column" // 한줄추가
         }}
       >
-        <Box
-          sx={{
-            width:"1200px",
-            height:"1300px",
-            backgroundColor:"#FF9999",
-            borderRadius:"20px"
-          }}
-          >
+        <Box>
           <Typography
             sx={{
-              fontSize: "40px",
+              fontSize:"48px",
               fontFamily: "CookieRun-Regular",
-              color:"#ffffff",
-              marginTop:"30px"
-            }}
-            >
-            {language === "CN" ? "我子女学习进行率" : language === "VI" ? "Tiến độ học tập của con tôi" : "내 자녀 학습 진행률"}
-          </Typography>
-          <Box // 자녀 학습 진행률 하단 내용 들어갈 부분
-            sx={{
-              width: "100%",
-              height: "1200px",
-              backgroundColor:"#FFDADA",
-              marginTop:"30px",
-              borderRadius: "0 0 20px 20px"
             }}
           >
-
-          </Box>
+            다문화 정책 및 지원 정보
+          </Typography>
         </Box>
+        <Typography
+          sx={{
+            fontSize:"48px",
+            fontFamily: "CookieRun-Regular",
+          }}
+          className="text-hover text-hover-underline-opening"
+        >
+          호버 테스트
+        </Typography>
       </Box>
     </div>
   )
 }
 
-export default ParentPage1
+export default ParentPage3
