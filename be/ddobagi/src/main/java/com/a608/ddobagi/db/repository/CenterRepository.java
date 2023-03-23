@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface CenterRepository extends JpaRepository<Center, Long> {
 
-    List<Center> findCentersByGugun(String gugunName);
+    List<Center> findCentersByGugun(String gugunCode);
 }
