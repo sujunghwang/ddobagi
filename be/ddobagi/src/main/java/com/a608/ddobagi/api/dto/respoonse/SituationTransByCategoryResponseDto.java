@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class SituationTransByCategoryResponse {
+public class SituationTransByCategoryResponseDto {
 	String categoryName;
 	String situationTitle;
 
