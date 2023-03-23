@@ -9,7 +9,7 @@ import java.util.Map;
 public class SituationDetailResponse {
 
     String situationVideoUrl;
-    Map<Lang, Map<String,String>> map;
+    Map<Lang, Map<String,String>> lang;
 
     public SituationDetailResponse() {}
 
@@ -17,8 +17,9 @@ public class SituationDetailResponse {
         this.situationVideoUrl = situationVideoUrl;
     }
 
-    public void setMap(Map<Lang, Map<String,String>> map) {
-        this.map = map;
+    public void setLang(Map<Lang, Map<String,String>> lang) {
+        this.lang = lang;
     }
 
 }
+

@@ -4,6 +4,7 @@ import com.a608.ddobagi.api.dto.respoonse.ScriptResponse;
 import com.a608.ddobagi.api.dto.respoonse.SituationDetailResponse;
 import com.a608.ddobagi.db.entity.Lang;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -48,7 +49,7 @@ public class ConversationRepositoryImpl {
             temp.put("desc", tuple.get(situationTrans.description));
             map.put(tuple.get(situationTrans.lang), temp);
         }
-        result.setMap(map);
+        result.setLang(map);
 
         return result;
 
@@ -65,8 +66,8 @@ public class ConversationRepositoryImpl {
 
     public List<ScriptResponse> selectScriptList(Long situationId, Long userId) {
 
-        List<Tuple> list = queryFactory
-                .select(
+        List<ScriptResponse> list = queryFactory
+                .select(Projections.constructor(ScriptResponse.class,
                         script.id,
                         script.startTime,
                         script.endTime,
@@ -74,16 +75,17 @@ public class ConversationRepositoryImpl {
                         script.defaultContent,
                         userScript.recordUrl,
                         scriptTrans.lang,
-                        scriptTrans.transContent)
+                        scriptTrans.transContent))
                 .from(script)
                 .leftJoin(userScript).on(script.id.eq(userScript.script.id))
                 .join(scriptTrans).on(script.id.eq(scriptTrans.script.id))
                 .where(script.situation.id.eq(situationId).and(userScript.user.id.eq(userId)))
                 .fetch();
 
-        ScriptResponse result = new ScriptResponse();
 
-        System.out.println(list);
+
+        // System.out.println(list);
+
 
 //        List<Tuple> result = queryFactory
 //                .select(
@@ -118,6 +120,6 @@ public class ConversationRepositoryImpl {
         and user_script.user_id=1;
          */
 
-        return null;
+        return list;
     }
 }
