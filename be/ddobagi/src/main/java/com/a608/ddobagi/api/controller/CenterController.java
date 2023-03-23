@@ -27,8 +27,8 @@ public class CenterController {
     }
 
     @GetMapping()
-    public ResponseEntity<?> getCenterList(@RequestParam("gugun") String gugunName) {
+    public ResponseEntity<?> getCenterList(@RequestParam("gugun") String gugunCode) {
         // 센터 조회
-        return ResponseEntity.ok(centerService.findCenter(gugunName));
+        return ResponseEntity.ok(centerService.findCenter(gugunCode));
     }
 }

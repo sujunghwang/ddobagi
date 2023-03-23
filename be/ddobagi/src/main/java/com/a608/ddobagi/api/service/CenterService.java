@@ -34,9 +34,9 @@ public class CenterService {
         return sidoGugunDongCodeRepositoryImpl.selectGugun(sidoCode);
     }
 
-    public List<CenterResponseDto> findCenter(String gugunName){
-        // 구군이름으로 센터 조회
-        List<Center> centerList = centerRepository.findCentersByGugun(gugunName);
+    public List<CenterResponseDto> findCenter(String gugunCode){
+        // 구군코드로 센터 조회
+        List<Center> centerList = centerRepository.findCentersByGugun(gugunCode);
 
         // responseDto에 담기
         List<CenterResponseDto> collect = centerList.stream()
