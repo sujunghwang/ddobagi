@@ -18,7 +18,11 @@ public class QCulture extends EntityPathBase<Culture> {
 
     private static final long serialVersionUID = -1834314383L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QCulture culture = new QCulture("culture");
+
+    public final QCultureCategory cultureCategory;
 
     public final ListPath<CultureTrans, QCultureTrans> cultureTransList = this.<CultureTrans, QCultureTrans>createList("cultureTransList", CultureTrans.class, QCultureTrans.class, PathInits.DIRECT2);
 
@@ -29,15 +33,24 @@ public class QCulture extends EntityPathBase<Culture> {
     public final StringPath videoUrl = createString("videoUrl");
 
     public QCulture(String variable) {
-        super(Culture.class, forVariable(variable));
+        this(Culture.class, forVariable(variable), INITS);
     }
 
     public QCulture(Path<? extends Culture> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QCulture(PathMetadata metadata) {
-        super(Culture.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QCulture(PathMetadata metadata, PathInits inits) {
+        this(Culture.class, metadata, inits);
+    }
+
+    public QCulture(Class<? extends Culture> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.cultureCategory = inits.isInitialized("cultureCategory") ? new QCultureCategory(forProperty("cultureCategory")) : null;
     }
 
 }
