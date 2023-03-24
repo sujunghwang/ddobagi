@@ -390,6 +390,7 @@ $RECYCLE.BIN/
 *.lnk
 
 
+# ignore setting files
 application.yml
 application.yaml
 
