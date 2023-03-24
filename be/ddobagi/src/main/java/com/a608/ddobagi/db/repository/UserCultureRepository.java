@@ -17,4 +17,6 @@ import com.a608.ddobagi.db.entity.UserCulture;
  */
 public interface UserCultureRepository extends JpaRepository<UserCulture, Long> {
 	Long countByUserId(Long userId);
+
+	Long countBy();
 }
