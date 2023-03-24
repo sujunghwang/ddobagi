@@ -103,6 +103,7 @@ public class ConversationService {
         String openApiURL = "http://aiopen.etri.re.kr:8000/WiseASR/PronunciationKor";   //한국어
         String accessKey = "22dc5f8d-966b-4e05-b00b-88d5bf2739e2";    // 발급받은 API Key
         String languageCode = "koran";     // 언어 코드
+
         String script = conversationRepository.findById(scriptId).orElseThrow(() -> new IllegalArgumentException("no such data")).getDefaultContent();    // 평가 대본
 
         String audioContents = null;
