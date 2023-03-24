@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.a608.ddobagi.api.dto.respoonse.UserProgressParentsResponseDto;
 import com.a608.ddobagi.api.dto.respoonse.UserProgressResponseDto;
 import com.a608.ddobagi.api.dto.respoonse.UserQuizReviewResponseDto;
 import com.a608.ddobagi.api.service.UserService;
@@ -33,8 +34,8 @@ public class ParentController {
 
 	private final UserService userService;
 
-	@GetMapping("/{userId}/parents/progress")
-	public ApiResponse<UserProgressResponseDto> getUserProgressForParents(@PathVariable Long userId) {
+	@GetMapping("/{userId}/parents/statics")
+	public ApiResponse<UserProgressParentsResponseDto> getUserProgressForParents(@PathVariable Long userId) {
 		return new ApiResponse<>(userService.findUserProgressForParents(userId));
 	}
 
@@ -42,4 +43,5 @@ public class ParentController {
 	public ApiResponse<List<UserQuizReviewResponseDto>> getUserQuizReviewForParents(@PathVariable Long userId) {
 		return new ApiResponse<>(userService.getUserQuizReviewForParents(userId));
 	}
+
 }

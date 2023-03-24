@@ -33,4 +33,6 @@ public interface UserQuizRepository extends JpaRepository<UserQuiz, Long> {
 
 	@Query("select uq from UserQuiz uq where uq.user.id = :userId and uq.quiz.id = :quizId")
 	UserQuiz findByUserIdAndQuizId(@Param("userId") Long userId, @Param("quizId") Long quizId);
+
+	Long countBy();
 }

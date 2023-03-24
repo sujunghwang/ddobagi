@@ -31,4 +31,12 @@ public interface UserScriptRepository extends JpaRepository<UserScript, Long> {
 	@Query("select count(us) from UserScript us where us.user.id = :userId"
 		+ " and us.recordUrl is not null")
 	Long countUserRecord(@Param("userId") Long userId);
+
+	@Query("select avg(us.pronounce) from UserScript us")
+	Double avgByAllUserPronounce();
+
+	@Query("select avg(us.pronounce) from UserScript us where us.user.id = :userId")
+	Double avgByUserPronounce(Long userId);
+
+	Long countBy();
 }

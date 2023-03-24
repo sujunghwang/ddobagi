@@ -29,5 +29,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 		+ " and us.user.id = :userId"
 		+ " and us.pronounce >= 2")
 	Long categoryUserDoneCnt(@Param("common") String common, @Param("userId") Long userId);
-	
+
+
+	Long countBy();
 }
