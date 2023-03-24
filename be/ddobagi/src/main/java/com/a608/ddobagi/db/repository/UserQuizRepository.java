@@ -23,10 +23,12 @@ import org.springframework.data.repository.query.Param;
  * 2023/03/21        modsiw       최초 생성
  */
 public interface UserQuizRepository extends JpaRepository<UserQuiz, Long> {
+
+	@Query("select count(uq) from UserQuiz uq where uq.user.id = :userId"
+		+ " and uq.isNowCorrected = true")
 	Long countByUserId(Long userId);
 
-
-	@Query("select count(*) from UserQuiz uq where uq.user.id = :userId and uq.quiz.id = :quizId")
+	@Query("select count(uq) from UserQuiz uq where uq.user.id = :userId and uq.quiz.id = :quizId")
 	Long existsByUserIdAndQuizId(@Param("userId") Long userId, @Param("quizId") Long quizId);
 
 	@Query("select uq from UserQuiz uq where uq.user.id = :userId and uq.quiz.id = :quizId")

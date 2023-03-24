@@ -24,7 +24,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query("select count(sc) from Script sc where sc.situation.category.common = :common")
 	Long categoryCnt(@Param("common") String common);
 
-	@Query("select count(us) from UserScript us where us.script.situation.category.common = :common and us.user.id = :userId")
+	@Query("select count(us) from UserScript us where"
+		+ " us.script.situation.category.common = :common"
+		+ " and us.user.id = :userId"
+		+ " and us.pronounce >= 2")
 	Long categoryUserDoneCnt(@Param("common") String common, @Param("userId") Long userId);
 	
 }

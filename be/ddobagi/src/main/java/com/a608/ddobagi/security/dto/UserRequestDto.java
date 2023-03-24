@@ -27,6 +27,7 @@ public class UserRequestDto {
 	private String name;
 	private String userLang;
 	private LocalDate birth;
+	private int settleYear;
 	// private int age;
 
 	public User toEntity(PasswordEncoder passwordEncoder) {
@@ -37,6 +38,7 @@ public class UserRequestDto {
 			.userLang(Lang.valueOf(userLang))
 			// .age(age)
 			.birth(birth)
+			.settleYear(settleYear)
 			.role(Role.ROLE_USER)
 			.build();
 

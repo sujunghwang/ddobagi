@@ -18,6 +18,10 @@ import lombok.Data;
 @Data
 public class UserProgressResponseDto {
 
+	int viewedVideoCount;
+	int recordedScriptCount;
+	int studiedQuizCount;
+
 	private int schoolCategoryProgress;
 	private int homeCategoryProgress;
 	private int storeCategoryProgress;
@@ -28,8 +32,12 @@ public class UserProgressResponseDto {
 	private int cultureProgress;
 
 	@Builder
-	public UserProgressResponseDto(int schoolCategoryProgress, int homeCategoryProgress, int storeCategoryProgress,
-		int playgroundCategoryProgress, int scriptProgress, int quizProgress, int cultureProgress) {
+	public UserProgressResponseDto(int viewedVideoCount, int recordedScriptCount, int studiedQuizCount,
+		int schoolCategoryProgress, int homeCategoryProgress, int storeCategoryProgress, int playgroundCategoryProgress,
+		int scriptProgress, int quizProgress, int cultureProgress) {
+		this.viewedVideoCount = viewedVideoCount;
+		this.recordedScriptCount = recordedScriptCount;
+		this.studiedQuizCount = studiedQuizCount;
 		this.schoolCategoryProgress = schoolCategoryProgress;
 		this.homeCategoryProgress = homeCategoryProgress;
 		this.storeCategoryProgress = storeCategoryProgress;

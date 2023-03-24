@@ -70,6 +70,7 @@ public class UserService {
 			.loginId(user.getLoginId())
 			.name(user.getName())
 			.age(user.getAge())
+			.settleYear(user.getSettleYear())
 			.userLang(user.getUserLang().toString())
 			.build();
 	}
@@ -83,6 +84,7 @@ public class UserService {
 			.id(userId)
 			.birth(requestDto.getBirth())
 			.name(requestDto.getName())
+			.settleYear(requestDto.getSettleYear())
 			.pw(passwordEncoder.encode(requestDto.getPw()))
 			.userLang(Lang.valueOf(requestDto.getUserLang()))
 			.build());
@@ -91,6 +93,7 @@ public class UserService {
 			.loginId(modifyUser.getLoginId())
 			.name(modifyUser.getName())
 			.age(modifyUser.getAge())
+			.settleYear(modifyUser.getSettleYear())
 			.userLang(modifyUser.getUserLang().toString())
 			.build();
 	}
@@ -113,6 +116,10 @@ public class UserService {
 	}
 
 	public UserProgressResponseDto findUserProgress(Long userId) {
+		int viewedVideoCount = Math.toIntExact(calCountUserViewedVideo(userId));
+		int recordedScriptCount = Math.toIntExact(calCountUserStudiedQuiz(userId));
+		int studiedQuizCount = Math.toIntExact(calCountUserRecorded(userId));
+
 		int schoolCategoryProgress = 0;
 		int homeCategoryProgess = 0;
 		int storeCategoryProgress = 0;
@@ -120,6 +127,7 @@ public class UserService {
 		int scriptProgress = 0;
 		int quizProgress = 0;
 		int cultureProgress = 0;
+
 
 		// ===== 퀴즈, 스크립트, 문화 진행률 ==== //
 		if (!Objects.equals(userScriptRepository.countByUserId(userId), ZERO)) {
@@ -158,6 +166,9 @@ public class UserService {
 		}
 
 		return UserProgressResponseDto.builder()
+			.viewedVideoCount(viewedVideoCount)
+			.recordedScriptCount(recordedScriptCount)
+			.studiedQuizCount(studiedQuizCount)
 			.schoolCategoryProgress(schoolCategoryProgress)
 			.homeCategoryProgress(homeCategoryProgess)
 			.storeCategoryProgress(storeCategoryProgress)
@@ -186,4 +197,18 @@ public class UserService {
 		return userQuizRepositoryImpl.findUserQuizReviewListForParents(userId);
 	}
 
+	public Long calCountUserViewedVideo(Long userId) {
+		Long culture = userCultureRepository.countByUserId(userId);
+		Long script = userScriptRepository.countByUserId(userId);
+
+		return culture + script;
+	}
+
+	public Long calCountUserRecorded(Long userId) {
+		return userScriptRepository.countUserRecord(userId);
+	}
+
+	public Long calCountUserStudiedQuiz(Long userId) {
+		return userQuizRepository.countByUserId(userId);
+	}
 }
