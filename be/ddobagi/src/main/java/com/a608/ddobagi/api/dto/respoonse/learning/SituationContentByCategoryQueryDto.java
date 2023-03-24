@@ -1,4 +1,4 @@
-package com.a608.ddobagi.api.dto.respoonse;
+package com.a608.ddobagi.api.dto.respoonse.learning;
 
 import com.a608.ddobagi.db.entity.Lang;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 @Data
 @RequiredArgsConstructor
-public class SituationByCategoryResponseDto {
+public class SituationContentByCategoryQueryDto {
 
     Long situationId;
     String thumbnail;
@@ -25,7 +25,7 @@ public class SituationByCategoryResponseDto {
     double progress;
 
     @Builder
-    public SituationByCategoryResponseDto(Long situationId, String thumbnail, Lang lang, String title, Long completedScriptCnt, Long totalScriptCnt, Long completedQuizCnt, Long totalQuizCnt, boolean isCompleted, double progress) {
+    public SituationContentByCategoryQueryDto(Long situationId, String thumbnail, Lang lang, String title, Long completedScriptCnt, Long totalScriptCnt, Long completedQuizCnt, Long totalQuizCnt, boolean isCompleted, double progress) {
         this.situationId = situationId;
         this.completedScriptCnt = completedScriptCnt;
         this.thumbnail = thumbnail;

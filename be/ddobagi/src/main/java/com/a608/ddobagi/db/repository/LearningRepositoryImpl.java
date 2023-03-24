@@ -4,7 +4,6 @@ import static com.a608.ddobagi.db.entity.QQuiz.*;
 
 import java.util.List;
 
-import com.a608.ddobagi.api.dto.respoonse.SituationByCategoryResponseDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.RequiredArgsConstructor;
