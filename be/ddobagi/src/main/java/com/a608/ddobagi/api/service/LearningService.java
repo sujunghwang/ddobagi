@@ -2,6 +2,8 @@ package com.a608.ddobagi.api.service;
 
 import java.util.List;
 
+import com.a608.ddobagi.api.dto.respoonse.SituationWithUserResponseDto;
+import com.a608.ddobagi.api.dto.respoonse.SituationWithoutUserResponseDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,9 +25,16 @@ public class LearningService {
 	private final UserRepository userRepository;
 
 	 public List<SituationByCategoryResponseDto> getSituationListByCategory(Long userId, String categoryCommon) {
-	 	List<SituationByCategoryResponseDto> situationList = learningRepository.getSituationListByCategory(userId, categoryCommon);
-
+	 	List<SituationByCategoryResponseDto> situationList = learningRepository.getSituationListByCategory(userId, userId, categoryCommon);
+		for(SituationByCategoryResponseDto situation : situationList) {
+			System.out.println("situation : " + situation);
+		}
 	 	return situationList;
+//		 List<SituationWithoutUserResponseDto> situationWithoutUserList = learningRepository.getSituationWithoutUser(categoryCommon);
+//		 List<SituationWithUserResponseDto> situationListWithUser = learningRepository.getSituationWithUser(userId, userId, categoryCommon);
+//		 System.out.println("situationList : " + situationWithoutUserList);
+//		 System.out.println("situationListWithUser : " + situationListWithUser);
+//		 return null;
 	 }
 
 	public List<Long> findQuizListBySituationId(Long situationId) {

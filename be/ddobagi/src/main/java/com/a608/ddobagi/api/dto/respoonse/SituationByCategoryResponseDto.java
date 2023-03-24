@@ -1,30 +1,40 @@
 package com.a608.ddobagi.api.dto.respoonse;
 
+import com.a608.ddobagi.db.entity.Lang;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
+@ToString
 @Data
 @RequiredArgsConstructor
 public class SituationByCategoryResponseDto {
 
     Long situationId;
     String thumbnail;
-    @JsonProperty("isCompleted")
-    Long isCompleted;
-    Double progress;
-    String lang;
+    Lang lang;
     String title;
+    Long completedScriptCnt;
+    Long totalScriptCnt;
+    Long completedQuizCnt;
+    Long totalQuizCnt;
+    @JsonProperty("isCompleted")
+    boolean isCompleted;
+    double progress;
 
     @Builder
-
-    public SituationByCategoryResponseDto(Long situationId, String thumbnail, Long isCompleted, Double progress, String lang, String title) {
+    public SituationByCategoryResponseDto(Long situationId, String thumbnail, Lang lang, String title, Long completedScriptCnt, Long totalScriptCnt, Long completedQuizCnt, Long totalQuizCnt, boolean isCompleted, double progress) {
         this.situationId = situationId;
+        this.completedScriptCnt = completedScriptCnt;
         this.thumbnail = thumbnail;
-        this.isCompleted = isCompleted;
-        this.progress = progress;
         this.lang = lang;
         this.title = title;
+        this.totalScriptCnt = totalScriptCnt;
+        this.completedQuizCnt = completedQuizCnt;
+        this.totalQuizCnt = totalQuizCnt;
+        this.isCompleted = isCompleted;
+        this.progress = progress;
     }
 }
