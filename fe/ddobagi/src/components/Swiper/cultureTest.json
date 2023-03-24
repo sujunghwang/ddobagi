@@ -1,0 +1,152 @@
+[
+  {
+      "cultureId": 1,
+      "thumbnail": "https://i.ytimg.com/vi/CINyyv0GMIU/maxresdefault.jpg",
+      "cultureContentQueryDtoList": [
+          {
+              "cultureId": 1,
+              "lang": "KR",
+              "title": "펭수의 독도 체험",
+              "description": "한국설명1"
+          },
+          {
+              "cultureId": 1,
+              "lang": "CN",
+              "title": "중국타이틀1",
+              "description": "중국설명1"
+          },
+          {
+              "cultureId": 1,
+              "lang": "VI",
+              "title": "베트타이틀1",
+              "description": "베트설명1"
+          }
+      ],
+      "completed": true
+  },
+  {
+    "cultureId": 2,
+    "thumbnail": "http://www.hanryutimes.com/news/photo/202107/20210707_1_bodyimg_10083.JPG",
+    "cultureContentQueryDtoList": [
+        {
+            "cultureId": 2,
+            "lang": "KR",
+            "title": "한국의 K-POP문화",
+            "description": "한국설명1"
+        },
+        {
+            "cultureId": 2,
+            "lang": "CN",
+            "title": "중국타이틀1",
+            "description": "중국설명1"
+        },
+        {
+            "cultureId": 2,
+            "lang": "VI",
+            "title": "베트타이틀1",
+            "description": "베트설명1"
+        }
+    ],
+    "completed": true
+  },
+  {
+    "cultureId": 3,
+    "thumbnail": "https://uni.dongseo.ac.kr/koreafood/_Img/feature_img01.jpg",
+    "cultureContentQueryDtoList": [
+        {
+            "cultureId": 3,
+            "lang": "KR",
+            "title": "또박이",
+            "description": "한국설명1"
+        },
+        {
+            "cultureId": 3,
+            "lang": "CN",
+            "title": "중국타이틀1",
+            "description": "중국설명1"
+        },
+        {
+            "cultureId": 3,
+            "lang": "VI",
+            "title": "베트타이틀1",
+            "description": "베트설명1"
+        }
+    ],
+    "completed": true
+  },
+  {
+    "cultureId": 4,
+    "thumbnail": "https://d2um1hurm6o2hd.cloudfront.net/public/product/PRV3000000002/PRD3000004199/editor/20220617092202427_dAibk.jpg",
+    "cultureContentQueryDtoList": [
+        {
+            "cultureId": 4,
+            "lang": "KR",
+            "title": "경복궁",
+            "description": "한국설명1"
+        },
+        {
+            "cultureId": 4,
+            "lang": "CN",
+            "title": "중국타이틀1",
+            "description": "중국설명1"
+        },
+        {
+            "cultureId": 4,
+            "lang": "VI",
+            "title": "베트타이틀1",
+            "description": "베트설명1"
+        }
+    ],
+    "completed": true
+  },
+  {
+    "cultureId": 5,
+    "thumbnail": "https://m.segye.com/content/image/2021/08/11/20210811516582.jpg",
+    "cultureContentQueryDtoList": [
+        {
+            "cultureId": 5,
+            "lang": "KR",
+            "title": "5번째임다",
+            "description": "한국설명1"
+        },
+        {
+            "cultureId": 5,
+            "lang": "CN",
+            "title": "중국타이틀1",
+            "description": "중국설명1"
+        },
+        {
+            "cultureId": 5,
+            "lang": "VI",
+            "title": "베트타이틀1",
+            "description": "베트설명1"
+        }
+    ],
+    "completed": true
+  },
+  {
+    "cultureId": 6,
+    "thumbnail": "https://file.mk.co.kr/meet/neds/2023/01/image_readtop_2023_2900_16726249815299109.jpg",
+    "cultureContentQueryDtoList": [
+        {
+            "cultureId": 6,
+            "lang": "KR",
+            "title": "더글로리",
+            "description": "한국설명1"
+        },
+        {
+            "cultureId": 6,
+            "lang": "CN",
+            "title": "중국타이틀1",
+            "description": "중국설명1"
+        },
+        {
+            "cultureId": 6,
+            "lang": "VI",
+            "title": "베트타이틀1",
+            "description": "베트설명1"
+        }
+    ],
+    "completed": true
+  }
+]
