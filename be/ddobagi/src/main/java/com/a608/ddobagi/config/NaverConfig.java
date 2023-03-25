@@ -1,6 +1,7 @@
 package com.a608.ddobagi.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
 
 import lombok.Getter;
 
@@ -8,8 +9,10 @@ import lombok.Getter;
 @Getter
 public class NaverConfig {
 
-    private String clientID = "AKIAQUIHCELPK7CFE47V";
+    @Value("${naver.client.id}")
+    private String clientID;
 
+    @Value("${naver.client.secret}")
     private String clientSecret = "mw+9Cr2fDSIlN6nLSoNkj/1YACouZMIhDpOIujNJ";
 
 }

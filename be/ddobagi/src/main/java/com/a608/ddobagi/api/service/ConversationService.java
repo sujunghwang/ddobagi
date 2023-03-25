@@ -3,74 +3,27 @@ package com.a608.ddobagi.api.service;
 import com.a608.ddobagi.api.dto.respoonse.ScriptResponse;
 import com.a608.ddobagi.api.dto.respoonse.SituationDetailResponse;
 import com.a608.ddobagi.config.S3Config;
-import com.a608.ddobagi.db.entity.Script;
 import com.a608.ddobagi.db.entity.UserScript;
-import com.a608.ddobagi.db.repository.ConversationRepository;
-import com.a608.ddobagi.db.repository.ConversationRepositoryImpl;
-import com.a608.ddobagi.db.repository.ScriptRepository;
-import com.a608.ddobagi.db.repository.UserRepository;
-import com.a608.ddobagi.db.repository.UserScriptRepository;
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.HttpMethod;
-import com.amazonaws.SdkClientException;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3;
+import com.a608.ddobagi.db.repository.*;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.google.gson.Gson;
-
 import lombok.RequiredArgsConstructor;
-
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.DatagramPacket;
+import javax.sound.sampled.*;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import java.util.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -231,28 +184,6 @@ public class ConversationService {
         }
 
     }
-
-    /*
-    Recording recording = recordingRepository.findRecordingByStudioIdAndSceneId(studioId, sceneId);
-        if (recording != null) {
-            recording.changeUrl(recordingVideoUrl);
-            recording.changeUserId(userId);
-            recordingRepository.save(recording);
-        }
-
-        if (recording == null) {
-            Studio studio = studioRepository.findById(Long.valueOf(studioId)).orElse(null);
-            Scene scene = sceneRepository.findById(Long.valueOf(sceneId)).orElse(null);
-
-            recordingRepository.save(Recording.builder()
-                            .recordingVideoUrl(recordingVideoUrl)
-                            .userId(userId)
-                            .studio(studio)
-                            .scene(scene)
-                    .build());
-        }
-     */
-
 
 
     public static class WavToRaw {
