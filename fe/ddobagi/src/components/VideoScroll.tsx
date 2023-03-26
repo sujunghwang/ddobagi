@@ -1,15 +1,20 @@
 import React, { useRef } from "react";
 import VideoCard from "./VideoCard";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/RootReducer";
 import styles from "./VideoScroll.module.scss";
 import { IconButton } from "@mui/material";
 import PlayCircleOutlineOutlinedIcon from "@mui/icons-material/PlayCircleOutlineOutlined";
 
 interface Videolist {
-  situationThumbnail: string;
-  progress: number;
-  situationTitle: string;
   situationId: number;
+  thumbnail: string;
   isCompleted: boolean;
+  progress: number;
+  situationTrans: {
+    lang: string;
+    title: string;
+  }[];
 }
 
 type VidProp = {
@@ -20,6 +25,12 @@ type VidProp = {
 
 function VideoScroll({ color, videolist, categoryName }: VidProp) {
   const componentRef = useRef<HTMLDivElement>(null);
+  //언어 변수
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+  );
+
+  const lang = language === "CN" ? 1 : language === "VI" ? 2 : 0;
 
   return (
     <div
@@ -49,9 +60,9 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
         {videolist.map((item, index) => (
           <VideoCard
             key={index}
-            situationThumbnail={item.situationThumbnail}
+            situationThumbnail={item.thumbnail}
             progress={item.progress}
-            situationTitle={item.situationTitle}
+            situationTitle={item.situationTrans[lang].title}
             situationId={item.situationId}
             isCompleted={item.isCompleted}
             color={color}
