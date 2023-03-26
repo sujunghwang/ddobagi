@@ -11,7 +11,7 @@ import ParentPage2 from "./pages/ParentPage2";
 import ParentPage3 from "./pages/ParentPage3";
 import MyPage from "./pages/MyPage";
 import ConversationStudy from "./components/learning/ConversationStudy";
-import WordStudy from "./components/learning/ConversationStudy";
+import WordStudy from "./components/learning/WordStudy";
 import CultureDetail from "./components/Culture/CultureDetail";
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
               path="/learning/conversation/:id"
               element={<ConversationStudy />}
             />
-            <Route path="/learning/quiz/:id" element={<WordStudy />} />
+            <Route path="/learning/quiz/*" element={<WordStudy />} />
           </Route>
           {/* <Route path = "/*" element={< />}/> */}
         </Routes>

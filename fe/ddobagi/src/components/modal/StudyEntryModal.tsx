@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import Modal from "@mui/material/Modal";
 import Slide from "@mui/material/Slide";
 import Box from "@mui/material/Box";
@@ -56,6 +56,7 @@ function StudyEntryModal({
         categoryName: categoryName,
         situationTitle: situationTitle,
         progress: progress,
+        color: color,
       },
     });
   };
@@ -65,6 +66,7 @@ function StudyEntryModal({
         categoryName: categoryName,
         situationTitle: situationTitle,
         progress: progress,
+        color: color,
       },
     });
   };

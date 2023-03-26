@@ -4,14 +4,17 @@ import BreadCrumbs from "../components/BreadCrumbs";
 import styles from "./CategoryList.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/RootReducer";
-import TemporaryArray from "../components/TemporaryArray";
+import TemporaryResponse from "../components/TemporaryResponse";
 // 임시 리스트를 가져옴. 실제 서비스에서는 요청을 통해 해당 카테고리 아이템들의 리스트를 가져올 필요가 있음.
 interface Videolist {
-  situationThumbnail: string;
-  progress: number;
-  situationTitle: string;
   situationId: number;
+  thumbnail: string;
   isCompleted: boolean;
+  progress: number;
+  situationTrans: {
+    lang: string;
+    title: string;
+  }[];
 }
 
 function CategoryList() {
@@ -21,7 +24,9 @@ function CategoryList() {
   );
   //
   // axios통신으로 리스트를 받아와야 하는 부분//
-  const testArray: Videolist[] = TemporaryArray as Videolist[];
+  const testArray: Videolist[] = TemporaryResponse[
+    "situationList"
+  ] as Videolist[];
   // 가져온 리스트의 타입을 캐스팅
 
   // 카테고리명을 변수화 ( 모달에 넘겨주기 위함 )
