@@ -1,0 +1,43 @@
+.mouse {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scroll-icon {
+  position: relative;
+  width: 2em;
+  height: 4em;
+  border: 0.2em solid #ffffff;
+  border-radius: 2em;
+}
+
+.scroll-icon.ex-1 .wheel {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  width: 0.5em;
+  height: 0.5em;
+  background-color: #ffffff;
+  transform: translate(-50%, 0);
+  border-radius: 0.6em;
+  animation: ex-1-wheel 1s ease-in-out infinite;
+}
+
+@keyframes ex-1-wheel {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 0;
+  }
+  20%,
+  70% {
+    opacity: 1;
+  }
+  90%,
+  100% {
+    transform: translate(-50%, 150%);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,83 @@
+.FContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.CContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.HContainer {
+  width: 45%;
+}
+
+.IContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.SContainer {
+  font-family: "Cookierun-Regular";
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 80%;
+}
+.categoryName {
+  font-size: 2rem;
+}
+.situationTitle {
+  font-size: 3rem;
+}
+
+.CloseBtn {
+  cursor: pointer;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
+.BtnMargin {
+  margin-top: 20px;
+}
+
+@media (min-width: 901px) {
+  .Logo {
+    width: 200;
+    margin-bottom: 30px;
+  }
+  .handImg {
+    position: absolute;
+    top: 100%;
+    left: 49.455%;
+    transform: translate(-49.455%, -100%);
+    width: 809.5px;
+    pointer-events: none;
+  }
+  .BtnGroup {
+    display: flex;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .Logo {
+    width: 80%;
+    margin-bottom: 30px;
+  }
+  .handImg {
+    position: absolute;
+    top: 100%;
+    left: 49.455%;
+    transform: translate(-49.455%, -100%);
+    width: 381.5px;
+    pointer-events: none;
+  }
+}

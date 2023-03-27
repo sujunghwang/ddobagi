@@ -1,0 +1,40 @@
+.vertical {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 0.5rem;
+}
+
+.vertical2 {
+  display: flex;
+  justify-content: start;
+  gap: 5%;
+  margin-top: 1rem;
+}
+
+.vertical3 {
+  display: flex;
+  justify-content: end;
+  gap: 10%;
+}
+
+.icon {
+  &:active {
+    scale: 1.2;
+  }
+  &:hover {
+    cursor: pointer;
+    color: #566b8c;
+  }
+}
+
+.router {
+  &:hover {
+    color: #566b8c;
+    cursor: pointer;
+  }
+}
+.container {
+  margin: 0 5rem 2rem 5rem;
+  word-break: keep-all;
+}
