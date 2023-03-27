@@ -9,16 +9,12 @@ import image33 from "../../assets/랜딩33.png"
 export default function MainThree() {
   return (
     <div>
-      <Box 
-      sx={{
-        height:"150px"
-      }}>
-
-      </Box>
       <div
         style={{
           width: '100%',
-          height: '92vh',
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: 'rgb(255 118 0 / 4%)',
@@ -29,7 +25,6 @@ export default function MainThree() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            paddingTop: '80px',
           }}
         >
           <Box>
@@ -63,7 +58,7 @@ export default function MainThree() {
           }}
         >
           <Box
-            sx = {{
+            sx={{
               display: "flex",
               justifyContent: 'spaceAround',
             }}
@@ -73,19 +68,19 @@ export default function MainThree() {
                 backgroundColor: "#FF6B6B",
                 width: "360px",
                 height: "360px",
-                borderRadius:"20px",
-                margin : "50px",
+                borderRadius: "20px",
+                margin: "50px",
               }}
             >
               <Box
                 sx={{
-                  marginLeft:"40px",
-                  marginTop:"25px",
-                  paddingTop:"10px",
+                  marginLeft: "40px",
+                  marginTop: "25px",
+                  paddingTop: "10px",
                   backgroundColor: "#FFDADA",
                   width: "280px",
                   height: "310px",
-                  borderRadius:"20px",
+                  borderRadius: "20px",
                 }}
               >
                 <img
@@ -96,7 +91,7 @@ export default function MainThree() {
                 />
                 <Typography
                   sx={{
-                    fontSize:"30px",
+                    fontSize: "30px",
                     fontFamily: "CookieRun-Regular",
                   }}
                 >
@@ -109,19 +104,19 @@ export default function MainThree() {
                 backgroundColor: "#FFD93D",
                 width: "360px",
                 height: "360px",
-                borderRadius:"20px",
-                margin : "50px",
+                borderRadius: "20px",
+                margin: "50px",
               }}
             >
               <Box
                 sx={{
-                  marginLeft:"40px",
-                  marginTop:"25px",
-                  paddingTop:"10px",
+                  marginLeft: "40px",
+                  marginTop: "25px",
+                  paddingTop: "10px",
                   backgroundColor: "#FFF5D7",
                   width: "280px",
                   height: "310px",
-                  borderRadius:"20px",
+                  borderRadius: "20px",
                 }}
               >
                 <img
@@ -132,7 +127,7 @@ export default function MainThree() {
                 />
                 <Typography
                   sx={{
-                    fontSize:"30px",
+                    fontSize: "30px",
                     fontFamily: "CookieRun-Regular",
                   }}
                 >
@@ -145,19 +140,19 @@ export default function MainThree() {
                 backgroundColor: "#6BCB77",
                 width: "360px",
                 height: "360px",
-                borderRadius:"20px",
-                margin : "50px",
+                borderRadius: "20px",
+                margin: "50px",
               }}
             >
               <Box
                 sx={{
-                  marginLeft:"40px",
-                  marginTop:"25px",
-                  paddingTop:"10px",
+                  marginLeft: "40px",
+                  marginTop: "25px",
+                  paddingTop: "10px",
                   backgroundColor: "#FFF5D7",
                   width: "280px",
                   height: "310px",
-                  borderRadius:"20px",
+                  borderRadius: "20px",
                 }}
               >
                 <img
@@ -168,7 +163,7 @@ export default function MainThree() {
                 />
                 <Typography
                   sx={{
-                    fontSize:"30px",
+                    fontSize: "30px",
                     fontFamily: "CookieRun-Regular",
                   }}
                 >
