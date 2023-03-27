@@ -1,0 +1,17 @@
+{
+	"schoolCategoryProgress": "75",
+	"homeCategoryProgress": "50",
+	"storeCategoryProgress": "49",
+	"playgroundCategoryProgress": "33",
+	
+	"scriptProgress": "80",
+	"quizProgress": "55",
+	"cultureProgress": "41",
+	
+	"userAllProgressAvg": "60",
+	"otherAllProgressAvg": "40",
+		
+	"userPronounceScoreAvg": "50",
+	"otherPronounceScoreProgress": "60"
+
+}
