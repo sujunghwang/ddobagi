@@ -20,14 +20,19 @@ import lombok.Data;
 public class CultureContentDto {
 
 	private Long cultureId;
-	private String thumbnail;
+	private String url;
 	private boolean isCompleted;
 
 	private List<CultureContentQueryDto> cultureContentQueryDtoList;
 
-	public CultureContentDto(Long cultureId, String thumbnail, boolean isCompleted) {
+	public CultureContentDto(Long cultureId, String url, boolean isCompleted) {
 		this.cultureId = cultureId;
-		this.thumbnail = thumbnail;
+		this.url = url;
 		this.isCompleted = isCompleted;
+	}
+
+	public CultureContentDto(Long cultureId, String url) {
+		this.cultureId = cultureId;
+		this.url = url;
 	}
 }
