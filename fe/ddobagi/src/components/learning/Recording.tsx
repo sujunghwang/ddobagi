@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { ReactMic, ReactMicStopEvent } from "react-mic";
+// import { ReactMic, ReactMicStopEvent } from "react-mic";
 
 interface RecordingState {
   isRecording: boolean;
@@ -22,19 +22,19 @@ function Recording(props: RecordingProps) {
 
   console.log(record.isRecording);
 
-  const onStop = (recordedBlob: ReactMicStopEvent) => {
-    const blobUrl = URL.createObjectURL(recordedBlob.blob);
-    stopRecording(blobUrl);
-  };
+  // const onStop = (recordedBlob: ReactMicStopEvent) => {
+  //   const blobUrl = URL.createObjectURL(recordedBlob.blob);
+  //   stopRecording(blobUrl);
+  // };
   
   return (
     <div>
-      <ReactMic
+      {/* <ReactMic
         record={record.isRecording}
         onStop={onStop}
         strokeColor="#000000"
         backgroundColor="#ffffff"
-      />
+      /> */}
       <button onClick={() => startRecording()} disabled={record.isRecording}>
         Record
       </button>

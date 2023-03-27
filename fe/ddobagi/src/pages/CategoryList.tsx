@@ -38,19 +38,21 @@ function CategoryList() {
     language === "CN"
       ? "学习"
       : language === "VI"
-      ? "tại cửa hàng"
-      : "가게에서";
+        ? "tại cửa hàng"
+        : "가게에서";
   const playGround =
     language === "CN"
       ? "在操场上"
       : language === "VI"
-      ? "tại sân chơi"
-      : "놀이터에서";
+        ? "tại sân chơi"
+        : "놀이터에서";
   //
 
   return (
     <div className={styles.FContainer}>
-      <img src="img/BlueHeader.png" alt="" className={styles.Header} />
+      <div className={styles.Banner}>
+        <div className={styles.Header}>한국어 학습</div>
+      </div>
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
       </div>
