@@ -20,23 +20,26 @@
   align-items: center;
 }
 
-.Router{
+.Router {
   color: black;
   font-family: 'CookieRun-Regular';
   cursor: pointer;
   margin-right: 1rem;
-  font-size: 20px;
-  border: solid rgba(0, 0, 0, .5);
-  border-radius: 10px;
+  font-size: 1.3rem;
+  border: solid rgba(184, 0, 0, 0.5);
   padding: 5px 10px 5px 10px;
-  transition: border-width .1s;
+  transition: border-width .15s;
+  word-break: keep-all;
+
 }
 
 @media (min-width: 901px) {
   .Logo {
     display: flex;
     cursor: pointer;
+    margin-bottom: 1rem;
   }
+
   .LogoXs {
     display: none;
   }
@@ -46,6 +49,7 @@
   .Logo {
     display: none;
   }
+
   .LogoXs {
     display: flex;
     cursor: pointer;

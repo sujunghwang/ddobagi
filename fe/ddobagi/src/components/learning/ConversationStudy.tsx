@@ -11,7 +11,7 @@ import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
 import MicRoundedIcon from "@mui/icons-material/MicRounded";
 import FiberManualRecordRoundedIcon from "@mui/icons-material/FiberManualRecordRounded";
 import VolumeUpRoundedIcon from "@mui/icons-material/VolumeUpRounded";
-import { ReactMic, ReactMicStopEvent, ReactMicProps } from "react-mic";
+// import { ReactMic, ReactMicStopEvent, ReactMicProps } from "react-mic";
 import Recording from "./Recording";
 
 function ConversationStudy() {
@@ -155,10 +155,10 @@ function ConversationStudy() {
     setRecords(false);
   };
 
-  const onStop = (recordedBlob: ReactMicStopEvent, id: number) => {
-    const blobUrl = recordedBlob.blobURL;
-    blobUrls.current[id] = blobUrl;
-  };
+  // const onStop = (recordedBlob: ReactMicStopEvent, id: number) => {
+  //   const blobUrl = recordedBlob.blobURL;
+  //   blobUrls.current[id] = blobUrl;
+  // };
 
   // 비디오 데이터 요청  GET http://localhost:8080/api/conversations/{situationId}
   // 임의 응답 데이터
@@ -210,12 +210,12 @@ function ConversationStudy() {
       </div>
       <div className={styles.RightContainer}>
         <div className={styles.scores}>녹음 완료한 갯수 / 총 스크립트 갯수</div>
-        <ReactMic
+        {/* <ReactMic
           record={records}
           onStop={(recordedBlob: ReactMicStopEvent) => onStop(recordedBlob, 2)}
           strokeColor="#000000"
           backgroundColor="#ffffff"
-        />
+        /> */}
         <div
           className={styles.OuterContainer}
           style={{ backgroundColor: color }}

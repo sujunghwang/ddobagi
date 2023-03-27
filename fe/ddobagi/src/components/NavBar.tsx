@@ -74,7 +74,7 @@ function NavBar() {
   };
   return (
     <div>
-      <AppBar position="sticky" color="inherit" elevation={0}>
+      <AppBar position="fixed" color="inherit" elevation={0} >
         <Container maxWidth="xl">
           {/* 모바일 환경 */}
           <Toolbar disableGutters>
@@ -119,8 +119,8 @@ function NavBar() {
                       {language === "CN"
                         ? "监护人"
                         : language === "VI"
-                        ? "người giám hộ"
-                        : "보호자"}
+                          ? "người giám hộ"
+                          : "보호자"}
                     </Typography>
                   </MenuItem>
                 )}
@@ -135,8 +135,8 @@ function NavBar() {
                     {language === "CN"
                       ? "学习"
                       : language === "VI"
-                      ? "học hỏi"
-                      : "한국어 연습"}
+                        ? "học hỏi"
+                        : "한국어 연습"}
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -150,8 +150,8 @@ function NavBar() {
                     {language === "CN"
                       ? "韩国文化"
                       : language === "VI"
-                      ? "văn hoá"
-                      : "한국 문화"}
+                        ? "văn hoá"
+                        : "한국 문화"}
                   </Typography>
                 </MenuItem>
                 {userStr && (
@@ -166,8 +166,8 @@ function NavBar() {
                       {language === "CN"
                         ? "我的简历"
                         : language === "VI"
-                        ? "Thông tin của tôi"
-                        : "내 정보"}
+                          ? "Thông tin của tôi"
+                          : "내 정보"}
                     </Typography>
                   </MenuItem>
                 )}
@@ -178,8 +178,8 @@ function NavBar() {
                       language === "CN"
                         ? "登录"
                         : language === "VI"
-                        ? "đăng nhập"
-                        : "로그인"
+                          ? "đăng nhập"
+                          : "로그인"
                     }
                     color="#FFD93D"
                     width="130px"
@@ -196,8 +196,8 @@ function NavBar() {
                       language === "CN"
                         ? "登出"
                         : language === "VI"
-                        ? "đăng xuất"
-                        : "로그아웃"
+                          ? "đăng xuất"
+                          : "로그아웃"
                     }
                     color="#FF6B6B"
                     width="130px"
@@ -210,7 +210,7 @@ function NavBar() {
               </Menu>
             </Box>
             <img
-              src="img/Logo.png"
+              src={"/img/Logo.png"}
               alt="logo"
               onClick={navigateToHome}
               className={styles.LogoXs}
@@ -225,7 +225,7 @@ function NavBar() {
               }}
             >
               <img
-                src="img/Logo.png"
+                src={"/img/Logo.png"}
                 alt="logo"
                 className={styles.Logo}
                 onClick={navigateToHome}
@@ -246,16 +246,16 @@ function NavBar() {
                     onClick={navigateToParents}
                     style={{
                       borderWidth:
-                        location.pathname === "/parentpage"
-                          ? "0px 3px 4px 0px"
+                        location.pathname === "/parentpage/record" || location.pathname === "/parentpage/map" || location.pathname === "/parentpage/news"
+                          ? "0px 0px 4px 0px"
                           : "0px 0px 0px 0px",
                     }}
                   >
                     {language === "CN"
                       ? "监护人"
                       : language === "VI"
-                      ? "người giám hộ"
-                      : "보호자"}
+                        ? "người giám hộ"
+                        : "보호자"}
                   </div>
                 )}
                 <div
@@ -265,15 +265,15 @@ function NavBar() {
                   style={{
                     borderWidth:
                       location.pathname === "/CategoryList"
-                        ? "0px 3px 4px 0px"
+                        ? "0px 0px 4px 0px"
                         : "0px 0px 0px 0px",
                   }}
                 >
                   {language === "CN"
                     ? "学习"
                     : language === "VI"
-                    ? "học hỏi"
-                    : "한국어 연습"}
+                      ? "học hỏi"
+                      : "한국어 연습"}
                 </div>
                 <div
                   key="한국 문화"
@@ -282,15 +282,15 @@ function NavBar() {
                   style={{
                     borderWidth:
                       location.pathname === "/CultureList"
-                        ? "0px 3px 4px 0px"
+                        ? "0px 0px 4px 0px"
                         : "0px 0px 0px 0px",
                   }}
                 >
                   {language === "CN"
                     ? "韩国文化"
                     : language === "VI"
-                    ? "văn hoá"
-                    : "한국 문화"}
+                      ? "văn hoá"
+                      : "한국 문화"}
                 </div>
                 {userStr && (
                   <div
@@ -300,28 +300,28 @@ function NavBar() {
                     style={{
                       borderWidth:
                         location.pathname === "/mypage"
-                          ? "0px 3px 4px 0px"
+                          ? "0px 0px 4px 0px"
                           : "0px 0px 0px 0px",
                     }}
                   >
                     {language === "CN"
                       ? "我的简历"
                       : language === "VI"
-                      ? "Thông tin của tôi"
-                      : "내 정보"}
+                        ? "Thông tin của tôi"
+                        : "내 정보"}
                   </div>
                 )}
-
-                <SelectLanguage />
-
+                <div style={{ marginRight: "1rem" }}>
+                  <SelectLanguage />
+                </div>
                 {userStr === null && (
                   <ColorBtn
                     content={
                       language === "CN"
                         ? "登录"
                         : language === "VI"
-                        ? "đăng nhập"
-                        : "로그인"
+                          ? "đăng nhập"
+                          : "로그인"
                     }
                     color="#FFD93D"
                     width="130px"
@@ -337,11 +337,11 @@ function NavBar() {
                       language === "CN"
                         ? "登出"
                         : language === "VI"
-                        ? "đăng xuất"
-                        : "로그아웃"
+                          ? "đăng xuất"
+                          : "로그아웃"
                     }
                     color="#FF6B6B"
-                    width="130px"
+                    width="9rem"
                     onClick={logout}
                   />
                 )}
