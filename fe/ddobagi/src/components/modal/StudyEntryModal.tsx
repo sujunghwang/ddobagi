@@ -87,7 +87,6 @@ function StudyEntryModal({
       slotProps={{
         backdrop: {
           timeout: 500,
-          style: { backgroundColor: "rgba(0, 0, 0, 0)" },
         },
       }}
     >

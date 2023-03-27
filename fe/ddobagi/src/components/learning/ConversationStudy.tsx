@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./Study.module.scss";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
@@ -55,85 +56,54 @@ function ConversationStudy() {
   };
 
   // 스크립트를 요청하는 구문. 각 스크립트별 데이터가 리스트로 제공됨.
-  // 임의 응답 데이터 http://localhost:8080/api/conversations/{situationId}/{userId}/script
-  const scriptResponse = [
-    {
-      scriptId: 1,
-      startTime: "0",
-      endTime: "5",
-      scriptRole: "RIGHT",
-      defaultContent: "좋은 아침.",
-      recordedUrl: "www.abc.kr",
-      lang: "CHI",
-      transContent: "早上好。",
-    },
-    {
-      scriptId: 2,
-      startTime: "10",
-      endTime: "15",
-      scriptRole: "RIGHT",
-      defaultContent: "안녕히 주무셨어요?",
-      recordedUrl: "www.abc.kr",
-      lang: "CHI",
-      transContent: "早上好。",
-    },
-    {
-      scriptId: 3,
-      startTime: "15",
-      endTime: "20",
-      scriptRole: "RIGHT",
-      defaultContent: "그럼, 잘 잤지. 아침은 뭐 먹을까?",
-      recordedUrl: "www.abc.kr",
-      lang: "CHI",
-      transContent: "好吧，睡个好觉。 早餐吃什么?",
-    },
-    {
-      scriptId: 4,
-      startTime: "20",
-      endTime: "25",
-      scriptRole: "RIGHT",
-      defaultContent: "계란프라이가 먹고 싶어요!",
-      recordedUrl: "www.abc.kr",
-      lang: "CHI",
-      transContent: "我想吃煎鸡蛋！",
-    },
-    {
-      scriptId: 5,
-      startTime: "25",
-      endTime: "30",
-      scriptRole: "RIGHT",
-      defaultContent: "그래, 금방 해 줄게.",
-      recordedUrl: "www.abc.kr",
-      lang: "CHI",
-      transContent: "好的，我会尽快做的。",
-    },
-    {
-      scriptId: 6,
-      startTime: "30",
-      endTime: "35",
-      scriptRole: "RIGHT",
-      defaultContent: "와! 신난다!",
-      recordedUrl: "www.abc.kr",
-      lang: "CHI",
-      transContent: "好的，我会尽快做的。",
-    },
-    {
-      scriptId: 7,
-      startTime: "35",
-      endTime: "40",
-      scriptRole: "RIGHT",
-      defaultContent: "추가 텍스트입니다.",
-      recordedUrl: "www.abc.kr",
-      lang: "CHI",
-      transContent: "好的，我会尽快做的。",
-    },
-  ];
+  // 임의 응답 데이터 http://j8a608.p.ssafy.io:8080/api/conversations/1/1/script
+  interface Script {
+    // Learning 객체의 속성을 정의합니다.
+    scriptId: number;
+    startTime: string;
+    endTime: string;
+    scriptRole: string;
+    defaultContent: string;
+    recordedUrl: string;
+    lang: string;
+    transContent: string;
+  }
+  const [scripts, setScripts] = useState<Script[]>([]);
+
+  useEffect(() => {
+    const fetchScript = async () => {
+      try {
+        const response = await axios.get<Script[]>(
+          "http://j8a608.p.ssafy.io:8080/api/conversations/1/1/script"
+        );
+        const newScripts = [];
+        if (language === "VI") {
+          for (const item of response.data) {
+            if (item.lang === "VI") {
+              newScripts.push(item);
+            }
+          }
+        } else {
+          for (const item of response.data) {
+            if (item.lang === "CN") {
+              newScripts.push(item);
+            }
+          }
+        }
+        setScripts(newScripts);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchScript();
+  }, []);
 
   const opts: YouTubeProps["opts"] = {
     height: "467",
     width: "830",
     playerVars: {
-      // end: Number(scriptResponse[scriptResponse.length - 1].endTime), // 마지막 문장이 끝나는 시간을 데이터로 받아옵니다.
+      end: scripts[scripts.length - 1]?.endTime, // 마지막 문장이 끝나는 시간을 데이터로 받아옵니다. -> end 이벤트를 발생시켜야 합니다.
       controls: 0,
       rel: 0,
       modestbranding: 1,
@@ -146,7 +116,7 @@ function ConversationStudy() {
     blobUrl: string | null;
   }
   const [records, setRecords] = useState<boolean>(false);
-  const blobUrls = useRef<string[]>(new Array(scriptResponse.length).fill(""));
+  const blobUrls = useRef<string[]>(new Array(scripts.length).fill(""));
   const startRecording = (index: number) => {
     setRecords(true);
   };
@@ -160,34 +130,53 @@ function ConversationStudy() {
   //   blobUrls.current[id] = blobUrl;
   // };
 
-  // 비디오 데이터 요청  GET http://localhost:8080/api/conversations/{situationId}
-  // 임의 응답 데이터
+  //동영상 정보
   interface MapType {
-    [key: string]: {
-      title: string;
-      desc: string;
+    situationVideoUrl: string;
+    lang: {
+      [key: string]: {
+        title: string;
+        desc: string;
+      };
     };
   }
-  const response = {
-    situationVideoUrl: "https://www.youtube.com/watch?v=On_ZA4RNfyU",
-    map: {
-      CN: {
-        title: "问好",
-        desc: "这是视频的描述",
-      },
-      KR: {
-        title: "인사하기",
-        desc: "동영상에 대한 설명입니다. 설명이니까 좀 길어야 되지 않을까요? 얼마나 길면 문제가 생길까요? 더 늘려보라고 ㅋㅋㅋ 이제 더 늘려도 안밀린다 하하하하ㅏㅎ 신난다재미난다게임오브더데스근데 이렇게까지 길어지지는않겠지만 아무튼 쭉 밀어보면 ",
-      },
-      VI: {
-        title: "nói xin chào",
-        desc: "Đây là mô tả của video",
-      },
-    } as MapType,
-  };
+  const [videoInfo, setVideoInfo] = useState<MapType | null>(null);
 
-  const videoId = response.situationVideoUrl.split("?v=")[1];
-  const videoDescription = response.map[language]?.desc;
+  useEffect(() => {
+    const fetchVideoInfo = async () => {
+      try {
+        const response = await axios.get<MapType>(
+          "http://j8a608.p.ssafy.io:8080/api/conversations/1"
+        );
+        setVideoInfo(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchVideoInfo();
+  }, []);
+
+  const videoId = videoInfo?.situationVideoUrl.split("?v=")[1];
+  const videoDescription = videoInfo?.lang[language]?.desc;
+  //
+
+  const [record, setRecord] = useState<number>(0);
+
+  useEffect(() => {
+    const fetchRecordInfo = async () => {
+      try {
+        const response = await axios.get<number>(
+          "http://j8a608.p.ssafy.io:8080/api/conversations/1/1/record"
+        );
+        setRecord(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchRecordInfo();
+  }, []);
 
   return (
     <div className={styles.FullContainer}>
@@ -209,7 +198,9 @@ function ConversationStudy() {
         <div className={styles.Description}>{videoDescription}</div>
       </div>
       <div className={styles.RightContainer}>
-        <div className={styles.scores}>녹음 완료한 갯수 / 총 스크립트 갯수</div>
+        <div className={styles.scores}>
+          {record} / {scripts.length}
+        </div>
         {/* <ReactMic
           record={records}
           onStop={(recordedBlob: ReactMicStopEvent) => onStop(recordedBlob, 2)}
@@ -221,7 +212,7 @@ function ConversationStudy() {
           style={{ backgroundColor: color }}
         >
           <div className={styles.InnerContainer}>
-            {scriptResponse.map((item, index) => (
+            {scripts.map((item, index) => (
               <div key={index} className={styles.bubbleGroup}>
                 <div className={styles.Scripts}>
                   <div className={styles.bubble}>

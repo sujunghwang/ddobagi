@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import VideoScroll from "../components/VideoScroll";
 import BreadCrumbs from "../components/BreadCrumbs";
+import Loading from "../components/Loading";
 import styles from "./CategoryList.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/RootReducer";
+import axios from "axios";
 import TemporaryResponse from "../components/TemporaryResponse";
 // 임시 리스트를 가져옴. 실제 서비스에서는 요청을 통해 해당 카테고리 아이템들의 리스트를 가져올 필요가 있음.
-interface Videolist {
+interface SituationTrans {
+  lang: string;
+  title: string;
+}
+
+interface Situation {
   situationId: number;
   thumbnail: string;
-  isCompleted: boolean;
   progress: number;
-  situationTrans: {
-    lang: string;
-    title: string;
-  }[];
+  situationTransList: SituationTrans[];
+  isCompleted: boolean;
+}
+
+interface Videolist {
+  situationList: Situation[];
 }
 
 function CategoryList() {
@@ -24,10 +32,40 @@ function CategoryList() {
   );
   //
   // axios통신으로 리스트를 받아와야 하는 부분//
-  const testArray: Videolist[] = TemporaryResponse[
-    "situationList"
-  ] as Videolist[];
-  // 가져온 리스트의 타입을 캐스팅
+  const [homeList, setHomeList] = useState<Videolist | null>(null);
+  const [schoolList, setSchoolList] = useState<Videolist | null>(null);
+  const [playGroundList, setPlayGroundList] = useState<Videolist | null>(null);
+  const [storeList, setStoreList] = useState<Videolist | null>(null);
+
+  useEffect(() => {
+    const fetchLearning = async () => {
+      try {
+        const response = await axios.get<Videolist>(
+          "http://j8a608.p.ssafy.io:8080/api/learnings/1/HOME"
+        );
+        setHomeList(response.data);
+
+        const response2 = await axios.get<Videolist>(
+          "http://j8a608.p.ssafy.io:8080/api/learnings/1/SCHOOL"
+        );
+        setSchoolList(response2.data);
+
+        const response3 = await axios.get<Videolist>(
+          "http://j8a608.p.ssafy.io:8080/api/learnings/1/PLAYGROUND"
+        );
+        setPlayGroundList(response3.data);
+
+        const response4 = await axios.get<Videolist>(
+          "http://j8a608.p.ssafy.io:8080/api/learnings/1/STORE"
+        );
+        setStoreList(response4.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchLearning();
+  }, []);
 
   // 카테고리명을 변수화 ( 모달에 넘겨주기 위함 )
   const house =
@@ -38,14 +76,14 @@ function CategoryList() {
     language === "CN"
       ? "学习"
       : language === "VI"
-        ? "tại cửa hàng"
-        : "가게에서";
+      ? "tại cửa hàng"
+      : "가게에서";
   const playGround =
     language === "CN"
       ? "在操场上"
       : language === "VI"
-        ? "tại sân chơi"
-        : "놀이터에서";
+      ? "tại sân chơi"
+      : "놀이터에서";
   //
 
   return (
@@ -57,29 +95,45 @@ function CategoryList() {
         <BreadCrumbs />
       </div>
       <div className={styles.CategoryName}>{house}</div>
-      <VideoScroll
-        color={"#FF6B6B"}
-        videolist={testArray}
-        categoryName={house}
-      />
+      {homeList ? (
+        <VideoScroll
+          color={"#FF6B6B"}
+          videolist={homeList}
+          categoryName={house}
+        />
+      ) : (
+        <Loading />
+      )}
       <div className={styles.CategoryName}>{school}</div>
-      <VideoScroll
-        color={"#92B4EC"}
-        videolist={testArray}
-        categoryName={school}
-      />
+      {schoolList ? (
+        <VideoScroll
+          color={"#92B4EC"}
+          videolist={schoolList}
+          categoryName={school}
+        />
+      ) : (
+        <Loading />
+      )}
       <div className={styles.CategoryName}>{store}</div>
-      <VideoScroll
-        color={"#FFE69A"}
-        videolist={testArray}
-        categoryName={store}
-      />
+      {playGroundList ? (
+        <VideoScroll
+          color={"#FFE69A"}
+          videolist={playGroundList}
+          categoryName={store}
+        />
+      ) : (
+        <Loading />
+      )}
       <div className={styles.CategoryName}>{playGround}</div>
-      <VideoScroll
-        color={"#84D88F"}
-        videolist={testArray}
-        categoryName={playGround}
-      />
+      {storeList ? (
+        <VideoScroll
+          color={"#84D88F"}
+          videolist={storeList}
+          categoryName={playGround}
+        />
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }

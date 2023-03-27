@@ -7,7 +7,6 @@ import { useLocation } from 'react-router-dom';
 function Explore() {
   const location = useLocation();
   const pathname = location.pathname
-  console.log(pathname)
   return (
     <div>
       <NavBar />

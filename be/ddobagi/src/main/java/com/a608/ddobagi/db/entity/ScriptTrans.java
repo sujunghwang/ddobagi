@@ -1,36 +1,39 @@
 package com.a608.ddobagi.db.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.io.Serializable;
 
-/**
- *packageName    : com.a608.ddobagi.entity
- * fileName       : SubScript
- * author         : modsiw
- * date           : 2023/03/10
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023/03/10        modsiw       최초 생성
- */
+import lombok.Getter;
+
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class ScriptTrans {
+@Getter
+public class ScriptTrans implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	// private Long scriptId;
+	private String transContent;
 
 	@Enumerated(EnumType.STRING)
 	private Lang lang;
 
-	private String transContent;
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "script_id")
+	private Script script;
 
+
+	/* 연관관계 편의 메소드 */
+	public void setScript(Script script) {
+		if(this.script != null) {
+			// 다대일측에서 연관관계를 지정할 때 기존 연관관계는 끊어주어야 한다.
+			this.script.getScriptTransList().remove(this);
+		}
+		this.script = script;
+		script.getScriptTransList().add(this);
+	}
 }

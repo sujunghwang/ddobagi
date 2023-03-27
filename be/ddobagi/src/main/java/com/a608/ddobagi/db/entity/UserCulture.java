@@ -1,5 +1,11 @@
 package com.a608.ddobagi.db.entity;
 
+import java.io.Serializable;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,38 +15,33 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-/**
- *packageName    : com.a608.ddobagi.entity
- * fileName       : UserCulture
- * author         : modsiw
- * date           : 2023/03/10
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023/03/10        modsiw       최초 생성
- */
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class UserCulture {
+@Getter
+@RequiredArgsConstructor
+public class UserCulture implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "user_id")
-	private Long userId;
-
-	@Column(name = "culture_id")
-	private Long cultureId;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", updatable = false, insertable = false)
-	private User user;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "culture_id", updatable = false, insertable = false)
-	private Culture culture;
-
 	private boolean isCompleted;
 
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "culture_id")
+	private Culture culture;
+
+	@Builder
+	public UserCulture(boolean isCompleted, User user, Culture culture) {
+		this.isCompleted = isCompleted;
+		this.user = user;
+		this.culture = culture;
+	}
 }

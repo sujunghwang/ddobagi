@@ -1,29 +1,25 @@
 package com.a608.ddobagi.db.entity;
 
+import lombok.Getter;
+
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-/**
- *packageName    : com.a608.ddobagi.entity
- * fileName       : Culture
- * author         : modsiw
- * date           : 2023/03/10
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023/03/10        modsiw       최초 생성
- */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Culture {
+@Getter
+public class Culture implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +27,13 @@ public class Culture {
 
 	private String videoUrl;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "culture_id")
+	private String thumbnail;
+
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "culture_category_id")
+	private CultureCategory cultureCategory;
+
+	@OneToMany(mappedBy = "culture", cascade = CascadeType.ALL)
 	private List<CultureTrans> cultureTransList;
 }

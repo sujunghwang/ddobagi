@@ -6,20 +6,26 @@ import styles from "./VideoScroll.module.scss";
 import { IconButton } from "@mui/material";
 import PlayCircleOutlineOutlinedIcon from "@mui/icons-material/PlayCircleOutlineOutlined";
 
-interface Videolist {
+interface SituationTrans {
+  lang: string;
+  title: string;
+}
+
+interface Situation {
   situationId: number;
   thumbnail: string;
-  isCompleted: boolean;
   progress: number;
-  situationTrans: {
-    lang: string;
-    title: string;
-  }[];
+  situationTransList: SituationTrans[];
+  isCompleted: boolean;
+}
+
+interface Videolist {
+  situationList: Situation[];
 }
 
 type VidProp = {
   color: string;
-  videolist: Videolist[];
+  videolist: Videolist;
   categoryName: string;
 };
 
@@ -30,7 +36,7 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
     (state: RootState) => state.languageChange.language
   );
 
-  const lang = language === "CN" ? 1 : language === "VI" ? 2 : 0;
+  const lang = language === "CN" ? 0 : language === "VI" ? 2 : 1;
 
   return (
     <div
@@ -57,12 +63,12 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
         <PlayCircleOutlineOutlinedIcon sx={{ fontSize: "4rem" }} />
       </IconButton>
       <div className={styles.SContainer}>
-        {videolist.map((item, index) => (
+        {videolist.situationList.map((item, index) => (
           <VideoCard
             key={index}
             situationThumbnail={item.thumbnail}
             progress={item.progress}
-            situationTitle={item.situationTrans[lang].title}
+            situationTitle={item.situationTransList[lang].title}
             situationId={item.situationId}
             isCompleted={item.isCompleted}
             color={color}

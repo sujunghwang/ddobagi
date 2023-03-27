@@ -1,33 +1,20 @@
 package com.a608.ddobagi.db.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.io.Serializable;
 
-/**
- *packageName    : com.a608.ddobagi.entity
- * fileName       : CultureTrans
- * author         : modsiw
- * date           : 2023/03/10
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023/03/10        modsiw       최초 생성
- */
+import lombok.Getter;
+
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class CultureTrans {
+@Getter
+public class CultureTrans implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	// @Column(name = "culture_id")
-	// private Long cultureId;
 
 	private String title;
 
@@ -36,4 +23,19 @@ public class CultureTrans {
 	@Enumerated(EnumType.STRING)
 	private Lang lang;
 
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "culture_id")
+	private Culture culture;
+
+
+	/* 연관관계 편의 메소드 */
+	public void setCulture(Culture culture) {
+		if(this.culture != null) {
+			// 다대일측에서 연관관계를 지정할 때 기존 연관관계는 끊어주어야 한다.
+			this.culture.getCultureTransList().remove(this);
+		}
+		this.culture = culture;
+		culture.getCultureTransList().add(this);
+	}
 }

@@ -1,6 +1,11 @@
 package com.a608.ddobagi.db.entity;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+import java.time.LocalDate;
+
+import lombok.Builder;
+import lombok.Getter;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,37 +14,38 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-/**
- *packageName    : com.a608.ddobagi.entity
- * fileName       : UserQuiz
- * author         : modsiw
- * date           : 2023/03/10
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023/03/10        modsiw       최초 생성
- */
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.NoArgsConstructor;
+
 @Entity
-public class UserQuiz {
+@Getter
+@NoArgsConstructor
+public class UserQuiz implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "quiz_id")
-	private Long quizId;
+	private boolean isNowCorrected;
 
-	@Column(name = "user_id")
-	private Long userId;
+	private boolean isFirstCorrected;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", updatable = false, insertable = false)
+	@JoinColumn(name = "user_id")
 	private User user;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "quiz_id", updatable = false, insertable = false)
+	@JoinColumn(name = "quiz_id")
 	private Quiz quiz;
 
-	private boolean isCorrected;
+	@Builder(toBuilder = true)
+	public UserQuiz(Long id, boolean isNowCorrected, boolean isFirstCorrected, User user, Quiz quiz) {
+		this.id = id;
+		this.isNowCorrected = isNowCorrected;
+		this.isFirstCorrected = isFirstCorrected;
+		this.user = user;
+		this.quiz = quiz;
+	}
 }
