@@ -23,7 +23,7 @@ function ParentPage3() {
     // 탭 선택 함수
     const navigate = useNavigate();
     const navigateToParent1 = () => {
-      navigate("/parentpage");
+      navigate("/parentpage/record");
     };
     const navigateToParent2 = () => {
       navigate("/parentpage/map");

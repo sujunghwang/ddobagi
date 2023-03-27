@@ -2,7 +2,9 @@ import React from "react";
 import Card from '@mui/material/Card';
 import { Button, Box, Typography, CardActionArea, CardMedia, CardContent, Grid } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { RootState } from "../../redux/RootReducer";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ReactPlayer from "react-player";
 
 // 문화 상세 사진
@@ -23,6 +25,28 @@ type CultureBoxProp = {
 };
 
 function CultureBox({ contentType, backColor, title, content, videoURL, others }: CultureBoxProp) {
+
+  //언어 변수
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+    );
+  //
+
+  const introduce = () =>  {
+    if (language === "CN") {
+      return "其他视频"
+    } else if (language === 'VI') {
+      // @ts-ignore
+      return "Có cái này nữa nè!"
+    } else {
+      return "이런 것도 있어요!"
+    }
+  }
+
+  // 영상 학습 완료 함수 (추후에 API POST 보낼 곳)
+  const handleEnded = () => {
+    console.log("비디오 재생이 완료되었습니다.");
+  }
 
   let idnumbers : Array<[number, string, any ]>;
 
@@ -72,6 +96,7 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others }
               height="650px"
               muted={true}
               playing={true}
+              onEnded={handleEnded}
               />
 
           </Box>
@@ -116,7 +141,7 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others }
               marginTop: "10px"
             }}
           >
-            이런 것도 있어요!
+            {introduce()}
           </Typography>
         </Box>
         <Box

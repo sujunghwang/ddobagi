@@ -12,6 +12,8 @@ import CultureDetail from '../components/Culture/CultureDetail';
 import VideoScroll from "../components/VideoScroll";
 import SwiperList from "../components/Swiper/SwiperList";
 // 임시카테고리
+// import TemporaryArray from "../components/TemporaryArray";
+// 임시 리스트를 가져옴. 실제 서비스에서는 요청을 통해 해당 카테고리 아이템들의 리스트를 가져올 필요가 있음.
 
 // API에서 받아온 데이터의 타입을 선언합니다.
 interface ApiData {
@@ -116,13 +118,19 @@ function CultureList() {
         <Box sx={{ height:"50px"}} />
         <SwiperList boxColor="red" />
         <Box sx={{ height:"50px"}} />
+        <hr />
+        <Box sx={{ height:"50px"}} />
       <div className={styles.CategoryName}>{category2}</div>
       <Box sx={{ height:"50px"}} />
         <SwiperList boxColor="blue" />
         <Box sx={{ height:"50px"}} />
+        <hr />
+        <Box sx={{ height:"50px"}} />
       <div className={styles.CategoryName}>{category3}</div>
         <Box sx={{ height:"50px"}} />
         <SwiperList boxColor="green" />
+        <Box sx={{ height:"50px"}} />
+        <hr />
         <Box sx={{ height:"50px"}} />
       <div className={styles.CategoryName}>{category4}</div>
         <Box sx={{ height:"50px"}} />
