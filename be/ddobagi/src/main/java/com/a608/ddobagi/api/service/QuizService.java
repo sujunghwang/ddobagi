@@ -50,8 +50,8 @@ public class QuizService {
         String option2 = quizList.get(0).get(quiz.option2);
         String option3 = quizList.get(0).get(quiz.option3);
         String defaultContent = quizList.get(0).get(script.defaultContent);
-        LocalTime startTime = quizList.get(0).get(script.startTime);
-        LocalTime endTime = quizList.get(0).get(script.endTime);
+        Long startTime = quizList.get(0).get(script.startTime);
+        Long endTime = quizList.get(0).get(script.endTime);
         boolean isNowCorrected = quizList.get(0).get(userQuiz.isNowCorrected);
         boolean isFirstCorrected = quizList.get(0).get(userQuiz.isNowCorrected);
 

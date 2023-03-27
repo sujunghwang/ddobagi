@@ -6,5 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SituationRepository extends JpaRepository<Situation,Long> {
 
+    Long countBy();
     Situation findById(long id);
+
+    // Double avgC
 }

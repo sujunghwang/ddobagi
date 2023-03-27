@@ -27,14 +27,17 @@ public class UserResponseDto {
 	private String loginId;
 	private String name;
 	private int age;
+	private int settleYear;
 	private String userLang;
 
 	@Builder
-	public UserResponseDto(Long userId, String loginId, String name, int age, String userLang) {
+	public UserResponseDto(Long userId, String loginId, String name,
+		int age, int settleYear, String userLang) {
 		this.userId = userId;
 		this.loginId = loginId;
 		this.name = name;
 		this.age = age;
+		this.settleYear = settleYear;
 		this.userLang = userLang;
 	}
 
@@ -43,6 +46,7 @@ public class UserResponseDto {
 		this.loginId = user.getLoginId();
 		this.name = user.getName();
 		this.age = user.getAge();
+		this.settleYear = user.getSettleYear();
 		this.userLang = user.getUserLang().toString();
 	}
 }

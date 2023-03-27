@@ -62,7 +62,7 @@ public class UserController {
 		return new ApiResponse<>(userService.findUserQuizReviewList(userId));
 	}
 
-	@GetMapping("/{userId}/progress")
+	@GetMapping("/{userId}/statics")
 	public ApiResponse<UserProgressResponseDto> getUserProgress(@PathVariable Long userId) {
 		return new ApiResponse<>(userService.findUserProgress(userId));
 	}

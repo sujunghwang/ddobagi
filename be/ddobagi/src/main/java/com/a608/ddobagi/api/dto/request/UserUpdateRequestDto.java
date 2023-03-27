@@ -23,6 +23,7 @@ public class UserUpdateRequestDto {
 
 	private String name;
 	private LocalDate birth;
+	private int settleYear;
 	private String userLang;
 	private String pw;
 

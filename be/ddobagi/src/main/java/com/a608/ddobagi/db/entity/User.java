@@ -34,6 +34,8 @@ public class User extends BaseEntity implements Serializable {
 	//생년월일 추가
 	private LocalDate birth;
 
+	private int settleYear;
+
 	@Enumerated(EnumType.STRING)
 	private Lang userLang;
 
@@ -43,13 +45,15 @@ public class User extends BaseEntity implements Serializable {
 	private Role role;
 
 	@Builder(toBuilder = true)
-	public User(Long id, String loginId, String pw, String name, Lang userLang, LocalDate birth, Role role) {
+	public User(Long id, String loginId, String pw, String name,
+		Lang userLang, LocalDate birth, int settleYear, Role role) {
 		this.id = id;
 		this.loginId = loginId;
 		this.pw = pw;
 		this.name = name;
 		this.userLang = userLang;
 		this.birth = birth;
+		this.settleYear = settleYear;
 		this.age = calAge(birth);
 		this.role = role;
 	}
