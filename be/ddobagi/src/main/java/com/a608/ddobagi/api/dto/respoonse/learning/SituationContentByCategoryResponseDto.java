@@ -25,4 +25,20 @@ public class SituationContentByCategoryResponseDto {
         this.progress = progress;
         this.situationTransList = situationTransList;
     }
+
+//    Long situationId;
+//    String thumbnail;
+//    @JsonProperty("isCompleted")
+//    boolean isCompleted;
+//    double progress;
+//    List<SituationTransDto> situationTransList;
+//
+//    @Builder
+//    public SituationContentByCategoryResponseDto(Long situationId, String thumbnail, boolean isCompleted, double progress, List<SituationTransDto> situationTransList) {
+//        this.situationId = situationId;
+//        this.thumbnail = thumbnail;
+//        this.isCompleted = isCompleted;
+//        this.progress = progress;
+//        this.situationTransList = situationTransList;
+//    }
 }

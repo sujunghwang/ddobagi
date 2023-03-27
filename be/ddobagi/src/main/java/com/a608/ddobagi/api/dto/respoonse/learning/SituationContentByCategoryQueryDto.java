@@ -24,6 +24,13 @@ public class SituationContentByCategoryQueryDto {
     boolean isCompleted;
     double progress;
 
+//    @Builder
+//    public SituationContentByCategoryQueryDto(Long situationId, String thumbnail, Lang lang, String title) {
+//        this.situationId = situationId;
+//        this.thumbnail = thumbnail;
+//        this.lang = lang;
+//        this.title = title;
+//    }
     @Builder
     public SituationContentByCategoryQueryDto(Long situationId, String thumbnail, Lang lang, String title, Long completedScriptCnt, Long totalScriptCnt, Long completedQuizCnt, Long totalQuizCnt, boolean isCompleted, double progress) {
         this.situationId = situationId;
