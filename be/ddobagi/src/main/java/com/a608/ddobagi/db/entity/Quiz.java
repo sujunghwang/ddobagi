@@ -46,6 +46,8 @@ public class Quiz implements Serializable {
 	@OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
 	private List<QuizTrans> quizTransList = new ArrayList<>();
 
+	@OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+	private List<UserQuiz> userQuizList = new ArrayList<>();
 
 	/* 연관관계 편의 메소드 */
 	public void setSituation(Situation situation) {
