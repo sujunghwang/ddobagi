@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
+import ScrollToTop from "./components/ScrollToTop";
 import Explore from "./pages/Explore";
 import Landing from "./pages/Landing";
 import Learning from "./pages/Learning";
@@ -18,18 +19,19 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Explore />}>
             <Route path="/" element={<Landing />} />
             <Route path="/categorylist" element={<CategoryList />} />
             <Route path="/culturelist" element={<CultureList />} />
-            <Route path = "/cultureitem" element={<CultureDetail />}/>
+            <Route path="/cultureitem" element={<CultureDetail />} />
             {/* <Route path = "/cultureitem/:id" element={<Landing />}/> */}
             <Route path="/mypage" element={<MyPage />} />
-            <Route path="/parentpage" element={<ParentPage1 />}/>
-            <Route path="/parentpage/map" element={<ParentPage2 />}/>
-            <Route path="/parentpage/news" element={<ParentPage3 />}/>
-              {/* <Route path = "/parentpage" element={<Landing />}/>
+            <Route path="/parentpage" element={<ParentPage1 />} />
+            <Route path="/parentpage/map" element={<ParentPage2 />} />
+            <Route path="/parentpage/news" element={<ParentPage3 />} />
+            {/* <Route path = "/parentpage" element={<Landing />}/>
               <Route path = "/parentpage/map" element={<Landing />}/>
               <Route path = "/parentpage/news" element={<Landing />}/>
               <Route path = "/parentpage/news/:categoryid" element={<Landing />}/> */}

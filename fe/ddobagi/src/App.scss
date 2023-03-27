@@ -17,3 +17,14 @@
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* Standard syntax */
 }
+
+@media (max-width: 900px) {
+  html {
+    font-size: 40%;
+  }
+}
+
+@media (min-width: 901px) {
+  // html {
+  // }
+}

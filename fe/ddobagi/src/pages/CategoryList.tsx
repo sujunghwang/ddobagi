@@ -78,7 +78,6 @@ function CategoryList() {
         videolist={testArray}
         categoryName={playGround}
       />
-      <div>푸터 들어가는 자리</div>
     </div>
   );
 }

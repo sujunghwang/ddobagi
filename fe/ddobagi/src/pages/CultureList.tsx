@@ -12,8 +12,6 @@ import CultureDetail from '../components/Culture/CultureDetail';
 import VideoScroll from "../components/VideoScroll";
 import SwiperList from "../components/Swiper/SwiperList";
 // 임시카테고리
-import TemporaryArray from "../components/TemporaryArray";
-// 임시 리스트를 가져옴. 실제 서비스에서는 요청을 통해 해당 카테고리 아이템들의 리스트를 가져올 필요가 있음.
 
 // API에서 받아온 데이터의 타입을 선언합니다.
 interface ApiData {
