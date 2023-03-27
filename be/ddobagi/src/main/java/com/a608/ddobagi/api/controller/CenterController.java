@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 @RequestMapping("/api/centers")
 @RestController
 public class CenterController {
@@ -27,8 +29,17 @@ public class CenterController {
     }
 
     @GetMapping()
-    public ResponseEntity<?> getCenterList(@RequestParam("gugun") String gugunCode) {
+    public ResponseEntity<?> getCenterList(@RequestParam(required = false) String sido, @RequestParam(required = false) String gugun) {
         // 센터 조회
-        return ResponseEntity.ok(centerService.findCenter(gugunCode));
+        HashMap<String, Object> conditions = new HashMap<String, Object>();
+        if (sido != null){
+            // 시도로 조회했을 때
+            conditions.put("sidoCode", sido);
+        }else if(gugun != null){
+            // 구군으로 조회했을 때
+            conditions.put("gugunCode", gugun);
+        }
+        System.out.println(conditions);
+        return ResponseEntity.ok(centerService.findCenter(conditions));
     }
 }

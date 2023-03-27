@@ -21,12 +21,4 @@ public class CenterResponseDto {
 
     private String tel;
 
-    public CenterResponseDto(Center center) {
-        this.type = center.getType();
-        this.zipCode = center.getZipCode();
-        this.address = center.getAddress();
-        this.Latitude = center.getLatitude();
-        this.Longitude = center.getLongitude();
-        this.tel = center.getTel();
-    }
 }
