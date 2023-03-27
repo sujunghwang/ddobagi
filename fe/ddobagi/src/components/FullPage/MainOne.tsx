@@ -6,19 +6,15 @@ import './Mouse.css';
 export default function MainOne() {
   return (
     <div>
-      <Box 
-      sx={{
-        height:"150px"
-      }}>
-
-      </Box>
       <div
         style={{
           width: '100%',
-          height: '92vh',
+          height: '100vh',
+          backgroundColor: '#92B4EC',
+          display: 'flex',
+          flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#92B4EC',
         }}
       >
         <Box
@@ -26,20 +22,20 @@ export default function MainOne() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            paddingTop: '80px',
+            paddingTop: '115px'
           }}
         >
-          <Box sx={{ marginTop: "300px" }}>
+          <Box>
             <Typography
               sx={{
                 fontSize: '80px',
                 fontFamily: "CookieRun-Regular",
                 color: "#ffffff",
                 marginBottom: '5px',
-                whiteSpace:"pre-line"
+                whiteSpace: "pre-line"
               }}
             >
-              또박또박 
+              또박또박
               말하면서 익혀요
             </Typography>
           </Box>
@@ -57,12 +53,12 @@ export default function MainOne() {
               <span className="wheel"></span>
             </div>
           </Box>
-          <Typography 
-          sx={{
-            fontSize: '35px',
-            fontFamily: "CookieRun-Regular",
-            color: "#ffffff",
-          }}>
+          <Typography
+            sx={{
+              fontSize: '35px',
+              fontFamily: "CookieRun-Regular",
+              color: "#ffffff",
+            }}>
             아래로 내려보세요
           </Typography>
         </Box>

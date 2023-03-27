@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Fullpage, { FullPageSections, FullpageSection} from '@ap.cx/react-fullpage'
+import Fullpage, { FullPageSections, FullpageSection } from '@ap.cx/react-fullpage'
 import MainOne from '../components/FullPage/MainOne';
 import MainTwo from '../components/FullPage/MainTwo';
 import MainThree from '../components/FullPage/MainThree';
@@ -8,24 +8,24 @@ import MainFour from '../components/FullPage/MainFour';
 import MainFive from '../components/FullPage/MainFive';
 
 function Landing() {
-  return(
+  return (
     // @ts-ignore
     <Fullpage>
       <FullPageSections>
         <FullpageSection>
-          <MainOne/>
+          <MainOne />
         </FullpageSection>
         <FullpageSection>
-          <MainTwo/>
+          <MainTwo />
         </FullpageSection>
         <FullpageSection>
-          <MainThree/>
+          <MainThree />
         </FullpageSection>
         <FullpageSection>
-          <MainFour/>
+          <MainFour />
         </FullpageSection>
         <FullpageSection>
-          <MainFive/>
+          <MainFive />
         </FullpageSection>
       </FullPageSections>
     </Fullpage>
