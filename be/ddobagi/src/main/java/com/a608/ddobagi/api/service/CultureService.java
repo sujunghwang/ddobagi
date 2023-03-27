@@ -42,6 +42,9 @@ public class CultureService {
 		cultureResponseDto.setCultureList(
 			cultureRepositoryImpl.findCultureContentByDto_optimization(userId, cultureCategoryCommon));
 
+		// cultureResponseDto.getCultureList().forEach(c -> c.setCompleted(cultureRepository.isCompleted(userId, c.getCultureId())));
+		System.out.println(cultureRepository.isCompleted(userId, 1L));
+
 		return cultureResponseDto;
 	}
 
