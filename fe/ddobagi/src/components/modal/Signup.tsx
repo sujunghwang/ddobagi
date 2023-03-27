@@ -55,14 +55,19 @@ function SignUp({ closeModal }: Props) {
     setName(event.target.value);
   };
 
-  const [birthDay, setBirthDay] = useState<Date | null>(null);
-  const [submitBirth, setSubmitBirth] = useState<number>(0);
-  const handleBirthDayChange = (date: Date | null) => {
-    setBirthDay(date);
+  const [settleDay, setSettleDay] = useState<Date | null>(null);
+  const [submitSettle, setSubmitSettle] = useState<number>(0);
+  const handleSettleDayChange = (date: Date | null) => {
+    setSettleDay(date);
     if (date) {
       const year = new Date(date).getFullYear();
-      setSubmitBirth(year);
+      setSubmitSettle(year);
     }
+  };
+
+  const [birthDay, setBirthDay] = useState<Date | null>(null);
+  const handleBirthDayChange = (date: Date | null) => {
+    setBirthDay(date);
   };
 
   const [id, setId] = useState<string>("");
@@ -95,7 +100,8 @@ function SignUp({ closeModal }: Props) {
     const token = {
       name: name,
       language: language,
-      submitBirth: submitBirth,
+      submitSettle: submitSettle,
+      birthDay: birthDay,
       id: id,
       password: password,
       confirmPassword: confirmPassword,
@@ -119,8 +125,8 @@ function SignUp({ closeModal }: Props) {
               {reduxLanguage === "CN"
                 ? "姓名"
                 : reduxLanguage === "VI"
-                ? "tên"
-                : "이름"}
+                  ? "tên"
+                  : "이름"}
             </div>
             <Input
               error={submitted === true && name === "" ? true : false}
@@ -138,8 +144,8 @@ function SignUp({ closeModal }: Props) {
               {reduxLanguage === "CN"
                 ? "语言"
                 : reduxLanguage === "VI"
-                ? "ngôn ngữ"
-                : "언어"}
+                  ? "ngôn ngữ"
+                  : "언어"}
             </div>
             <FormControl sx={{ minWidth: "100%" }} size="small">
               <InputLabel id="select-label" className={styles.SelectLabel}>
@@ -165,17 +171,39 @@ function SignUp({ closeModal }: Props) {
       <div>
         <div>
           {reduxLanguage === "CN"
-            ? "出生日期"
+            ? "进入韩国的年份"
             : reduxLanguage === "VI"
-            ? "ngày sinh"
-            : "생년월일"}
+              ? "năm nhập cảnh"
+              : "입국년도"}
+        </div>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={["DatePicker"]}>
+            <DatePicker
+              label="Select the day you entered"
+              openTo="year"
+              views={["year"]}
+              sx={{ width: "100%" }}
+              value={settleDay}
+              onChange={handleSettleDayChange}
+              onError={(error, value) => {
+                <TextField helperText={error} required />;
+              }}
+            />
+          </DemoContainer>
+        </LocalizationProvider>
+      </div>
+      <div>
+        <div>
+          {reduxLanguage === "CN"
+            ? "出生年月日"
+            : reduxLanguage === "VI"
+              ? "sinh nhật"
+              : "생일"}
         </div>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["DatePicker"]}>
             <DatePicker
               label="Select Birthday"
-              openTo="year"
-              views={["year"]}
               sx={{ width: "100%" }}
               value={birthDay}
               onChange={handleBirthDayChange}
@@ -191,8 +219,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "帐户"
             : reduxLanguage === "VI"
-            ? "tài khoản"
-            : "아이디"}
+              ? "tài khoản"
+              : "아이디"}
         </div>
         <Input
           placeholder="ID"
@@ -207,8 +235,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "密码"
             : reduxLanguage === "VI"
-            ? "mật khẩu"
-            : "비밀번호"}
+              ? "mật khẩu"
+              : "비밀번호"}
         </div>
         <FormControl sx={{ width: "100%" }} variant="outlined" size="small">
           <OutlinedInput
@@ -238,8 +266,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "验证密码"
             : reduxLanguage === "VI"
-            ? "Xác nhận lại mật khẩu"
-            : "비밀번호 확인"}
+              ? "Xác nhận lại mật khẩu"
+              : "비밀번호 확인"}
         </div>
         <FormControl sx={{ width: "100%" }} variant="outlined" size="small">
           <OutlinedInput
@@ -273,8 +301,8 @@ function SignUp({ closeModal }: Props) {
             reduxLanguage === "CN"
               ? "加入会员"
               : reduxLanguage === "VI"
-              ? "tham gia thành viên"
-              : "회원가입"
+                ? "tham gia thành viên"
+                : "회원가입"
           }
           color="#FF6B6B"
           width="100%"

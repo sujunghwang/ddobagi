@@ -17,6 +17,17 @@ function CircleCharts(
           size="12rem"
           color="info"
           thickness={4}
+          sx={{
+            position: 'absolute',
+            left: 0,
+            zIndex: 2
+          }}
+        />
+        <CircularProgress
+          variant="determinate"
+          value={100}
+          size="12rem"
+          sx={{ color: "white" }} thickness={4}
         />
         <Box
           sx={{
