@@ -166,7 +166,7 @@ fabric.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
+#*.jar
 *.war
 *.nar
 *.ear
@@ -393,6 +393,7 @@ $RECYCLE.BIN/
 # ignore setting files
 application.yml
 application.yaml
+hidden.yml
 
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,react,windows,macos,node
