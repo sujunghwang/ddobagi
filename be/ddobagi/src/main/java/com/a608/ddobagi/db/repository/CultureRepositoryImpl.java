@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
+import com.a608.ddobagi.api.dto.respoonse.culture.CheckUserViewedVideoDto;
 import com.a608.ddobagi.api.dto.respoonse.culture.CultureCategoryResponseDto;
 import com.a608.ddobagi.api.dto.respoonse.culture.CultureContentDto;
 import com.a608.ddobagi.api.dto.respoonse.culture.CultureContentQueryDto;
@@ -48,12 +49,20 @@ public class CultureRepositoryImpl {
 	//카테고리 별 내용 리스트 가져오기
 	public List<CultureContentDto> findCultureContentByDto_optimization(Long userId, String cultureCategoryCommon) {
 
-		List<CultureContentDto> result = findCultureContents(userId, cultureCategoryCommon);
+		List<CultureContentDto> result =
+			findCultureContents(userId, cultureCategoryCommon);
+
+		// System.out.println("===========카테고리 내용 리스트============");
+		// System.out.println(result.size());
 
 		Map<Long, List<CultureContentQueryDto>> cultureContentMap = findCultureContentMap(toCultureIds(result));
+		// Map<Long, List<CheckUserViewedVideoDto>> longListMap = checkUserViewdVideo(toCultureIds(result));
+		// System.out.println("===========user 시청 여부 내용 리스트============");
+		// System.out.println(longListMap.size());
 
 		result.forEach(c -> c.setCultureContentQueryDtoList(cultureContentMap.get(c.getCultureId())));
-
+		// result.forEach(uc -> uc.setCompleted(cultureRepository.isCompleted(userId, uc.getCultureId())));
+		// System.out.println(result.get(0).isCompleted());
 		return result;
 
 	}
@@ -69,15 +78,16 @@ public class CultureRepositoryImpl {
 	public List<CultureContentDto> findCultureContents(Long userId, String cultureCategoryCommon) {
 		return em.createQuery(
 				"select new com.a608.ddobagi.api.dto.respoonse.culture.CultureContentDto"
-					+ "(c.id, c.thumbnail, uc.isCompleted)"
+					+ "(c.id, c.thumbnail)"
 					+ " from Culture c"
 					+ " left outer join UserCulture uc"
 					+ " on c.id = uc.culture.id"
-					+ " join CultureCategory cc"
+					+ " left join CultureCategory cc"
 					+ " on c.cultureCategory.id = cc.id"
-					+ " where uc.user.id = :userId"
-					+ " and cc.common = :common", CultureContentDto.class)
-			.setParameter("userId", userId)
+					+ " where"
+					// + " uc.user.id = :userId and"
+					+ " cc.common = :common", CultureContentDto.class)
+			// .setParameter("userId", userId)
 			.setParameter("common", cultureCategoryCommon)
 			.getResultList();
 	}
@@ -98,6 +108,24 @@ public class CultureRepositoryImpl {
 		return cultureContent.stream()
 			.collect(Collectors.groupingBy(CultureContentQueryDto::getCultureId));
 	}
+
+	//user가 봤는지 안봤는지 확인
+	public Map<Long, List<CheckUserViewedVideoDto>> checkUserViewdVideo(List<Long> cultureIds) {
+		List<CheckUserViewedVideoDto> result =  em.createQuery(
+				"select new com.a608.ddobagi.api.dto.respoonse.culture.CheckUserViewedVideoDto"
+					+ "(c.id, coalesce(uc.isCompleted, false))"
+					+ " from UserCulture uc"
+					+ " join Culture c"
+					+ " on uc.culture.id = c.id"
+					+ " where uc.culture.id in :cultureIds", CheckUserViewedVideoDto.class)
+			.setParameter("cultureIds", cultureIds)
+			.getResultList();
+
+		return result.stream()
+			.collect(Collectors.groupingBy(CheckUserViewedVideoDto::getCultureId));
+
+	}
+
 
 
 	// === sql 그냥 조회 === //

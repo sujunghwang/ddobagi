@@ -1,9 +1,12 @@
 package com.a608.ddobagi.api.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.a608.ddobagi.api.dto.respoonse.learning.SituationContentByCategoryResponseDto;
 import com.a608.ddobagi.common.ApiResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,9 +23,11 @@ public class LearningController {
 	private final LearningService learningService;
 
 	 @GetMapping(value = "/api/learnings/{userId}/{categoryCommon}")
-	 public ApiResponse<List<SituationContentByCategoryResponseDto>> situationListByCategory(@PathVariable Long userId, @PathVariable String categoryCommon) {
-	 	List<SituationContentByCategoryResponseDto> result = learningService.getSituationListByCategory(userId, categoryCommon);
-	 	return new ApiResponse<>(result);
+	 public ResponseEntity<Object> situationListByCategory(@PathVariable Long userId, @PathVariable String categoryCommon) {
+		 Map<String, Object> response = new HashMap<>();
+		 List<SituationContentByCategoryResponseDto> result = learningService.getSituationListByCategory(userId, categoryCommon);
+		 response.put("situationList", result);
+		 return ResponseEntity.ok(response);
 	 }
 
 	@GetMapping(value = "/api/learnings/{situationId}")
