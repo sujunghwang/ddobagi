@@ -67,11 +67,19 @@ function SwiperList({
   //
 
   const navigate = useNavigate();
-  const moveCulture = () => {
-    navigate("/cultureitem");
+  // const moveCulture = () => {
+  //   navigate("/cultureitem");
+  // }
+  const moveCulture = (cultureId: number) => {
+    navigate(`/cultureitem/${cultureId}`);
   }
 
   const Slides = cultureTest
+
+  const getYouTubeThumbnailUrl = (youtubeUrl: string) => {
+    const videoId = youtubeUrl.split('v=')[1];
+    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  }
 
   return (
     <Box 
@@ -115,13 +123,13 @@ function SwiperList({
           <SwiperSlide key={(slide.cultureId)}>
             <Card
               sx={{ maxWidth: 345, borderRadius:"20px" }}
-              onClick={moveCulture}
+              onClick={() => moveCulture(slide.cultureId)}
             >
               <CardActionArea>
                 <CardMedia
                   component="img"
                   height="220"
-                  image={slide.thumbnail}
+                  image={getYouTubeThumbnailUrl(slide.thumbnail)} 
                 />
                 <CardContent
                   sx={{
