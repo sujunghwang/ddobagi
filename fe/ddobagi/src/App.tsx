@@ -13,6 +13,7 @@ import MyPage from "./pages/MyPage";
 import ConversationStudy from "./components/learning/ConversationStudy";
 import WordStudy from "./components/learning/ConversationStudy";
 import CultureDetail from "./components/Culture/CultureDetail";
+import KakaoMapEx1 from "./pages/ParentPage_demo";
 
 function App() {
   return (
@@ -27,8 +28,9 @@ function App() {
             {/* <Route path = "/cultureitem/:id" element={<Landing />}/> */}
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/parentpage" element={<ParentPage1 />}/>
-            <Route path="/parentpage/map" element={<ParentPage2 />}/>
+              {/* <Route path="/parentpage/map" element={<ParentPage2 />}/> */}
             <Route path="/parentpage/news" element={<ParentPage3 />}/>
+            <Route path="/parentpage/map" element={<KakaoMapEx1 />}/>
               {/* <Route path = "/parentpage" element={<Landing />}/>
               <Route path = "/parentpage/map" element={<Landing />}/>
               <Route path = "/parentpage/news" element={<Landing />}/>
