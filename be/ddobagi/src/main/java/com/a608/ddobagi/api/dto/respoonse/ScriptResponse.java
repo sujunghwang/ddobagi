@@ -12,15 +12,15 @@ import lombok.Data;
 @Data
 public class ScriptResponse {
     Long scriptId;
-    LocalTime startTime;
-    LocalTime endTime;
+    Long startTime;
+    Long endTime;
     ScriptRole scriptRole;
     String defaultContent;
     String recordedUrl;
     Lang lang;
     String transContent;
 
-    public ScriptResponse(Long scriptId, LocalTime startTime, LocalTime endTime,
+    public ScriptResponse(Long scriptId, Long startTime, Long endTime,
         ScriptRole scriptRole, String defaultContent, String recordedUrl, Lang lang, String transContent) {
         this.scriptId = scriptId;
         this.startTime = startTime;
