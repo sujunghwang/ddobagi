@@ -6,6 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { RootState } from "../redux/RootReducer";
 import { Box, Grid, Typography } from '@mui/material';
 import ParentHeader from "../assets/ParentHeader.png"
+// import RadialBarChart2 from '../components/Charts/ParentChart2';
+// import RadialBarChart3 from '../components/Charts/ParentChart3';
+import RadialBarChart from '../components/Charts/ParentChart';
+import ChartData from '../components/Charts/ParentChartData.json'
+import ColumnChartWithGroupLabel from '../components/Charts/StickChart';
+// import ChartSwiper from '../components/Swiper/ChartSwiper';
 
 // interface StudyButtonProps {
 //   studyBtn: string;
@@ -29,6 +35,23 @@ function ParentPage1() {
       navigate("/parentpage/news");
     };
     // 탭 선택 함수 끝
+
+    // 임시 차트 데이터
+    const chartdata = ChartData
+
+    // const ColumnChartData = [
+    //   { name: "해당 사용자", data: [50, 30] },
+    //   { name: "전체 사용자", data: [60, 40] },
+    // ]
+    const ColumnChartData = [
+      { name: "해당 사용자", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
+      { name: "전체 사용자", data: [chartdata.otherPronounceScoreProgress, chartdata.otherAllProgressAvg] },
+    ]
+
+
+    const categories = ["발음 평균 점수", "전체 진행도"];
+
+    const title = "유저 비교 통계";
 
   return(
     <div className={styles.FContainer}>
@@ -128,7 +151,7 @@ function ParentPage1() {
         <Box
           sx={{
             width:"1200px",
-            height:"1300px",
+            height:"auto",
             backgroundColor:"#FF9999",
             borderRadius:"20px"
           }}
@@ -152,7 +175,52 @@ function ParentPage1() {
               borderRadius: "0 0 20px 20px"
             }}
           >
-
+            <Box>
+              <Typography
+                sx={{
+                  fontSize: "40px",
+                  fontFamily: "CookieRun-Regular",
+                }}
+              >
+                카테고리별 통계
+              </Typography>
+              <Grid container>
+                <Grid item xs={12} md={6} lg={3}>
+                  <RadialBarChart totalLabel='집에서' totalValue={parseInt(chartdata.schoolCategoryProgress)} totalColor='#FF6B6B' />
+                </Grid>
+                <Grid item xs={12} md={6} lg={3}>
+                  <RadialBarChart totalLabel='학교에서' totalValue={parseInt(chartdata.homeCategoryProgress)} totalColor='#FFD93D' />
+                </Grid>
+                <Grid item xs={12} md={6} lg={3}>
+                  <RadialBarChart totalLabel='가게에서' totalValue={parseInt(chartdata.storeCategoryProgress)} totalColor='#6BCB77' />
+                </Grid>
+                <Grid item xs={12} md={6} lg={3}>
+                  <RadialBarChart totalLabel='놀이터에서' totalValue={parseInt(chartdata.playgroundCategoryProgress)} totalColor='#4D96FF' />
+                </Grid>
+              </Grid>
+            </Box>
+            <Box>
+              <Grid container>
+                <Grid item xs={12} md={4}>
+                  <RadialBarChart totalLabel='대화 연습' totalValue={parseInt(chartdata.scriptProgress)} totalColor='#FF6B6B' />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <RadialBarChart totalLabel='단어 연습' totalValue={parseInt(chartdata.quizProgress)} totalColor='#FFD93D' />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <RadialBarChart totalLabel='문화 영상' totalValue={parseInt(chartdata.cultureProgress)} totalColor='#6BCB77' />
+                </Grid>
+              </Grid>
+            </Box>
+            <Typography
+              sx={{
+                fontSize: "40px",
+                fontFamily: "CookieRun-Regular",
+              }}
+            >
+              비교통계 (같은 연차)
+            </Typography>
+            <ColumnChartWithGroupLabel data={ColumnChartData} categories={categories} title={title} />;
           </Box>
         </Box>
       </Box>
