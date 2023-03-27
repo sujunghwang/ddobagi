@@ -22,7 +22,7 @@ function ColorBtn({ content, color, width, onClick }: BtnProp) : JSX.Element {
           backgroundColor: color,
           borderRadius: 50,
           fontFamily: "CookieRun-Regular",
-          fontSize: 20,
+          fontSize: "1.6rem",
           transition: "top .1s ",
           "&:hover": {
             backgroundColor: color,
