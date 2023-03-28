@@ -9,10 +9,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
-import MicRoundedIcon from "@mui/icons-material/MicRounded";
-import FiberManualRecordRoundedIcon from "@mui/icons-material/FiberManualRecordRounded";
-import VolumeUpRoundedIcon from "@mui/icons-material/VolumeUpRounded";
-// import { ReactMic, ReactMicStopEvent, ReactMicProps } from "react-mic";
 import Recording from "./Recording";
 
 function ConversationStudy() {
@@ -21,6 +17,10 @@ function ConversationStudy() {
   const categoryName = location.state?.categoryName;
   const situationTitle = location.state?.situationTitle;
   const color = location.state?.color;
+  const situationId = location.state?.situationId;
+  const userId = useSelector(
+    (state: RootState) => state.inputUserInfo.payload.id
+  );
 
   //언어 변수
   const language = useSelector(
@@ -56,7 +56,6 @@ function ConversationStudy() {
   };
 
   // 스크립트를 요청하는 구문. 각 스크립트별 데이터가 리스트로 제공됨.
-  // 임의 응답 데이터 http://j8a608.p.ssafy.io:8080/api/conversations/1/1/script
   interface Script {
     // Learning 객체의 속성을 정의합니다.
     scriptId: number;
@@ -74,7 +73,7 @@ function ConversationStudy() {
     const fetchScript = async () => {
       try {
         const response = await axios.get<Script[]>(
-          "http://j8a608.p.ssafy.io:8080/api/conversations/1/1/script"
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}/${userId}/script`
         );
         const newScripts = [];
         if (language === "VI") {
@@ -110,26 +109,6 @@ function ConversationStudy() {
     },
   };
 
-  // 녹음 데이터 관리
-  interface RecordingState {
-    isRecording: boolean;
-    blobUrl: string | null;
-  }
-  const [records, setRecords] = useState<boolean>(false);
-  const blobUrls = useRef<string[]>(new Array(scripts.length).fill(""));
-  const startRecording = (index: number) => {
-    setRecords(true);
-  };
-
-  const stopRecording = (index: number) => {
-    setRecords(false);
-  };
-
-  // const onStop = (recordedBlob: ReactMicStopEvent, id: number) => {
-  //   const blobUrl = recordedBlob.blobURL;
-  //   blobUrls.current[id] = blobUrl;
-  // };
-
   //동영상 정보
   interface MapType {
     situationVideoUrl: string;
@@ -146,7 +125,7 @@ function ConversationStudy() {
     const fetchVideoInfo = async () => {
       try {
         const response = await axios.get<MapType>(
-          "http://j8a608.p.ssafy.io:8080/api/conversations/1"
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}`
         );
         setVideoInfo(response.data);
       } catch (error) {
@@ -167,7 +146,7 @@ function ConversationStudy() {
     const fetchRecordInfo = async () => {
       try {
         const response = await axios.get<number>(
-          "http://j8a608.p.ssafy.io:8080/api/conversations/1/1/record"
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}/${userId}/record`
         );
         setRecord(response.data);
       } catch (error) {
@@ -185,12 +164,12 @@ function ConversationStudy() {
           <CloseIcon sx={{ fontSize: "2rem" }} />
         </div>
         <div>
-          <YouTube
+          {/* <YouTube
             opts={opts}
             videoId={videoId}
             onReady={onPlayerReady}
             onEnd={onPlayerEnd}
-          />
+          /> */}
         </div>
         <div className={styles.TextBox}></div>
         <div className={styles.Title}>{categoryName}</div>
@@ -201,21 +180,15 @@ function ConversationStudy() {
         <div className={styles.scores}>
           {record} / {scripts.length}
         </div>
-        {/* <ReactMic
-          record={records}
-          onStop={(recordedBlob: ReactMicStopEvent) => onStop(recordedBlob, 2)}
-          strokeColor="#000000"
-          backgroundColor="#ffffff"
-        /> */}
         <div
           className={styles.OuterContainer}
           style={{ backgroundColor: color }}
         >
           <div className={styles.InnerContainer}>
             {scripts.map((item, index) => (
-              <div key={index} className={styles.bubbleGroup}>
+              <div key={index} className={styles.bubbleGroup} >
                 <div className={styles.Scripts}>
-                  <div className={styles.bubble}>
+                  <div className={`${styles.bubble} ${item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT}`}>
                     <div>{item.defaultContent}</div>
                     <div>{item.transContent}</div>
                   </div>
@@ -228,26 +201,7 @@ function ConversationStudy() {
                     >
                       <PlayArrowRoundedIcon sx={{ fontSize: "2rem" }} />
                     </div>
-                    <div
-                      className={styles.GBtn}
-                      onClick={() => startRecording(index)}
-                    >
-                      <MicRoundedIcon
-                        sx={{ fontSize: "2rem", transformOrigin: "center" }}
-                      />
-                    </div>
-                    <div
-                      id={String(index)}
-                      onClick={(event) => {
-                        stopRecording(index);
-                      }}
-                    >
-                      녹음 정지
-                    </div>
-                    <audio src={blobUrls.current[index]} controls />
-                    <div className={styles.YBtn}>
-                      <VolumeUpRoundedIcon sx={{ fontSize: "2rem" }} />
-                    </div>
+                    <Recording situationId={situationId} scriptId={item.scriptId} />
                   </div>
                 </div>
               </div>

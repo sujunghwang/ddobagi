@@ -8,9 +8,12 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { inputUserInfo } from "../../redux/UserInfo";
 
 type Props = {
   setModalContent: Function;
@@ -56,15 +59,49 @@ function Login({ setModalContent, closeModal }: Props) {
     navigate("/CategoryList");
   };
 
+  interface LogInfo {
+    grantType: string,
+    accessToken: string,
+    refreshToken: null,
+    tokenExpiresIn: number,
+    id: number,
+    loginId: string,
+    name: string,
+    userLang: string
+  }
+
+  const dispatch = useDispatch()
   const Login = () => {
-    console.log(id);
-    console.log(password);
-    // 아무튼 백엔드로 뭘 보내서 토큰을 받아온다. 여기선 임시로 object를 생성
-    const token = { id: id, password: password };
-    const UserStr = JSON.stringify(token);
-    localStorage.setItem("user", UserStr);
-    navigateToCategory();
-    closeModal();
+    const apiLogin = async () => {
+      try {
+        const response = await axios.post<LogInfo>(
+          "http://j8a608.p.ssafy.io:8080/api/auth/login",
+          {
+            "loginId": id,
+            "pw": password
+          }
+        );
+
+        interface UserInfo {
+          name: string;
+          id: number;
+        }
+
+        const newUserInfo: UserInfo = {
+          name: response.data.name,
+          id: response.data.id,
+        };
+        dispatch(inputUserInfo(newUserInfo));
+        const token = response.data.accessToken
+        const AccessToken = JSON.stringify(token);
+        localStorage.setItem("token", AccessToken);
+        navigateToCategory();
+        closeModal();
+      } catch (error) {
+        alert("정보를 다시 확인해 주세요")
+      }
+    }
+    apiLogin()
   };
   //
 
@@ -78,7 +115,7 @@ function Login({ setModalContent, closeModal }: Props) {
         ) : (
           <div> 아이디</div>
         )}
-        <Input placeholder="ID" value={id} onChange={handleIdChange} required/>
+        <Input placeholder="ID" value={id} onChange={handleIdChange} required />
       </div>
       <div className={styles.IContainer}>
         {language === "CN" ? (
@@ -117,8 +154,8 @@ function Login({ setModalContent, closeModal }: Props) {
             language === "CN"
               ? "登录"
               : language === "VI"
-              ? "đăng nhập"
-              : "로그인"
+                ? "đăng nhập"
+                : "로그인"
           }
           color="#FFD93D"
           width="100%"
@@ -131,8 +168,8 @@ function Login({ setModalContent, closeModal }: Props) {
             language === "CN"
               ? "加入会员"
               : language === "VI"
-              ? "tham gia thành viên"
-              : "회원가입"
+                ? "tham gia thành viên"
+                : "회원가입"
           }
           color="#FF6B6B"
           width="100%"

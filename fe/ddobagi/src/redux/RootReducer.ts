@@ -1,5 +1,6 @@
 import { combineReducers } from "redux"
 import languageChange from "./LanguageSelector"
+import inputUserInfo from "./UserInfo";
 import { PersistConfig, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -7,10 +8,10 @@ const persistConfig = {
   key: "root",
   // localStorage에 저장합니다.
   storage,
-  whitelist: ["languageChange"]
+  whitelist: ["languageChange", "inputUserInfo"]
 };
 export const rootReducer = combineReducers({
-  languageChange
+  languageChange, inputUserInfo
 });
 
 export default persistReducer(persistConfig, rootReducer);

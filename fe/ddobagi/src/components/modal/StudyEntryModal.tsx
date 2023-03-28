@@ -15,6 +15,7 @@ type Props = {
   categoryName: string;
   color: string;
   progress: number;
+  situationId: number
 };
 
 function StudyEntryModal({
@@ -24,16 +25,17 @@ function StudyEntryModal({
   categoryName,
   color,
   progress,
+  situationId
 }: Props) {
   const exit = () => closeModal();
   const backGroundImgColor =
     color === "#FF6B6B"
       ? "pink"
       : color === "#92B4EC"
-      ? "blue"
-      : color === "#FFE69A"
-      ? "yellow"
-      : "green";
+        ? "blue"
+        : color === "#FFE69A"
+          ? "yellow"
+          : "green";
   const style = {
     position: "absolute" as "absolute",
     width: { xs: "265px", md: "630px" },
@@ -57,6 +59,7 @@ function StudyEntryModal({
         situationTitle: situationTitle,
         progress: progress,
         color: color,
+        situationId: situationId
       },
     });
   };
@@ -67,6 +70,7 @@ function StudyEntryModal({
         situationTitle: situationTitle,
         progress: progress,
         color: color,
+        situationId: situationId
       },
     });
   };

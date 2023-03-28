@@ -61,7 +61,7 @@ function NavBar() {
   //
 
   // 로그인 확인 변수
-  const userStr = localStorage.getItem("user");
+  const userStr = localStorage.getItem("token");
 
   //로그아웃 함수
   const logout = () => {

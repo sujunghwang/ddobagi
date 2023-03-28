@@ -34,7 +34,6 @@ function Learning() {
   return (
     <div>
       <BorderLinearProgress variant="determinate" value={progress} />
-      <script src="https://www.youtube.com/iframe_api"></script>
       <Outlet />
     </div>
   );
