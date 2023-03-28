@@ -56,7 +56,7 @@ function CenterMap(){
         }
 
         // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열
-        axios.get(`http://localhost:8080/api/centers?sido=${selectSido}&gugun=${selectGugun}`)
+        axios.get(`http://j8a608.p.ssafy.io:8080/api/centers?sido=${selectSido}&gugun=${selectGugun}`)
             .then(response => {
             const data = response.data;
             setData(data);
