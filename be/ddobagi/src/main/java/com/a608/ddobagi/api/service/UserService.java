@@ -125,6 +125,7 @@ public class UserService {
 		int recordedScriptCount = Math.toIntExact(calCountUserStudiedQuiz(userId));
 		int studiedQuizCount = Math.toIntExact(calCountUserRecorded(userId));
 		int crownCount = getCrownCntByCategoryId(userId);
+		// int crownCount = 0;
 
 		int schoolCategoryProgress = 0;
 		int homeCategoryProgess = 0;
@@ -136,41 +137,45 @@ public class UserService {
 
 		// ===== 퀴즈, 스크립트, 문화 진행률 ==== //
 		if (!Objects.equals(userScriptRepository.countByUserId(userId), ZERO)) {
-			scriptProgress = (int)(userScriptRepository.countByUserId(userId)
+			scriptProgress = (int)((double)userScriptRepository.countByUserId(userId)
 				/ scriptRepository.countBy() * HUNDRED);
 		}
 
-		System.out.println("================================");
-		System.out.println(userScriptRepository.countByUserId(userId));
-		System.out.println("================================");
+		// System.out.println(scriptProgress);
+
+		// System.out.println("================================");
+		// System.out.println(userScriptRepository.countByUserId(userId));
+		// System.out.println(scriptRepository.countBy());
+		// System.out.println("================================");
 
 		if (!Objects.equals(userQuizRepository.countByUserId(userId), ZERO)) {
-			quizProgress = (int)(userQuizRepository.countByUserId(userId)
+			System.out.println("잘왓습니당");
+			quizProgress = (int)((double)userQuizRepository.countByUserId(userId)
 				/ quizRepository.countBy() * HUNDRED);
 		}
 
 		if (!Objects.equals(userCultureRepository.countByUserId(userId), ZERO)) {
-			cultureProgress = (int)(userCultureRepository.countByUserId(userId)
+			cultureProgress = (int)((double)userCultureRepository.countByUserId(userId)
 				/ cultureRepository.countBy() * HUNDRED);
 		}
 
 		// ===== 카테고리 진행률 ===== //
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId), ZERO)) {
-			schoolCategoryProgress = (int)(userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId)
-				/ userRepository.categoryCnt(CATEGORY_SCHOOL) * HUNDRED);
+			schoolCategoryProgress = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId)
+				/ (double)userRepository.categoryCnt(CATEGORY_SCHOOL) * HUNDRED);
 		}
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId), ZERO)) {
-			homeCategoryProgess = (int)(userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId)
+			homeCategoryProgess = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId)
 				/ userRepository.categoryCnt(CATEGORY_HOME) * HUNDRED);
 		}
 
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId), ZERO)) {
-			storeCategoryProgress = (int)(userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId)
+			storeCategoryProgress = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId)
 				/ userRepository.categoryCnt(CATEGORY_STORE) * HUNDRED);
 		}
 
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId), ZERO)) {
-			playgroundCategoryProgress = (int)(userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId)
+			playgroundCategoryProgress = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId)
 				/ userRepository.categoryCnt(CATEGORY_PLAYGROUND));
 		}
 
@@ -274,7 +279,6 @@ public class UserService {
 		int categoryId3 = calCountUserCrownByCategoryId(userId, 3L);
 		int categoryId4 = calCountUserCrownByCategoryId(userId, 4L);
 
-
 		return categoryId1 + categoryId2 + categoryId3 + categoryId4;
 	}
 
@@ -291,7 +295,7 @@ public class UserService {
 				&& Objects.equals(userRepository.countQuizBySituationId(situationId),
 				userRepository.countQuizBySituationIdAndUserQuizIsNowCorrected(situationId, userId))) {
 				{
-					crownCnt ++;
+					crownCnt++;
 				}
 			}
 		}

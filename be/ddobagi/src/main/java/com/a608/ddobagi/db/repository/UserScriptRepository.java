@@ -19,9 +19,8 @@ import com.a608.ddobagi.db.entity.UserScript;
  */
 public interface UserScriptRepository extends JpaRepository<UserScript, Long> {
 
-	@Query("select count(us) from UserScript us where"
-		+ " us.script.situation.category.common = :common"
-		+ " and us.user.id = :userId"
+	@Query("select count(us) from UserScript us"
+		+ " where us.user.id = :userId"
 		+ " and us.pronounce >= 2")
 	Long countByUserId(@Param("userId") Long userId);
 
