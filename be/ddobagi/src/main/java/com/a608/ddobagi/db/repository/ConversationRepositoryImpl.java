@@ -58,10 +58,10 @@ public class ConversationRepositoryImpl {
     public Long selectRecordCount(Long situationId, Long userId) {
         return queryFactory
                 .select(userScript.count())
-                .from(userScript, situation)
+                .from(userScript)
                 .where(userScript.user.id.eq(userId)
-                        .and(situation.id.eq(situationId)))
-                .fetchOne();
+                    .and(userScript.script.situation.id.eq(situationId)))
+            .fetchOne();
     }
 
     public List<ScriptResponse> selectScriptList(Long situationId, Long userId) {
