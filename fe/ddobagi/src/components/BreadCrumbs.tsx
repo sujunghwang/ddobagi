@@ -44,8 +44,24 @@ function BreadCrumbs() {
         : language === "VI"
         ? "người giám hộ"
         : "보호자",
-    map: "다문화센터 위치",
-    news: "다문화 지원 정보",
+    record:
+      language === "CN"
+          ? "子女学习记录"
+          : language === "VI"
+          ? "hồ sơ học tập của con cái"
+          : "자녀 학습 기록",
+    map: 
+    language === "CN"
+    ? "多元文化中心位置"
+    : language === "VI"
+    ? "vị trí trung tâm đa văn hóa"
+    : "다문화 센터 위치",
+    news: 
+    language === "CN"
+    ? "多元文化支持信息"
+    : language === "VI"
+    ? "Thông tin hỗ trợ đa văn hóa"
+    : "다문화 지원 정보",
   };
   const navigate = useNavigate();
   const location = useLocation();
@@ -67,16 +83,12 @@ function BreadCrumbs() {
       const addPath =
         nowPath.length === 1
           ? "/"
-          : nowPath.length === 3
-          ? nowPath.join("/") // 마지막 한 개를 뺀 상태에서 join 해야 함 (미구현)
           : nowPath.join("/");
       const item: Route = {
         path: addPath,
         name:
           nowPath.length === 1
             ? home
-            : nowPath.length === 3
-            ? pathNames[pathArray[i - 1]]
             : pathNames[pathArray[i]],
       };
       breads.push(item);
