@@ -4,7 +4,7 @@ import styles from "./CategoryList.module.scss";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../redux/RootReducer";
-import { Box, Grid, Typography, TextField } from '@mui/material';
+import { Box, Grid, Typography, TextField, Button } from '@mui/material';
 import ParentHeader from "../assets/ParentHeader.png"
 // import CenterBackground from "../assets/CenterBackground.png"
 import "../components/ParentPage/ParentPage2.css"
@@ -14,6 +14,7 @@ import SigoonSelect from '../components/ParentPage/SelectBox/sigoonSelect';
 // import styles2 from "../components/ParentPage/SelectBox/BoxStyle.module.scss";
 // import studyBtn from '../components/ParentPage/studyBtn';
 import SearchBtn from '../components/ParentPage/SelectBox/SearchBtn';
+import CenterMap from '../components/Map/CenterMap';
 
 // interface StudyButtonProps {
 //   studyBtn: string;
@@ -35,6 +36,9 @@ function ParentPage2() {
     };
     const navigateToParent3 = () => {
       navigate("/parentpage/news");
+    };
+    const navigateToParent4 = () => {
+      navigate("/parentpage/map2");
     };
     // 탭 선택 함수 끝
   return(
@@ -145,7 +149,7 @@ function ParentPage2() {
               fontSize: "40px",
               fontFamily: "CookieRun-Regular",
               color:"#ffffff",
-              marginTop:"30px"
+              marginTop:"20px"
             }}
             >
             {language === "CN" ? "多元文化中心位置" : language === "VI" ? "vị trí trung tâm đa văn hóa" : "다문화 센터 위치 및 정보"}
@@ -153,77 +157,30 @@ function ParentPage2() {
           <div // 다문화센터 위치 내용 들어갈 부분
             style={{
               width: "100%",
-              height: "870px",
+              height: "auto",
               backgroundColor:"#FFF6DA",
               marginTop:"30px",
               borderRadius: "0 0 20px 20px"
             }}
           >
-            <div
-              style={{ width:"1330px", height:"560px", marginTop:"100px"}}
-              className="banner"
-            >
-              <Box
-                sx={{
-                  width:"645px",
-                  height:"auto",
-                  display:"flex",
-                  flexDirection:"column",
-                  justifyContent:"center",
-                }}
-              >
-                <Typography
-                  sx={{
-                    marginTop:"10px",
-                    fontSize: "30px",
-                    fontFamily: "CookieRun-Regular",
-                  }}
-                >
-                  다문화센터 위치 검색
-                </Typography>
-                <Box // 셀렉트박스와 검색
-                  // className={styles2.SelcectBox}
-                  sx={{
-                    marginTop: "30px",
-                    marginLeft:"20%",
-                    width:"60%",
-                  }}
-                >
-                  <SidoSelect />
-                  <Box sx={{
-                    height:"50px"
-                    }}
-                  />
-                  <SigoonSelect />
-                  <Box sx={{
-                    height:"50px"
-                    }}
-                  />
-                  {/* <CenterFields /> */}
-                  <TextField 
-                    id="outlined-basic" 
-                    label="명칭" 
-                    variant="outlined" 
-                    style={{ 
-                      backgroundColor:"white",
-                      width:"100%",
-                    }} />
-                  <Box sx={{
-                    height:"50px"
-                    }}
-                  />
-                  <SearchBtn width='190px' />
-                </Box>
-              </Box>
-              <div className='banner-content'>
-                hi
-              </div>
-            </div>
-            {/* <img 
-              src={CenterBackground} 
-              alt="" 
-              style={{ width:"1330px", height:"560px", marginTop:"100px"}} 
-            /> */}
+            <Box sx={{
+              width:"80%",
+              marginLeft:"10%",
+              paddingTop:"20px",
+              paddingBottom: "30px",
+            }}>
+              <Typography sx={{ fontSize:"25px", fontFamily: "CookieRun-Regular", }}>
+                {language === "CN" ? "选择市/道及区/郡,可以获得多元文化中心及家庭中心的位置信息。" : language === "VI" ? "Nếu bạn chọn tỉnh/thành phố và quận/huyện, bạn có thể nhận được thông tin vị trí của trung tâm đa văn hóa và trung tâm gia đình." : "시/도 및 구/군을 선택하시면 다문화 센터 및 가족 센터의 위치 정보를 얻으실 수 있습니다."}
+                {/* 시/도 및 구/군을 선택하시면 다문화 센터 및 가족 센터의 위치 정보를 얻으실 수 있습니다 */}
+              </Typography>
+              <CenterMap />
+            </Box>
+            {/* <Button
+              onClick={() => {
+                navigateToParent4();
+              }}>
+              여기요 맵으로 이동 뾰로롱
+            </Button> */}
           </div>
         </Box>
       </Box>
