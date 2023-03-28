@@ -78,16 +78,17 @@ public class CultureRepositoryImpl {
 	public List<CultureContentDto> findCultureContents(Long userId, String cultureCategoryCommon) {
 		return em.createQuery(
 				"select new com.a608.ddobagi.api.dto.respoonse.culture.CultureContentDto"
-					+ "(c.id, c.thumbnail)"
+					+ "(c.id, c.thumbnail,"
+					+ " case when uc.isCompleted = true then true else false end)"
 					+ " from Culture c"
 					+ " left outer join UserCulture uc"
-					+ " on c.id = uc.culture.id"
+					+ " on c.id = uc.culture.id and uc.user.id =:userId"
 					+ " left join CultureCategory cc"
 					+ " on c.cultureCategory.id = cc.id"
 					+ " where"
 					// + " uc.user.id = :userId and"
 					+ " cc.common = :common", CultureContentDto.class)
-			// .setParameter("userId", userId)
+			.setParameter("userId", userId)
 			.setParameter("common", cultureCategoryCommon)
 			.getResultList();
 	}
