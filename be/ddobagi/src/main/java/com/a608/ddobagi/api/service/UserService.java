@@ -20,6 +20,7 @@ import com.a608.ddobagi.db.repository.CultureRepository;
 import com.a608.ddobagi.db.repository.QuizRepository;
 import com.a608.ddobagi.db.repository.ScriptRepository;
 import com.a608.ddobagi.db.repository.SituationRepository;
+import com.a608.ddobagi.db.repository.SituationRepositoryImpl;
 import com.a608.ddobagi.db.repository.UserCultureRepository;
 import com.a608.ddobagi.db.repository.UserQuizRepository;
 import com.a608.ddobagi.db.repository.UserQuizRepositoryImpl;
@@ -63,6 +64,7 @@ public class UserService {
 	private final CultureRepository cultureRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final SituationRepository situationRepository;
+	private final SituationRepositoryImpl situationRepositoryImpl;
 
 	public UserResponseDto findUser(Long userId) {
 		User user = userRepository.findById(userId).orElseThrow(
@@ -130,7 +132,6 @@ public class UserService {
 		int scriptProgress = 0;
 		int quizProgress = 0;
 		int cultureProgress = 0;
-
 
 		// ===== 퀴즈, 스크립트, 문화 진행률 ==== //
 		if (!Objects.equals(userScriptRepository.countByUserId(userId), ZERO)) {
@@ -238,8 +239,6 @@ public class UserService {
 				/ userRepository.categoryCnt(CATEGORY_PLAYGROUND));
 		}
 
-
-
 		return UserProgressParentsResponseDto.builder()
 			.schoolCategoryProgress(schoolCategoryProgress)
 			.homeCategoryProgress(homeCategoryProgess)
@@ -259,8 +258,50 @@ public class UserService {
 		return userQuizRepositoryImpl.findUserQuizReviewListForParents(userId);
 	}
 
-
 	// ===== 계산 로직 ===== //
+
+	//왕관 개수 세기
+	public int getCrownCntByCategoryId(Long userId) {
+		// System.out.println("====해당 situation에 잇는 script개수====");
+		// System.out.println(userRepository.countScriptBySituationId(1L));
+		// System.out.println("====해당 situation에 잇는 script개수 유저는 2점 이상====");
+		// System.out.println(userRepository.countScriptBySituationIdAndUserScriptPronounceOver2(1L, 1L));
+		// System.out.println("====해당 situation에 잇는 quiz개수====");
+		// System.out.println(userRepository.countQuizBySituationId(1L));
+		// System.out.println("====해당 situation에 잇는 quiz개수랑 맞은거====");
+		// System.out.println(userRepository.countQuizBySituationIdAndUserQuizIsNowCorrected(1L, 1L));
+
+
+		int categoryId1 = calCountUserCrownByCategoryId(userId, 1L);
+		int categoryId2 = calCountUserCrownByCategoryId(userId, 2L);
+		int categoryId3 = calCountUserCrownByCategoryId(userId, 3L);
+		int categoryId4 = calCountUserCrownByCategoryId(userId, 4L);
+
+
+		return categoryId1 + categoryId2 + categoryId3 + categoryId4;
+	}
+
+	public int calCountUserCrownByCategoryId(Long userId, Long categoryId) {
+		int crownCnt = 0;
+		//situationId들의 리스트 가져오기
+
+		// List<Long> situationIdList = situationRepository.findSituationIdList(1L);
+		List<Long> situationIdList = situationRepositoryImpl.findSituationList(categoryId);
+
+		for (Long situationId : situationIdList) {
+			if (Objects.equals(userRepository.countScriptBySituationId(situationId),
+				userRepository.countScriptBySituationIdAndUserScriptPronounceOver2(situationId, userId))
+				&& Objects.equals(userRepository.countQuizBySituationId(situationId),
+				userRepository.countQuizBySituationIdAndUserQuizIsNowCorrected(situationId, userId))) {
+				{
+					crownCnt ++;
+				}
+			}
+		}
+
+		return crownCnt;
+	}
+
 	public Long calCountUserViewedVideo(Long userId) {
 		Long culture = userCultureRepository.countByUserId(userId);
 		Long script = userScriptRepository.countByUserId(userId);
@@ -295,13 +336,13 @@ public class UserService {
 
 	public int calUserProgress() {
 		/*
-		* 유저 전체수를 알잖아.
-		* count(user_script) / (count(script)*count(user)) 다 더해서 곱하기 백
-		* */
+		 * 유저 전체수를 알잖아.
+		 * count(user_script) / (count(script)*count(user)) 다 더해서 곱하기 백
+		 * */
 		Long script = userScriptRepository.countBy() / (scriptRepository.countBy() * userRepository.countBy());
 		Long quiz = userQuizRepository.countBy() / (quizRepository.countBy() * userRepository.countBy());
 		Long culture = userCultureRepository.countBy() / (cultureRepository.countBy() * userRepository.count());
 
-		return (int) ((script + quiz + culture) * 100);
+		return (int)((script + quiz + culture) * 100);
 	}
 }
