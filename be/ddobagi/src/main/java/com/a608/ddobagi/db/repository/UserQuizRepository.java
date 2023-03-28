@@ -26,7 +26,7 @@ public interface UserQuizRepository extends JpaRepository<UserQuiz, Long> {
 
 	@Query("select count(uq) from UserQuiz uq where uq.user.id = :userId"
 		+ " and uq.isNowCorrected = true")
-	Long countByUserId(Long userId);
+	Long countByUserId(@Param("userId") Long userId);
 
 	@Query("select count(uq) from UserQuiz uq where uq.user.id = :userId and uq.quiz.id = :quizId")
 	Long existsByUserIdAndQuizId(@Param("userId") Long userId, @Param("quizId") Long quizId);

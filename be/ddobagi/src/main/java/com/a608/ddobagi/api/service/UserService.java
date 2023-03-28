@@ -124,6 +124,7 @@ public class UserService {
 		int viewedVideoCount = Math.toIntExact(calCountUserViewedVideo(userId));
 		int recordedScriptCount = Math.toIntExact(calCountUserStudiedQuiz(userId));
 		int studiedQuizCount = Math.toIntExact(calCountUserRecorded(userId));
+		int crownCount = getCrownCntByCategoryId(userId);
 
 		int schoolCategoryProgress = 0;
 		int homeCategoryProgess = 0;
@@ -138,6 +139,10 @@ public class UserService {
 			scriptProgress = (int)(userScriptRepository.countByUserId(userId)
 				/ scriptRepository.countBy() * HUNDRED);
 		}
+
+		System.out.println("================================");
+		System.out.println(userScriptRepository.countByUserId(userId));
+		System.out.println("================================");
 
 		if (!Objects.equals(userQuizRepository.countByUserId(userId), ZERO)) {
 			quizProgress = (int)(userQuizRepository.countByUserId(userId)
@@ -173,6 +178,7 @@ public class UserService {
 			.viewedVideoCount(viewedVideoCount)
 			.recordedScriptCount(recordedScriptCount)
 			.studiedQuizCount(studiedQuizCount)
+			.crownCount(crownCount)
 			.schoolCategoryProgress(schoolCategoryProgress)
 			.homeCategoryProgress(homeCategoryProgess)
 			.storeCategoryProgress(storeCategoryProgress)
@@ -262,15 +268,6 @@ public class UserService {
 
 	//왕관 개수 세기
 	public int getCrownCntByCategoryId(Long userId) {
-		// System.out.println("====해당 situation에 잇는 script개수====");
-		// System.out.println(userRepository.countScriptBySituationId(1L));
-		// System.out.println("====해당 situation에 잇는 script개수 유저는 2점 이상====");
-		// System.out.println(userRepository.countScriptBySituationIdAndUserScriptPronounceOver2(1L, 1L));
-		// System.out.println("====해당 situation에 잇는 quiz개수====");
-		// System.out.println(userRepository.countQuizBySituationId(1L));
-		// System.out.println("====해당 situation에 잇는 quiz개수랑 맞은거====");
-		// System.out.println(userRepository.countQuizBySituationIdAndUserQuizIsNowCorrected(1L, 1L));
-
 
 		int categoryId1 = calCountUserCrownByCategoryId(userId, 1L);
 		int categoryId2 = calCountUserCrownByCategoryId(userId, 2L);

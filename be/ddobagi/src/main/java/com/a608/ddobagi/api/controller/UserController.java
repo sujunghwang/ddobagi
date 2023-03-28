@@ -62,15 +62,15 @@ public class UserController {
 		return new ApiResponse<>(userService.findUserQuizReviewList(userId));
 	}
 
-	@GetMapping("/{userId}/statics")
+	@GetMapping("/{userId}/statistics")
 	public ApiResponse<UserProgressResponseDto> getUserProgress(@PathVariable Long userId) {
 		return new ApiResponse<>(userService.findUserProgress(userId));
 	}
 
-	@GetMapping("/{userId}/test")
-	public int getUserCrown(@PathVariable Long userId) {
-		return userService.getCrownCntByCategoryId(userId);
-	}
+	// @GetMapping("/{userId}/test")
+	// public int getUserCrown(@PathVariable Long userId) {
+	// 	return userService.getCrownCntByCategoryId(userId);
+	// }
 
 	@GetMapping
 	public ApiResponse<List<UserResponseDto>> getUserList() {
