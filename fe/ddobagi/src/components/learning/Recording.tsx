@@ -1,13 +1,12 @@
-import React, { useState, useRef } from 'react';
-import axios from 'axios';
-import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
-import styles from "./Study.module.scss"
+import React, { useState, useRef } from "react";
+import axios from "axios";
+import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
+import styles from "./Study.module.scss";
 import MicRoundedIcon from "@mui/icons-material/MicRounded";
 import FiberManualRecordRoundedIcon from "@mui/icons-material/FiberManualRecordRounded";
 import VolumeUpRoundedIcon from "@mui/icons-material/VolumeUpRounded";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
-
 
 interface Props {
   situationId: number;
@@ -16,30 +15,35 @@ interface Props {
 
 const Recording = (props: Props) => {
   const recorderControls = useAudioRecorder();
-  const situationId = props.situationId
-  const scriptId = props.scriptId
+  const situationId = props.situationId;
+  const scriptId = props.scriptId;
   const userId = useSelector(
     (state: RootState) => state.inputUserInfo.payload.id
   );
 
-  const [blobUrl, setBlobUrl] = useState<string>("")
+  const [blobUrl, setBlobUrl] = useState<string>("");
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  const [score, setScore] = useState<number>(0);
   const addAudioElement = async (blob: Blob) => {
     const formData = new FormData();
-    formData.append('situationId', situationId.toString());
-    formData.append('userId', userId.toString());
-    formData.append('scriptId', scriptId.toString());
-    formData.append('file', new File([blob], 'recording.wav'));
+    formData.append("situation_id", situationId.toString());
+    formData.append("user_id", userId.toString());
+    formData.append("script_id", scriptId.toString());
+    formData.append("file", new File([blob], "recording.wav"));
 
-    console.log(formData)
+    console.log();
 
     try {
-      const response = await axios.post('http://j8a608.p.ssafy.io:8080/api/conversations/record', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.post(
+        "http://j8a608.p.ssafy.io:8080/api/conversations/record",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       console.log(response.data);
       const url = URL.createObjectURL(blob);
@@ -57,26 +61,25 @@ const Recording = (props: Props) => {
 
   return (
     <div className={styles.BtnGroup2}>
-      {recorderControls.isRecording ?
+      {recorderControls.isRecording ? (
         <div className={styles.RBtn} onClick={recorderControls.stopRecording}>
-          <FiberManualRecordRoundedIcon sx={{ fontSize: "1rem", transformOrigin: "center" }}
-          /><div className={styles.pulse}>
-          </div>
+          <FiberManualRecordRoundedIcon
+            sx={{ fontSize: "1rem", transformOrigin: "center" }}
+          />
+          <div className={styles.pulse}></div>
         </div>
-        : <div
-          className={styles.GBtn}
-          onClick={recorderControls.startRecording}
-        >
+      ) : (
+        <div className={styles.GBtn} onClick={recorderControls.startRecording}>
           <MicRoundedIcon
             sx={{ fontSize: "2rem", transformOrigin: "center" }}
           />
-        </div>}
+        </div>
+      )}
 
       <div className={styles.YBtn} onClick={handlePlay}>
         <VolumeUpRoundedIcon sx={{ fontSize: "2rem" }} />
       </div>
-      <div style={{ display: 'none' }}
-      >
+      <div style={{ display: "none" }}>
         <AudioRecorder
           recorderControls={recorderControls}
           onRecordingComplete={addAudioElement}
@@ -85,6 +88,6 @@ const Recording = (props: Props) => {
       <audio src={blobUrl} ref={audioRef}></audio>
     </div>
   );
-}
+};
 
 export default Recording;
