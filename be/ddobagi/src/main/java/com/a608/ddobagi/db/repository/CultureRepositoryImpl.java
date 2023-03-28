@@ -52,17 +52,10 @@ public class CultureRepositoryImpl {
 		List<CultureContentDto> result =
 			findCultureContents(userId, cultureCategoryCommon);
 
-		// System.out.println("===========카테고리 내용 리스트============");
-		// System.out.println(result.size());
-
 		Map<Long, List<CultureContentQueryDto>> cultureContentMap = findCultureContentMap(toCultureIds(result));
-		// Map<Long, List<CheckUserViewedVideoDto>> longListMap = checkUserViewdVideo(toCultureIds(result));
-		// System.out.println("===========user 시청 여부 내용 리스트============");
-		// System.out.println(longListMap.size());
 
 		result.forEach(c -> c.setCultureContentQueryDtoList(cultureContentMap.get(c.getCultureId())));
-		// result.forEach(uc -> uc.setCompleted(cultureRepository.isCompleted(userId, uc.getCultureId())));
-		// System.out.println(result.get(0).isCompleted());
+
 		return result;
 
 	}
@@ -112,7 +105,7 @@ public class CultureRepositoryImpl {
 
 	//user가 봤는지 안봤는지 확인
 	public Map<Long, List<CheckUserViewedVideoDto>> checkUserViewdVideo(List<Long> cultureIds) {
-		List<CheckUserViewedVideoDto> result =  em.createQuery(
+		List<CheckUserViewedVideoDto> result = em.createQuery(
 				"select new com.a608.ddobagi.api.dto.respoonse.culture.CheckUserViewedVideoDto"
 					+ "(c.id, coalesce(uc.isCompleted, false))"
 					+ " from UserCulture uc"
@@ -126,8 +119,6 @@ public class CultureRepositoryImpl {
 			.collect(Collectors.groupingBy(CheckUserViewedVideoDto::getCultureId));
 
 	}
-
-
 
 	// === sql 그냥 조회 === //
 	/*
