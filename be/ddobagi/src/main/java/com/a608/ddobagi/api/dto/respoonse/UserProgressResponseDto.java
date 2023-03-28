@@ -21,6 +21,7 @@ public class UserProgressResponseDto {
 	int viewedVideoCount;
 	int recordedScriptCount;
 	int studiedQuizCount;
+	int crownCount;
 
 	private int schoolCategoryProgress;
 	private int homeCategoryProgress;
@@ -32,12 +33,13 @@ public class UserProgressResponseDto {
 	private int cultureProgress;
 
 	@Builder
-	public UserProgressResponseDto(int viewedVideoCount, int recordedScriptCount, int studiedQuizCount,
+	public UserProgressResponseDto(int viewedVideoCount, int recordedScriptCount, int studiedQuizCount, int crownCount,
 		int schoolCategoryProgress, int homeCategoryProgress, int storeCategoryProgress, int playgroundCategoryProgress,
 		int scriptProgress, int quizProgress, int cultureProgress) {
 		this.viewedVideoCount = viewedVideoCount;
 		this.recordedScriptCount = recordedScriptCount;
 		this.studiedQuizCount = studiedQuizCount;
+		this.crownCount = crownCount;
 		this.schoolCategoryProgress = schoolCategoryProgress;
 		this.homeCategoryProgress = homeCategoryProgress;
 		this.storeCategoryProgress = storeCategoryProgress;

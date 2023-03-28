@@ -13,11 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByLoginId(String loginId);
 
-	User findUserByLoginId(String loginId);
-
 	boolean existsByLoginId(String loginId);
-
-	Optional<User> findByName(String Name);
 
 	Optional<User> findById(Long id);
 
@@ -30,6 +26,22 @@ public interface UserRepository extends JpaRepository<User, Long> {
 		+ " and us.pronounce >= 2")
 	Long categoryUserDoneCnt(@Param("common") String common, @Param("userId") Long userId);
 
-
 	Long countBy();
+
+	@Query("select count(sc) from Script sc where sc.situation.id =:situationId")
+	Long countScriptBySituationId(@Param("situationId") Long situationId);
+
+	@Query("select count(us) from UserScript us"
+		+ " where us.pronounce >= 2.0 and us.script.situation.id = :situationId"
+		+ " and us.user.id = :userId")
+	Long countScriptBySituationIdAndUserScriptPronounceOver2(
+		@Param("situationId") Long situationId, @Param("userId") Long userId);
+
+	@Query("select count(q) from Quiz q where q.situation.id = :situationId")
+	Long countQuizBySituationId(@Param("situationId") Long situationId);
+
+	@Query("select count(uq) from UserQuiz uq where uq.quiz.situation.id = :situationId"
+		+ " and uq.isNowCorrected = true and uq.user.id = :userId")
+	Long countQuizBySituationIdAndUserQuizIsNowCorrected(
+		@Param("situationId") Long situationId, @Param("userId") Long userId);
 }
