@@ -164,12 +164,12 @@ function ConversationStudy() {
           <CloseIcon sx={{ fontSize: "2rem" }} />
         </div>
         <div>
-          {/* <YouTube
+          <YouTube
             opts={opts}
             videoId={videoId}
             onReady={onPlayerReady}
             onEnd={onPlayerEnd}
-          /> */}
+          />
         </div>
         <div className={styles.TextBox}></div>
         <div className={styles.Title}>{categoryName}</div>
@@ -186,9 +186,13 @@ function ConversationStudy() {
         >
           <div className={styles.InnerContainer}>
             {scripts.map((item, index) => (
-              <div key={index} className={styles.bubbleGroup} >
+              <div key={index} className={styles.bubbleGroup}>
                 <div className={styles.Scripts}>
-                  <div className={`${styles.bubble} ${item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT}`}>
+                  <div
+                    className={`${styles.bubble} ${
+                      item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
+                    }`}
+                  >
                     <div>{item.defaultContent}</div>
                     <div>{item.transContent}</div>
                   </div>
@@ -201,7 +205,10 @@ function ConversationStudy() {
                     >
                       <PlayArrowRoundedIcon sx={{ fontSize: "2rem" }} />
                     </div>
-                    <Recording situationId={situationId} scriptId={item.scriptId} />
+                    <Recording
+                      situationId={situationId}
+                      scriptId={item.scriptId}
+                    />
                   </div>
                 </div>
               </div>

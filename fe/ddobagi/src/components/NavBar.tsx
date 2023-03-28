@@ -15,6 +15,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import ColorBtn from "../components/ColorBtn";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/RootReducer";
+import axios from "axios";
 
 function NavBar() {
   //언어 변수
@@ -65,6 +66,10 @@ function NavBar() {
 
   //로그아웃 함수
   const logout = () => {
+    const apiLogOut = async () => {
+      await axios.get("http://j8a608.p.ssafy.io:8080/api/auth/logout");
+    };
+    apiLogOut();
     localStorage.clear();
     navigateToHome();
   };
@@ -74,7 +79,7 @@ function NavBar() {
   };
   return (
     <div>
-      <AppBar position="fixed" color="inherit" elevation={0} >
+      <AppBar position="fixed" color="inherit" elevation={0}>
         <Container maxWidth="xl">
           {/* 모바일 환경 */}
           <Toolbar disableGutters>
@@ -119,8 +124,8 @@ function NavBar() {
                       {language === "CN"
                         ? "监护人"
                         : language === "VI"
-                          ? "người giám hộ"
-                          : "보호자"}
+                        ? "người giám hộ"
+                        : "보호자"}
                     </Typography>
                   </MenuItem>
                 )}
@@ -135,8 +140,8 @@ function NavBar() {
                     {language === "CN"
                       ? "学习"
                       : language === "VI"
-                        ? "học hỏi"
-                        : "한국어 연습"}
+                      ? "học hỏi"
+                      : "한국어 연습"}
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -150,8 +155,8 @@ function NavBar() {
                     {language === "CN"
                       ? "韩国文化"
                       : language === "VI"
-                        ? "văn hoá"
-                        : "한국 문화"}
+                      ? "văn hoá"
+                      : "한국 문화"}
                   </Typography>
                 </MenuItem>
                 {userStr && (
@@ -166,8 +171,8 @@ function NavBar() {
                       {language === "CN"
                         ? "我的简历"
                         : language === "VI"
-                          ? "Thông tin của tôi"
-                          : "내 정보"}
+                        ? "Thông tin của tôi"
+                        : "내 정보"}
                     </Typography>
                   </MenuItem>
                 )}
@@ -178,8 +183,8 @@ function NavBar() {
                       language === "CN"
                         ? "登录"
                         : language === "VI"
-                          ? "đăng nhập"
-                          : "로그인"
+                        ? "đăng nhập"
+                        : "로그인"
                     }
                     color="#FFD93D"
                     width="130px"
@@ -196,13 +201,13 @@ function NavBar() {
                       language === "CN"
                         ? "登出"
                         : language === "VI"
-                          ? "đăng xuất"
-                          : "로그아웃"
+                        ? "đăng xuất"
+                        : "로그아웃"
                     }
                     color="#FF6B6B"
                     width="130px"
                     onClick={() => {
-                      logout()
+                      logout();
                       handleCloseNavMenu();
                     }}
                   />
@@ -246,7 +251,9 @@ function NavBar() {
                     onClick={navigateToParents}
                     style={{
                       borderWidth:
-                        location.pathname === "/parentpage/record" || location.pathname === "/parentpage/map" || location.pathname === "/parentpage/news"
+                        location.pathname === "/parentpage/record" ||
+                        location.pathname === "/parentpage/map" ||
+                        location.pathname === "/parentpage/news"
                           ? "0px 0px 4px 0px"
                           : "0px 0px 0px 0px",
                     }}
@@ -254,8 +261,8 @@ function NavBar() {
                     {language === "CN"
                       ? "监护人"
                       : language === "VI"
-                        ? "người giám hộ"
-                        : "보호자"}
+                      ? "người giám hộ"
+                      : "보호자"}
                   </div>
                 )}
                 <div
@@ -272,8 +279,8 @@ function NavBar() {
                   {language === "CN"
                     ? "学习"
                     : language === "VI"
-                      ? "học hỏi"
-                      : "한국어 연습"}
+                    ? "học hỏi"
+                    : "한국어 연습"}
                 </div>
                 <div
                   key="한국 문화"
@@ -289,8 +296,8 @@ function NavBar() {
                   {language === "CN"
                     ? "韩国文化"
                     : language === "VI"
-                      ? "văn hoá"
-                      : "한국 문화"}
+                    ? "văn hoá"
+                    : "한국 문화"}
                 </div>
                 {userStr && (
                   <div
@@ -307,8 +314,8 @@ function NavBar() {
                     {language === "CN"
                       ? "我的简历"
                       : language === "VI"
-                        ? "Thông tin của tôi"
-                        : "내 정보"}
+                      ? "Thông tin của tôi"
+                      : "내 정보"}
                   </div>
                 )}
                 <div style={{ marginRight: "1rem" }}>
@@ -320,8 +327,8 @@ function NavBar() {
                       language === "CN"
                         ? "登录"
                         : language === "VI"
-                          ? "đăng nhập"
-                          : "로그인"
+                        ? "đăng nhập"
+                        : "로그인"
                     }
                     color="#FFD93D"
                     width="130px"
@@ -337,8 +344,8 @@ function NavBar() {
                       language === "CN"
                         ? "登出"
                         : language === "VI"
-                          ? "đăng xuất"
-                          : "로그아웃"
+                        ? "đăng xuất"
+                        : "로그아웃"
                     }
                     color="#FF6B6B"
                     width="9rem"

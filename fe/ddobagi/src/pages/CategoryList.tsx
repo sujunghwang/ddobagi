@@ -60,7 +60,7 @@ function CategoryList() {
         );
         setStoreList(response4.data);
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     };
 
