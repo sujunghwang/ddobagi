@@ -43,15 +43,15 @@ public class ConversationController {
     }
 
     @PostMapping(value = "/api/conversations/record")
-    public float saveRecord(@RequestParam("situation_id") Long situationId,
-        @RequestParam("user_id") Long userId,
-        @RequestParam("script_id") Long scriptId,
+    public float saveRecord(@RequestParam("situation_id") String situationId,
+        @RequestParam("user_id") String userId,
+        @RequestParam("script_id") String scriptId,
         @RequestPart("file")  MultipartFile file) throws IOException {
 
         // 발음평가 api 돌려서 점수 받아내서 db에 저장하고 점수만 return
-        float score = conversationService.getScore(scriptId, file);
+        float score = conversationService.getScore(Long.parseLong(scriptId), file);
         // s3에 저장
-        conversationService.saveRecord(situationId, userId, scriptId, file, score);
+        conversationService.saveRecord(Long.parseLong(situationId), Long.parseLong(userId), Long.parseLong(scriptId), file, score);
 
         return score;
     }
