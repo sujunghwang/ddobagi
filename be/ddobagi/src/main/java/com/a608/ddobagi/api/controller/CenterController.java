@@ -31,13 +31,14 @@ public class CenterController {
     @GetMapping()
     public ResponseEntity<?> getCenterList(@RequestParam(required = false) String sido, @RequestParam(required = false) String gugun) {
         // 센터 조회
+        System.out.println(sido+"    "+gugun);
         HashMap<String, Object> conditions = new HashMap<String, Object>();
-        if (sido != null){
-            // 시도로 조회했을 때
-            conditions.put("sidoCode", sido);
-        }else if(gugun != null){
+        if(!gugun.equals("undefined")){
             // 구군으로 조회했을 때
             conditions.put("gugunCode", gugun);
+        }else if (!sido.equals("undefined")){
+            // 시도로 조회했을 때
+            conditions.put("sidoCode", sido);
         }
         System.out.println(conditions);
         return ResponseEntity.ok(centerService.findCenter(conditions));
