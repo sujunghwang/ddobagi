@@ -11,11 +11,6 @@ import ParentHeader from "../assets/ParentHeader.png"
 import RadialBarChart from '../components/Charts/ParentChart';
 import ChartData from '../components/Charts/ParentChartData.json'
 import ColumnChartWithGroupLabel from '../components/Charts/StickChart';
-// import ChartSwiper from '../components/Swiper/ChartSwiper';
-
-// interface StudyButtonProps {
-//   studyBtn: string;
-// }
 
 function ParentPage1() {
     //언어 함수
