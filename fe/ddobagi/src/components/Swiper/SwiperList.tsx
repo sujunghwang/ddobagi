@@ -7,15 +7,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
 import { Button, Box, Typography, CardActionArea, CardMedia, CardContent, Grid } from "@mui/material";
-import cultureTest from "../Swiper/cultureTest.json"
-
-// 문화 상세 사진
-// import dokdo from "../../assets/dokdopeng.jpg"
-// import game from "../../assets/game.jpg"
-// import kb from "../../assets/kyungbok.jpg"
-// import netflix from "../../assets/netflix.jpg"
-// import ddobak from "../../assets/말남아.png"
-
 
 // Import Swiper styles
 import 'swiper/css';
@@ -23,22 +14,48 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
+interface CultureContent {
+  cultureId: number;
+  lang: string;
+  title: string;
+  description: string;
+}
+
+interface Culture {
+  cultureId: number;
+  url: string;
+  cultureContentQueryDtoList: CultureContent[];
+  completed: boolean;
+}
+
+interface Category {
+  categoryId: number;
+  lang: string;
+  categoryName: string;
+}
+
+interface Data {
+  categoryName: Category[];
+  cultureList: Culture[];
+}
+
+interface ApiData {
+  data: Data;
+}
+
+// type CultureProp = {
+//   dataProp : ApiData;
+//   boxColor: string;
+// }
+
 type CultureProp = {
-  cultureThumbnail?: string;
-  cultureTitle?: string;
-  cultureId?: number;
-  isCompleted?: boolean;
+  dataProp : ApiData;
   boxColor: string;
-  culturecategoryName?: string;
 }
 
 function SwiperList({
-  cultureThumbnail,
-  cultureTitle,
-  cultureId,
-  isCompleted,
+  dataProp,
   boxColor,
-  culturecategoryName,
  } : CultureProp) {
 
   const getColorCode = (color: string): string => {
@@ -71,10 +88,17 @@ function SwiperList({
   //   navigate("/cultureitem");
   // }
   const moveCulture = (cultureId: number) => {
-    navigate(`/cultureitem/${cultureId}`);
+    navigate(`/cultureitem/${CategoryNumber}_${cultureId}`);
   }
 
-  const Slides = cultureTest
+  // const SlidesData = Test230328.data
+  const SlidesData = dataProp?.data
+  if (!SlidesData) return null;
+  console.log(SlidesData)
+
+  const Slides = SlidesData.cultureList
+
+  const CategoryNumber = SlidesData.categoryName[0].categoryId
 
   const getYouTubeThumbnailUrl = (youtubeUrl: string) => {
     const videoId = youtubeUrl.split('v=')[1];
@@ -129,7 +153,7 @@ function SwiperList({
                 <CardMedia
                   component="img"
                   height="220"
-                  image={getYouTubeThumbnailUrl(slide.thumbnail)} 
+                  image={getYouTubeThumbnailUrl(slide.url)} 
                 />
                 <CardContent
                   sx={{

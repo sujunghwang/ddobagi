@@ -8,41 +8,45 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/RootReducer";
 import BreadCrumbs from "../components/BreadCrumbs";
 import styles from "./CategoryList.module.scss";
-import CultureDetail from '../components/Culture/CultureDetail';
-import VideoScroll from "../components/VideoScroll";
+// import CultureDetail from '../components/Culture/CultureDetail';
+// import VideoScroll from "../components/VideoScroll";
 import SwiperList from "../components/Swiper/SwiperList";
-// 임시카테고리
-// import TemporaryArray from "../components/TemporaryArray";
-// 임시 리스트를 가져옴. 실제 서비스에서는 요청을 통해 해당 카테고리 아이템들의 리스트를 가져올 필요가 있음.
 
 // API에서 받아온 데이터의 타입을 선언합니다.
 interface ApiData {
-  cultureCategoryName: CultureCategory[];
+  categoryName: Category[];
   cultureList: Culture[];
 }
 
-interface CultureTranslation {
+interface CultureContent {
+  cultureId: number;
   lang: string;
   title: string;
+  description: string;
 }
 
 interface Culture {
   cultureId: number;
-  thumbnail: string;
-  isCompleted: boolean;
-  cultureTrans: CultureTranslation[];
+  url: string;
+  cultureContentQueryDtoList: CultureContent[];
+  completed: boolean;
 }
 
-interface CultureCategory {
+interface Category {
+  categoryId: number;
   lang: string;
-  name: string;
+  categoryName: string;
 }
+
+// interface ApiData {
+//   data: Data;
+// }
 
 function CultureList() {
-  const navigate = useNavigate();
-  const moveCulture = () => {
-    navigate("/cultureitem");
-  }
+  // const navigate = useNavigate();
+  // const moveCulture = () => {
+  //   navigate("/cultureitem");
+  // }
   //언어 변수
   const language = useSelector(
     (state: RootState) => state.languageChange.language
@@ -75,17 +79,54 @@ function CultureList() {
   // 가져온 리스트의 타입을 캐스팅
 
   // axios (아직 하나만 - 2023.03.24)
-  // useEffect(() => {
-  //   // API 호출
-  //   axios
-  //     .get('http://localhost:8080/api/cultures/{userId}?category=1')
-  //     .then((res) => {
-  //       setApiData1(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, [accessToken]);
+  useEffect(() => {
+    // API 호출
+    axios
+      .get('http://j8a608.p.ssafy.io:8080/api/cultures/1?common=ANNIVERSARY')
+      .then((res) => {
+        setApiData1(res.data);
+        console.log(apiData1)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    // API 호출
+    axios
+      .get('http://j8a608.p.ssafy.io:8080/api/cultures/1?common=TRADITION')
+      .then((res) => {
+        setApiData2(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    // API 호출
+    axios
+      .get('http://j8a608.p.ssafy.io:8080/api/cultures/1?common=ART')
+      .then((res) => {
+        setApiData3(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    // API 호출
+    axios
+      .get('http://j8a608.p.ssafy.io:8080/api/cultures/1?common=FOOD')
+      .then((res) => {
+        setApiData4(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
 
   return(
@@ -116,29 +157,33 @@ function CultureList() {
         </Typography> */}
         <div className={styles.CategoryName}>{category1}</div>
         <Box sx={{ height:"50px"}} />
-        <SwiperList boxColor="red" />
+          {/* @ts-ignore */}
+          <SwiperList dataProp={apiData1} boxColor="red" />
         <Box sx={{ height:"50px"}} />
         <hr />
         <Box sx={{ height:"50px"}} />
       <div className={styles.CategoryName}>{category2}</div>
-      <Box sx={{ height:"50px"}} />
-        <SwiperList boxColor="blue" />
+        <Box sx={{ height:"50px"}} />
+        {/* @ts-ignore */}
+          <SwiperList dataProp={apiData2} boxColor="blue" />
         <Box sx={{ height:"50px"}} />
         <hr />
         <Box sx={{ height:"50px"}} />
       <div className={styles.CategoryName}>{category3}</div>
         <Box sx={{ height:"50px"}} />
-        <SwiperList boxColor="green" />
+        {/* @ts-ignore */}
+          <SwiperList dataProp={apiData3} boxColor="green" />
         <Box sx={{ height:"50px"}} />
         <hr />
         <Box sx={{ height:"50px"}} />
       <div className={styles.CategoryName}>{category4}</div>
         <Box sx={{ height:"50px"}} />
-        <SwiperList boxColor="yellow" />
-      </Box>
+        {/* @ts-ignore */}
+          <SwiperList dataProp={apiData4} boxColor="yellow" />
+        </Box>
       <Box sx={{ height:"50px"}} />
     </div>
   )
 }
 
-export default CultureList
+export default CultureList;
