@@ -67,10 +67,10 @@ public class UserController {
 		return new ApiResponse<>(userService.findUserProgress(userId));
 	}
 
-	// @GetMapping("/{userId}/test")
-	// public int getUserCrown(@PathVariable Long userId) {
-	// 	return userService.getCrownCntByCategoryId(userId);
-	// }
+	@GetMapping("/{userId}/test")
+	public int getUserCrown(@PathVariable Long userId) {
+		return userService.getCrownCntByCategoryId(userId);
+	}
 
 	@GetMapping
 	public ApiResponse<List<UserResponseDto>> getUserList() {
