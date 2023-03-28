@@ -53,6 +53,7 @@ public class CultureService {
 		return null;
 	}
 
+	@Transactional
 	public void completedWatchCultureVideo(Long cultureId, Long userId) {
 
 		Culture culture = cultureRepository.findById(cultureId)
