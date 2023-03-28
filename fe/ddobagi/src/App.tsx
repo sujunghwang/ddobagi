@@ -13,7 +13,7 @@ import MyPage from "./pages/MyPage";
 import ConversationStudy from "./components/learning/ConversationStudy";
 import WordStudy from "./components/learning/ConversationStudy";
 import CultureDetail from "./components/Culture/CultureDetail";
-import CenterMap from "./pages/ParentPage_demo";
+import CenterMap from "./pages/CenterMap";
 
 function App() {
   return (

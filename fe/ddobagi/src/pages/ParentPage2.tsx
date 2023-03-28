@@ -15,7 +15,7 @@ import SigoonSelect from '../components/ParentPage/SelectBox/sigoonSelect';
 // import studyBtn from '../components/ParentPage/studyBtn';
 import SearchBtn from '../components/ParentPage/SelectBox/SearchBtn';
 
-import CenterMap from './ParentPage_demo';
+import CenterMap from './CenterMap';
 
 // interface StudyButtonProps {
 //   studyBtn: string;
