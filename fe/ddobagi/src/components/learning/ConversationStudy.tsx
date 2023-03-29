@@ -136,7 +136,7 @@ function ConversationStudy() {
     fetchVideoInfo();
   }, []);
 
-  const videoId = videoInfo?.situationVideoUrl.split("?v=")[1];
+  const videoId = videoInfo?.situationVideoUrl.split(".be/")[1];
   const videoDescription = videoInfo?.lang[language]?.desc;
   //
 
@@ -189,9 +189,8 @@ function ConversationStudy() {
               <div key={index} className={styles.bubbleGroup}>
                 <div className={styles.Scripts}>
                   <div
-                    className={`${styles.bubble} ${
-                      item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
-                    }`}
+                    className={`${styles.bubble} ${item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
+                      }`}
                   >
                     <div>{item.defaultContent}</div>
                     <div>{item.transContent}</div>

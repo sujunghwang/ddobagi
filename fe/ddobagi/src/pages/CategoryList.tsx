@@ -6,8 +6,6 @@ import styles from "./CategoryList.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/RootReducer";
 import axios from "axios";
-import TemporaryResponse from "../components/TemporaryResponse";
-// 임시 리스트를 가져옴. 실제 서비스에서는 요청을 통해 해당 카테고리 아이템들의 리스트를 가져올 필요가 있음.
 interface SituationTrans {
   lang: string;
   title: string;
@@ -32,6 +30,9 @@ function CategoryList() {
   );
   //
   // axios통신으로 리스트를 받아와야 하는 부분//
+  const userId = useSelector(
+    (state: RootState) => state.inputUserInfo.payload.id
+  );
   const [homeList, setHomeList] = useState<Videolist | null>(null);
   const [schoolList, setSchoolList] = useState<Videolist | null>(null);
   const [playGroundList, setPlayGroundList] = useState<Videolist | null>(null);
@@ -41,22 +42,22 @@ function CategoryList() {
     const fetchLearning = async () => {
       try {
         const response = await axios.get<Videolist>(
-          "http://j8a608.p.ssafy.io:8080/api/learnings/1/HOME"
+          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/HOME`
         );
         setHomeList(response.data);
 
         const response2 = await axios.get<Videolist>(
-          "http://j8a608.p.ssafy.io:8080/api/learnings/1/SCHOOL"
+          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/SCHOOL`
         );
         setSchoolList(response2.data);
 
         const response3 = await axios.get<Videolist>(
-          "http://j8a608.p.ssafy.io:8080/api/learnings/1/PLAYGROUND"
+          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/PLAYGROUND`
         );
         setPlayGroundList(response3.data);
 
         const response4 = await axios.get<Videolist>(
-          "http://j8a608.p.ssafy.io:8080/api/learnings/1/STORE"
+          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/STORE`
         );
         setStoreList(response4.data);
       } catch (error) {
@@ -76,14 +77,14 @@ function CategoryList() {
     language === "CN"
       ? "学习"
       : language === "VI"
-      ? "tại cửa hàng"
-      : "가게에서";
+        ? "tại cửa hàng"
+        : "가게에서";
   const playGround =
     language === "CN"
       ? "在操场上"
       : language === "VI"
-      ? "tại sân chơi"
-      : "놀이터에서";
+        ? "tại sân chơi"
+        : "놀이터에서";
   //
 
   return (
@@ -94,22 +95,22 @@ function CategoryList() {
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
       </div>
-      <div className={styles.CategoryName}>{house}</div>
-      {homeList ? (
-        <VideoScroll
-          color={"#FF6B6B"}
-          videolist={homeList}
-          categoryName={house}
-        />
-      ) : (
-        <Loading />
-      )}
       <div className={styles.CategoryName}>{school}</div>
       {schoolList ? (
         <VideoScroll
           color={"#92B4EC"}
           videolist={schoolList}
           categoryName={school}
+        />
+      ) : (
+        <Loading />
+      )}
+      <div className={styles.CategoryName}>{house}</div>
+      {homeList ? (
+        <VideoScroll
+          color={"#FF6B6B"}
+          videolist={homeList}
+          categoryName={house}
         />
       ) : (
         <Loading />

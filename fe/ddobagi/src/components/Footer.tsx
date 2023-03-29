@@ -18,7 +18,7 @@ function Footer() {
     navigate("/CultureList");
   };
   const navigateToParents = () => {
-    navigate("/parentpage");
+    navigate("/parentpage/record");
   };
   const navigateToMyPage = () => {
     navigate("/mypage");

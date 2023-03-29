@@ -134,6 +134,7 @@
 }
 
 .BtnGroup2 {
+  position: relative;
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -147,6 +148,7 @@
   justify-content: center;
   align-items: center;
   width: 2.5rem;
+  height: 2.5rem;
   color: white;
   background-color: #ff0000;
   border-radius: 50%;
@@ -195,12 +197,12 @@
 }
 
 .GBtn {
-  aspect-ratio: 1 / 1;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   width: 2.5rem;
+  height: 2.5rem;
   background-color: #6bcb77;
   border-radius: 100%;
   cursor: pointer;
@@ -227,6 +229,7 @@
   align-items: center;
   color: white;
   width: 2.5rem;
+  height: 2.5rem;
   background-color: #ffd93d;
   border-radius: 100%;
   cursor: pointer;
@@ -244,4 +247,31 @@
   &:active {
     background-color: #c2a329;
   }
+}
+
+
+.confirmMark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #92B4EB;
+  border-radius: 100%;
+  font-size: 1.3rem;
+  box-shadow: inset -1px -2px rgba(0, 0, 0, 0.25);
+}
+
+.noConfirmMark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #ff0000;
+  border-radius: 100%;
+  font-size: 1.3rem;
+  box-shadow: inset -1px -2px rgba(0, 0, 0, 0.25);
 }
