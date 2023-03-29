@@ -1,5 +1,11 @@
 .CloseBtn {
   cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 3rem;
+  background-color: #30b341;
+  padding: 5px 15px 5px 15px;
+  color: white;
+  border-radius: 50px;
 }
 
 .FullContainer {
@@ -9,7 +15,7 @@
 }
 
 .LeftContainer {
-  margin-top: calc(100vh - 850px);
+  margin-top: calc(100vh - 815px);
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -274,4 +280,12 @@
   border-radius: 100%;
   font-size: 1.3rem;
   box-shadow: inset -1px -2px rgba(0, 0, 0, 0.25);
+}
+
+.LastGroup {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  font-size: 1.5rem;
 }
