@@ -5,13 +5,26 @@ import styles from "./Study.module.scss";
 import MicRoundedIcon from "@mui/icons-material/MicRounded";
 import FiberManualRecordRoundedIcon from "@mui/icons-material/FiberManualRecordRounded";
 import VolumeUpRoundedIcon from "@mui/icons-material/VolumeUpRounded";
-import CheckIcon from '@mui/icons-material/Check';
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
 
 interface Props {
   situationId: number;
   scriptId: number;
+  item: {
+    scriptId: number;
+    startTime: string;
+    endTime: string;
+    scriptRole: string;
+    defaultContent: string;
+    recordedUrl: string;
+    lang: string;
+    transContent: string;
+  }
+  videoFrame: React.MutableRefObject<any>
+  play: (start: number, end: number) => void
 }
 
 const Recording = (props: Props) => {
@@ -60,8 +73,32 @@ const Recording = (props: Props) => {
     }
   };
 
+  const [onPlay, setOnPlay] = useState<boolean>(false)
+
+
   return (
     <div className={styles.BtnGroup2}>
+      {onPlay ? <div
+        className={styles.RBtn}
+        onClick={() => {
+          props.videoFrame.current.pauseVideo();
+          setOnPlay(false)
+        }}
+      >
+        <PauseRoundedIcon sx={{ fontSize: "2rem" }} />
+      </div> : <div
+        className={styles.RBtn}
+        onClick={() => {
+          props.play(Number(props.item.startTime), Number(props.item.endTime));
+          setOnPlay(true)
+          const duration = Number(props.item.endTime) - Number(props.item.startTime);
+          setTimeout(() => {
+            setOnPlay(false)
+          }, duration * 1000);
+        }}
+      >
+        <PlayArrowRoundedIcon sx={{ fontSize: "2rem" }} />
+      </div>}
       {recorderControls.isRecording ? (
         <div className={styles.RBtn} onClick={recorderControls.stopRecording}>
           <FiberManualRecordRoundedIcon
