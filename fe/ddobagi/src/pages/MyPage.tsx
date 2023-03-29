@@ -91,7 +91,7 @@ function MyPage() {
   // 리뷰용 API
 
   return (
-    <div>
+    <div className={styles.body}>
       <div className={styles.Banner}>
         <div className={styles.Header}>마이 페이지</div>
       </div>

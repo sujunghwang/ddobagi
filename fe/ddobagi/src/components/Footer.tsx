@@ -24,7 +24,7 @@ function Footer() {
     navigate("/mypage");
   };
   return (
-    <div className={styles.container}>
+    <div>
       <div className={styles.vertical}>
         <img src={"/img/Logo.png"} alt="logo" onClick={navigateToHome} />
         <div className={styles.vertical3}>

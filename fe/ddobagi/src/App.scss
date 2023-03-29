@@ -18,6 +18,10 @@
   user-select: none; /* Standard syntax */
 }
 
+.s::-webkit-scrollbar {
+  display: none;
+}
+
 @media (max-width: 900px) {
   html {
     font-size: 40%;

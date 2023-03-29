@@ -18,7 +18,11 @@ function SelectLanguage({ language, changeLanguageBy }: SelectLanguageProps) {
   return (
     <div>
       <FormControl sx={{ minWidth: 130 }} size="small">
-        <InputLabel id="select-label" className={styles.SelectLabel}>
+        <InputLabel
+          id="select-label"
+          className={styles.SelectLabel}
+          sx={{ fontFamily: "CookieRun-Regular" }}
+        >
           Language
         </InputLabel>
         <Select
@@ -27,10 +31,17 @@ function SelectLanguage({ language, changeLanguageBy }: SelectLanguageProps) {
           value={language}
           label="Language"
           onChange={handleChange}
+          sx={{ fontFamily: "CookieRun-Regular" }}
         >
-          <MenuItem value={"KR"}>한국어</MenuItem>
-          <MenuItem value={"CN"}>中文</MenuItem>
-          <MenuItem value={"VI"}>Tiếng Việt</MenuItem>
+          <MenuItem value={"KR"} sx={{ fontFamily: "CookieRun-Regular" }}>
+            한국어
+          </MenuItem>
+          <MenuItem value={"CN"} sx={{ fontFamily: "CookieRun-Regular" }}>
+            中文
+          </MenuItem>
+          <MenuItem value={"VI"} sx={{ fontFamily: "CookieRun-Regular" }}>
+            Tiếng Việt
+          </MenuItem>
         </Select>
       </FormControl>
     </div>
