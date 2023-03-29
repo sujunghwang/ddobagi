@@ -33,7 +33,10 @@ public class LearningService {
 				dto.setSituationId(situationList.get(i).getSituationId());
 				dto.setThumbnail(situationList.get(i).getThumbnail());
 				dto.setCompleted(situationList.get(i).isCompleted());
-				dto.setProgress(situationList.get(i).getProgress());
+
+				// 소수점 절삭
+				double progress = Math.round(situationList.get(i).getProgress() * 100.0) / 100.0;
+				dto.setProgress(progress);
 				List<SituationTransDto> transList = new ArrayList<>();
 				dto.setSituationTransList(transList);
 				result.add(dto);
