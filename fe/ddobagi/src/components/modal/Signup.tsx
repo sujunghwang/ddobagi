@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useRef } from "react";
 import Input from "@mui/joy/Input";
 import ColorBtn from "../ColorBtn";
 import styles from "./Modal.module.scss";
@@ -96,46 +96,26 @@ function SignUp({ closeModal }: Props) {
   //입력값을 제출하는 함수 - 회원가입 등록 후 동기처리해서 바로 로그인.
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  //제출 실패 애니메이션
+  const signupBtn = useRef<HTMLDivElement>(null)
+  const shakeanime = () => {
+    if (signupBtn.current) {
+      signupBtn.current.classList.add(styles.ErrorBtn)
+
+      signupBtn.current.addEventListener("animationend", () => {
+        if (signupBtn.current) {
+          signupBtn.current.classList.remove(styles.ErrorBtn);
+        }
+      });
+    }
+  }
+
   const navigateToCategory = () => {
     navigate("/CategoryList");
   };
   const Log = () => {
-    // 입력값 검증
-    setSubmitted(true);
-    if (password !== confirmPassword) {
-      alert("비밀번호를 확인해주세요");
-      return;
-    }
-
-    //회원가입
-    interface SignupInfo {
-      loginId: string;
-      pw: string;
-      name: string;
-      userLang: string;
-      birth: string; // string이 아닐 수 있음.
-      settle: string;
-    }
-    const signup = async () => {
-      try {
-        const response = await axios.post<SignupInfo>(
-          "http://j8a608.p.ssafy.io:8080/api/auth/signup",
-          {
-            loginId: id,
-            pw: password,
-            name: name,
-            userLang: language,
-            birth: birthDay,
-            settle: submitSettle,
-          }
-        );
-        const success = response.data;
-      } catch (error) {
-        alert("유효하지 않은 데이터가 있습니다.");
-      }
-    };
-
-    // 로그인
+    //로그인 함수 선언
     interface LogInfo {
       grantType: string;
       accessToken: string;
@@ -173,15 +153,50 @@ function SignUp({ closeModal }: Props) {
         navigateToCategory();
         closeModal();
       } catch (error) {
-        alert("정보를 다시 확인해 주세요");
+        shakeanime()
       }
     };
-    async function signupToLogin() {
-      await signup();
-      await apiLogin();
-    }
 
-    signupToLogin();
+    //회원가입 함수 선언
+    interface SignupInfo {
+      loginId: string;
+      pw: string;
+      name: string;
+      userLang: string;
+      birth: string; // string이 아닐 수 있음.
+      settle: string;
+    }
+    const signup = async () => {
+      try {
+        const response = await axios.post<SignupInfo>(
+          "http://j8a608.p.ssafy.io:8080/api/auth/signup",
+          {
+            loginId: id,
+            pw: password,
+            name: name,
+            userLang: language,
+            birth: birthDay,
+            settle: submitSettle,
+          }
+        );
+        apiLogin()
+      } catch (error) {
+        shakeanime()
+      }
+    };
+    // 입력값 검증
+    setSubmitted(true);
+    if (password !== confirmPassword ||
+      birthDay === null ||
+      settleDay === null ||
+      id === "" ||
+      language === "" ||
+      name === "") {
+      shakeanime()
+      return;
+    } else {
+      signup();
+    }
   };
 
   return (
@@ -193,8 +208,8 @@ function SignUp({ closeModal }: Props) {
               {reduxLanguage === "CN"
                 ? "姓名"
                 : reduxLanguage === "VI"
-                ? "tên"
-                : "이름"}
+                  ? "tên"
+                  : "이름"}
             </div>
             <Input
               error={submitted === true && name === "" ? true : false}
@@ -212,8 +227,8 @@ function SignUp({ closeModal }: Props) {
               {reduxLanguage === "CN"
                 ? "语言"
                 : reduxLanguage === "VI"
-                ? "ngôn ngữ"
-                : "언어"}
+                  ? "ngôn ngữ"
+                  : "언어"}
             </div>
             <FormControl sx={{ minWidth: "100%" }} size="small">
               <InputLabel id="select-label" className={styles.SelectLabel}>
@@ -241,8 +256,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "进入韩国的年份"
             : reduxLanguage === "VI"
-            ? "năm nhập cảnh"
-            : "입국년도"}
+              ? "năm nhập cảnh"
+              : "입국년도"}
         </div>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["DatePicker"]}>
@@ -265,8 +280,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "出生年月日"
             : reduxLanguage === "VI"
-            ? "sinh nhật"
-            : "생일"}
+              ? "sinh nhật"
+              : "생일"}
         </div>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["DatePicker"]}>
@@ -287,8 +302,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "帐户"
             : reduxLanguage === "VI"
-            ? "tài khoản"
-            : "아이디"}
+              ? "tài khoản"
+              : "아이디"}
         </div>
         <Input
           placeholder="ID"
@@ -303,8 +318,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "密码"
             : reduxLanguage === "VI"
-            ? "mật khẩu"
-            : "비밀번호"}
+              ? "mật khẩu"
+              : "비밀번호"}
         </div>
         <FormControl sx={{ width: "100%" }} variant="outlined" size="small">
           <OutlinedInput
@@ -334,8 +349,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "验证密码"
             : reduxLanguage === "VI"
-            ? "Xác nhận lại mật khẩu"
-            : "비밀번호 확인"}
+              ? "Xác nhận lại mật khẩu"
+              : "비밀번호 확인"}
         </div>
         <FormControl sx={{ width: "100%" }} variant="outlined" size="small">
           <OutlinedInput
@@ -363,14 +378,14 @@ function SignUp({ closeModal }: Props) {
           />
         </FormControl>
       </div>
-      <div className={styles.BtnMargin}>
+      <div className={styles.BtnMargin} ref={signupBtn}>
         <ColorBtn
           content={
             reduxLanguage === "CN"
               ? "加入会员"
               : reduxLanguage === "VI"
-              ? "tham gia thành viên"
-              : "회원가입"
+                ? "tham gia thành viên"
+                : "회원가입"
           }
           color="#FF6B6B"
           width="100%"

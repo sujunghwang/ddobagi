@@ -5,6 +5,7 @@ import styles from "./Study.module.scss";
 import MicRoundedIcon from "@mui/icons-material/MicRounded";
 import FiberManualRecordRoundedIcon from "@mui/icons-material/FiberManualRecordRounded";
 import VolumeUpRoundedIcon from "@mui/icons-material/VolumeUpRounded";
+import CheckIcon from '@mui/icons-material/Check';
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
 
@@ -24,7 +25,7 @@ const Recording = (props: Props) => {
   const [blobUrl, setBlobUrl] = useState<string>("");
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const [score, setScore] = useState<number>(0);
+  const [score, setScore] = useState<number>(0);  // 서버에서 반환된 점수를 저장합니다.
   const addAudioElement = async (blob: Blob) => {
     const formData = new FormData();
     formData.append("situation_id", situationId.toString());
@@ -35,6 +36,8 @@ const Recording = (props: Props) => {
     console.log();
 
     try {
+      const url = URL.createObjectURL(blob);
+      setBlobUrl(url);
       const response = await axios.post(
         "http://j8a608.p.ssafy.io:8080/api/conversations/record",
         formData,
@@ -44,10 +47,8 @@ const Recording = (props: Props) => {
           },
         }
       );
-
-      console.log(response.data);
-      const url = URL.createObjectURL(blob);
-      setBlobUrl(url);
+      const roundedNum: number = Math.round(response.data * 10) / 10; // 소수 첫째자리까지
+      setScore(roundedNum)
     } catch (error) {
       console.error(error);
     }
@@ -85,6 +86,14 @@ const Recording = (props: Props) => {
           onRecordingComplete={addAudioElement}
         />
       </div>
+      {score > 2 ?
+        <div className={styles.confirmMark}>
+          {score}
+        </div>
+        :
+        <div className={styles.noConfirmMark}>
+          {score}
+        </div>}
       <audio src={blobUrl} ref={audioRef}></audio>
     </div>
   );
