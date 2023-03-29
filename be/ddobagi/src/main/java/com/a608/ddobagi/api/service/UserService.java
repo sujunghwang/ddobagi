@@ -216,37 +216,37 @@ public class UserService {
 
 		// ===== 퀴즈, 스크립트, 문화 진행률 ==== //
 		if (!Objects.equals(userScriptRepository.countByUserId(userId), ZERO)) {
-			scriptProgress = (int)(userScriptRepository.countByUserId(userId)
+			scriptProgress = (int)((double)userScriptRepository.countByUserId(userId)
 				/ scriptRepository.countBy() * HUNDRED);
 		}
 
 		if (!Objects.equals(userQuizRepository.countByUserId(userId), ZERO)) {
-			quizProgress = (int)(userQuizRepository.countByUserId(userId)
+			quizProgress = (int)((double)userQuizRepository.countByUserId(userId)
 				/ quizRepository.countBy() * HUNDRED);
 		}
 
 		if (!Objects.equals(userCultureRepository.countByUserId(userId), ZERO)) {
-			cultureProgress = (int)(userCultureRepository.countByUserId(userId)
+			cultureProgress = (int)((double)userCultureRepository.countByUserId(userId)
 				/ cultureRepository.countBy() * HUNDRED);
 		}
 
 		// ===== 카테고리 진행률 ===== //
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId), ZERO)) {
-			schoolCategoryProgress = (int)(userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId)
+			schoolCategoryProgress = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId)
 				/ userRepository.categoryCnt(CATEGORY_SCHOOL) * HUNDRED);
 		}
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId), ZERO)) {
-			homeCategoryProgess = (int)(userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId)
+			homeCategoryProgess = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId)
 				/ userRepository.categoryCnt(CATEGORY_HOME) * HUNDRED);
 		}
 
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId), ZERO)) {
-			storeCategoryProgress = (int)(userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId)
+			storeCategoryProgress = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId)
 				/ userRepository.categoryCnt(CATEGORY_STORE) * HUNDRED);
 		}
 
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId), ZERO)) {
-			playgroundCategoryProgress = (int)(userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId)
+			playgroundCategoryProgress = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId)
 				/ userRepository.categoryCnt(CATEGORY_PLAYGROUND));
 		}
 
