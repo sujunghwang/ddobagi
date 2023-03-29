@@ -10,7 +10,7 @@ type BtnProp = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-function ColorBtn({ content, color, width, onClick }: BtnProp) : JSX.Element {
+function ColorBtn({ content, color, width, onClick }: BtnProp): JSX.Element {
 
   return (
     <div className={styles.Container}>

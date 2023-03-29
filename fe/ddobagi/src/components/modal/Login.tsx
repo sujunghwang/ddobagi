@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useRef } from "react";
 import Input from "@mui/joy/Input";
 import ColorBtn from "../ColorBtn";
 import styles from "./Modal.module.scss";
@@ -54,6 +54,7 @@ function Login({ setModalContent, closeModal }: Props) {
   //
 
   //로그인 함수
+  const LoginBtn = useRef<HTMLDivElement>(null)
   const navigate = useNavigate();
   const navigateToCategory = () => {
     navigate("/CategoryList");
@@ -69,39 +70,54 @@ function Login({ setModalContent, closeModal }: Props) {
     name: string,
     userLang: string
   }
+  const shakeanime = () => {
+    if (LoginBtn.current) {
+      LoginBtn.current.classList.add(styles.ErrorBtn)
 
+      LoginBtn.current.addEventListener("animationend", () => {
+        if (LoginBtn.current) {
+          LoginBtn.current.classList.remove(styles.ErrorBtn);
+        }
+      });
+    }
+  }
+  
   const dispatch = useDispatch()
   const Login = () => {
-    const apiLogin = async () => {
-      try {
-        const response = await axios.post<LogInfo>(
-          "http://j8a608.p.ssafy.io:8080/api/auth/login",
-          {
-            "loginId": id,
-            "pw": password
+    if (id === "" || password === "") {
+      shakeanime()
+    } else {
+      const apiLogin = async () => {
+        try {
+          const response = await axios.post<LogInfo>(
+            "http://j8a608.p.ssafy.io:8080/api/auth/login",
+            {
+              "loginId": id,
+              "pw": password
+            }
+          );
+
+          interface UserInfo {
+            name: string;
+            id: number;
           }
-        );
 
-        interface UserInfo {
-          name: string;
-          id: number;
+          const newUserInfo: UserInfo = {
+            name: response.data.name,
+            id: response.data.id,
+          };
+          dispatch(inputUserInfo(newUserInfo));
+          const token = response.data.accessToken
+          const AccessToken = JSON.stringify(token);
+          localStorage.setItem("token", AccessToken);
+          navigateToCategory();
+          closeModal();
+        } catch (error) {
+          shakeanime()
         }
-
-        const newUserInfo: UserInfo = {
-          name: response.data.name,
-          id: response.data.id,
-        };
-        dispatch(inputUserInfo(newUserInfo));
-        const token = response.data.accessToken
-        const AccessToken = JSON.stringify(token);
-        localStorage.setItem("token", AccessToken);
-        navigateToCategory();
-        closeModal();
-      } catch (error) {
-        alert("정보를 다시 확인해 주세요")
       }
+      apiLogin()
     }
-    apiLogin()
   };
   //
 
@@ -144,11 +160,18 @@ function Login({ setModalContent, closeModal }: Props) {
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
+
             }
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                event.preventDefault(); // 엔터키가 기본 동작을 하지 않도록 막음
+                Login(); // 엔터키를 눌렀을 때 실행할 함수
+              }
+            }}
           />
-        </FormControl>{" "}
+        </FormControl>
       </div>
-      <div className={styles.BtnMargin}>
+      <div className={styles.BtnMargin} ref={LoginBtn}>
         <ColorBtn
           content={
             language === "CN"

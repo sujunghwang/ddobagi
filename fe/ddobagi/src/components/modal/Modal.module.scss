@@ -30,9 +30,11 @@
   gap: 12px;
   width: 80%;
 }
+
 .categoryName {
   font-size: 2rem;
 }
+
 .situationTitle {
   font-size: 3rem;
 }
@@ -53,6 +55,7 @@
     width: 200;
     margin-bottom: 30px;
   }
+
   .handImg {
     position: absolute;
     top: 100%;
@@ -61,6 +64,7 @@
     width: 809.5px;
     pointer-events: none;
   }
+
   .BtnGroup {
     display: flex;
     gap: 3rem;
@@ -72,6 +76,7 @@
     width: 80%;
     margin-bottom: 30px;
   }
+
   .handImg {
     position: absolute;
     top: 100%;
@@ -79,5 +84,35 @@
     transform: translate(-49.455%, -100%);
     width: 381.5px;
     pointer-events: none;
+  }
+}
+
+
+.ErrorBtn {
+  animation: wave .5s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes wave {
+
+  10%,
+  90% {
+    transform: translateX(-3px) translateY(0);
+  }
+
+  20%,
+  80% {
+    transform: translateX(5px) translateY(0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translateX(-5px) translateY(0);
+  }
+
+  40%,
+  60% {
+    transform: translateX(3px) translateY(0);
   }
 }
