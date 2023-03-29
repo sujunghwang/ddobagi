@@ -49,7 +49,7 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
         onClick={() => {
           componentRef.current?.scrollBy({ left: -330, behavior: "smooth" });
         }}
-        sx={{ position: "absolute", color: "white" }}
+        sx={{ position: "absolute", color: "black" }}
       >
         <PlayCircleOutlineOutlinedIcon sx={{ fontSize: "4rem" }} />
       </IconButton>
@@ -58,7 +58,7 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
         onClick={() => {
           componentRef.current?.scrollBy({ left: 330, behavior: "smooth" });
         }}
-        sx={{ position: "absolute", color: "white" }}
+        sx={{ position: "absolute", color: "black" }}
       >
         <PlayCircleOutlineOutlinedIcon sx={{ fontSize: "4rem" }} />
       </IconButton>

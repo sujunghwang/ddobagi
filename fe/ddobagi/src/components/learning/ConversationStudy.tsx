@@ -36,7 +36,7 @@ function ConversationStudy() {
         situationTitle: situationTitle,
         progress: progress,
         color: color,
-        situationId: situationId
+        situationId: situationId,
       },
     });
   };
@@ -109,8 +109,8 @@ function ConversationStudy() {
   }, []);
 
   const opts: YouTubeProps["opts"] = {
-    height: "467",
-    width: "830",
+    height: "450",
+    width: "800",
     playerVars: {
       end: scripts[scripts.length - 1]?.endTime, // 마지막 문장이 끝나는 시간을 데이터로 받아옵니다. -> end 이벤트를 발생시켜야 합니다.
       controls: 0,
@@ -167,7 +167,6 @@ function ConversationStudy() {
     fetchRecordInfo();
   }, []);
 
-
   return (
     <div className={styles.FullContainer}>
       <div className={styles.LeftContainer}>
@@ -183,7 +182,9 @@ function ConversationStudy() {
         <div className={styles.Title}>{categoryName}</div>
         <div className={styles.SubTitle}>{situationTitle}</div>
         <div className={styles.Description}>{videoDescription}</div>
-        <div onClick={goBack} className={styles.CloseBtn}>나가기</div>
+        <div onClick={goBack} className={styles.CloseBtn}>
+          나가기
+        </div>
       </div>
       <div className={styles.RightContainer}>
         <div className={styles.scores}>
@@ -198,8 +199,9 @@ function ConversationStudy() {
               <div key={index} className={styles.bubbleGroup}>
                 <div className={styles.Scripts}>
                   <div
-                    className={`${styles.bubble} ${item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
-                      }`}
+                    className={`${styles.bubble} ${
+                      item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
+                    }`}
                   >
                     <div>{item.defaultContent}</div>
                     <div>{item.transContent}</div>
@@ -217,8 +219,18 @@ function ConversationStudy() {
               </div>
             ))}
             <div className={styles.LastGroup}>
-              <ColorBtn content="뒤로가기" color="#ffffff" width="10rem" onClick={goBack}></ColorBtn>
-              <ColorBtn content="단어공부" color="#ffffff" width="10rem" onClick={goWord}></ColorBtn>
+              <ColorBtn
+                content="뒤로가기"
+                color="#ffffff"
+                width="10rem"
+                onClick={goBack}
+              ></ColorBtn>
+              <ColorBtn
+                content="단어공부"
+                color="#ffffff"
+                width="10rem"
+                onClick={goWord}
+              ></ColorBtn>
             </div>
           </div>
         </div>

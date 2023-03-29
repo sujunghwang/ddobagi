@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./ColorBtn.module.scss";
 import { Button } from "@mui/material";
 
-
 type BtnProp = {
   content: string;
   color: string;
@@ -11,7 +10,6 @@ type BtnProp = {
 };
 
 function ColorBtn({ content, color, width, onClick }: BtnProp): JSX.Element {
-
   return (
     <div className={styles.Container}>
       <Button
@@ -22,7 +20,7 @@ function ColorBtn({ content, color, width, onClick }: BtnProp): JSX.Element {
           backgroundColor: color,
           borderRadius: 50,
           fontFamily: "CookieRun-Regular",
-          fontSize: "1.6rem",
+          fontSize: "1rem",
           transition: "top .1s ",
           "&:hover": {
             backgroundColor: color,
