@@ -1,0 +1,247 @@
+.CloseBtn {
+  cursor: pointer;
+}
+
+.FullContainer {
+  display: flex;
+  justify-content: space-evenly;
+  height: calc(100vh - 15px);
+}
+
+.LeftContainer {
+  margin-top: calc(100vh - 850px);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  text-align: start;
+}
+
+.RightContainer {
+  position: relative;
+  align-self: flex-end;
+}
+
+.TextBox {
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.Title {
+  font-size: 3rem;
+  width: 830px;
+}
+
+.SubTitle {
+  font-size: 2rem;
+  width: 830px;
+}
+
+.Description {
+  font-size: 1.5rem;
+  width: 830px;
+  // 텍스트 3줄제한 추가하기
+}
+
+.scores {
+  font-size: 1.5rem;
+  text-align: end;
+}
+
+.OuterContainer {
+  width: 550px;
+  height: 750px;
+  border-radius: 10px 10px 0 0;
+  box-shadow: inset 0 10px rgba(0, 0, 0, 0.25);
+  padding: 50px 40px 0 40px;
+}
+
+.InnerContainer {
+  overflow: auto;
+  height: 685px;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 10px 10px 0 0;
+  padding: 2rem;
+}
+
+.InnerContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.Scripts {
+  display: flex;
+  flex-direction: column;
+}
+
+.bubble {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 0.4em;
+  text-align: left;
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+.RIGHT {
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-right-color: #ffffff;
+    border-left: 0;
+    border-top: 0;
+    margin-top: -10px;
+    margin-left: -15px;
+  }
+}
+
+.LEFT {
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-left-color: #ffffff;
+    border-right: 0;
+    border-top: 0;
+    margin-top: -10px;
+    margin-right: -15px;
+  }
+}
+
+.handImg {
+  position: absolute;
+  top: 100%;
+  left: 86.5%;
+  object-fit: cover;
+  width: 180px;
+  transform: translate(0, -100%);
+}
+
+.BtnGroup {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+  gap: 1rem;
+  align-self: flex-end;
+}
+
+.BtnGroup2 {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-self: flex-end;
+}
+
+.RBtn {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  color: white;
+  background-color: #ff0000;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: inset -1px -2px rgba(0, 0, 0, 0.25);
+  transform-origin: center;
+  z-index: 0;
+  /* 중앙을 기준으로 확대 */
+
+  &:hover {
+    scale: 1.1;
+    transition: scale ease-in 0.1s;
+  }
+
+  &:not(:hover) {
+    transition: scale ease-in 0.1s;
+  }
+
+  &:active {
+    background-color: #9c0000;
+  }
+}
+
+.pulse {
+  z-index: -1;
+  background-color: #ff0000;
+  aspect-ratio: 1 / 1;
+  position: absolute;
+  width: 2.5rem;
+  opacity: 0;
+  border-radius: 50%;
+  animation: pulse 1s cubic-bezier(0.5, 0.5, 0, 0);
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+
+  25% {
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: scale(1.5);
+  }
+
+}
+
+.GBtn {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 2.5rem;
+  background-color: #6bcb77;
+  border-radius: 100%;
+  cursor: pointer;
+  box-shadow: inset -1px -2px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    scale: 1.1;
+    transition: scale ease-in 0.1s;
+  }
+
+  &:not(:hover) {
+    transition: scale ease-in 0.1s;
+  }
+
+  &:active {
+    background-color: #45884e;
+  }
+}
+
+.YBtn {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 2.5rem;
+  background-color: #ffd93d;
+  border-radius: 100%;
+  cursor: pointer;
+  box-shadow: inset -1px -2px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    scale: 1.1;
+    transition: scale ease-in 0.1s;
+  }
+
+  &:not(:hover) {
+    transition: scale ease-in 0.1s;
+  }
+
+  &:active {
+    background-color: #c2a329;
+  }
+}

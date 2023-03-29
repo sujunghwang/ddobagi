@@ -1,0 +1,58 @@
+.Background {
+  background-color: #92b4eb;
+  box-shadow: inset 0px 10px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  padding: 32px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.Background2 {
+  background-color: #fa9999;
+  box-shadow: inset 0px 10px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 30px 20px 20px 20px;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  font-size: 2.5rem;
+  text-overflow: clip;
+}
+
+.UpperGroup {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.DownGroup {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.iconGroup {
+  display: flex;
+  align-items: center;
+}
+
+.LogGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 20%;
+  white-space: pre;
+  height: 10rem;
+}
+
+.icon {
+  aspect-ratio: 1/1;
+  width: 3.2rem;
+}

@@ -1,0 +1,56 @@
+.FContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.Banner {
+  width: 100%;
+  height: 16rem;
+  background-image: url("../../public/img/BlueHeader.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Header {
+  font-size: 3rem;
+  color: #405069;
+}
+
+.HeaderTitle {
+  font-size: 5rem;
+  color: #405069;
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%, -25%);
+}
+
+@media (max-width: 900px) {
+  .CategoryName {
+    font-size: xx-large;
+  }
+
+  .BreadCrum {
+    align-self: flex-start;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 901px) {
+  .CategoryName {
+    font-size: 2.5rem;
+  }
+
+  .BreadCrum {
+    align-self: flex-start;
+    margin-left: 5rem;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+  }
+}
