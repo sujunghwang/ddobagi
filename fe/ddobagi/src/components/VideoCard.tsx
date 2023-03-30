@@ -76,7 +76,7 @@ function VideoCard({
             <BorderLinearProgress variant="determinate" value={progress} />
             <Typography
               gutterBottom
-              variant="h5"
+              variant="h6"
               component="div"
               sx={{
                 textAlign: "left",

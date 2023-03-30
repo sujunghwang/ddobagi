@@ -104,7 +104,7 @@ function CategoryList() {
       <div className={styles.CategoryName}>{school}</div>
       {schoolList ? (
         <VideoScroll
-          color={"#92B4EC"}
+          color={"#FFE4B0"}
           videolist={schoolList}
           categoryName={school}
         />
@@ -114,7 +114,7 @@ function CategoryList() {
       <div className={styles.CategoryName}>{house}</div>
       {homeList ? (
         <VideoScroll
-          color={"#FF6B6B"}
+          color={"#FFE4B0"}
           videolist={homeList}
           categoryName={house}
         />
