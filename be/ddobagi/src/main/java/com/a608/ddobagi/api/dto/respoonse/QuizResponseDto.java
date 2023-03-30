@@ -27,6 +27,8 @@ public class QuizResponseDto {
 
     private String defaultContent;
 
+    private String videoUrl;
+
     private Long startTime;
 
     private Long endTime;
@@ -40,7 +42,7 @@ public class QuizResponseDto {
     private boolean isSolved;
 
     public QuizResponseDto(String beforeSentence, String afterSentence, String answer, String option1, String option2, String option3,
-                                   String defaultContent, Long startTime, Long endTime, boolean isNowCorrected, boolean isFirstCorrected, boolean isSolved) {
+                                   String defaultContent, String videoUrl, Long startTime, Long endTime, boolean isNowCorrected, boolean isFirstCorrected, boolean isSolved) {
         this.beforeSentence = beforeSentence;
         this.afterSentence = afterSentence;
         this.answer = answer;
@@ -48,6 +50,7 @@ public class QuizResponseDto {
         this.option2 = option2;
         this.option3 = option3;
         this.defaultContent = defaultContent;
+        this.videoUrl = videoUrl;
         this.startTime = startTime;
         this.endTime = endTime;
         this.isNowCorrected = isNowCorrected;

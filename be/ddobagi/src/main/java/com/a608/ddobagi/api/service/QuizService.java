@@ -52,6 +52,7 @@ public class QuizService {
         String option2 = quizList.get(0).get(quiz.option2);
         String option3 = quizList.get(0).get(quiz.option3);
         String defaultContent = quizList.get(0).get(script.defaultContent);
+        String videoUrl = quizList.get(0).get(quiz.situation).getVideoUrl();
         Long startTime = quizList.get(0).get(script.startTime);
         Long endTime = quizList.get(0).get(script.endTime);
         boolean isNowCorrected;
@@ -70,7 +71,7 @@ public class QuizService {
             isSovled = false;
         }
 
-        QuizResponseDto quizResponse = new QuizResponseDto(beforeSentence,afterSentence,answer,option1,option2,option3,defaultContent,startTime,endTime,isNowCorrected,isFirstCorrected,isSovled);
+        QuizResponseDto quizResponse = new QuizResponseDto(beforeSentence,afterSentence,answer,option1,option2,option3,defaultContent,videoUrl,startTime,endTime,isNowCorrected,isFirstCorrected,isSovled);
         Map<Lang, Map<String,String>> lang = new HashMap<>();
         
         // 언어별 번역내용 map에 저장
