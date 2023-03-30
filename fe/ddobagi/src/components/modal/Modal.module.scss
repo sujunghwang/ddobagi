@@ -42,8 +42,8 @@
 .CloseBtn {
   cursor: pointer;
   position: absolute;
-  left: 5px;
-  top: 5px;
+  left: 93%;
+  top: 10px;
 }
 
 .BtnMargin {
@@ -87,14 +87,12 @@
   }
 }
 
-
 .ErrorBtn {
-  animation: wave .5s ease-in-out;
+  animation: wave 0.5s ease-in-out;
   animation-fill-mode: forwards;
 }
 
 @keyframes wave {
-
   10%,
   90% {
     transform: translateX(-3px) translateY(0);

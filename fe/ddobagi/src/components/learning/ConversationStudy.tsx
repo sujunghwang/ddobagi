@@ -2,14 +2,12 @@ import React, { useRef, useEffect, useState } from "react";
 import YouTube, { YouTubeProps, YouTubePlayer } from "react-youtube";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import CloseIcon from "@mui/icons-material/Close";
 import styles from "./Study.module.scss";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
-import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
-import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
 import Recording from "./Recording";
+import ColorBtn from "../ColorBtn";
 
 function ConversationStudy() {
   // navigate에 넣어 둔 state 값들을 가져옵니다.
@@ -18,6 +16,7 @@ function ConversationStudy() {
   const situationTitle = location.state?.situationTitle;
   const color = location.state?.color;
   const situationId = location.state?.situationId;
+  const progress = location.state?.progress;
   const userId = useSelector(
     (state: RootState) => state.inputUserInfo.payload.id
   );
@@ -30,6 +29,17 @@ function ConversationStudy() {
 
   const navigate = useNavigate();
   const goBack = () => navigate("/CategoryList");
+  const goWord = () => {
+    navigate(`/learning/quiz/${situationId}`, {
+      state: {
+        categoryName: categoryName,
+        situationTitle: situationTitle,
+        progress: progress,
+        color: color,
+        situationId: situationId,
+      },
+    });
+  };
 
   // 유튜브 플레이어를 제어하기 위한 객체
   const videoFrame = useRef<YouTubePlayer>();
@@ -99,8 +109,8 @@ function ConversationStudy() {
   }, []);
 
   const opts: YouTubeProps["opts"] = {
-    height: "467",
-    width: "830",
+    height: "450",
+    width: "800",
     playerVars: {
       end: scripts[scripts.length - 1]?.endTime, // 마지막 문장이 끝나는 시간을 데이터로 받아옵니다. -> end 이벤트를 발생시켜야 합니다.
       controls: 0,
@@ -160,9 +170,6 @@ function ConversationStudy() {
   return (
     <div className={styles.FullContainer}>
       <div className={styles.LeftContainer}>
-        <div onClick={goBack} className={styles.CloseBtn}>
-          <CloseIcon sx={{ fontSize: "2rem" }} />
-        </div>
         <div>
           <YouTube
             opts={opts}
@@ -175,6 +182,9 @@ function ConversationStudy() {
         <div className={styles.Title}>{categoryName}</div>
         <div className={styles.SubTitle}>{situationTitle}</div>
         <div className={styles.Description}>{videoDescription}</div>
+        <div onClick={goBack} className={styles.CloseBtn}>
+          나가기
+        </div>
       </div>
       <div className={styles.RightContainer}>
         <div className={styles.scores}>
@@ -189,29 +199,39 @@ function ConversationStudy() {
               <div key={index} className={styles.bubbleGroup}>
                 <div className={styles.Scripts}>
                   <div
-                    className={`${styles.bubble} ${item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
-                      }`}
+                    className={`${styles.bubble} ${
+                      item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
+                    }`}
                   >
                     <div>{item.defaultContent}</div>
                     <div>{item.transContent}</div>
                   </div>
                   <div className={styles.BtnGroup}>
-                    <div
-                      className={styles.RBtn}
-                      onClick={() => {
-                        play(Number(item.startTime), Number(item.endTime));
-                      }}
-                    >
-                      <PlayArrowRoundedIcon sx={{ fontSize: "2rem" }} />
-                    </div>
                     <Recording
                       situationId={situationId}
                       scriptId={item.scriptId}
+                      item={item}
+                      videoFrame={videoFrame}
+                      play={play}
                     />
                   </div>
                 </div>
               </div>
             ))}
+            <div className={styles.LastGroup}>
+              <ColorBtn
+                content="뒤로가기"
+                color="#ffffff"
+                width="10rem"
+                onClick={goBack}
+              ></ColorBtn>
+              <ColorBtn
+                content="단어공부"
+                color="#ffffff"
+                width="10rem"
+                onClick={goWord}
+              ></ColorBtn>
+            </div>
           </div>
         </div>
         <img src="/img/Hands2.png" alt="hands" className={styles.handImg} />

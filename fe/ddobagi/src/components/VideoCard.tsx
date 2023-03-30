@@ -13,13 +13,13 @@ import styles from "./VideoScroll.module.scss";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
-  borderRadius: 5,
+  borderRadius: "10px",
   [`&.${linearProgressClasses.colorPrimary}`]: {
     backgroundColor:
       theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
   },
   [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 5,
+    borderRadius: "10px",
     backgroundColor: theme.palette.mode === "light" ? "#1a90ff" : "#308fe8",
   },
 }));
@@ -59,7 +59,7 @@ function VideoCard({
       )}
       <Card
         sx={{
-          borderRadius: 5,
+          borderRadius: "10px",
         }}
         onClick={() => {
           setModal(true);
@@ -82,6 +82,9 @@ function VideoCard({
                 textAlign: "left",
                 marginTop: "10px",
                 fontFamily: "CookieRun-Regular",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
               }}
             >
               {situationTitle}
