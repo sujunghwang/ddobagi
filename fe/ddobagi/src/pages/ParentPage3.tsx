@@ -84,7 +84,7 @@ function ParentPage3() {
 
   return (
     <div className={styles.FContainer}>
-      <img src={ParentHeader} alt="" className={styles.Header} />
+      <img src={ParentHeader} alt="" className={styles.Banner} />
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
       </div>

@@ -37,13 +37,13 @@ function ParentPage2() {
     const navigateToParent3 = () => {
       navigate("/parentpage/news");
     };
-    const navigateToParent4 = () => {
-      navigate("/parentpage/map2");
-    };
+    // const navigateToParent4 = () => {
+    //   navigate("/parentpage/map2");
+    // };
     // 탭 선택 함수 끝
   return(
     <div className={styles.FContainer}>
-      <img src={ParentHeader} alt="" className={styles.Header} />
+      <img src={ParentHeader} alt="" className={styles.Banner} />
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
       </div>

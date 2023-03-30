@@ -1,0 +1,17 @@
+{
+  "beforeSentence": "검정색",
+  "afterSentence": "가 필요해",
+  "answer": "크레파스",
+  "option1": "분필",
+  "option2": "크레파스",
+  "option3": "색연필",
+  "defaultContent": "검정색 크레파스가 필요해",
+  "lang": {
+      "VI": {
+          "transContent": "베트베트"
+      },
+      "CN": {
+          "transContent": "需要黑色的蜡笔"
+      }
+  }
+}
