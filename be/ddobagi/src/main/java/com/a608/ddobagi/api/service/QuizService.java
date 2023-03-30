@@ -41,7 +41,9 @@ public class QuizService {
 
     public QuizResponseDto findQuiz(long userId, long quizId) {
         // 단어 퀴즈 문제 및 보기를 번역된 언어와 함께 조회
-        List<Tuple> quizList = quizRepositoryImpl.selectQuiz(userId, quizId);
+
+        UserQuiz hasUserQuiz = userQuizRepository.findByUserIdAndQuizId(userId, quizId);
+        List<Tuple> quizList = quizRepositoryImpl.selectQuiz(quizId);
 
         String beforeSentence = quizList.get(0).get(quiz.beforeSentence);
         String afterSentence = quizList.get(0).get(quiz.afterSentence);
@@ -52,10 +54,23 @@ public class QuizService {
         String defaultContent = quizList.get(0).get(script.defaultContent);
         Long startTime = quizList.get(0).get(script.startTime);
         Long endTime = quizList.get(0).get(script.endTime);
-        boolean isNowCorrected = quizList.get(0).get(userQuiz.isNowCorrected);
-        boolean isFirstCorrected = quizList.get(0).get(userQuiz.isNowCorrected);
+        boolean isNowCorrected;
+        boolean isFirstCorrected;
+        boolean isSovled;
+        
+        if(hasUserQuiz!=null){
+            // 유저가 문제를 풀어본적 있는 경우
+            isNowCorrected = hasUserQuiz.isNowCorrected();
+            isFirstCorrected = hasUserQuiz.isFirstCorrected();
+            isSovled = true;
+        }else{
+            // 유저가 문제를 풀어본적 없는 경우
+            isNowCorrected = false;
+            isFirstCorrected = false;
+            isSovled = false;
+        }
 
-        QuizResponseDto quizResponse = new QuizResponseDto(beforeSentence,afterSentence,answer,option1,option2,option3,defaultContent,startTime,endTime,isNowCorrected,isFirstCorrected);
+        QuizResponseDto quizResponse = new QuizResponseDto(beforeSentence,afterSentence,answer,option1,option2,option3,defaultContent,startTime,endTime,isNowCorrected,isFirstCorrected,isSovled);
         Map<Lang, Map<String,String>> lang = new HashMap<>();
         
         // 언어별 번역내용 map에 저장
