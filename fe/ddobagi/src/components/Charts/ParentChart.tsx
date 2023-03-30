@@ -25,10 +25,10 @@ const RadialBarChart = ({ totalLabel, totalValue, totalColor }: Props) => {
       radialBar: {
         dataLabels: {
           name: {
-            fontSize: "22px",
+            fontSize: "25px",
           },
           value: {
-            fontSize: "16px",
+            fontSize: "20px",
           },
           total: {
             show: true,
