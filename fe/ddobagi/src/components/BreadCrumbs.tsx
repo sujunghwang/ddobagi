@@ -58,10 +58,16 @@ function BreadCrumbs() {
         : "다문화 센터 위치",
     news:
       language === "CN"
-        ? "多元文化支持信息"
+        ? "多文化新闻"
         : language === "VI"
-        ? "Thông tin hỗ trợ đa văn hóa"
-        : "다문화 지원 정보",
+        ? "tin tức đa văn hóa"
+        : "다문화 뉴스",
+    support:
+      language === "CN"
+        ? "多文化支援消息"
+        : language === "VI"
+        ? "tin tức hỗ trợ đa văn hóa"
+        : "다문화 지원 소식",
   };
   const navigate = useNavigate();
   const location = useLocation();
