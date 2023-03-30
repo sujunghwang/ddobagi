@@ -58,26 +58,26 @@ function CultureList() {
     language === "CN"
       ? "朝鲜纪念日"
       : language === "VI"
-      ? "ngày kỷ niệm của Hàn Quốc"
-      : "한국의 기념일";
+        ? "ngày kỷ niệm của Hàn Quốc"
+        : "한국의 기념일";
   const category2 =
     language === "CN"
       ? "朝鲜传统"
       : language === "VI"
-      ? "truyền thống của Hàn Quốc"
-      : "한국의 전통";
+        ? "truyền thống của Hàn Quốc"
+        : "한국의 전통";
   const category3 =
     language === "CN"
       ? "朝鲜文化艺术"
       : language === "VI"
-      ? "văn hóa nghệ thuật của Hàn Quốc"
-      : "한국의 문화예술";
+        ? "văn hóa nghệ thuật của Hàn Quốc"
+        : "한국의 문화예술";
   const category4 =
     language === "CN"
       ? "朝鲜饮食"
       : language === "VI"
-      ? "món ăn Hàn Quốc"
-      : "한국의 음식";
+        ? "món ăn Hàn Quốc"
+        : "한국의 음식";
   //
   // axios통신으로 리스트를 받아와야 하는 부분 - 카테고리별 분류 1, 2, 3, 4 //
   const [apiData1, setApiData1] = useState<ApiData | null>(null);
@@ -155,7 +155,11 @@ function CultureList() {
             fontFamily: "CookieRun-Regular",
           }}
         >
-          한국 문화 학습
+          {language === "CN"
+            ? "韩国文化"
+            : language === "VI"
+              ? "văn hoá"
+              : "한국 문화"}
         </Typography>
       </Box>
       <div className={styles.BreadCrum}>
