@@ -346,7 +346,7 @@ function NavBar() {
                         ? "đăng xuất"
                         : "로그아웃"
                     }
-                    color="#FF6B6B"
+                    color="#FFCF70"
                     width="9rem"
                     onClick={logout}
                   />
