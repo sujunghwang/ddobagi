@@ -14,7 +14,7 @@ public class QuizController {
     @Autowired
     private QuizService quizService;
 
-    @GetMapping("/{userId}/{situationId}/{quizId}")
+    @GetMapping("/{userId}/question/{quizId}")
     public ResponseEntity<?> getQuizDetail(@PathVariable Long userId, @PathVariable Long quizId) {
         // 단어 문제 및 보기 조회 (번역 포함)
         return ResponseEntity.ok(quizService.findQuiz(userId, quizId));
