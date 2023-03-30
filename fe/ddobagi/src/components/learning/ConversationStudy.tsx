@@ -199,9 +199,8 @@ function ConversationStudy() {
               <div key={index} className={styles.bubbleGroup}>
                 <div className={styles.Scripts}>
                   <div
-                    className={`${styles.bubble} ${
-                      item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
-                    }`}
+                    className={`${styles.bubble} ${item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
+                      }`}
                   >
                     <div>{item.defaultContent}</div>
                     <div>{item.transContent}</div>

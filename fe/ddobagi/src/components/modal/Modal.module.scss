@@ -49,6 +49,16 @@
 .BtnMargin {
   margin-top: 20px;
 }
+.BtnGroup{
+  display: flex;
+  align-items: flex-end;
+}
+.Group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 @media (min-width: 901px) {
   .Logo {
@@ -65,10 +75,6 @@
     pointer-events: none;
   }
 
-  .BtnGroup {
-    display: flex;
-    gap: 3rem;
-  }
 }
 
 @media (max-width: 900px) {
@@ -93,6 +99,7 @@
 }
 
 @keyframes wave {
+
   10%,
   90% {
     transform: translateX(-3px) translateY(0);
