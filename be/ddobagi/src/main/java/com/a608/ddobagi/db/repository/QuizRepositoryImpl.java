@@ -23,7 +23,7 @@ public class QuizRepositoryImpl {
     @Autowired
     private JPAQueryFactory query;
 
-    public List<Tuple> selectQuiz(long userId, long quizId){
+    public List<Tuple> selectQuiz(long quizId){
         // 단어 퀴즈 문제 및 보기를 번역된 언어와 함께 조회
         return query
                 .select(
@@ -37,14 +37,11 @@ public class QuizRepositoryImpl {
                         script.startTime,
                         script.endTime,
                         scriptTrans.lang,
-                        scriptTrans.transContent,
-                        userQuiz.isFirstCorrected,
-                        userQuiz.isNowCorrected)
+                        scriptTrans.transContent)
                 .from(quiz)
                 .join(quiz.script, script)
                 .join(script.scriptTransList, scriptTrans)
-                .join(userQuiz).on(userQuiz.quiz.eq(quiz))
-                .where(quiz.id.eq(quizId),userQuiz.user.id.eq(userId))
+                .where(quiz.id.eq(quizId))
                 .fetch();
     }
 

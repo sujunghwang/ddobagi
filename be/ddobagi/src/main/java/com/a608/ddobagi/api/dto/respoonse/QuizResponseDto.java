@@ -37,8 +37,10 @@ public class QuizResponseDto {
 
     private boolean isFirstCorrected;
 
+    private boolean isSolved;
+
     public QuizResponseDto(String beforeSentence, String afterSentence, String answer, String option1, String option2, String option3,
-                                   String defaultContent, Long startTime, Long endTime, boolean isNowCorrected, boolean isFirstCorrected) {
+                                   String defaultContent, Long startTime, Long endTime, boolean isNowCorrected, boolean isFirstCorrected, boolean isSolved) {
         this.beforeSentence = beforeSentence;
         this.afterSentence = afterSentence;
         this.answer = answer;
@@ -50,6 +52,7 @@ public class QuizResponseDto {
         this.endTime = endTime;
         this.isNowCorrected = isNowCorrected;
         this.isFirstCorrected = isFirstCorrected;
+        this.isSolved = isSolved;
     }
 
 }
