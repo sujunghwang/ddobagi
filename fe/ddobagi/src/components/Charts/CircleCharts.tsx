@@ -45,8 +45,9 @@ function CircleCharts(
           <Typography
             variant="h6"
             component="div"
-            color="white"
+            color="black"
             fontSize="1.5rem"
+            zIndex={2}
             align="center"
           >
             {props.name}

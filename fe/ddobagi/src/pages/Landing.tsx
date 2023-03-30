@@ -1,8 +1,5 @@
-import Fullpage, {
-  FullPageSections,
-  FullpageSection,
-} from "@ap.cx/react-fullpage";
-import React, { useEffect } from "react";
+import * as FullpageModule from '@ap.cx/react-fullpage';
+import React, { useEffect, useRef } from "react";
 import styles from "./CategoryList.module.scss";
 import MainOne from "../components/FullPage/MainOne";
 import MainTwo from "../components/FullPage/MainTwo";
@@ -11,33 +8,36 @@ import MainFour from "../components/FullPage/MainFour";
 import MainFive from "../components/FullPage/MainFive";
 
 function Landing() {
+  const ref = useRef<FullpageModule.Fullpage>(null)
+
   useEffect(() => {
     document.body.classList.add(styles.Noscroll);
     return () => {
       document.body.classList.remove(styles.Noscroll);
+      ref.current?.destroy()
     };
   }, []);
+
   return (
-    // @ts-ignore
-    <Fullpage>
-      <FullPageSections>
-        <FullpageSection>
+    <FullpageModule.Fullpage ref={ref}>
+      <FullpageModule.FullPageSections>
+        <FullpageModule.FullpageSection>
           <MainOne />
-        </FullpageSection>
-        <FullpageSection>
+        </FullpageModule.FullpageSection>
+        <FullpageModule.FullpageSection>
           <MainTwo />
-        </FullpageSection>
-        <FullpageSection>
+        </FullpageModule.FullpageSection>
+        <FullpageModule.FullpageSection>
           <MainThree />
-        </FullpageSection>
-        <FullpageSection>
+        </FullpageModule.FullpageSection>
+        <FullpageModule.FullpageSection>
           <MainFour />
-        </FullpageSection>
-        <FullpageSection>
+        </FullpageModule.FullpageSection>
+        <FullpageModule.FullpageSection>
           <MainFive />
-        </FullpageSection>
-      </FullPageSections>
-    </Fullpage>
+        </FullpageModule.FullpageSection>
+      </FullpageModule.FullPageSections>
+    </FullpageModule.Fullpage>
   );
 }
 
