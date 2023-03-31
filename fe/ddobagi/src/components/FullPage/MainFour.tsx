@@ -2,7 +2,6 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/joy';
 import support from "../../assets/support.png"
-// import './Main.css';
 
 export default function MainFour() {
   return (
@@ -11,7 +10,6 @@ export default function MainFour() {
         width: '100%',
         height: '100vh',
         backgroundColor: '#84D88F',
-        paddingTop: '60px'
       }}
     >
       <Box

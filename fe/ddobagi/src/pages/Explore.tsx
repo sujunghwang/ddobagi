@@ -9,12 +9,15 @@ function Explore() {
   const location = useLocation();
   const pathname = location.pathname;
   return (
-    <Container maxWidth="xl">
-      <NavBar />
-      <div style={{ height: "115px" }}></div>
-      <Outlet />
+    <div>
+      <Container maxWidth="xl">
+        <NavBar />
+        {pathname !== "/" && <div style={{ height: "115px" }}></div>}
+        {pathname !== "/" && <Outlet />}
+      </Container>
+      {pathname === "/" && <Outlet />}
       {pathname !== "/" && <Footer />}
-    </Container>
+    </div>
   );
 }
 

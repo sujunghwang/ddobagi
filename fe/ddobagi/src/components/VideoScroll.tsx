@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/RootReducer";
 import styles from "./VideoScroll.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Navigation, Pagination, Autoplay, Mousewheel } from "swiper";
 
 interface SituationTrans {
   lang: string;
@@ -45,40 +45,44 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
       className={styles.FContainer}
     >
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        navigation
-        scrollbar={{ draggable: true }}
-        style={{
-          padding: "3rem",
+        modules={[Pagination, Autoplay, Mousewheel]}
+        mousewheel={true}
+        grabCursor={true}
+        pagination={{
+          clickable: true,
         }}
-        keyboard={true}
+        autoplay={{ delay: 3300, disableOnInteraction: false }}
         breakpoints={{
           360: {
             slidesPerView: 1,
           },
+          760: {
+            slidesPerView: 2,
+          },
           1024: {
             slidesPerView: 3,
           },
-          1250: {
+          1520: {
             slidesPerView: 4,
           }
         }}
-      >        {videolist.situationList.map((item, index) => (
-        <SwiperSlide key={index}
-        >
-          <VideoCard
-            situationThumbnail={item.thumbnail}
-            progress={item.progress}
-            situationTitle={item.situationTransList[lang].title}
-            situationId={item.situationId}
-            isCompleted={item.isCompleted}
-            color={color}
-            categoryName={categoryName}
-          />
-        </SwiperSlide>
-      ))}
+      >
+        {videolist.situationList.map((item, index) => (
+          <SwiperSlide key={index}
+          >
+            <VideoCard
+              situationThumbnail={item.thumbnail}
+              progress={item.progress}
+              situationTitle={item.situationTransList[lang].title}
+              situationId={item.situationId}
+              isCompleted={item.isCompleted}
+              color={color}
+              categoryName={categoryName}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
-    </div>
+    </div >
   );
 }
 

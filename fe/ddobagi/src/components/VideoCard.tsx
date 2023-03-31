@@ -11,18 +11,6 @@ import LinearProgress, {
 import StudyEntryModal from "./modal/StudyEntryModal";
 import styles from "./VideoScroll.module.scss";
 
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: 10,
-  borderRadius: "10px",
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor:
-      theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: "10px",
-    backgroundColor: theme.palette.mode === "light" ? "#30b341" : "#308fe8",
-  },
-}));
 
 type CardProp = {
   situationThumbnail: string;
@@ -47,18 +35,34 @@ function VideoCard({
   const [modal, setModal] = useState<boolean>(false);
   const closeModal = () => setModal(false);
   // 모달 관련 함수 종료
+  const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+    height: 10,
+    borderRadius: "5px",
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+      backgroundColor: "#e1e1e1"
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+      borderRadius: "5px",
+      backgroundImage:
+        "linear-gradient(to right, #74ebd5, #acb6e5)"
+    },
+  }));
 
   return (
     <div className={styles.CardContainer}>
       {isCompleted && (
-        <img
-          className={`${styles.Crown} noselect`}
-          src="img/Crown.png"
-          alt="crown"
-        />
+        <>
+          <div className={styles.clearFog}></div>
+          <img
+            className={`${styles.Stamp} noselect`}
+            src="img/Stamp.png"
+            alt="Stamp"
+          />
+        </>
       )}
       <Card
         sx={{
+          maxWidth: 345,
           borderRadius: "10px",
         }}
         onClick={() => {
@@ -68,9 +72,8 @@ function VideoCard({
         <CardActionArea>
           <CardMedia
             component="img"
-            height="150"
             image={situationThumbnail}
-            alt="green iguana"
+            alt="thumbNail"
           />
           <CardContent>
             <BorderLinearProgress variant="determinate" value={progress} />
@@ -79,9 +82,9 @@ function VideoCard({
               variant="h6"
               component="div"
               sx={{
-                textAlign: "left",
+                textAlign: "center",
                 marginTop: "10px",
-                fontFamily: "CookieRun-Regular",
+                fontFamily: "MaplestoryOTFLight",
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
