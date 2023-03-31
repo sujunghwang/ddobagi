@@ -50,7 +50,7 @@ public class QCultureTrans extends EntityPathBase<CultureTrans> {
 
     public QCultureTrans(Class<? extends CultureTrans> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.culture = inits.isInitialized("culture") ? new QCulture(forProperty("culture")) : null;
+        this.culture = inits.isInitialized("culture") ? new QCulture(forProperty("culture"), inits.get("culture")) : null;
     }
 
 }

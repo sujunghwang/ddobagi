@@ -24,7 +24,7 @@ public class QCategoryTrans extends EntityPathBase<CategoryTrans> {
 
     public final QCategory category;
 
-    public final StringPath category_name = createString("category_name");
+    public final StringPath categoryName = createString("categoryName");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
