@@ -7,12 +7,11 @@ import MainFour from "../components/FullPage/MainFour";
 import MainFive from "../components/FullPage/MainFive";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Mousewheel } from "swiper";
-import { height, width } from "@mui/system";
 
 function Landing() {
 
   useEffect(() => {
-    // document.body.classList.add(styles.Noscroll);
+    document.body.classList.add(styles.Noscroll);
     return () => {
       document.body.classList.remove(styles.Noscroll);
     };
@@ -29,7 +28,7 @@ function Landing() {
         pagination={{
           clickable: true,
         }}
-        direction={'horizontal'}
+        direction="horizontal"
       >
         <SwiperSlide>
           <MainOne />

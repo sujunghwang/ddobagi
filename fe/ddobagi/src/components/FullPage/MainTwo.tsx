@@ -3,6 +3,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/joy';
 import talk from "../../assets/4인대화.png"
+import styles from "./Two.module.scss"
 
 export default function MainTwo() {
   return (
@@ -19,7 +20,7 @@ export default function MainTwo() {
     >
       <Box
       >
-        <Box >
+        <Box className={styles.Fadeleft}>
           <Typography
             sx={{
               fontSize: '80px',

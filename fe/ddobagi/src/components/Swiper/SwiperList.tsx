@@ -113,11 +113,12 @@ function SwiperList({ dataProp, boxColor }: CultureProp) {
         borderRadius: "0px 0px 30px 30px",
         boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2) ",
         overflow: "hidden",
-        marginBottom: "3rem",
+        marginBottom: "8rem",
       }}
     >
       <Swiper
         modules={[Pagination, Autoplay, Mousewheel]}
+        spaceBetween={100}
         mousewheel={true}
         grabCursor={true}
         pagination={{
@@ -138,9 +139,10 @@ function SwiperList({ dataProp, boxColor }: CultureProp) {
             slidesPerView: 4,
           }
         }}
+        style={{ padding: "3rem" }}
       >
         {Slides.map((slide) => (
-          <SwiperSlide key={slide.cultureId} style={{ padding: "3rem" }}>
+          <SwiperSlide key={slide.cultureId}>
             <Card
               sx={{ maxWidth: 345, borderRadius: "10px" }}
               onClick={() => moveCulture(slide.cultureId)}
