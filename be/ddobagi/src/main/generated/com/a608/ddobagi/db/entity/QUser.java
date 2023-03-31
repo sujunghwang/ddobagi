@@ -38,6 +38,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final EnumPath<Role> role = createEnum("role", Role.class);
 
+    public final NumberPath<Integer> settleYear = createNumber("settleYear", Integer.class);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
 
