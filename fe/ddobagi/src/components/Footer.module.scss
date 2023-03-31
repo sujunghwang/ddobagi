@@ -1,43 +1,45 @@
-.Full{
-  margin-bottom: 1rem;
+.Full {
+  margin-top: 6rem;
+  padding: 3.5rem;
+  background-color: #f2f2f2;
+  color: #544e4b;
+  font-family: "Pretendard-Regular";
+  text-align: start;
 }
 
 .vertical {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  margin-top: 0.5rem;
 }
 
 .vertical2 {
   display: flex;
-  justify-content: start;
-  gap: 5%;
-  margin-top: 1rem;
+  flex-direction: column;
 }
 
 .vertical3 {
   display: flex;
   justify-content: end;
-  gap: 10%;
+  gap: 20%;
 }
 
 .icon {
-  &:active {
-    scale: 1.2;
-  }
+  color: #544e4b;
+
   &:hover {
     cursor: pointer;
-    color: #566b8c;
+    color: black;
   }
 }
 
 .router {
+  margin-bottom: 1.5rem;
   &:hover {
     color: #566b8c;
     cursor: pointer;
   }
 }
+
 .container {
   margin: 0 5rem 2rem 5rem;
   word-break: keep-all;

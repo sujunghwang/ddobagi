@@ -28,7 +28,7 @@ export default function MainOne() {
           <Typography
             sx={{
               fontSize: '80px',
-              fontFamily: "CookieRun-Regular",
+              fontFamily: "ONE-Mobile-POP",
               color: "#ffffff",
               marginBottom: '5px',
               whiteSpace: "pre-line"

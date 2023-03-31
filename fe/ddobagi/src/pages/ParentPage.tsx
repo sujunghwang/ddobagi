@@ -17,92 +17,100 @@ import NewsAnimation from '../components/animations/News';
 import SupportAnimation from '../components/animations/Support';
 
 function ParentPage1() {
-    //언어 함수
-    const language = useSelector(
-      (state: RootState) => state.languageChange.language
-    );
-    // 언어 함수 끝
-    // 탭 선택 함수
-    const navigate = useNavigate();
-    const navigateToParent1 = () => {
-      navigate("/parentpage/record");
-    };
-    const navigateToParent2 = () => {
-      navigate("/parentpage/map");
-    };
-    const navigateToParent3 = () => {
-      navigate("/parentpage/news");
-    };
-    const navigateToParent4 = () => {
-      navigate("/parentpage/support");
-    };
-    // 탭 선택 함수 끝
+  //언어 함수
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+  );
+  // 언어 함수 끝
+  // 탭 선택 함수
+  const navigate = useNavigate();
+  const navigateToParent1 = () => {
+    navigate("/parentpage/record");
+  };
+  const navigateToParent2 = () => {
+    navigate("/parentpage/map");
+  };
+  const navigateToParent3 = () => {
+    navigate("/parentpage/news");
+  };
+  const navigateToParent4 = () => {
+    navigate("/parentpage/support");
+  };
+  // 탭 선택 함수 끝
 
-    // 임시 차트 데이터
-    const chartdata = ChartData
+  // 임시 차트 데이터
+  const chartdata = ChartData
 
-    // const ColumnChartData = [
-    //   { name: "해당 사용자", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
-    //   { name: "전체 사용자", data: [chartdata.otherPronounceScoreProgress, chartdata.otherAllProgressAvg] },
-    // ]
+  // const ColumnChartData = [
+  //   { name: "해당 사용자", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
+  //   { name: "전체 사용자", data: [chartdata.otherPronounceScoreProgress, chartdata.otherAllProgressAvg] },
+  // ]
 
 
-    // const categories = ["발음 평균 점수", "전체 진행도"];
+  // const categories = ["발음 평균 점수", "전체 진행도"];
 
-    // const title = "유저 비교 통계";
+  // const title = "유저 비교 통계";
 
-    let ColumnChartData, categories, title;
+  let ColumnChartData, categories, title;
 
-    if (language === "CN") {
-      ColumnChartData = [
-        { name: "相关用户", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
-        { name: "所有用户", data: [chartdata.otherPronounceScoreProgress, chartdata.otherAllProgressAvg] },
-      ];
-      categories = ["发音平均分数", "整体进度"];
-      title = "用户比较统计";
-    } else if (language === "VI") {
-      ColumnChartData = [
-        { name: "Người dùng tương ứng", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
-        { name: "Tất cả người dùng", data: [chartdata.otherPronounceScoreProgress, chartdata.otherAllProgressAvg] },
-      ];
-      categories = ["Điểm trung bình phát âm", "Tiến độ toàn bộ"];
-      title = "So sánh thống kê theo hạng mục";
-    } else {
-      ColumnChartData = [
-        { name: "해당 사용자", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
-        { name: "전체 사용자", data: [chartdata.otherPronounceScoreProgress, chartdata.otherAllProgressAvg] },
-      ];
-      categories = ["발음 평균 점수", "전체 진행도"];
-      title = "유저 비교 통계";
-    }
+  if (language === "CN") {
+    ColumnChartData = [
+      { name: "相关用户", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
+      { name: "所有用户", data: [chartdata.otherPronounceScoreProgress, chartdata.otherAllProgressAvg] },
+    ];
+    categories = ["发音平均分数", "整体进度"];
+    title = "用户比较统计";
+  } else if (language === "VI") {
+    ColumnChartData = [
+      { name: "Người dùng tương ứng", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
+      { name: "Tất cả người dùng", data: [chartdata.otherPronounceScoreProgress, chartdata.otherAllProgressAvg] },
+    ];
+    categories = ["Điểm trung bình phát âm", "Tiến độ toàn bộ"];
+    title = "So sánh thống kê theo hạng mục";
+  } else {
+    ColumnChartData = [
+      { name: "해당 사용자", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
+      { name: "전체 사용자", data: [chartdata.otherPronounceScoreProgress, chartdata.otherAllProgressAvg] },
+    ];
+    categories = ["발음 평균 점수", "전체 진행도"];
+    title = "유저 비교 통계";
+  }
 
-  return(
+  return (
     <div className={styles.FContainer}>
-      <img src={ParentHeader} alt="" className={styles.Banner} />
+      <div className={styles.Banner}>
+        <div className={styles.Header}>
+          {language === "CN"
+            ? "父母亲"
+            : language === "VI"
+              ? "Trang của bố mẹ"
+              : "보호자 페이지"}
+        </div>
+      </div>
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
       </div>
       <Box
-       sx={{
-        display:"flex",
-        justifyContent:"center",
-       }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
 
         <Box // 버튼들 담을 박스
           sx={{
-            display:"grid",
+            display: "grid",
           }}
         >
           <Grid container>
             <Grid item xs={12} md={3}>
-            <Box
+              <Box
                 sx={{
                   width: "200px",
-                  height:"200px",
+                  height: "200px",
                   backgroundColor: "#FFDADA",
-                  margin:"30px",
-                  borderRadius : "20px",
+                  margin: "30px",
+                  borderRadius: "20px",
                   cursor: 'pointer',
                   borderBottom: "5px solid red",
                 }}
@@ -111,9 +119,9 @@ function ParentPage1() {
                 }}
               >
                 <Box
-                  sx= {{
-                    margin:"10px",
-                    paddingLeft : "20px"
+                  sx={{
+                    margin: "10px",
+                    paddingLeft: "20px"
                   }}
                 >
                   <ChartAnimation />
@@ -132,10 +140,10 @@ function ParentPage1() {
               <Box
                 sx={{
                   width: "200px",
-                  height:"200px",
+                  height: "200px",
                   backgroundColor: "#FFF5D7",
-                  margin:"30px",
-                  borderRadius : "20px",
+                  margin: "30px",
+                  borderRadius: "20px",
                   cursor: 'pointer',
                 }}
                 onClick={() => {
@@ -143,9 +151,9 @@ function ParentPage1() {
                 }}
               >
                 <Box
-                  sx= {{
-                    margin:"10px",
-                    paddingLeft : "20px"
+                  sx={{
+                    margin: "10px",
+                    paddingLeft: "20px"
                   }}
                 >
                   <MapAnimation />
@@ -164,10 +172,10 @@ function ParentPage1() {
               <Box
                 sx={{
                   width: "200px",
-                  height:"200px",
+                  height: "200px",
                   backgroundColor: "#DCFFE0",
-                  margin:"30px",
-                  borderRadius : "20px",
+                  margin: "30px",
+                  borderRadius: "20px",
                   cursor: 'pointer',
                 }}
                 onClick={() => {
@@ -175,9 +183,9 @@ function ParentPage1() {
                 }}
               >
                 <Box
-                  sx= {{
-                    margin:"10px",
-                    paddingLeft : "20px"
+                  sx={{
+                    margin: "10px",
+                    paddingLeft: "20px"
                   }}
                 >
                   <NewsAnimation />
@@ -193,13 +201,13 @@ function ParentPage1() {
               </Box>
             </Grid>
             <Grid item xs={12} md={3}>
-            <Box
+              <Box
                 sx={{
                   width: "200px",
-                  height:"200px",
+                  height: "200px",
                   backgroundColor: "#D8E8FF",
-                  margin:"30px",
-                  borderRadius : "20px",
+                  margin: "30px",
+                  borderRadius: "20px",
                   cursor: 'pointer',
                 }}
                 onClick={() => {
@@ -207,9 +215,9 @@ function ParentPage1() {
                 }}
               >
                 <Box
-                  sx= {{
-                    margin:"10px",
-                    paddingLeft : "30px"
+                  sx={{
+                    margin: "10px",
+                    paddingLeft: "30px"
                   }}
                 >
                   <SupportAnimation />
@@ -229,35 +237,35 @@ function ParentPage1() {
       </Box>
       <Box
         sx={{
-          display:"flex",
-          justifyContent:"center",
+          display: "flex",
+          justifyContent: "center",
           marginTop: "30px"
         }}
       >
         <Box
           sx={{
-            width:"1200px",
-            height:"auto",
-            backgroundColor:"#FF9999",
-            borderRadius:"20px"
+            width: "1200px",
+            height: "auto",
+            backgroundColor: "#FF9999",
+            borderRadius: "20px"
           }}
-          >
+        >
           <Typography
             sx={{
               fontSize: "40px",
               fontFamily: "CookieRun-Regular",
-              color:"#ffffff",
-              marginTop:"30px"
+              color: "#ffffff",
+              marginTop: "30px"
             }}
-            >
+          >
             {language === "CN" ? "我子女学习进行率" : language === "VI" ? "Tiến độ học tập của con tôi" : "내 자녀 학습 진행률"}
           </Typography>
           <Box // 자녀 학습 진행률 하단 내용 들어갈 부분
             sx={{
               width: "100%",
               height: "1200px",
-              backgroundColor:"#FFDADA",
-              marginTop:"30px",
+              backgroundColor: "#FFDADA",
+              marginTop: "30px",
               borderRadius: "0 0 20px 20px"
             }}
           >

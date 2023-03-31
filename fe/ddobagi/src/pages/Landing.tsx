@@ -1,43 +1,54 @@
-import * as FullpageModule from '@ap.cx/react-fullpage';
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import styles from "./CategoryList.module.scss";
 import MainOne from "../components/FullPage/MainOne";
 import MainTwo from "../components/FullPage/MainTwo";
 import MainThree from "../components/FullPage/MainThree";
 import MainFour from "../components/FullPage/MainFour";
 import MainFive from "../components/FullPage/MainFive";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Mousewheel } from "swiper";
+import { height, width } from "@mui/system";
 
 function Landing() {
-  const ref = useRef<FullpageModule.Fullpage>(null)
 
   useEffect(() => {
-    document.body.classList.add(styles.Noscroll);
+    // document.body.classList.add(styles.Noscroll);
     return () => {
       document.body.classList.remove(styles.Noscroll);
-      ref.current?.destroy()
     };
   }, []);
 
+
+
   return (
-    <FullpageModule.Fullpage ref={ref}>
-      <FullpageModule.FullPageSections>
-        <FullpageModule.FullpageSection>
+    <>
+      <Swiper
+        modules={[Mousewheel, Pagination]}
+        mousewheel={true}
+        slidesPerView={1}
+        pagination={{
+          clickable: true,
+        }}
+        direction={'horizontal'}
+      >
+        <SwiperSlide>
           <MainOne />
-        </FullpageModule.FullpageSection>
-        <FullpageModule.FullpageSection>
+        </SwiperSlide>
+        <SwiperSlide>
           <MainTwo />
-        </FullpageModule.FullpageSection>
-        <FullpageModule.FullpageSection>
+        </SwiperSlide>
+        <SwiperSlide>
           <MainThree />
-        </FullpageModule.FullpageSection>
-        <FullpageModule.FullpageSection>
+        </SwiperSlide>
+        <SwiperSlide>
           <MainFour />
-        </FullpageModule.FullpageSection>
-        <FullpageModule.FullpageSection>
+        </SwiperSlide>
+        <SwiperSlide>
           <MainFive />
-        </FullpageModule.FullpageSection>
-      </FullpageModule.FullPageSections>
-    </FullpageModule.Fullpage>
+        </SwiperSlide>
+      </Swiper>
+    </>
+
   );
 }
 

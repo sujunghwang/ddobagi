@@ -21,7 +21,7 @@ function SelectLanguage({ language, changeLanguageBy }: SelectLanguageProps) {
         <InputLabel
           id="select-label"
           className={styles.SelectLabel}
-          sx={{ fontFamily: "CookieRun-Regular" }}
+          sx={{ fontFamily: "Pretendard-Regular" }}
         >
           Language
         </InputLabel>
@@ -31,15 +31,15 @@ function SelectLanguage({ language, changeLanguageBy }: SelectLanguageProps) {
           value={language}
           label="Language"
           onChange={handleChange}
-          sx={{ fontFamily: "CookieRun-Regular" }}
+          sx={{ fontFamily: "Pretendard-Regular" }}
         >
-          <MenuItem value={"KR"} sx={{ fontFamily: "CookieRun-Regular" }}>
+          <MenuItem value={"KR"} sx={{ fontFamily: "Pretendard-Regular" }}>
             한국어
           </MenuItem>
-          <MenuItem value={"CN"} sx={{ fontFamily: "CookieRun-Regular" }}>
+          <MenuItem value={"CN"} sx={{ fontFamily: "Pretendard-Regular" }}>
             中文
           </MenuItem>
-          <MenuItem value={"VI"} sx={{ fontFamily: "CookieRun-Regular" }}>
+          <MenuItem value={"VI"} sx={{ fontFamily: "Pretendard-Regular" }}>
             Tiếng Việt
           </MenuItem>
         </Select>

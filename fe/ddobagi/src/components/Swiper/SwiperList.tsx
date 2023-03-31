@@ -2,7 +2,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 // import Swiper core and required modules
 import { RootState } from "../../redux/RootReducer";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Pagination, Autoplay, Mousewheel } from "swiper";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
@@ -64,13 +64,13 @@ type CultureProp = {
 function SwiperList({ dataProp, boxColor }: CultureProp) {
   const getColorCode = (color: string): string => {
     if (color === "red") {
-      return "#FF6B6B";
+      return "#ffcfd8";
     } else if (color === "green") {
-      return "#6BCB77";
+      return "#e8f9f6";
     } else if (color === "blue") {
-      return "#4D96FF";
+      return "#e0f1ff";
     } else if (color === "yellow") {
-      return "#FFD93D";
+      return "#fff9e2";
     }
     // 다른 색상에 대한 처리
     return "#FFE69A";
@@ -95,7 +95,6 @@ function SwiperList({ dataProp, boxColor }: CultureProp) {
   // const SlidesData = Test230328.data
   const SlidesData = dataProp?.data;
   if (!SlidesData) return null;
-  console.log(SlidesData);
 
   const Slides = SlidesData.cultureList;
 
@@ -111,37 +110,37 @@ function SwiperList({ dataProp, boxColor }: CultureProp) {
       sx={{
         width: "100%",
         backgroundColor: colorCode,
-        borderRadius: "10px",
-        boxShadow: "inset 0px 10px 0px rgba(0, 0, 0, 0.25) ",
-        // overflow : "auto",
+        borderRadius: "0px 0px 30px 30px",
+        boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2) ",
         overflow: "hidden",
-        // margin : "1rem 5rem 5rem 5rem",
+        marginBottom: "3rem",
       }}
     >
       <Swiper
-        // install Swiper modules
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={20}
-        slidesPerView={1}
-        navigation
-        // pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
-        style={{
-          padding: "3rem",
+        modules={[Pagination, Autoplay, Mousewheel]}
+        mousewheel={true}
+        grabCursor={true}
+        pagination={{
+          clickable: true,
         }}
+        autoplay={{ delay: 3300, disableOnInteraction: false }}
         breakpoints={{
-          768: {
+          360: {
+            slidesPerView: 1,
+          },
+          760: {
             slidesPerView: 2,
           },
           1024: {
-            slidesPerView: 4,
+            slidesPerView: 3,
           },
+          1520: {
+            slidesPerView: 4,
+          }
         }}
       >
         {Slides.map((slide) => (
-          <SwiperSlide key={slide.cultureId}>
+          <SwiperSlide key={slide.cultureId} style={{ padding: "3rem" }}>
             <Card
               sx={{ maxWidth: 345, borderRadius: "10px" }}
               onClick={() => moveCulture(slide.cultureId)}
@@ -149,27 +148,25 @@ function SwiperList({ dataProp, boxColor }: CultureProp) {
               <CardActionArea>
                 <CardMedia
                   component="img"
-                  height="220"
                   image={getYouTubeThumbnailUrl(slide.url)}
                 />
-                <CardContent
-                  sx={{
-                    height: "80px",
-                  }}
-                >
+                <CardContent>
                   <Typography
+                    variant="h6"
+                    component="div"
                     sx={{
-                      fontSize: "20px",
-                      fontFamily: "CookieRun-Regular",
+                      fontFamily: "MaplestoryOTFLight",
                       textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
                     }}
                     gutterBottom
                   >
                     {language === "CN"
                       ? slide.cultureContentQueryDtoList[1].title
                       : language === "VI"
-                      ? slide.cultureContentQueryDtoList[2].title
-                      : slide.cultureContentQueryDtoList[0].title}
+                        ? slide.cultureContentQueryDtoList[2].title
+                        : slide.cultureContentQueryDtoList[0].title}
                   </Typography>
                 </CardContent>
               </CardActionArea>

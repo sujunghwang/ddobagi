@@ -93,10 +93,8 @@ function CultureList() {
       .get("http://j8a608.p.ssafy.io:8080/api/cultures/1?common=ANNIVERSARY")
       .then((res) => {
         setApiData1(res.data);
-        console.log(apiData1);
       })
       .catch((error) => {
-        console.error(error);
       });
   }, []);
 
@@ -141,18 +139,17 @@ function CultureList() {
       <Box
         sx={{
           width: "100%",
-          height: "280px",
+          height: "10rem",
           display: "flex",
-          justifyContent: "center",
-          backgroundColor: "primary.dark",
+          justifyContent: "start",
+          alignItems: "end"
         }}
       >
-        <Typography
-          sx={{
-            display: "flex",
-            fontSize: "50px",
+        <div
+          style={{
+            fontSize: "3.8rem",
             alignItems: "center",
-            fontFamily: "CookieRun-Regular",
+            fontFamily: 'MaplestoryOTFBold'
           }}
         >
           {language === "CN"
@@ -160,7 +157,7 @@ function CultureList() {
             : language === "VI"
               ? "văn hoá"
               : "한국 문화"}
-        </Typography>
+        </div>
       </Box>
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
@@ -169,31 +166,29 @@ function CultureList() {
         {/* <Typography>
           한국의 예술 문화
         </Typography> */}
-        <div className={styles.CategoryName}>{category1}</div>
-        <Box sx={{ height: "50px" }} />
-        {/* @ts-ignore */}
-        <SwiperList dataProp={apiData1} boxColor="red" />
-        <Box sx={{ height: "50px" }} />
-        <Box sx={{ height: "50px" }} />
-        <div className={styles.CategoryName}>{category2}</div>
-        <Box sx={{ height: "50px" }} />
-        {/* @ts-ignore */}
-        <SwiperList dataProp={apiData2} boxColor="blue" />
-        <Box sx={{ height: "50px" }} />
-        <Box sx={{ height: "50px" }} />
-        <div className={styles.CategoryName}>{category3}</div>
-        <Box sx={{ height: "50px" }} />
-        {/* @ts-ignore */}
-        <SwiperList dataProp={apiData3} boxColor="green" />
-        <Box sx={{ height: "50px" }} />
-        <Box sx={{ height: "50px" }} />
-        <div className={styles.CategoryName}>{category4}</div>
-        <Box sx={{ height: "50px" }} />
-        {/* @ts-ignore */}
-        <SwiperList dataProp={apiData4} boxColor="yellow" />
+        <div className={styles.CategoryBox}>
+          <div className={styles.CategoryName}>{category1}</div>
+          {/* @ts-ignore */}
+          <SwiperList dataProp={apiData1} boxColor="red" />
+        </div>
+        <div className={styles.CategoryBox}>
+          <div className={styles.CategoryName}>{category2}</div>
+          {/* @ts-ignore */}
+          <SwiperList dataProp={apiData2} boxColor="yellow" />
+        </div>
+        <div className={styles.CategoryBox}>
+          <div className={styles.CategoryName}>{category3}</div>
+          {/* @ts-ignore */}
+          <SwiperList dataProp={apiData3} boxColor="green" />
+        </div>
+        <div className={styles.CategoryBox}>
+          <div className={styles.CategoryName}>{category4}</div>
+          {/* @ts-ignore */}
+          <SwiperList dataProp={apiData4} boxColor="blue" />
+        </div>
+
       </Box>
-      <Box sx={{ height: "50px" }} />
-    </div>
+    </div >
   );
 }
 
