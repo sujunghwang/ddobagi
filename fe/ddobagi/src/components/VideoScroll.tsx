@@ -46,6 +46,7 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
     >
       <Swiper
         modules={[Pagination, Autoplay, Mousewheel]}
+        spaceBetween={100}
         mousewheel={true}
         grabCursor={true}
         pagination={{
@@ -66,6 +67,8 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
             slidesPerView: 4,
           }
         }}
+        style={{ padding: "3rem" }}
+
       >
         {videolist.situationList.map((item, index) => (
           <SwiperSlide key={index}
