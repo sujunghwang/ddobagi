@@ -21,9 +21,9 @@ import ParentHeader from "../assets/ParentHeader.png";
 import "../components/ParentPage/hovertest.scss";
 import axios from "axios";
 import PaginationComponent from "../components/PaginationComponent";
-import ChartAnimation from '../components/animations/ParentChart';
-import MapAnimation from '../components/animations/Map';
-import NewsAnimation from '../components/animations/News';
+import ChartAnimation from "../components/animations/ParentChart";
+import MapAnimation from "../components/animations/Map";
+import NewsAnimation from "../components/animations/News";
 import SupportAnimation from "../components/animations/Support";
 
 // interface StudyButtonProps {
@@ -83,19 +83,28 @@ function ParentPage3() {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const filteredData = data.slice(indexOfFirstItem, indexOfLastItem);
-  const AvatarColor = ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF']
+  const AvatarColor = ["#FF6B6B", "#FFD93D", "#6BCB77", "#4D96FF"];
 
   const handleChangePage = (event: any, newPage: number) => {
     setCurrentPage(newPage);
   };
 
   return (
-    <div className={styles.FContainer}>
-      <img src={ParentHeader} alt="" className={styles.Banner} />
+    <div className={styles.Fcontainer}>
+      <div className={styles.Banner}>
+        <div className={styles.Header}>
+          {language === "CN"
+            ? "父母亲"
+            : language === "VI"
+            ? "Trang của bố mẹ"
+            : "보호자 페이지"}
+        </div>
+      </div>
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
       </div>
       <Box
+        className={styles.BtnBoxes}
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -108,23 +117,24 @@ function ParentPage3() {
         >
           <Grid container>
             <Grid item xs={12} md={3}>
-            <Box
+              <Box
+                className={styles.BtnBox}
                 sx={{
                   width: "200px",
-                  height:"200px",
+                  height: "200px",
                   backgroundColor: "#FFDADA",
-                  margin:"30px",
-                  borderRadius : "20px",
-                  cursor: 'pointer',
+                  margin: "30px",
+                  borderRadius: "20px",
+                  cursor: "pointer",
                 }}
                 onClick={() => {
                   navigateToParent1();
                 }}
               >
                 <Box
-                  sx= {{
-                    margin:"10px",
-                    paddingLeft : "20px"
+                  sx={{
+                    margin: "10px",
+                    paddingLeft: "20px",
                   }}
                 >
                   <ChartAnimation />
@@ -132,31 +142,37 @@ function ParentPage3() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "CookieRun-Regular",
+                    fontFamily: "MaplestoryOTFLight",
+                    userSelect: "none",
                   }}
                 >
-                  {language === "CN" ? "子女学习记录" : language === "VI" ? "hồ sơ con cái" : "자녀 학습 기록"}
+                  {language === "CN"
+                    ? "子女学习记录"
+                    : language === "VI"
+                    ? "hồ sơ con cái"
+                    : "자녀 학습 기록"}
                 </Typography>
               </Box>
             </Grid>
             <Grid item xs={12} md={3}>
               <Box
+                className={styles.BtnBox}
                 sx={{
                   width: "200px",
-                  height:"200px",
+                  height: "200px",
                   backgroundColor: "#FFF5D7",
-                  margin:"30px",
-                  borderRadius : "20px",
-                  cursor: 'pointer',
+                  margin: "30px",
+                  borderRadius: "20px",
+                  cursor: "pointer",
                 }}
                 onClick={() => {
                   navigateToParent2();
                 }}
               >
                 <Box
-                  sx= {{
-                    margin:"10px",
-                    paddingLeft : "20px"
+                  sx={{
+                    margin: "10px",
+                    paddingLeft: "20px",
                   }}
                 >
                   <MapAnimation />
@@ -164,22 +180,28 @@ function ParentPage3() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "CookieRun-Regular",
+                    fontFamily: "MaplestoryOTFLight",
+                    userSelect: "none",
                   }}
                 >
-                  {language === "CN" ? "多元文化中心位置" : language === "VI" ? "vị trí trung tâm đa văn hóa" : "다문화 센터 위치"}
+                  {language === "CN"
+                    ? "多元文化中心位置"
+                    : language === "VI"
+                    ? "vị trí trung tâm đa văn hóa"
+                    : "다문화 센터 위치"}
                 </Typography>
               </Box>
             </Grid>
             <Grid item xs={12} md={3}>
               <Box
+                className={styles.BtnBox}
                 sx={{
                   width: "200px",
-                  height:"200px",
+                  height: "200px",
                   backgroundColor: "#DCFFE0",
-                  margin:"30px",
-                  borderRadius : "20px",
-                  cursor: 'pointer',
+                  margin: "30px",
+                  borderRadius: "20px",
+                  cursor: "pointer",
                   borderBottom: "5px solid green",
                 }}
                 onClick={() => {
@@ -187,9 +209,9 @@ function ParentPage3() {
                 }}
               >
                 <Box
-                  sx= {{
-                    margin:"10px",
-                    paddingLeft : "20px"
+                  sx={{
+                    margin: "10px",
+                    paddingLeft: "20px",
                   }}
                 >
                   <NewsAnimation />
@@ -197,31 +219,37 @@ function ParentPage3() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "CookieRun-Regular",
+                    fontFamily: "MaplestoryOTFLight",
+                    userSelect: "none",
                   }}
                 >
-                  {language === "CN" ? "多文化新闻" : language === "VI" ? "tin tức đa văn hóa" : "다문화 뉴스"}
+                  {language === "CN"
+                    ? "多文化新闻"
+                    : language === "VI"
+                    ? "tin tức đa văn hóa"
+                    : "다문화 뉴스"}
                 </Typography>
               </Box>
             </Grid>
             <Grid item xs={12} md={3}>
-            <Box
+              <Box
+                className={styles.BtnBox}
                 sx={{
                   width: "200px",
-                  height:"200px",
+                  height: "200px",
                   backgroundColor: "#D8E8FF",
-                  margin:"30px",
-                  borderRadius : "20px",
-                  cursor: 'pointer',
+                  margin: "30px",
+                  borderRadius: "20px",
+                  cursor: "pointer",
                 }}
                 onClick={() => {
                   navigateToParent4();
                 }}
               >
                 <Box
-                  sx= {{
-                    margin:"10px",
-                    paddingLeft : "30px"
+                  sx={{
+                    margin: "10px",
+                    paddingLeft: "30px",
                   }}
                 >
                   <SupportAnimation />
@@ -229,10 +257,15 @@ function ParentPage3() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "CookieRun-Regular",
+                    fontFamily: "MaplestoryOTFLight",
+                    userSelect: "none",
                   }}
                 >
-                  {language === "CN" ? "多文化支援消息" : language === "VI" ? "tin tức hỗ trợ đa văn hóa" : "다문화 지원 소식"}
+                  {language === "CN"
+                    ? "多文化支援消息"
+                    : language === "VI"
+                    ? "tin tức hỗ trợ đa văn hóa"
+                    : "다문화 지원 소식"}
                 </Typography>
               </Box>
             </Grid>
@@ -240,6 +273,7 @@ function ParentPage3() {
         </Box>
       </Box>
       <Box
+        className={styles.MainBox}
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -262,7 +296,7 @@ function ParentPage3() {
           <Typography
             sx={{
               fontSize: "40px",
-              fontFamily: "CookieRun-Regular",
+              fontFamily: "MaplestoryOTFLight",
               color: "#ffffff",
               marginTop: "30px",
             }}
@@ -294,13 +328,22 @@ function ParentPage3() {
                 marginTop: "30px",
               }}
             >
-              <Typography variant="h5" sx={{ fontFamily: "CookieRun-Regular" }}>
+              <Typography
+                variant="h5"
+                sx={{ fontFamily: "MaplestoryOTFLight" }}
+              >
                 총&nbsp;
               </Typography>
-              <Typography variant="h5" sx={{ fontFamily: "CookieRun-Regular" }}>
+              <Typography
+                variant="h5"
+                sx={{ fontFamily: "MaplestoryOTFLight" }}
+              >
                 {data.length}
               </Typography>
-              <Typography variant="h5" sx={{ fontFamily: "CookieRun-Regular" }}>
+              <Typography
+                variant="h5"
+                sx={{ fontFamily: "MaplestoryOTFLight" }}
+              >
                 건
               </Typography>
             </Box>
@@ -326,7 +369,12 @@ function ParentPage3() {
                       onClick={() => handleItemClick(item)}
                     >
                       <ListItemAvatar>
-                        <Avatar sx={{ backgroundColor: AvatarColor[item.id % AvatarColor.length] }}>
+                        <Avatar
+                          sx={{
+                            backgroundColor:
+                              AvatarColor[item.id % AvatarColor.length],
+                          }}
+                        >
                           {item.id}
                         </Avatar>
                       </ListItemAvatar>
@@ -334,7 +382,7 @@ function ParentPage3() {
                         primary={
                           <Typography
                             variant="h5"
-                            sx={{ fontFamily: "CookieRun-Regular" }}
+                            sx={{ fontFamily: "MaplestoryOTFLight" }}
                           >
                             {item.title}
                           </Typography>
@@ -342,9 +390,9 @@ function ParentPage3() {
                         secondary={
                           <Typography
                             variant="body1"
-                            sx={{ fontFamily: "CookieRun-Regular" }}
+                            sx={{ fontFamily: "MaplestoryOTFLight" }}
                           >
-                            {item.summary.slice(0,150)}
+                            {item.summary.slice(0, 150)}
                           </Typography>
                         }
                       />
