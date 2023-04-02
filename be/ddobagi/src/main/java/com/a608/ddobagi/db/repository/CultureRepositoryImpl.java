@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
+import com.a608.ddobagi.api.dto.respoonse.culture.CheckUserViewedVideoDto;
 import com.a608.ddobagi.api.dto.respoonse.culture.CultureCategoryResponseDto;
 import com.a608.ddobagi.api.dto.respoonse.culture.CultureContentDto;
 import com.a608.ddobagi.api.dto.respoonse.culture.CultureContentQueryDto;
@@ -48,7 +49,8 @@ public class CultureRepositoryImpl {
 	//카테고리 별 내용 리스트 가져오기
 	public List<CultureContentDto> findCultureContentByDto_optimization(Long userId, String cultureCategoryCommon) {
 
-		List<CultureContentDto> result = findCultureContents(userId, cultureCategoryCommon);
+		List<CultureContentDto> result =
+			findCultureContents(userId, cultureCategoryCommon);
 
 		Map<Long, List<CultureContentQueryDto>> cultureContentMap = findCultureContentMap(toCultureIds(result));
 
@@ -69,14 +71,16 @@ public class CultureRepositoryImpl {
 	public List<CultureContentDto> findCultureContents(Long userId, String cultureCategoryCommon) {
 		return em.createQuery(
 				"select new com.a608.ddobagi.api.dto.respoonse.culture.CultureContentDto"
-					+ "(c.id, c.thumbnail, uc.isCompleted)"
+					+ "(c.id, c.thumbnail,"
+					+ " case when uc.isCompleted = true then true else false end)"
 					+ " from Culture c"
 					+ " left outer join UserCulture uc"
-					+ " on c.id = uc.culture.id"
-					+ " join CultureCategory cc"
+					+ " on c.id = uc.culture.id and uc.user.id =:userId"
+					+ " left join CultureCategory cc"
 					+ " on c.cultureCategory.id = cc.id"
-					+ " where uc.user.id = :userId"
-					+ " and cc.common = :common", CultureContentDto.class)
+					+ " where"
+					// + " uc.user.id = :userId and"
+					+ " cc.common = :common", CultureContentDto.class)
 			.setParameter("userId", userId)
 			.setParameter("common", cultureCategoryCommon)
 			.getResultList();
@@ -99,6 +103,22 @@ public class CultureRepositoryImpl {
 			.collect(Collectors.groupingBy(CultureContentQueryDto::getCultureId));
 	}
 
+	//user가 봤는지 안봤는지 확인
+	public Map<Long, List<CheckUserViewedVideoDto>> checkUserViewdVideo(List<Long> cultureIds) {
+		List<CheckUserViewedVideoDto> result = em.createQuery(
+				"select new com.a608.ddobagi.api.dto.respoonse.culture.CheckUserViewedVideoDto"
+					+ "(c.id, coalesce(uc.isCompleted, false))"
+					+ " from UserCulture uc"
+					+ " join Culture c"
+					+ " on uc.culture.id = c.id"
+					+ " where uc.culture.id in :cultureIds", CheckUserViewedVideoDto.class)
+			.setParameter("cultureIds", cultureIds)
+			.getResultList();
+
+		return result.stream()
+			.collect(Collectors.groupingBy(CheckUserViewedVideoDto::getCultureId));
+
+	}
 
 	// === sql 그냥 조회 === //
 	/*

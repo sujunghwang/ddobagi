@@ -106,17 +106,19 @@ function MyPage() {
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
       </div>
-      <div className={styles.title}>
-        {language === "VI"
-          ? "Hồ sơ của " : ""}
-        {userName}
-        {language === "CN"
-          ? "的记录"
-          : language === "VI"
-            ? ""
-            : "의 기록"}</div>
-      {statistics ? <UserLog statistics={statistics} /> : <Loading />}
-
+      <div className={styles.BContainer}>
+        <div className={styles.title}>
+          {language === "VI"
+            ? "Hồ sơ của " : ""}
+          {userName}
+          {language === "CN"
+            ? "的记录"
+            : language === "VI"
+              ? ""
+              : "의 기록"}
+        </div>
+        {statistics ? <UserLog statistics={statistics} /> : <Loading />}
+      </div>
       <div className={styles.Btn}>
         <ColorBtn
           content={language === "CN"
@@ -132,36 +134,44 @@ function MyPage() {
           }}
         />
       </div>
-      <div className={styles.title}>{language === "CN"
-        ? "学习水平"
-        : language === "VI"
-          ? "tiến độ học vấn"
-          : "학습 진행도"}</div>
-      {statistics ? <MypageCharts statistics={statistics} /> : <Loading />}
-      <div className={styles.CheckList}>
-        <div className={styles.Header}>{language === "CN"
-          ? "复习"
-          : language === "VI"
-            ? "việc ôn tập"
-            : "다시 풀기"}</div>
-        <div style={{ fontSize: "1.5rem" }}>
+      <div className={styles.BContainer}>
+        <div className={styles.title}>
           {language === "CN"
-            ? "把错题重新做一遍吧！"
+            ? "学习水平"
             : language === "VI"
-              ? "Hãy thử giải lại câu hỏi sai đi!"
-              : "틀렸던 문제들을 다시 풀어보세요!"}
+              ? "tiến độ học vấn"
+              : "학습 진행도"}
         </div>
-        <div className={styles.Btn}>
-          <ColorBtn
-            content={language === "CN"
-              ? "解题"
+        {statistics ? <MypageCharts statistics={statistics} /> : <Loading />}
+      </div>
+      <div className={styles.CheckList}>
+        <div className={styles.Header}>
+          {language === "CN"
+            ? "复习"
+            : language === "VI"
+              ? "việc ôn tập"
+              : "다시 풀기"}</div>
+
+        <div className={styles.Content}>
+          <div style={{ fontSize: "1.5rem" }}>
+            {language === "CN"
+              ? "把错题重新做一遍吧！"
               : language === "VI"
-                ? "giải quyết vấn đề"
-                : "문제 풀기"}
-            color="#FFD93D"
-            width="11.5rem"
-            onClick={() => { }}
-          />
+                ? "Hãy thử giải lại câu hỏi sai đi!"
+                : "틀렸던 문제들을 다시 풀어보세요!"}
+          </div>
+          <div style={{ margin: "2rem" }}>
+            <ColorBtn
+              content={language === "CN"
+                ? "解题"
+                : language === "VI"
+                  ? "giải quyết vấn đề"
+                  : "문제 풀기"}
+              color="#FFD93D"
+              width="11.5rem"
+              onClick={() => { }}
+            />
+          </div>
         </div>
       </div>
       <UserInfoModal

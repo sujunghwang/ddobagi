@@ -5,6 +5,7 @@ import com.a608.ddobagi.api.dto.respoonse.SituationDetailResponse;
 import com.a608.ddobagi.db.entity.Lang;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -58,10 +59,10 @@ public class ConversationRepositoryImpl {
     public Long selectRecordCount(Long situationId, Long userId) {
         return queryFactory
                 .select(userScript.count())
-                .from(userScript, situation)
+                .from(userScript)
                 .where(userScript.user.id.eq(userId)
-                        .and(situation.id.eq(situationId)))
-                .fetchOne();
+                    .and(userScript.script.situation.id.eq(situationId)))
+            .fetchOne();
     }
 
     public List<ScriptResponse> selectScriptList(Long situationId, Long userId) {
@@ -74,12 +75,15 @@ public class ConversationRepositoryImpl {
                         script.scriptRole,
                         script.defaultContent,
                         userScript.recordUrl,
+                        // new CaseBuilder()
+                        //     .when(userScript.recordUrl.isNotNull()).then(userScript.recordUrl)
+                        //     .otherwise(""),
                         scriptTrans.lang,
                         scriptTrans.transContent))
                 .from(script)
-                .leftJoin(userScript).on(script.id.eq(userScript.script.id))
+                .leftJoin(userScript).on(script.id.eq(userScript.script.id).and(userScript.user.id.eq(userId)))
                 .join(scriptTrans).on(script.id.eq(scriptTrans.script.id))
-                .where(script.situation.id.eq(situationId).and(userScript.user.id.eq(userId)))
+                .where(script.situation.id.eq(situationId))
                 .fetch();
 
 

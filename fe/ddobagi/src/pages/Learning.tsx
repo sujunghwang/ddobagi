@@ -45,7 +45,7 @@ function Learning() {
         height: "100vh",
         justifyContent: "space-between",
       }}>
-      <div>
+      <div className={styles.loadAnime}>
         <div
           style={{
             width: "fit-content",
@@ -55,7 +55,9 @@ function Learning() {
         >
           <TwoWheelerIcon color="success" fontSize="large" />
         </div>
-        <BorderLinearProgress variant="determinate" value={progress} />
+        <BorderLinearProgress variant="determinate" value={progress} sx={{
+          boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.2)"
+        }} />
       </div>
       <Outlet />
     </Container >

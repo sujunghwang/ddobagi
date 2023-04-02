@@ -16,6 +16,7 @@ import static com.a608.ddobagi.db.entity.QQuiz.quiz; //q타입 클래스 직접 
 import static com.a608.ddobagi.db.entity.QScript.script;
 import static com.a608.ddobagi.db.entity.QScriptTrans.scriptTrans;
 import static com.a608.ddobagi.db.entity.QUserQuiz.userQuiz;
+import static com.a608.ddobagi.db.entity.QSituation.situation;
 
 @Repository
 public class QuizRepositoryImpl {
@@ -23,7 +24,7 @@ public class QuizRepositoryImpl {
     @Autowired
     private JPAQueryFactory query;
 
-    public List<Tuple> selectQuiz(long userId, long quizId){
+    public List<Tuple> selectQuiz(long quizId){
         // 단어 퀴즈 문제 및 보기를 번역된 언어와 함께 조회
         return query
                 .select(
@@ -34,17 +35,16 @@ public class QuizRepositoryImpl {
                         quiz.option2,
                         quiz.option3,
                         script.defaultContent,
+                        quiz.situation,
                         script.startTime,
                         script.endTime,
                         scriptTrans.lang,
-                        scriptTrans.transContent,
-                        userQuiz.isFirstCorrected,
-                        userQuiz.isNowCorrected)
+                        scriptTrans.transContent)
                 .from(quiz)
                 .join(quiz.script, script)
+                .join(quiz.situation, situation)
                 .join(script.scriptTransList, scriptTrans)
-                .join(userQuiz).on(userQuiz.quiz.eq(quiz))
-                .where(quiz.id.eq(quizId),userQuiz.user.id.eq(userId))
+                .where(quiz.id.eq(quizId))
                 .fetch();
     }
 

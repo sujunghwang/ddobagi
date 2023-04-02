@@ -1,42 +1,41 @@
 .Background {
-  background-color: #92b4eb;
-  width: fit-content;
-  box-shadow: inset 0px 10px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  background-color: #e8f9f6;
+  width: 100%;
+  box-shadow: inset 0px -10px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 0 0 30px 30px;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
   align-items: center;
-  padding: 2rem;
-  margin-left: 5%;
-  margin-right: 5%;
 }
 
 .Background2 {
-  background-color: #fa9999;
-  width: fit-content;
-  padding: 2rem;
-  box-shadow: inset 0px 10px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  background-color: #ffcfd8;
+  width: 100%;
+  box-shadow: inset 0px -10px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 0 0 30px 30px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   font-size: 2.5rem;
   text-overflow: clip;
   gap: 5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .UpperGroup {
   display: flex;
   width: 100%;
-  justify-content: space-between;
-  gap: 3rem;
+  justify-content: space-around;
+  padding: 2rem;
 }
 
 .DownGroup {
+  padding: 2rem;
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 12rem;
 }
 
 .iconGroup {

@@ -16,15 +16,15 @@ import com.a608.ddobagi.common.ApiResponse;
 import lombok.RequiredArgsConstructor;
 
 /**
- *packageName    : com.a608.ddobagi.api.controller
- * fileName       : ParentController
- * author         : modsiw
- * date           : 2023/03/22
- * description    :
+ * packageName : com.a608.ddobagi.api.controller
+ * fileName : ParentController
+ * author : modsiw
+ * date : 2023/03/22
+ * description :
  * ===========================================================
- * DATE              AUTHOR             NOTE
+ * DATE AUTHOR NOTE
  * -----------------------------------------------------------
- * 2023/03/22        modsiw       최초 생성
+ * 2023/03/22 modsiw 최초 생성
  */
 
 @RestController
@@ -34,7 +34,7 @@ public class ParentController {
 
 	private final UserService userService;
 
-	@GetMapping("/{userId}/parents/statics")
+	@GetMapping("/{userId}/parents/statistics")
 	public ApiResponse<UserProgressParentsResponseDto> getUserProgressForParents(@PathVariable Long userId) {
 		return new ApiResponse<>(userService.findUserProgressForParents(userId));
 	}
