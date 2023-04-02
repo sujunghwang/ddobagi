@@ -152,6 +152,26 @@ function ConversationStudy() {
 
   const [record, setRecord] = useState<number>(0);
 
+  // 왼쪽 컨테이너에 애니메이션을 적용
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef<YouTube>(null);
+
+  useEffect(() => {
+    // 동영상이 로드되기 전에 트랜지션 효과를 적용합니다.
+    if (videoRef.current) {
+      setVideoLoaded(true);
+    }
+
+    return () => {
+      // 컴포넌트가 unmount 되기 전에 이벤트 리스너를 제거합니다.
+      if (videoRef.current) {
+        setVideoLoaded(false);
+      }
+    };
+  }, []);
+
+
+  // 녹음 결과를 가져옵니다.
   useEffect(() => {
     const fetchRecordInfo = async () => {
       try {
@@ -165,20 +185,20 @@ function ConversationStudy() {
     };
 
     fetchRecordInfo();
-  }, []);
+  });
 
   return (
     <div className={styles.FullContainer}>
-      <div className={styles.LeftContainer}>
+      <div className={`${styles.LeftContainer} ${videoLoaded ? `${styles.Leftanime}` : ''}`}>
         <div>
           <YouTube
+            ref={videoRef}
             opts={opts}
             videoId={videoId}
             onReady={onPlayerReady}
             onEnd={onPlayerEnd}
           />
         </div>
-        <div className={styles.TextBox}></div>
         <div className={styles.Title}>{categoryName}</div>
         <div className={styles.SubTitle}>{situationTitle}</div>
         <div className={styles.Description}>{videoDescription}</div>
