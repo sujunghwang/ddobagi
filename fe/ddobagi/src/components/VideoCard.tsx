@@ -11,7 +11,6 @@ import LinearProgress, {
 import StudyEntryModal from "./modal/StudyEntryModal";
 import styles from "./VideoScroll.module.scss";
 
-
 type CardProp = {
   situationThumbnail: string;
   progress: number;
@@ -39,14 +38,16 @@ function VideoCard({
     height: 10,
     borderRadius: "5px",
     [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: "#e1e1e1"
+      backgroundColor: "#e1e1e1",
     },
     [`& .${linearProgressClasses.bar}`]: {
       borderRadius: "5px",
-      backgroundImage:
-        "linear-gradient(to right, #74ebd5, #acb6e5)"
+      backgroundImage: "linear-gradient(to right, #74ebd5, #acb6e5)",
     },
   }));
+
+  //로그인 확인 변수
+  const userStr = localStorage.getItem("token");
 
   return (
     <div className={styles.CardContainer}>
@@ -66,7 +67,11 @@ function VideoCard({
           borderRadius: "10px",
         }}
         onClick={() => {
-          setModal(true);
+          if (userStr) {
+            setModal(true);
+          } else {
+            // navi
+          }
         }}
       >
         <CardActionArea>

@@ -17,7 +17,7 @@ type Props = {
   categoryName: string;
   color: string;
   progress: number;
-  situationId: number
+  situationId: number;
 };
 
 function StudyEntryModal({
@@ -27,17 +27,17 @@ function StudyEntryModal({
   categoryName,
   color,
   progress,
-  situationId
+  situationId,
 }: Props) {
   const exit = () => closeModal();
   const backGroundImgColor =
-    color === "#FF6B6B"
+    color === "#ffcfd8"
       ? "pink"
-      : color === "#92B4EC"
-        ? "blue"
-        : color === "#FFE69A"
-          ? "yellow"
-          : "green";
+      : color === "#e0f1ff"
+      ? "blue"
+      : color === "#fff9e2"
+      ? "yellow"
+      : "green";
   const style = {
     position: "absolute" as "absolute",
     width: { xs: "265px", md: "630px" },
@@ -61,7 +61,7 @@ function StudyEntryModal({
         situationTitle: situationTitle,
         progress: progress,
         color: color,
-        situationId: situationId
+        situationId: situationId,
       },
     });
   };
@@ -72,7 +72,7 @@ function StudyEntryModal({
         situationTitle: situationTitle,
         progress: progress,
         color: color,
-        situationId: situationId
+        situationId: situationId,
       },
     });
   };
@@ -102,7 +102,7 @@ function StudyEntryModal({
           <div
             onClick={exit}
             className={styles.CloseBtn}
-            style={{ paddingTop: "10px" }}
+            style={{ paddingTop: "10px", transform: "TranslateX(70%)" }}
           >
             <CloseIcon />
           </div>

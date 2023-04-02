@@ -1,46 +1,48 @@
 .Background {
-  background-color: #e8f9f6;
-  width: 100%;
-  box-shadow: inset 0px -10px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 0 0 30px 30px;
+  background-color: #e0f1ff;
+  box-shadow: inset 0px 10px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
   display: flex;
+  font-size: 2.5rem;
   flex-direction: column;
-  align-items: center;
+  padding: 4rem;
 }
 
 .Background2 {
   background-color: #ffcfd8;
-  width: 100%;
-  box-shadow: inset 0px -10px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 0 0 30px 30px;
+  box-shadow: inset 0px 10px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
   font-size: 2.5rem;
   text-overflow: clip;
-  gap: 5rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  gap: 35%;
+  padding: 4rem;
 }
 
 .UpperGroup {
   display: flex;
-  width: 100%;
   justify-content: space-around;
-  padding: 2rem;
+  margin-top: 4rem;
+  gap: 2rem;
 }
 
 .DownGroup {
-  padding: 2rem;
   display: flex;
-  width: 100%;
   justify-content: center;
-  gap: 12rem;
+  margin-top: 2rem;
+  gap: 2rem;
 }
 
 .iconGroup {
   display: flex;
   align-items: center;
+}
+.SubGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
 }
 
 .LogGroup {
@@ -49,10 +51,28 @@
   justify-content: space-evenly;
   align-items: center;
   white-space: pre;
-  height: 10rem;
+  gap: 1rem;
 }
 
 .icon {
   aspect-ratio: 1/1;
   width: 3.2rem;
+}
+
+.RowGroup {
+  display: flex;
+  margin-top: 4rem;
+  justify-content: space-around;
+}
+
+.title {
+  text-align: start;
+}
+
+.hr {
+  width: 100%;
+  height: 4px;
+  background-color: #8a8a8a;
+  border: none;
+  border-radius: 10px;
 }

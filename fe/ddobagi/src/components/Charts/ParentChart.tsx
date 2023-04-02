@@ -49,7 +49,9 @@ const RadialBarChart = ({ totalLabel, totalValue, totalColor }: Props) => {
 
   const series = [value];
 
-  return <Chart options={options} series={series} type="radialBar" height="350" />;
+  return (
+    <Chart options={options} series={series} type="radialBar" height="350" />
+  );
 };
 
 export default RadialBarChart;

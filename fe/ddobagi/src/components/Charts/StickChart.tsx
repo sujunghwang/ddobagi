@@ -36,7 +36,7 @@ const ColumnChartWithGroupLabel = ({ data, categories, title }: Props) => {
       labels: {
         style: {
           fontSize: "20px",
-          fontFamily: "CookieRun-Regular",
+          fontFamily: "MaplestoryOTFBold",
         },
       },
     },
@@ -47,7 +47,7 @@ const ColumnChartWithGroupLabel = ({ data, categories, title }: Props) => {
       labels: {
         style: {
           fontSize: "20px",
-          fontFamily: "CookieRun-Regular",
+          fontFamily: "MaplestoryOTFBold",
         },
       },
     },

@@ -15,6 +15,7 @@ import {
   CardContent,
   Grid,
 } from "@mui/material";
+import styles from "../VideoScroll.module.scss";
 
 // Import Swiper styles
 import "swiper/css";
@@ -137,42 +138,44 @@ function SwiperList({ dataProp, boxColor }: CultureProp) {
           },
           1520: {
             slidesPerView: 4,
-          }
+          },
         }}
         style={{ padding: "3rem" }}
       >
         {Slides.map((slide) => (
           <SwiperSlide key={slide.cultureId}>
-            <Card
-              sx={{ maxWidth: 345, borderRadius: "10px" }}
-              onClick={() => moveCulture(slide.cultureId)}
-            >
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  image={getYouTubeThumbnailUrl(slide.url)}
-                />
-                <CardContent>
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{
-                      fontFamily: "MaplestoryOTFLight",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                    }}
-                    gutterBottom
-                  >
-                    {language === "CN"
-                      ? slide.cultureContentQueryDtoList[1].title
-                      : language === "VI"
+            <div className={styles.CardContainer}>
+              <Card
+                sx={{ minWidth: 345, borderRadius: "10px" }}
+                onClick={() => moveCulture(slide.cultureId)}
+              >
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    image={getYouTubeThumbnailUrl(slide.url)}
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="h6"
+                      component="div"
+                      sx={{
+                        fontFamily: "MaplestoryOTFLight",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                      }}
+                      gutterBottom
+                    >
+                      {language === "CN"
+                        ? slide.cultureContentQueryDtoList[1].title
+                        : language === "VI"
                         ? slide.cultureContentQueryDtoList[2].title
                         : slide.cultureContentQueryDtoList[0].title}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
