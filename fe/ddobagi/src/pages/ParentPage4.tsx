@@ -24,7 +24,7 @@ import PaginationComponent from "../components/PaginationComponent";
 import ChartAnimation from '../components/animations/ParentChart';
 import MapAnimation from '../components/animations/Map';
 import NewsAnimation from '../components/animations/News';
-import SupportAnimation from "../components/animations/Support";
+import SupportAnimation from '../components/animations/Support';
 
 // interface StudyButtonProps {
 //   studyBtn: string;
@@ -36,7 +36,7 @@ interface NewsType {
   url: string;
 }
 
-function ParentPage3() {
+function ParentPage4() {
   //언어 변수
   const language = useSelector(
     (state: RootState) => state.languageChange.language
@@ -180,7 +180,6 @@ function ParentPage3() {
                   margin:"30px",
                   borderRadius : "20px",
                   cursor: 'pointer',
-                  borderBottom: "5px solid green",
                 }}
                 onClick={() => {
                   navigateToParent3();
@@ -213,6 +212,7 @@ function ParentPage3() {
                   margin:"30px",
                   borderRadius : "20px",
                   cursor: 'pointer',
+                  borderBottom: "5px solid blue",
                 }}
                 onClick={() => {
                   navigateToParent4();
@@ -255,7 +255,7 @@ function ParentPage3() {
             //   md: '60%', // 데스크탑 크기에서는 33%의 너비를 가짐
             // },
             height: "900px",
-            backgroundColor: "#6BCB77",
+            backgroundColor: "#07449C",
             borderRadius: "20px",
           }}
         >
@@ -268,16 +268,16 @@ function ParentPage3() {
             }}
           >
             {language === "CN"
-              ? "多元文化新闻列表"
+              ? "多文化支援消息"
               : language === "VI"
-              ? "Danh sách tin tức đa văn hóa"
-              : "다문화 뉴스 리스트"}
+              ? "tin tức hỗ trợ đa văn hóa"
+              : "다문화 지원 소식"}
           </Typography>
           <div // 다문화센터 정책 및 지원 정보 내용 들어갈 부분
             style={{
               width: "100%",
               height: "870px",
-              backgroundColor: "#C4FFCB",
+              backgroundColor: "#D8E8FF",
               marginTop: "30px",
               borderRadius: "0 0 20px 20px",
               display: "flex",
@@ -375,4 +375,4 @@ function ParentPage3() {
   );
 }
 
-export default ParentPage3;
+export default ParentPage4;

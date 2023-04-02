@@ -1,35 +1,54 @@
-import React from 'react';
-
-import Fullpage, { FullPageSections, FullpageSection } from '@ap.cx/react-fullpage'
-import MainOne from '../components/FullPage/MainOne';
-import MainTwo from '../components/FullPage/MainTwo';
-import MainThree from '../components/FullPage/MainThree';
-import MainFour from '../components/FullPage/MainFour';
-import MainFive from '../components/FullPage/MainFive';
+import React, { useEffect } from "react";
+import styles from "./CategoryList.module.scss";
+import MainOne from "../components/FullPage/MainOne";
+import MainTwo from "../components/FullPage/MainTwo";
+import MainThree from "../components/FullPage/MainThree";
+import MainFour from "../components/FullPage/MainFour";
+import MainFive from "../components/FullPage/MainFive";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Mousewheel } from "swiper";
 
 function Landing() {
+
+  useEffect(() => {
+    document.body.classList.add(styles.Noscroll);
+    return () => {
+      document.body.classList.remove(styles.Noscroll);
+    };
+  }, []);
+
+
+
   return (
-    // @ts-ignore
-    <Fullpage>
-      <FullPageSections>
-        <FullpageSection>
+    <>
+      <Swiper
+        modules={[Mousewheel, Pagination]}
+        mousewheel={true}
+        slidesPerView={1}
+        pagination={{
+          clickable: true,
+        }}
+        direction="horizontal"
+      >
+        <SwiperSlide>
           <MainOne />
-        </FullpageSection>
-        <FullpageSection>
+        </SwiperSlide>
+        <SwiperSlide>
           <MainTwo />
-        </FullpageSection>
-        <FullpageSection>
+        </SwiperSlide>
+        <SwiperSlide>
           <MainThree />
-        </FullpageSection>
-        <FullpageSection>
+        </SwiperSlide>
+        <SwiperSlide>
           <MainFour />
-        </FullpageSection>
-        <FullpageSection>
+        </SwiperSlide>
+        <SwiperSlide>
           <MainFive />
-        </FullpageSection>
-      </FullPageSections>
-    </Fullpage>
-  )
+        </SwiperSlide>
+      </Swiper>
+    </>
+
+  );
 }
 
 export default Landing;

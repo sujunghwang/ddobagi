@@ -15,6 +15,10 @@ import SigoonSelect from '../components/ParentPage/SelectBox/sigoonSelect';
 // import studyBtn from '../components/ParentPage/studyBtn';
 import SearchBtn from '../components/ParentPage/SelectBox/SearchBtn';
 import CenterMap from '../components/Map/CenterMap';
+import ChartAnimation from '../components/animations/ParentChart';
+import MapAnimation from '../components/animations/Map';
+import NewsAnimation from '../components/animations/News';
+import SupportAnimation from '../components/animations/Support';
 
 // interface StudyButtonProps {
 //   studyBtn: string;
@@ -38,12 +42,12 @@ function ParentPage2() {
       navigate("/parentpage/news");
     };
     const navigateToParent4 = () => {
-      navigate("/parentpage/map2");
+      navigate("/parentpage/support");
     };
     // 탭 선택 함수 끝
   return(
     <div className={styles.FContainer}>
-      <img src={ParentHeader} alt="" className={styles.Header} />
+      <img src={ParentHeader} alt="" className={styles.Banner} />
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
       </div>
@@ -60,18 +64,28 @@ function ParentPage2() {
           }}
         >
           <Grid container>
-            <Grid item xs={12} md={4}>
-              <Box
+            <Grid item xs={12} md={3}>
+            <Box
                 sx={{
                   width: "200px",
                   height:"200px",
                   backgroundColor: "#FFDADA",
-                  margin:"30px"
+                  margin:"30px",
+                  borderRadius : "20px",
+                  cursor: 'pointer',
                 }}
                 onClick={() => {
                   navigateToParent1();
                 }}
               >
+                <Box
+                  sx= {{
+                    margin:"10px",
+                    paddingLeft : "20px"
+                  }}
+                >
+                  <ChartAnimation />
+                </Box>
                 <Typography
                   sx={{
                     fontSize: "20px",
@@ -82,18 +96,29 @@ function ParentPage2() {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={3}>
               <Box
                 sx={{
                   width: "200px",
                   height:"200px",
                   backgroundColor: "#FFF5D7",
-                  margin:"30px"
+                  margin:"30px",
+                  borderRadius : "20px",
+                  cursor: 'pointer',
+                  borderBottom: "5px solid orange",
                 }}
                 onClick={() => {
                   navigateToParent2();
                 }}
               >
+                <Box
+                  sx= {{
+                    margin:"10px",
+                    paddingLeft : "20px"
+                  }}
+                >
+                  <MapAnimation />
+                </Box>
                 <Typography
                   sx={{
                     fontSize: "20px",
@@ -104,25 +129,67 @@ function ParentPage2() {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={3}>
               <Box
                 sx={{
                   width: "200px",
                   height:"200px",
                   backgroundColor: "#DCFFE0",
-                  margin:"30px"
+                  margin:"30px",
+                  borderRadius : "20px",
+                  cursor: 'pointer',
                 }}
                 onClick={() => {
                   navigateToParent3();
                 }}
               >
+                <Box
+                  sx= {{
+                    margin:"10px",
+                    paddingLeft : "20px"
+                  }}
+                >
+                  <NewsAnimation />
+                </Box>
                 <Typography
                   sx={{
                     fontSize: "20px",
                     fontFamily: "CookieRun-Regular",
                   }}
                 >
-                  {language === "CN" ? "多元文化支持信息" : language === "VI" ? "Thông tin hỗ trợ đa văn hóa" : "다문화 지원 정보"}
+                  {language === "CN" ? "多文化新闻" : language === "VI" ? "tin tức đa văn hóa" : "다문화 뉴스"}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={3}>
+            <Box
+                sx={{
+                  width: "200px",
+                  height:"200px",
+                  backgroundColor: "#D8E8FF",
+                  margin:"30px",
+                  borderRadius : "20px",
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  navigateToParent4();
+                }}
+              >
+                <Box
+                  sx= {{
+                    margin:"10px",
+                    paddingLeft : "30px"
+                  }}
+                >
+                  <SupportAnimation />
+                </Box>
+                <Typography
+                  sx={{
+                    fontSize: "20px",
+                    fontFamily: "CookieRun-Regular",
+                  }}
+                >
+                  {language === "CN" ? "多文化支援消息" : language === "VI" ? "tin tức hỗ trợ đa văn hóa" : "다문화 지원 소식"}
                 </Typography>
               </Box>
             </Grid>
@@ -141,7 +208,8 @@ function ParentPage2() {
             width:"1400px",
             height:"900px",
             backgroundColor:"#A3C9FF",
-            borderRadius:"20px"
+            borderRadius:"20px",
+            cursor: 'pointer',
           }}
           >
           <Typography

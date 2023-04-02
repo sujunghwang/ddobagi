@@ -11,7 +11,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import ColorBtn from "../components/ColorBtn";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/RootReducer";
@@ -66,9 +66,9 @@ function NavBar() {
   const userStr = localStorage.getItem("token");
 
   //로그아웃 함수
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const logout = () => {
-    dispatch(inputUserInfo({ name: '', id: 0 }));
+    dispatch(inputUserInfo({ name: "", id: 0 }));
     localStorage.clear();
     navigateToHome();
   };
@@ -78,7 +78,7 @@ function NavBar() {
   };
   return (
     <div>
-      <AppBar position="fixed" color="inherit" elevation={0}>
+      <AppBar position="fixed" color={location.pathname === "/" ? "transparent" : "inherit"} elevation={0}>
         <Container maxWidth="xl">
           {/* 모바일 환경 */}
           <Toolbar disableGutters>
@@ -253,7 +253,7 @@ function NavBar() {
                         location.pathname === "/parentpage/record" ||
                           location.pathname === "/parentpage/map" ||
                           location.pathname === "/parentpage/news"
-                          ? "0px 0px 4px 0px"
+                          ? "0px 0px 6px 0px"
                           : "0px 0px 0px 0px",
                     }}
                   >
@@ -271,7 +271,7 @@ function NavBar() {
                   style={{
                     borderWidth:
                       location.pathname === "/CategoryList"
-                        ? "0px 0px 4px 0px"
+                        ? "0px 0px 6px 0px"
                         : "0px 0px 0px 0px",
                   }}
                 >
@@ -288,7 +288,7 @@ function NavBar() {
                   style={{
                     borderWidth:
                       location.pathname === "/CultureList"
-                        ? "0px 0px 4px 0px"
+                        ? "0px 0px 6px 0px"
                         : "0px 0px 0px 0px",
                   }}
                 >
@@ -306,7 +306,7 @@ function NavBar() {
                     style={{
                       borderWidth:
                         location.pathname === "/mypage"
-                          ? "0px 0px 4px 0px"
+                          ? "0px 0px 6px 0px"
                           : "0px 0px 0px 0px",
                     }}
                   >
@@ -346,7 +346,7 @@ function NavBar() {
                           ? "đăng xuất"
                           : "로그아웃"
                     }
-                    color="#FF6B6B"
+                    color="#FFCF70"
                     width="9rem"
                     onClick={logout}
                   />

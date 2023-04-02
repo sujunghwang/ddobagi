@@ -30,7 +30,6 @@ function InfoEdit({ closeModal }: Props) {
     (state: RootState) => state.inputUserInfo.payload.id
   );
 
-
   //번역
   const reduxLanguage = useSelector(
     (state: RootState) => state.languageChange.language
@@ -105,11 +104,11 @@ function InfoEdit({ closeModal }: Props) {
     fetchBase();
   }, []);
 
-  //버튼 애니메이션 
-  const submitBtn = useRef<HTMLDivElement>(null)
+  //버튼 애니메이션
+  const submitBtn = useRef<HTMLDivElement>(null);
   const shakeanime = () => {
     if (submitBtn.current) {
-      submitBtn.current.classList.add(styles.ErrorBtn)
+      submitBtn.current.classList.add(styles.ErrorBtn);
 
       submitBtn.current.addEventListener("animationend", () => {
         if (submitBtn.current) {
@@ -117,7 +116,7 @@ function InfoEdit({ closeModal }: Props) {
         }
       });
     }
-  }
+  };
   //기존 비밀번호 확인
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const [prevPassword, setPrevPassword] = useState<string>("");
@@ -139,7 +138,7 @@ function InfoEdit({ closeModal }: Props) {
       const success = response.data;
       setCanEdit(true);
     } catch (error) {
-      shakeanime()
+      shakeanime();
     }
   };
 
@@ -148,7 +147,6 @@ function InfoEdit({ closeModal }: Props) {
   const navigate = useNavigate();
   //입력값을 제출하는 함수 - 회원정보 수정 후 모달 닫고, navigate로 같은 페이지 새로고침
   const EditSubmit = () => {
-
     const fetchEdit = async () => {
       try {
         const response = await axios.put<dataOfBase>(
@@ -174,12 +172,12 @@ function InfoEdit({ closeModal }: Props) {
         }
         // 바꾸지 않았으면 제자리 새로고침
       } catch (error) {
-        shakeanime()
+        shakeanime();
       }
     };
 
     if (password !== confirmPassword || birthDay === null || name === "") {
-      shakeanime()
+      shakeanime();
     } else {
       fetchEdit();
       closeModal();
@@ -196,8 +194,8 @@ function InfoEdit({ closeModal }: Props) {
                 {reduxLanguage === "CN"
                   ? "姓名"
                   : reduxLanguage === "VI"
-                    ? "tên"
-                    : "이름"}
+                  ? "tên"
+                  : "이름"}
               </div>
               <Input
                 error={submitted === true && name === "" ? true : false}
@@ -215,8 +213,8 @@ function InfoEdit({ closeModal }: Props) {
                 {reduxLanguage === "CN"
                   ? "语言"
                   : reduxLanguage === "VI"
-                    ? "ngôn ngữ"
-                    : "언어"}
+                  ? "ngôn ngữ"
+                  : "언어"}
               </div>
               <FormControl sx={{ minWidth: "100%" }} size="small">
                 <InputLabel id="select-label" className={styles.SelectLabel}>
@@ -244,8 +242,8 @@ function InfoEdit({ closeModal }: Props) {
             {reduxLanguage === "CN"
               ? "出生年月日"
               : reduxLanguage === "VI"
-                ? "sinh nhật"
-                : "생일"}
+              ? "sinh nhật"
+              : "생일"}
           </div>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={["DatePicker"]}>
@@ -266,8 +264,8 @@ function InfoEdit({ closeModal }: Props) {
             {reduxLanguage === "CN"
               ? "密码"
               : reduxLanguage === "VI"
-                ? "mật khẩu"
-                : "비밀번호"}
+              ? "mật khẩu"
+              : "비밀번호"}
           </div>
           <FormControl sx={{ width: "100%" }} variant="outlined" size="small">
             <OutlinedInput
@@ -297,8 +295,8 @@ function InfoEdit({ closeModal }: Props) {
             {reduxLanguage === "CN"
               ? "验证密码"
               : reduxLanguage === "VI"
-                ? "Xác nhận lại mật khẩu"
-                : "비밀번호 확인"}
+              ? "Xác nhận lại mật khẩu"
+              : "비밀번호 확인"}
           </div>
           <FormControl sx={{ width: "100%" }} variant="outlined" size="small">
             <OutlinedInput
@@ -325,6 +323,12 @@ function InfoEdit({ closeModal }: Props) {
                   </IconButton>
                 </InputAdornment>
               }
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault(); // 엔터키가 기본 동작을 하지 않도록 막음
+                  EditSubmit(); // 엔터키를 눌렀을 때 실행할 함수
+                }
+              }}
             />
           </FormControl>{" "}
         </div>
@@ -334,8 +338,8 @@ function InfoEdit({ closeModal }: Props) {
               reduxLanguage === "CN"
                 ? "更改信息"
                 : reduxLanguage === "VI"
-                  ? "thay đổi thông tin"
-                  : "정보 수정"
+                ? "thay đổi thông tin"
+                : "정보 수정"
             }
             color="#FF6B6B"
             width="100%"
@@ -351,8 +355,8 @@ function InfoEdit({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "请输入您的旧密码"
             : reduxLanguage === "VI"
-              ? "Vui lòng nhập mật khẩu cũ của bạn"
-              : "기존 비밀번호를 입력하세요."}
+            ? "Vui lòng nhập mật khẩu cũ của bạn"
+            : "기존 비밀번호를 입력하세요."}
         </div>
         <FormControl sx={{ width: "100%" }} variant="outlined" size="small">
           <OutlinedInput
@@ -375,16 +379,22 @@ function InfoEdit({ closeModal }: Props) {
                 </IconButton>
               </InputAdornment>
             }
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                event.preventDefault(); // 엔터키가 기본 동작을 하지 않도록 막음
+                checkPassword(); // 엔터키를 눌렀을 때 실행할 함수
+              }
+            }}
           />
-        </FormControl>{" "}
+        </FormControl>
         <div className={styles.BtnMargin} ref={submitBtn}>
           <ColorBtn
             content={
               reduxLanguage === "CN"
                 ? "查看"
                 : reduxLanguage === "VI"
-                  ? "kiểm tra"
-                  : "확인하기"
+                ? "kiểm tra"
+                : "확인하기"
             }
             color="#FF6B6B"
             width="100%"

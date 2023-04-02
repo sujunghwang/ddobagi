@@ -1,23 +1,15 @@
-.FContainer {
-  display: flex;
-  flex-direction: column;
-}
-
 .Banner {
   width: 100%;
-  height: 16rem;
-  background-image: url("../../public/img/BlueHeader.png");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  height: 10rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: end;
 }
 
 .Header {
-  font-size: 3rem;
-  color: #405069;
+  font-size: 3.8rem;
+  font-family: 'MaplestoryOTFBold';
+  color: #221e1a;
 }
 
 .HeaderTitle {
@@ -29,16 +21,25 @@
   transform: translate(-50%, -25%);
 }
 
+.CategoryName {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 30px 30px 0 0;
+}
+
+.CategoryBox {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+}
+
 @media (max-width: 900px) {
   .CategoryName {
-    font-size: xx-large;
+    font-size: x-large;
   }
 
   .BreadCrum {
     align-self: flex-start;
-    margin-left: 1rem;
     margin-top: 1rem;
-    font-size: 1rem;
   }
 }
 
@@ -49,8 +50,14 @@
 
   .BreadCrum {
     align-self: flex-start;
-    margin-left: 5rem;
     margin-top: 2rem;
-    font-size: 1.5rem;
   }
+}
+
+.Noscroll::-webkit-scrollbar {
+  display: none;
+}
+
+.NoOverFlow {
+  overflow: hidden;
 }

@@ -88,53 +88,70 @@ function CategoryList() {
   //
 
   return (
-    <div className={styles.FContainer}>
+    <div className={styles.Fcontainer}>
       <div className={styles.Banner}>
-        <div className={styles.Header}>한국어 학습</div>
+        <div className={styles.Header}>
+          {language === "CN"
+            ? "学习"
+            : language === "VI"
+              ? "học hỏi"
+              : "한국어 연습"}
+        </div>
       </div>
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
       </div>
-      <div className={styles.CategoryName}>{school}</div>
-      {schoolList ? (
-        <VideoScroll
-          color={"#92B4EC"}
-          videolist={schoolList}
-          categoryName={school}
-        />
-      ) : (
-        <Loading />
-      )}
-      <div className={styles.CategoryName}>{house}</div>
-      {homeList ? (
-        <VideoScroll
-          color={"#FF6B6B"}
-          videolist={homeList}
-          categoryName={house}
-        />
-      ) : (
-        <Loading />
-      )}
-      <div className={styles.CategoryName}>{store}</div>
-      {playGroundList ? (
-        <VideoScroll
-          color={"#FFE69A"}
-          videolist={playGroundList}
-          categoryName={store}
-        />
-      ) : (
-        <Loading />
-      )}
-      <div className={styles.CategoryName}>{playGround}</div>
-      {storeList ? (
-        <VideoScroll
-          color={"#84D88F"}
-          videolist={storeList}
-          categoryName={playGround}
-        />
-      ) : (
-        <Loading />
-      )}
+      <div className={styles.CategoryBox}>
+        <div className={styles.CategoryName}>{school}</div>
+        {schoolList ? (
+          <VideoScroll
+            color={"#ffcfd8"}
+            videolist={schoolList}
+            categoryName={school}
+          />
+        ) : (
+          <Loading />
+        )}
+      </div>
+      <div className={styles.CategoryBox}>
+
+        <div className={styles.CategoryName}>{house}</div>
+        {homeList ? (
+          <VideoScroll
+            color={"#fff9e2"}
+            videolist={homeList}
+            categoryName={house}
+          />
+        ) : (
+          <Loading />
+        )}
+      </div>
+      <div className={styles.CategoryBox}>
+
+        <div className={styles.CategoryName}>{store}</div>
+        {playGroundList ? (
+          <VideoScroll
+            color={"#e8f9f6"}
+            videolist={playGroundList}
+            categoryName={store}
+          />
+        ) : (
+          <Loading />
+        )}
+      </div>
+      <div className={styles.CategoryBox}>
+
+        <div className={styles.CategoryName}>{playGround}</div>
+        {storeList ? (
+          <VideoScroll
+            color={"#e0f1ff"}
+            videolist={storeList}
+            categoryName={playGround}
+          />
+        ) : (
+          <Loading />
+        )}
+      </div>
     </div>
   );
 }

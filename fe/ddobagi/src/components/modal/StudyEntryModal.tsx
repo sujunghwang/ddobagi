@@ -6,6 +6,8 @@ import Backdrop from "@mui/material/Backdrop";
 import CloseIcon from "@mui/icons-material/Close";
 import ColorBtn from "../ColorBtn";
 import styles from "./Modal.module.scss";
+import ConversationAnimation from "../animations/Consversation";
+import TestAnimation from "../animations/Test";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
@@ -107,24 +109,29 @@ function StudyEntryModal({
           <div className={styles.SContainer}>
             <div className={styles.categoryName}>{categoryName}</div>
             <div className={styles.situationTitle}>{situationTitle}</div>
-            <div>애니메이션 두 개</div>
             <div className={styles.BtnGroup}>
-              <ColorBtn
-                content={"대화 연습"}
-                color={"#FFD93D"}
-                width={"220px"}
-                onClick={() => {
-                  navigateToConversation(situationTitle);
-                }}
-              />
-              <ColorBtn
-                content={"단어 연습"}
-                color={"#FF6B6B"}
-                width={"220px"}
-                onClick={() => {
-                  navigateToWord(situationTitle);
-                }}
-              />
+              <div className={styles.Group}>
+                <ConversationAnimation />
+                <ColorBtn
+                  content={"대화 연습"}
+                  color={"#FF6B6B"}
+                  width={"200px"}
+                  onClick={() => {
+                    navigateToConversation(situationTitle);
+                  }}
+                />
+              </div>
+              <div className={styles.Group}>
+                <TestAnimation />
+                <ColorBtn
+                  content={"단어 연습"}
+                  color={"#FFD93D"}
+                  width={"200px"}
+                  onClick={() => {
+                    navigateToWord(situationTitle);
+                  }}
+                />
+              </div>
             </div>
           </div>
         </Box>

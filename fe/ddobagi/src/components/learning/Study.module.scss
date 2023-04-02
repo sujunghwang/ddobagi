@@ -1,15 +1,20 @@
 .CloseBtn {
   cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 3rem;
+  background-color: #30b341;
+  padding: 5px 15px 5px 15px;
+  color: white;
+  border-radius: 50px;
 }
 
 .FullContainer {
   display: flex;
-  justify-content: space-evenly;
-  height: calc(100vh - 15px);
+  width: 100%;
+  justify-content: space-between;
 }
 
 .LeftContainer {
-  margin-top: calc(100vh - 850px);
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -18,7 +23,6 @@
 
 .RightContainer {
   position: relative;
-  align-self: flex-end;
 }
 
 .TextBox {
@@ -28,31 +32,49 @@
 
 .Title {
   font-size: 3rem;
-  width: 830px;
+  width: 800px;
 }
 
 .SubTitle {
   font-size: 2rem;
-  width: 830px;
+  width: 800px;
 }
 
 .Description {
   font-size: 1.5rem;
-  width: 830px;
+  width: 800px;
   // 텍스트 3줄제한 추가하기
 }
 
 .scores {
+  position: absolute;
   font-size: 1.5rem;
   text-align: end;
+  left: 87%;
+  top: -5%;
 }
 
 .OuterContainer {
+  transform: translateY(100%);
   width: 550px;
   height: 750px;
   border-radius: 10px 10px 0 0;
   box-shadow: inset 0 10px rgba(0, 0, 0, 0.25);
   padding: 50px 40px 0 40px;
+  animation: slide-up .8s ease-out;
+  animation-fill-mode: forwards
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
 }
 
 .InnerContainer {
@@ -100,7 +122,7 @@
 
 .LEFT {
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     right: 0;
     top: 50%;
@@ -121,8 +143,23 @@
   left: 86.5%;
   object-fit: cover;
   width: 180px;
-  transform: translate(0, -100%);
+  transform: translate(0, 102.5%);
+  animation: slide-up-hand .8s ease-out;
+  animation-fill-mode: forwards
 }
+
+@keyframes slide-up-hand {
+  0% {
+    transform: translate(0, 102.5%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(0, -100%);
+    opacity: 1;
+  }
+}
+
 
 .BtnGroup {
   display: flex;
@@ -185,7 +222,6 @@
 }
 
 @keyframes pulse {
-
   25% {
     opacity: 0.4;
   }
@@ -193,7 +229,6 @@
   100% {
     transform: scale(1.5);
   }
-
 }
 
 .GBtn {
@@ -249,7 +284,6 @@
   }
 }
 
-
 .confirmMark {
   display: flex;
   justify-content: center;
@@ -257,7 +291,7 @@
   color: white;
   width: 2.5rem;
   height: 2.5rem;
-  background-color: #92B4EB;
+  background-color: #92b4eb;
   border-radius: 100%;
   font-size: 1.3rem;
   box-shadow: inset -1px -2px rgba(0, 0, 0, 0.25);
@@ -274,4 +308,12 @@
   border-radius: 100%;
   font-size: 1.3rem;
   box-shadow: inset -1px -2px rgba(0, 0, 0, 0.25);
+}
+
+.LastGroup {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  font-size: 1.5rem;
 }
