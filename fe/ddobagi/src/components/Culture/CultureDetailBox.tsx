@@ -2,17 +2,34 @@ import React from "react";
 import Card from '@mui/material/Card';
 import { Button, Box, Typography, CardActionArea, CardMedia, CardContent, Grid } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+// import { MouseEventHandler } from 'react';
+import axios from "axios";
 import { RootState } from "../../redux/RootReducer";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ReactPlayer from "react-player";
 
 // 문화 상세 사진
-import dokdo from "../../assets/dokdopeng.jpg"
-import game from "../../assets/game.jpg"
-import kb from "../../assets/kyungbok.jpg"
-import netflix from "../../assets/netflix.jpg"
+// import dokdo from "../../assets/dokdopeng.jpg"
+// import game from "../../assets/game.jpg"
+// import kb from "../../assets/kyungbok.jpg"
+// import netflix from "../../assets/netflix.jpg"
 import ddobak from "../../assets/말남아.png"
+
+interface Culture {
+  cultureId: number;
+  url: string;
+  cultureContentQueryDtoList: CultureContent[];
+  completed: boolean;
+}
+
+interface CultureContent {
+  cultureId: number;
+  lang: string;
+  title: string;
+  description: string;
+}
 
 type CultureBoxProp = {
   contentType: string;
@@ -20,11 +37,12 @@ type CultureBoxProp = {
   title: string;
   content: string;
   videoURL: string;
-  others: Array<number>;
+  others: Culture[];
   // onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-function CultureBox({ contentType, backColor, title, content, videoURL, others }: CultureBoxProp) {
+
+function CultureBox({ contentType, backColor, title, content, videoURL, others}: CultureBoxProp) {
 
   //언어 변수
   const language = useSelector(
@@ -43,14 +61,67 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others }
     }
   }
 
+  const userId = useSelector(
+    (state: RootState) => state.inputUserInfo.payload.id
+  );
+
+  // let idnumbers : Array<[number, string, any ]>;
+  
+  // idnumbers = [[1, '독도', dokdo], [2, '놀이문화', game], [3, '경복궁', kb], [4, '한국의 넷플릭스', netflix]]
+  
+  const getYouTubeThumbnailUrl = (youtubeUrl: string) => {
+    const videoId = youtubeUrl.split("v=")[1];
+    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  };
+  
+  
+  // const NowCategory = categoryProp
+  // console.log(NowCategory)
+  const { id } = useParams();
+  
+  // @ts-ignore
+  const [CategoryNumber, cultureNumber] = id.split('_');
+  
+  console.log(CategoryNumber)
+  console.log(cultureNumber)
+  
+  const CultureFinish = () => {
+    axios({
+      url: `http://j8a608.p.ssafy.io:8080/api/cultures/${cultureNumber}/users/${userId}`,
+      method: "POST",
+      // withCredentials: true,
+      // data: {
+      //   corrected : false
+      // },
+    })
+      .then(() => {
+        console.log("영상을 다봤어요")
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   // 영상 학습 완료 함수 (추후에 API POST 보낼 곳)
   const handleEnded = () => {
     console.log("비디오 재생이 완료되었습니다.");
+    CultureFinish()
   }
 
-  let idnumbers : Array<[number, string, any ]>;
+  const navigate = useNavigate();
 
-  idnumbers = [[1, '독도', dokdo], [2, '놀이문화', game], [3, '경복궁', kb], [4, '한국의 넷플릭스', netflix]]
+  // const OtherMove = (Number : string) => {
+  //   navigate(`/cultureitem/${CategoryNumber}_${Number}`);
+  // }
+
+  // @ts-ignore
+  const OtherMove = (MoveNum : number) => {
+    const CategoryNum = CategoryNumber
+    navigate(`/cultureitem/${CategoryNum}_${MoveNum}`);
+  };
+
+
+  console.log(others)
 
   return (
     <Box sx={{
@@ -80,7 +151,7 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others }
           width: "1100px",
           height: "auto",
           backgroundColor:"#FFE8E8",
-          borderRadius : "75px",
+          borderRadius : "20px",
         }}>
           {/* <Box>
             {videoURL}
@@ -94,7 +165,7 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others }
               url={videoURL} 
               width="80%"
               height="650px"
-              muted={true}
+              // muted={true}
               playing={true}
               onEnded={handleEnded}
               />
@@ -153,21 +224,23 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others }
             marginBottom: "20px",
           }}
         >
-          {others}
+          {/* {others} */}
           <Box sx={{ margin: "10px"}}>
             <Grid container spacing={2}>
-              {idnumbers.map((one) => (
+              {/* {idnumbers.map((one) => ( */}
+              {others.map((other) => (
                 <Grid item xs={12} md={6} lg={3}>
                   <Card
                     sx={{
                       borderRadius:"20px",
                     }}
+                    onClick={() => OtherMove(other.cultureId)}
                   >
                     <CardActionArea>
                       <CardMedia
                         component="img"
                         height="220"
-                        image={one[2]}
+                        image={getYouTubeThumbnailUrl(other.url)}
                       />
                       <CardContent>
                         <Typography
@@ -176,7 +249,11 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others }
                             fontFamily: "CookieRun-Regular",
                           }}
                         >
-                          {one[1]}
+                          {language === "CN"
+                            ? other.cultureContentQueryDtoList[1].title
+                            : language === "VI"
+                            ? other.cultureContentQueryDtoList[2].title
+                            : other.cultureContentQueryDtoList[0].title}
                         </Typography>
                       </CardContent>
                     </CardActionArea> 

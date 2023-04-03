@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useNavigate } from "react-router-dom";
 
 type BtnProp = {
@@ -10,9 +10,12 @@ type BtnProp = {
 function BackBtn({ width }: BtnProp) {
   const navigate = useNavigate();
 
+  // const handleClick = () => {
+  //   navigate(-1);
+  // }
   const handleClick = () => {
-    navigate(-1);
-  };
+    navigate("/CultureList");
+  }
 
   return (
     <Button
@@ -22,7 +25,7 @@ function BackBtn({ width }: BtnProp) {
         color: "#ffffff",
         backgroundColor: "#6BCB77",
         borderRadius: 10,
-        fontFamily: "MaplestoryOTFBold",
+        fontFamily: "CookieRun-Regular",
         fontSize: 30,
         borderColor: "rgba(0, 0, 0, .25)",
         borderWidth: "0px 4px 4px 0px",
@@ -34,15 +37,11 @@ function BackBtn({ width }: BtnProp) {
         },
         marginX: "15px",
       }}
-      startIcon={
-        <ArrowBackIosNewIcon
-          sx={{ width: "38px", height: "35px", color: "white" }}
-        />
-      }
+      startIcon={<ArrowBackIosNewIcon sx={{ width: "38px", height: "35px", color:"white" }} />}
       disableElevation
       onClick={handleClick}
     >
-      뒤로 가기
+        뒤로 가기
     </Button>
   );
 }

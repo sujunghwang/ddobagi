@@ -10,6 +10,7 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import StudyEntryModal from "./modal/StudyEntryModal";
 import styles from "./VideoScroll.module.scss";
+import { useNavigate } from "react-router-dom";
 
 type CardProp = {
   situationThumbnail: string;
@@ -47,7 +48,9 @@ function VideoCard({
   }));
 
   //로그인 확인 변수
-  const userStr = localStorage.getItem("token");
+  const userStr = sessionStorage.getItem("token");
+
+  const navigate = useNavigate()
 
   return (
     <div className={styles.CardContainer}>
@@ -63,14 +66,15 @@ function VideoCard({
       )}
       <Card
         sx={{
-          maxWidth: 345,
-          borderRadius: "10px",
+          Width: 430,
+          borderRadius: "30px",
+          boxShadow: "0px 5px 10px rgba(0,0,0,0.4)"
         }}
         onClick={() => {
           if (userStr) {
             setModal(true);
           } else {
-            // navi
+            navigate('/')
           }
         }}
       >

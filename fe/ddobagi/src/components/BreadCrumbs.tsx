@@ -109,7 +109,7 @@ function BreadCrumbs() {
       sx={{
         display: "flex",
         justifyContent: "end",
-        marginBottom: "2rem",
+        marginBottom: "1rem",
         userSelect: "none",
       }}
       separator={<NavigateNextIcon fontSize="small" />}

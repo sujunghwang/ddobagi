@@ -4,7 +4,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/RootReducer";
 import styles from "./VideoScroll.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay, Mousewheel } from "swiper";
+import { Navigation, Pagination, Autoplay } from "swiper";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 
 interface SituationTrans {
   lang: string;
@@ -37,22 +39,30 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
   );
 
   const lang = language === "CN" ? 0 : language === "VI" ? 2 : 1;
+  const prevRef = useRef<HTMLDivElement>(null)
+  const nextRef = useRef<HTMLDivElement>(null)
 
   return (
     <div
       ref={componentRef}
-      style={{ backgroundColor: color }}
       className={styles.FContainer}
     >
+      <div className={styles.CContainer} style={{ backgroundColor: color }}
+      ></div>
       <Swiper
-        modules={[Pagination, Autoplay, Mousewheel]}
+        modules={[Pagination, Autoplay, Navigation]}
+        navigation={{
+          prevEl: prevRef.current!, // Assert non-null
+          nextEl: nextRef.current!, // Assert non-null
+          disabledClass: `${styles.disable}`,
+        }}
         spaceBetween={100}
-        mousewheel={true}
         grabCursor={true}
         pagination={{
+          // el: `${styles.Pagenation}`,
           clickable: true,
         }}
-        autoplay={{ delay: 3300, disableOnInteraction: false }}
+        autoplay={{ delay: 3300, disableOnInteraction: true }}
         breakpoints={{
           360: {
             slidesPerView: 1,
@@ -64,12 +74,13 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
             slidesPerView: 3,
           },
           1520: {
-            slidesPerView: 4,
+            slidesPerView: 3,
           }
         }}
         style={{ padding: "3rem" }}
 
       >
+
         {videolist.situationList.map((item, index) => (
           <SwiperSlide key={index}
           >
@@ -84,6 +95,10 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
             />
           </SwiperSlide>
         ))}
+        <div className={styles.NavGroup} >
+          <div ref={prevRef} className={styles.NavBtn1}><NavigateBeforeIcon sx={{ fontSize: "2.5rem" }} /></div>
+        </div>
+        <div ref={nextRef} className={styles.NavBtn2}><NavigateNextIcon sx={{ fontSize: "2.5rem" }} /></div>
       </Swiper>
     </div >
   );

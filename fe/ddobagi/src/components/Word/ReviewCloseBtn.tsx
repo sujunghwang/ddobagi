@@ -8,11 +8,11 @@ type BtnProp = {
   width: string;
 };
 
-function WordCloseBtn({ width }: BtnProp) {
+function ReviewCloseBtn({ width }: BtnProp) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/CategoryList");
+    navigate("/mypage");
   }
 
   return (
@@ -44,4 +44,4 @@ function WordCloseBtn({ width }: BtnProp) {
   );
 }
 
-export default WordCloseBtn;
+export default ReviewCloseBtn;
