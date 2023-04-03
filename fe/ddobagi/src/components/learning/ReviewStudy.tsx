@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 import CorrectAnimation from "../animations/Correct";
 import WrongAnimation from "../animations/Wrong";
 import SkipNextIcon from '@mui/icons-material/SkipNext';
+import ReviewCloseBtn from "../Word/ReviewCloseBtn";
 
 
 interface Lang {
@@ -36,23 +37,25 @@ interface QuizData {
   solved: boolean;
 }
 
-function WordStudy() {
+function ReviewStudy() {
   const location = useLocation();
-  const categoryName = location.state?.categoryName;
-  const situationTitle = location.state?.situationTitle;
-  const color = location.state?.color;
+  // const categoryName = location.state?.categoryName;
+  // const situationTitle = location.state?.situationTitle;
+  // const color = location.state?.color;
   const situationId = location.state?.situationId;
   const userId = useSelector(
     (state: RootState) => state.inputUserInfo.payload.id
   );
+  const reviewNum = location.state?.reviewNum;
 
-  console.log(categoryName)
-  console.log(situationTitle)
-  console.log(color)
-  console.log(situationId)
+  // console.log(categoryName)
+  // console.log(situationTitle)
+  // console.log(color)
+  // console.log(situationId)
   console.log(userId)
+  console.log(reviewNum)
   
-  const [quizIdData, setQuizIdData] = useState<number[]>([]);
+  // const [quizIdData, setQuizIdData] = useState<number[]>([]);
   const [quizData, setQuizData] = useState<QuizData>();
   const [quizIndex, setQuizIndex] = useState<number>(0);
 
@@ -63,29 +66,31 @@ function WordStudy() {
   console.log(isCorrect)
   console.log(isWrong)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(`https://j8a608.p.ssafy.io/api/learnings/${situationId}`);
-      setQuizIdData(response.data);
-    };
-    fetchData();
-  }, [situationId]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await axios.get(`http://j8a608.p.ssafy.io:8080/api/learnings/${situationId}`);
+  //     setQuizIdData(response.data);
+  //   };
+  //   fetchData();
+  // }, [situationId]);
+
+  // console.log(quizIdData)
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizIdData[quizIndex]}/`);
+      const response = await axios.get(`http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${reviewNum[quizIndex]}/`);
       setQuizData(response.data);
     };
     fetchData();
-  }, [userId, quizIdData, quizIndex]);
+  }, [userId, reviewNum, quizIndex]);
 
   const navigate = useNavigate();
 
   const handleQuizSubmit = () => {
-    if (quizIndex < quizIdData.length - 1) {
+    if (quizIndex < reviewNum.length - 1) {
       setQuizIndex(quizIndex + 1);
     } else {
-      navigate("/CategoryList");
+      navigate("/mypage");
     }
   };
 
@@ -110,7 +115,7 @@ function WordStudy() {
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", marginTop:"70px" }}>
           {/* <div className={styles.scores}> */}
           <div style={{ display:"flex", float:"right", paddingBottom:"20px", fontSize: "22px" }}>
-            {quizIndex+1} / {quizIdData.length}
+            {quizIndex+1} / {reviewNum.length}
           </div>
           <div style={{
             marginTop:"60px"
@@ -118,7 +123,7 @@ function WordStudy() {
             <Quiz 
               userId={userId}
               situationId={situationId}
-              quizId={quizIdData[quizIndex]}
+              quizId={reviewNum[quizIndex]}
               onNextQuiz={handleQuizSubmit}
               setIsCorrect={setIsCorrect} // React.Dispatch<React.SetStateAction<boolean>>
               setIsWrong={setIsWrong} // React.Dispatch<React.SetStateAction<boolean>>
@@ -150,10 +155,10 @@ function WordStudy() {
           }}
           startIcon={<SkipNextIcon sx={{ width: "38px", height: "35px", color:"white" }} />}
           >
-          {quizIndex === quizIdData.length - 1 ? "학습 완료" : "다음 문제"}
+          {quizIndex === reviewNum.length - 1 ? "학습 완료" : "다음 문제"}
         </Button>
         {/* <Button onClick={() => navigate("/CategoryList")}>학습 종료</Button> */}
-        <WordCloseBtn width="180px"/>
+        <ReviewCloseBtn width="180px"/>
       </Box>
       <Box sx={{ height: "100px" }} />
 
@@ -264,4 +269,4 @@ function WordStudy() {
 }
 
 
-export default WordStudy;
+export default ReviewStudy;

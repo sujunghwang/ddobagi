@@ -145,6 +145,17 @@ function SwiperList({ dataProp, boxColor }: CultureProp) {
         {Slides.map((slide) => (
           <SwiperSlide key={slide.cultureId}>
             <div className={styles.CardContainer}>
+              {/* {isCompleted && ( */}
+              {slide.completed && (
+                <>
+                  <div className={styles.clearFog}></div>
+                  <img
+                    className={`${styles.Stamp} noselect`}
+                    src="img/Stamp.png"
+                    alt="Stamp"
+                  />
+                </>
+              )}
               <Card
                 sx={{ minWidth: 345, borderRadius: "10px" }}
                 onClick={() => moveCulture(slide.cultureId)}

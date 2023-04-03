@@ -15,6 +15,7 @@ import MyPage from "./pages/MyPage";
 import ConversationStudy from "./components/learning/ConversationStudy";
 import WordStudy from "./components/learning/WordStudy";
 import CultureDetail from "./components/Culture/CultureDetail";
+import ReviewStudy from "./components/learning/ReviewStudy";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
               element={<ConversationStudy />}
             />
             <Route path="/learning/quiz/*" element={<WordStudy />} />
+            <Route path="/learning/review/*" element={<ReviewStudy />} />
           </Route>
           {/* <Route path = "/*" element={< />}/> */}
         </Routes>

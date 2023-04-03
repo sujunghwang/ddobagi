@@ -72,18 +72,9 @@ function MyPage() {
   }, []);
 
   // 오답노트용 정보입니다. 차후 타 페이지로 뺄 것.
-  interface reviewData {
-    quizId: number;
-    beforeSentence: string;
-    afterSentence: string;
-    answer: string;
-    option1: string;
-    option2: string;
-    option3: string;
-  }
 
-  interface reviews {
-    data: reviewData;
+  interface reviewData {
+    data: number[];
   }
 
   const [reviewList, setReviewList] = useState<reviewData | null>(null);
@@ -91,19 +82,33 @@ function MyPage() {
   useEffect(() => {
     const fetchWrongs = async () => {
       try {
-        const response = await axios.get<reviews>(
+        const response = await axios.get<reviewData>(
           `https://j8a608.p.ssafy.io/api/users/${userId}/review`
         );
-        setReviewList(response.data.data);
+        setReviewList(response.data);
+        console.log(response.data)
       } catch (error) {
         console.error(error);
       }
     };
 
+    
     fetchWrongs();
-  }, []);
+  }, [userId]);
+  
+  // console.log(reviewList)
+  const ReviewNum = reviewList?.data
+  console.log(ReviewNum)
 
   // 리뷰용 API
+  const navigate = useNavigate();
+  const navigateToReview = () => {
+    navigate(`/learning/review/`, {
+      state: {
+        reviewNum: ReviewNum
+      }
+    });
+  };
 
   return (
     <div className={styles.body}>
@@ -184,7 +189,9 @@ function MyPage() {
                   }
                   color="#FFD93D"
                   width="11.5rem"
-                  onClick={() => { }}
+                  onClick={() => {
+                    navigateToReview()
+                  }}
                 />
               </div>
             </div>
