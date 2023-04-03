@@ -1,55 +1,52 @@
 package com.a608.ddobagi.db.entity;
 
+import lombok.Getter;
+
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
-/**
- *packageName    : com.a608.ddobagi.entity
- * fileName       : Script
- * author         : modsiw
- * date           : 2023/03/10
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023/03/10        modsiw       최초 생성
- */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Script {
+@Getter
+public class Script implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	// @Column(name = "situation_id")
-	// private Long situtationId;
+	private String defaultContent;
 
-	private LocalTime startTime;
+	private Long startTime;
 
-	private LocalTime endTime;
+	private Long endTime;
 
 	@Enumerated(EnumType.STRING)
 	private ScriptRole scriptRole;
 
-	private String defaultContent;
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "situation_id")
+	private Situation situation;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "script_id")
-	private List<ScriptTrans> subScriptList = new ArrayList<>();
+	@OneToMany(mappedBy = "script", cascade = CascadeType.ALL)
+	private List<ScriptTrans> scriptTransList = new ArrayList<>();
 
 	@OneToMany(mappedBy = "script", cascade = CascadeType.ALL)
 	private List<UserScript> userScriptList = new ArrayList<>();
 
+
+	/* 연관관계 편의 메소드 */
+	public void setSituation(Situation situation) {
+		if(this.situation != null) {
+			// 다대일측에서 연관관계를 지정할 때 기존 연관관계는 끊어주어야 한다.
+			this.situation.getScriptList().remove(this);
+		}
+		this.situation = situation;
+		situation.getScriptList().add(this);
+	}
 }

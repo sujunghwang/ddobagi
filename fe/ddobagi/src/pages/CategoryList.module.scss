@@ -1,0 +1,158 @@
+.Fcontainer {
+  > .Banner {
+    animation: slide-up 0.8s ease-out;
+    animation-fill-mode: forwards;
+    opacity: 0;
+  }
+  > .BreadCrum {
+    animation: slide-up 0.8s ease-out;
+    animation-fill-mode: forwards;
+    opacity: 0;
+  }
+  > .BtnBoxes {
+    animation: slide-up 0.8s ease-out;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    animation-delay: 0.2s;
+  }
+  > .MainBox {
+    animation: slide-up 0.8s ease-out;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    animation-delay: 0.4s;
+  }
+}
+
+.Banner {
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  justify-content: start;
+  align-items: end;
+  user-select: none;
+}
+
+.Header {
+  font-size: 3.8rem;
+  font-family: "MaplestoryOTFBold";
+  color: #221e1a;
+}
+
+.HeaderTitle {
+  font-size: 5rem;
+  color: #405069;
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%, -25%);
+}
+
+.CategoryName {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 30px 30px 0 0;
+}
+
+@media (max-width: 900px) {
+  .CategoryName {
+    font-size: x-large;
+  }
+
+  .BreadCrum {
+    align-self: flex-start;
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 901px) {
+  .CategoryName {
+    font-size: 2.5rem;
+  }
+
+  .BreadCrum {
+    align-self: flex-start;
+    margin-top: 2rem;
+  }
+}
+
+.Noscroll::-webkit-scrollbar {
+  display: none;
+}
+
+.NoOverFlow {
+  overflow: hidden;
+}
+
+.loadAnime {
+  animation: slide-down 0.8s ease-in-out;
+}
+
+.CategoryBox {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  animation: slide-up 0.8s ease-out;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  &:nth-of-type(3) {
+    animation-delay: 0.2s;
+  }
+  &:nth-of-type(4) {
+    animation-delay: 0.4s;
+  }
+  &:nth-of-type(5) {
+    animation-delay: 0.6s;
+  }
+  &:nth-of-type(6) {
+    animation-delay: 0.8s;
+  }
+}
+
+.CategoryBox2 {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  animation: slide-up 0.8s ease-out;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  &:nth-of-type(1) {
+    animation-delay: 0.2s;
+  }
+  &:nth-of-type(2) {
+    animation-delay: 0.4s;
+  }
+  &:nth-of-type(3) {
+    animation-delay: 0.6s;
+  }
+  &:nth-of-type(4) {
+    animation-delay: 0.8s;
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.BtnBox {
+  transition: scale 0.3s ease;
+  &:hover {
+    scale: 0.95;
+  }
+}

@@ -1,0 +1,58 @@
+.NavBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  margin-top: 5rem;
+}
+
+.NavBarMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+}
+
+.SelectLabel {
+  display: flex;
+  align-items: center;
+}
+
+.Router {
+  user-select: none;
+  color: black;
+  font-family: "Pretendard-Regular";
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 1rem;
+  font-size: 1.3rem;
+  border: solid rgba(184, 0, 0, 0.5);
+  padding: 5px 10px 5px 10px;
+  transition: border-width 0.15s;
+  word-break: keep-all;
+}
+
+@media (min-width: 901px) {
+  .Logo {
+    display: flex;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+
+  .LogoXs {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .Logo {
+    display: none;
+  }
+
+  .LogoXs {
+    display: flex;
+    cursor: pointer;
+  }
+}

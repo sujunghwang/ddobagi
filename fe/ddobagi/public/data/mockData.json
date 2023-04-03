@@ -1,0 +1,144 @@
+{
+  "data": {
+    "news": [
+      {
+        "id": 1,
+        "title": "KOR",
+        "summary": "kor1",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 2,
+        "title": "KOR2",
+        "summary": "ㅎㅇ",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 3,
+        "title": "평택시가족센터, 다문화가족 자녀 진로 진학 지원한다",
+        "summary": "평택시가족센터, 다문화가족 자녀 진로 진학 프로그램 ‘꿈업학교’ 실시",
+        "url": "www.edupress.kr/news/articleView.html?idxno=10229"
+      },
+      {
+        "id": 4,
+        "title": "양천도서관, '다:잇다' 프로젝트 운영",
+        "summary": "양천도서관, '다:잇다' 프로젝트 운영, 다문화 교육 지평 확대한다",
+        "url": "www.edupress.kr/news/articleView.html?idxno=10229"
+      },
+      {
+        "id": 5,
+        "title": "KOR5",
+        "summary": "kor5",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 6,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 7,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 8,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 9,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 10,
+        "title": "군산시, 다문화가족 고향나들이 지원",
+        "summary": "군산시가 다문화 가족 고향 나들이를 위해 전격적으로 지원한다.",
+        "url": "www.jjan.kr/article/20230327580048"
+      },
+      {
+        "id": 11,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 12,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 13,
+        "title": "다문화 청소년을 위한 역할은'…연합뉴스 다문화포럼",
+        "summary": "다문화 청소년을 위한 역할은'…연합뉴스 다문화포럼다문화 청소년을 위한 역할은'…연합뉴스 다문화포럼다문화 청소년을 위한 역할은'…연합뉴스 다문화포럼다문화 청소년을 위한 역할은'…연합뉴스 다문화포럼다문화 청소년을 위한 역할은'…연합뉴스 다문화포럼다문화 청소년을 위한 역할은'…연합뉴스 다문화포럼",
+        "url": "yonhapnewstv.co.kr/news/MYH20220922021800038"
+      },
+      {
+        "id": 14,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 15,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 16,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 17,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 18,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 19,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 20,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 21,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 22,
+        "title": "KOR6",
+        "summary": "kor6",
+        "url": "www.naver.com"
+      },
+      {
+        "id": 23,
+        "title": "마지막 글이다 이눔아",
+        "summary": "보느라 수고했엉",
+        "url": "www.naver.com"
+      }
+    ]
+  }
+}
