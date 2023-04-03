@@ -129,7 +129,7 @@ function SignUp({ closeModal }: Props) {
     const apiLogin = async () => {
       try {
         const response = await axios.post<LogInfo>(
-          "https://j8a608.p.ssafy.io/api/auth/login",
+          "http://j8a608.p.ssafy.io:8080/api/auth/login",
           {
             loginId: id,
             pw: password,
@@ -169,7 +169,7 @@ function SignUp({ closeModal }: Props) {
     const signup = async () => {
       try {
         const response = await axios.post<SignupInfo>(
-          "https://j8a608.p.ssafy.io/api/auth/signup",
+          "http://j8a608.p.ssafy.io:8080/api/auth/signup",
           {
             loginId: id,
             pw: password,

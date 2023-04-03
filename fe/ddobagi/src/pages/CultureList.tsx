@@ -89,7 +89,7 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get("https://j8a608.p.ssafy.io/api/cultures/1?common=ANNIVERSARY")
+      .get("http://j8a608.p.ssafy.io:8080/api/cultures/1?common=ANNIVERSARY")
       .then((res) => {
         setApiData1(res.data);
       })
@@ -99,7 +99,7 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get("https://j8a608.p.ssafy.io/api/cultures/1?common=TRADITION")
+      .get("http://j8a608.p.ssafy.io:8080/api/cultures/1?common=TRADITION")
       .then((res) => {
         setApiData2(res.data);
       })
@@ -111,7 +111,7 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get("https://j8a608.p.ssafy.io/api/cultures/1?common=ART")
+      .get("http://j8a608.p.ssafy.io:8080/api/cultures/1?common=ART")
       .then((res) => {
         setApiData3(res.data);
       })
@@ -123,7 +123,7 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get("https://j8a608.p.ssafy.io/api/cultures/1?common=FOOD")
+      .get("http://j8a608.p.ssafy.io:8080/api/cultures/1?common=FOOD")
       .then((res) => {
         setApiData4(res.data);
       })

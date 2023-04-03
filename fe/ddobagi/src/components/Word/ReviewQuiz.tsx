@@ -56,7 +56,7 @@ const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQu
     const fetchData = async () => {
       setIsLoading(true);
       try {
-      const response = await axios.get(`https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizId}/`);
+      const response = await axios.get(`http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${quizId}/`);
       setQuizData(response.data);
       // options와 answer를 합침
       const arr = [response.data.option1, response.data.option2, response.data.option3, response.data.answer];
@@ -85,7 +85,7 @@ const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQu
   // const quizData = quizdata3
   const CorrectWord = () => {
     axios({
-      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
+      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
@@ -106,7 +106,7 @@ const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQu
 
   const WrongWord = () => {
     axios({
-      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
+      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {

@@ -21,6 +21,8 @@ function Landing() {
 
   return (
     <>
+      <div className={styles.StartAnime}></div>
+      <div className={styles.StartLogo}>또바기</div>
       <Swiper
         modules={[Mousewheel, Pagination]}
         mousewheel={true}
