@@ -8,6 +8,26 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
 import Recording from "./Recording";
 import ColorBtn from "../ColorBtn";
+import { styled } from "@mui/material/styles";
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
+import Container from "@mui/material/Container";
+import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
+
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 20,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: "#e1e1e1"
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 5,
+    backgroundImage:
+      "linear-gradient(to right, #74ebd5, #acb6e5)"
+  },
+}));
+
 
 function ConversationStudy() {
   // navigate에 넣어 둔 state 값들을 가져옵니다.
@@ -83,7 +103,7 @@ function ConversationStudy() {
     const fetchScript = async () => {
       try {
         const response = await axios.get<Script[]>(
-          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}/${userId}/script`
+          `https://j8a608.p.ssafy.io.api/api/conversations/${situationId}/${userId}/script`
         );
         const newScripts = [];
         if (language === "VI") {
@@ -135,7 +155,7 @@ function ConversationStudy() {
     const fetchVideoInfo = async () => {
       try {
         const response = await axios.get<MapType>(
-          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}`
+          `https://j8a608.p.ssafy.io.api/api/conversations/${situationId}`
         );
         setVideoInfo(response.data);
       } catch (error) {
@@ -176,7 +196,7 @@ function ConversationStudy() {
     const fetchRecordInfo = async () => {
       try {
         const response = await axios.get<number>(
-          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}/${userId}/record`
+          `https://j8a608.p.ssafy.io.api/api/conversations/${situationId}/${userId}/record`
         );
         setRecord(response.data);
       } catch (error) {
@@ -186,76 +206,98 @@ function ConversationStudy() {
 
     fetchRecordInfo();
   });
+  const Percentage = (record / scripts.length) * 100
+
 
   return (
-    <div className={styles.FullContainer}>
-      <div className={`${styles.LeftContainer} ${videoLoaded ? `${styles.Leftanime}` : ''}`}>
-        <div>
-          <YouTube
-            ref={videoRef}
-            opts={opts}
-            videoId={videoId}
-            onReady={onPlayerReady}
-            onEnd={onPlayerEnd}
-          />
+    <>
+      <div className={styles.loadAnime}>
+        <div
+          style={{
+            width: "fit-content",
+            marginLeft: `${Percentage}%`,
+            transform: "translate(-50%,0)",
+          }}
+        >
+          <TwoWheelerIcon color="success" fontSize="large" />
         </div>
-        <div className={styles.Title}>{categoryName}</div>
-        <div className={styles.SubTitle}>{situationTitle}</div>
-        <div className={styles.Description}>{videoDescription}</div>
-        <div onClick={goBack} className={styles.CloseBtn}>
-          나가기
-        </div>
-      </div>
-      <div className={styles.RightContainer}>
-        <div className={styles.scores}>
+        <BorderLinearProgress variant="determinate" value={Percentage} sx={{
+          boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.2)"
+        }} />
+        <div style={{
+          textAlign: "end",
+          fontSize:"1.2rem",
+          marginTop:".5rem"
+        }}>
           {record} / {scripts.length}
         </div>
-        <div
-          className={styles.OuterContainer}
-          style={{ backgroundColor: color }}
-        >
-          <div className={styles.InnerContainer}>
-            {scripts.map((item, index) => (
-              <div key={index} className={styles.bubbleGroup}>
-                <div className={styles.Scripts}>
-                  <div
-                    className={`${styles.bubble} ${item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
-                      }`}
-                  >
-                    <div>{item.defaultContent}</div>
-                    <div>{item.transContent}</div>
-                  </div>
-                  <div className={styles.BtnGroup}>
-                    <Recording
-                      situationId={situationId}
-                      scriptId={item.scriptId}
-                      item={item}
-                      videoFrame={videoFrame}
-                      play={play}
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-            <div className={styles.LastGroup}>
-              <ColorBtn
-                content="뒤로가기"
-                color="#ffffff"
-                width="10rem"
-                onClick={goBack}
-              ></ColorBtn>
-              <ColorBtn
-                content="단어공부"
-                color="#ffffff"
-                width="10rem"
-                onClick={goWord}
-              ></ColorBtn>
-            </div>
+      </div>
+      <div className={styles.FullContainer}>
+        <div className={`${styles.LeftContainer} ${videoLoaded ? `${styles.Leftanime}` : ''}`}>
+          <div>
+            <YouTube
+              ref={videoRef}
+              opts={opts}
+              videoId={videoId}
+              onReady={onPlayerReady}
+              onEnd={onPlayerEnd}
+            />
+          </div>
+          <div className={styles.Title}>{categoryName}</div>
+          <div className={styles.SubTitle}>{situationTitle}</div>
+          <div className={styles.Description}>{videoDescription}</div>
+          <div onClick={goBack} className={styles.CloseBtn}>
+            나가기
           </div>
         </div>
-        <img src="/img/Hands2.png" alt="hands" className={styles.handImg} />
+        <div className={styles.RightContainer}>
+          <div
+            className={styles.OuterContainer}
+            style={{ backgroundColor: color }}
+          >
+            <div className={styles.InnerContainer}>
+              {scripts.map((item, index) => (
+                <div key={index} className={styles.bubbleGroup}>
+                  <div className={styles.Scripts}>
+                    <div
+                      className={`${styles.bubble} ${item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
+                        }`}
+                    >
+                      <div>{item.defaultContent}</div>
+                      <div>{item.transContent}</div>
+                    </div>
+                    <div className={styles.BtnGroup}>
+                      <Recording
+                        situationId={situationId}
+                        scriptId={item.scriptId}
+                        item={item}
+                        videoFrame={videoFrame}
+                        play={play}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <div className={styles.LastGroup}>
+                <ColorBtn
+                  content="뒤로가기"
+                  color="#ffffff"
+                  width="10rem"
+                  onClick={goBack}
+                ></ColorBtn>
+                <ColorBtn
+                  content="단어공부"
+                  color="#ffffff"
+                  width="10rem"
+                  onClick={goWord}
+                ></ColorBtn>
+              </div>
+            </div>
+          </div>
+          <img src="/img/Hands2.png" alt="hands" className={styles.handImg} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

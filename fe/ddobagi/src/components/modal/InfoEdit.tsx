@@ -92,7 +92,7 @@ function InfoEdit({ closeModal }: Props) {
     const fetchBase = async () => {
       try {
         const response = await axios.get<dataOfBase>(
-          `http://j8a608.p.ssafy.io:8080/api/users/${userId}`
+          `https://j8a608.p.ssafy.io.api/api/users/${userId}`
         );
         setName(response.data.data.name);
         setLanguage(response.data.data.userLang);
@@ -129,7 +129,7 @@ function InfoEdit({ closeModal }: Props) {
   const checkPassword = async () => {
     try {
       const response = await axios.post<check>(
-        `http://j8a608.p.ssafy.io:8080/api/users/${userId}/password`,
+        `https://j8a608.p.ssafy.io.api/api/users/${userId}/password`,
         {
           userId: userId,
           pw: prevPassword,
@@ -150,7 +150,7 @@ function InfoEdit({ closeModal }: Props) {
     const fetchEdit = async () => {
       try {
         const response = await axios.put<dataOfBase>(
-          `http://j8a608.p.ssafy.io:8080/api/users/${userId}`,
+          `https://j8a608.p.ssafy.io.api/api/users/${userId}`,
           {
             name: name,
             birth: birthDay,
@@ -161,11 +161,7 @@ function InfoEdit({ closeModal }: Props) {
         const success = response.data;
         if (prevPassword !== password) {
           // 비밀번호를 바꿧으면 로그아웃 후 메인
-          const apiLogOut = async () => {
-            await axios.get("http://j8a608.p.ssafy.io:8080/api/auth/logout");
-          };
-          apiLogOut();
-          localStorage.clear();
+          sessionStorage.clear();
           navigate("/");
         } else {
           navigate("/mypage");

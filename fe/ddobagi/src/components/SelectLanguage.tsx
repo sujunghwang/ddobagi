@@ -21,7 +21,7 @@ function SelectLanguage({ language, changeLanguageBy }: SelectLanguageProps) {
         <InputLabel
           id="select-label"
           className={styles.SelectLabel}
-          sx={{ fontFamily: "Pretendard-Regular" }}
+          sx={{ fontFamily: "Pretendard-Regular", border: "none" }}
         >
           Language
         </InputLabel>
