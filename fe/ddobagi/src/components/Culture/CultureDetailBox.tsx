@@ -2,7 +2,8 @@ import React from "react";
 import Card from '@mui/material/Card';
 import { Button, Box, Typography, CardActionArea, CardMedia, CardContent, Grid } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { MouseEventHandler } from 'react';
+// import { MouseEventHandler } from 'react';
+import axios from "axios";
 import { RootState } from "../../redux/RootReducer";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -60,30 +61,52 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others}:
     }
   }
 
-  // 영상 학습 완료 함수 (추후에 API POST 보낼 곳)
-  const handleEnded = () => {
-    console.log("비디오 재생이 완료되었습니다.");
-  }
+  const userId = useSelector(
+    (state: RootState) => state.inputUserInfo.payload.id
+  );
 
   // let idnumbers : Array<[number, string, any ]>;
-
+  
   // idnumbers = [[1, '독도', dokdo], [2, '놀이문화', game], [3, '경복궁', kb], [4, '한국의 넷플릭스', netflix]]
-
+  
   const getYouTubeThumbnailUrl = (youtubeUrl: string) => {
     const videoId = youtubeUrl.split("v=")[1];
     return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   };
-
-
+  
+  
   // const NowCategory = categoryProp
   // console.log(NowCategory)
   const { id } = useParams();
-
+  
   // @ts-ignore
   const [CategoryNumber, cultureNumber] = id.split('_');
-
+  
   console.log(CategoryNumber)
   console.log(cultureNumber)
+  
+  const CultureFinish = () => {
+    axios({
+      url: `http://j8a608.p.ssafy.io:8080/api/cultures/${cultureNumber}/users/${userId}`,
+      method: "POST",
+      // withCredentials: true,
+      // data: {
+      //   corrected : false
+      // },
+    })
+      .then(() => {
+        console.log("영상을 다봤어요")
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  // 영상 학습 완료 함수 (추후에 API POST 보낼 곳)
+  const handleEnded = () => {
+    console.log("비디오 재생이 완료되었습니다.");
+    CultureFinish()
+  }
 
   const navigate = useNavigate();
 
