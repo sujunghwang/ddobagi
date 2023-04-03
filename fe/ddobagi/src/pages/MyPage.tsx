@@ -14,7 +14,7 @@ import { inputUserInfo } from "../redux/UserInfo";
 import { useNavigate } from "react-router-dom";
 
 function MyPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const userStr = sessionStorage.getItem("token");
   const language = useSelector(
     (state: RootState) => state.languageChange.language
@@ -92,16 +92,15 @@ function MyPage() {
       }
     };
 
-    
+
     fetchWrongs();
   }, [userId]);
-  
+
   // console.log(reviewList)
   const ReviewNum = reviewList?.data
   console.log(ReviewNum)
 
   // 리뷰용 API
-  const navigate = useNavigate();
   const navigateToReview = () => {
     navigate(`/learning/review/`, {
       state: {
