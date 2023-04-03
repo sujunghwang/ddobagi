@@ -81,7 +81,9 @@ function CultureDetail() {
   useEffect(() => {
     // API 호출
     axios
-      .get(`http://j8a608.p.ssafy.io:8080/api/cultures/1?common=${NewCategoryName}`)
+      .get(
+        `https://j8a608.p.ssafy.io/api/cultures/1?common=${NewCategoryName}`
+      )
       .then((res) => {
         setApiData(res.data);
         console.log(res.data)

@@ -345,3 +345,20 @@
   gap: 5rem;
   font-size: 1.5rem;
 }
+
+.loadAnime {
+  animation: slide-down 0.8s ease-in-out;
+}
+
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}

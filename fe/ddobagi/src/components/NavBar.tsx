@@ -11,14 +11,18 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { useNavigate, useLocation } from "react-router-dom";
 import ColorBtn from "../components/ColorBtn";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/RootReducer";
 import { useDispatch } from "react-redux";
 import { inputUserInfo } from "../redux/UserInfo";
 
+
 function NavBar() {
+
   //언어 변수
   const language = useSelector(
     (state: RootState) => state.languageChange.language
@@ -63,13 +67,13 @@ function NavBar() {
   //
 
   // 로그인 확인 변수
-  const userStr = localStorage.getItem("token");
+  const userStr = sessionStorage.getItem("token");
 
   //로그아웃 함수
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(inputUserInfo({ name: "", id: 0 }));
-    localStorage.clear();
+    sessionStorage.clear();
     navigateToHome();
   };
 
@@ -80,10 +84,9 @@ function NavBar() {
     <div>
       <AppBar position="fixed" color={location.pathname === "/" ? "transparent" : "inherit"} elevation={0}>
         <Container maxWidth="xl">
-          {/* 모바일 환경 */}
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
+              {/* <IconButton
                 size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -211,7 +214,7 @@ function NavBar() {
                     }}
                   />
                 )}
-              </Menu>
+              </Menu> */}
             </Box>
             <img
               src={"/img/Logo.png"}
@@ -253,8 +256,15 @@ function NavBar() {
                         location.pathname === "/parentpage/record" ||
                           location.pathname === "/parentpage/map" ||
                           location.pathname === "/parentpage/news"
-                          ? "0px 0px 6px 0px"
+                          ? "0px 0px 4px 0px"
                           : "0px 0px 0px 0px",
+
+                      color:
+                        location.pathname === "/parentpage/record" ||
+                          location.pathname === "/parentpage/map" ||
+                          location.pathname === "/parentpage/news"
+                          ? "rgb(255, 218, 80)"
+                          : "#000000",
                     }}
                   >
                     {language === "CN"
@@ -271,8 +281,12 @@ function NavBar() {
                   style={{
                     borderWidth:
                       location.pathname === "/CategoryList"
-                        ? "0px 0px 6px 0px"
+                        ? "0px 0px 4px 0px"
                         : "0px 0px 0px 0px",
+                    color:
+                      location.pathname === "/CategoryList"
+                        ? "rgb(255, 218, 80)"
+                        : "#000000",
                   }}
                 >
                   {language === "CN"
@@ -288,8 +302,12 @@ function NavBar() {
                   style={{
                     borderWidth:
                       location.pathname === "/CultureList"
-                        ? "0px 0px 6px 0px"
+                        ? "0px 0px 4px 0px"
                         : "0px 0px 0px 0px",
+                    color:
+                      location.pathname === "/CultureList"
+                        ? "rgb(255, 218, 80)"
+                        : "#000000",
                   }}
                 >
                   {language === "CN"
@@ -298,28 +316,30 @@ function NavBar() {
                       ? "văn hoá"
                       : "한국 문화"}
                 </div>
+                <div style={{ marginRight: "1rem" }}>
+                  <SelectLanguage />
+                </div>
+
                 {userStr && (
                   <div
                     key="내 정보"
                     className={styles.Router}
                     onClick={navigateToMyPage}
                     style={{
+                      borderRadius: "50px",
+                      color:
+                        location.pathname === "/mypage"
+                          ? "rgb(255, 218, 80)"
+                          : "#000000",
                       borderWidth:
                         location.pathname === "/mypage"
-                          ? "0px 0px 6px 0px"
+                          ? "0px 0px 4px 0px"
                           : "0px 0px 0px 0px",
                     }}
                   >
-                    {language === "CN"
-                      ? "我的简历"
-                      : language === "VI"
-                        ? "Thông tin của tôi"
-                        : "내 정보"}
+                    <PersonOutlineOutlinedIcon sx={{ fontSize: "2rem" }} />
                   </div>
                 )}
-                <div style={{ marginRight: "1rem" }}>
-                  <SelectLanguage />
-                </div>
                 {userStr === null && (
                   <ColorBtn
                     content={
@@ -335,20 +355,6 @@ function NavBar() {
                       setModal(true);
                       setModalContent("Login");
                     }}
-                  />
-                )}
-                {userStr && (
-                  <ColorBtn
-                    content={
-                      language === "CN"
-                        ? "登出"
-                        : language === "VI"
-                          ? "đăng xuất"
-                          : "로그아웃"
-                    }
-                    color="#FFCF70"
-                    width="9rem"
-                    onClick={logout}
                   />
                 )}
               </Box>

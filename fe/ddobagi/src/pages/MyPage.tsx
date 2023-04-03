@@ -9,9 +9,13 @@ import { RootState } from "../redux/RootReducer";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Loading from "../components/Loading";
+import { useDispatch } from "react-redux";
+import { inputUserInfo } from "../redux/UserInfo";
 import { useNavigate } from "react-router-dom";
 
 function MyPage() {
+  const navigate = useNavigate()
+  const userStr = sessionStorage.getItem("token");
   const language = useSelector(
     (state: RootState) => state.languageChange.language
   );
@@ -24,6 +28,13 @@ function MyPage() {
   const userName = useSelector(
     (state: RootState) => state.inputUserInfo.payload.name
   );
+  //로그아웃 함수
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(inputUserInfo({ name: "", id: 0 }));
+    sessionStorage.clear();
+    navigate('/');
+  };
   // 마이페이지 통계 정보를 수령합니다.
   interface data {
     viewedVideoCount: number;
@@ -49,7 +60,7 @@ function MyPage() {
     const fetchStatics = async () => {
       try {
         const response = await axios.get<Static>(
-          `http://j8a608.p.ssafy.io:8080/api/users/${userId}/statistics`
+          `https://j8a608.p.ssafy.io/api/users/${userId}/statistics`
         );
         setStatistics(response.data.data);
       } catch (error) {
@@ -72,7 +83,7 @@ function MyPage() {
     const fetchWrongs = async () => {
       try {
         const response = await axios.get<reviewData>(
-          `http://j8a608.p.ssafy.io:8080/api/users/${userId}/review`
+          `https://j8a608.p.ssafy.io/api/users/${userId}/review`
         );
         setReviewList(response.data);
         console.log(response.data)
@@ -113,8 +124,8 @@ function MyPage() {
                 language === "CN"
                   ? "信息变更"
                   : language === "VI"
-                  ? "thay đổi thông tin"
-                  : "회원정보 수정"
+                    ? "thay đổi thông tin"
+                    : "회원정보 수정"
               }
               color="#FF6B6B"
               width="15rem"
@@ -123,6 +134,19 @@ function MyPage() {
                 setModalContent("InfoEdit");
               }}
             />
+            {userStr &&
+              <ColorBtn
+                content={
+                  language === "CN"
+                    ? "登出"
+                    : language === "VI"
+                      ? "đăng xuất"
+                      : "로그아웃"
+                }
+                color="#FFCF70"
+                width="15rem"
+                onClick={logout}
+              />}
           </div>
         </div>
 
@@ -142,8 +166,8 @@ function MyPage() {
               {language === "CN"
                 ? "复习"
                 : language === "VI"
-                ? "việc ôn tập"
-                : "다시 풀기"}
+                  ? "việc ôn tập"
+                  : "다시 풀기"}
             </div>
             <hr className={styles.hr} />
             <div className={styles.DownGroup}>
@@ -151,8 +175,8 @@ function MyPage() {
                 {language === "CN"
                   ? "又可以解决错题了！"
                   : language === "VI"
-                  ? "Bạn có thể giải quyết vấn đề sai một lần nữa!"
-                  : "틀렸던 문제를 다시 풀어볼 수 있어요!"}
+                    ? "Bạn có thể giải quyết vấn đề sai một lần nữa!"
+                    : "틀렸던 문제를 다시 풀어볼 수 있어요!"}
               </div>
               <div>
                 <ColorBtn
@@ -160,8 +184,8 @@ function MyPage() {
                     language === "CN"
                       ? "解题"
                       : language === "VI"
-                      ? "giải quyết vấn đề"
-                      : "문제 풀기"
+                        ? "giải quyết vấn đề"
+                        : "문제 풀기"
                   }
                   color="#FFD93D"
                   width="11.5rem"

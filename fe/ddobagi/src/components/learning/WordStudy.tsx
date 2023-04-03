@@ -65,7 +65,7 @@ function WordStudy() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`http://j8a608.p.ssafy.io:8080/api/learnings/${situationId}`);
+      const response = await axios.get(`https://j8a608.p.ssafy.io/api/learnings/${situationId}`);
       setQuizIdData(response.data);
     };
     fetchData();
@@ -73,7 +73,7 @@ function WordStudy() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${quizIdData[quizIndex]}/`);
+      const response = await axios.get(`https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizIdData[quizIndex]}/`);
       setQuizData(response.data);
     };
     fetchData();
