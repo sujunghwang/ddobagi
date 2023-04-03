@@ -35,7 +35,7 @@ interface QuizData {
   solved: boolean;
 }
 
-const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, setIsCorrect, setIsWrong }) => {
+const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, setIsCorrect, setIsWrong }) => {
   //언어 변수
   const language = useSelector(
     (state: RootState) => state.languageChange.language
@@ -56,7 +56,7 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, se
     const fetchData = async () => {
       setIsLoading(true);
       try {
-      const response = await axios.get(`https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizId}/`);
+      const response = await axios.get(`http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${quizId}/`);
       setQuizData(response.data);
       // options와 answer를 합침
       const arr = [response.data.option1, response.data.option2, response.data.option3, response.data.answer];
@@ -212,4 +212,4 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, se
   );
 };
 
-export default Quiz;
+export default ReviewQuiz;

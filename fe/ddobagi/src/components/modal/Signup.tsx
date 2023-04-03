@@ -129,7 +129,7 @@ function SignUp({ closeModal }: Props) {
     const apiLogin = async () => {
       try {
         const response = await axios.post<LogInfo>(
-          "http://j8a608.p.ssafy.io:8080/api/auth/login",
+          "https://j8a608.p.ssafy.io/api/auth/login",
           {
             loginId: id,
             pw: password,
@@ -149,7 +149,7 @@ function SignUp({ closeModal }: Props) {
         dispatch(inputUserInfo(newUserInfo));
         const token = response.data.accessToken;
         const AccessToken = JSON.stringify(token);
-        localStorage.setItem("token", AccessToken);
+        sessionStorage.setItem("token", AccessToken);
         navigateToCategory();
         closeModal();
       } catch (error) {
@@ -169,7 +169,7 @@ function SignUp({ closeModal }: Props) {
     const signup = async () => {
       try {
         const response = await axios.post<SignupInfo>(
-          "http://j8a608.p.ssafy.io:8080/api/auth/signup",
+          "https://j8a608.p.ssafy.io/api/auth/signup",
           {
             loginId: id,
             pw: password,

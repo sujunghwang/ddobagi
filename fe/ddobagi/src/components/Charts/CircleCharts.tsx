@@ -13,8 +13,11 @@ function CircleCharts(
   }
 ) {
   const [progress, setProgress] = useState(0);
+
   useEffect(() => {
-    setProgress(props.value);
+    setTimeout(() => {
+      setProgress(props.value);
+    }, 1000);
   });
 
   return (

@@ -1,17 +1,29 @@
 .FContainer {
   border-radius: 0px 0px 30px 30px;
-  margin: 0 0 8rem 0;
+  // margin: 0 0 8rem 0;
   overflow: auto;
   box-sizing: border-box;
+  background-color: transparent;
+}
+
+.CContainer {
+  z-index: -2;
+  top: 0%;
+  left: -16%;
+  position: absolute;
+  width: 100.73vw;
+  height: 34.5rem;
+  background-color: rgb(82, 82, 82);
 }
 
 .CardContainer {
   position: relative;
-  width: 345px;
+  width: 430px;
   height: fit-content;
   flex-shrink: 0;
   flex-grow: 0;
   transition: scale 0.3s ease-out;
+
   &:hover {
     scale: 0.97;
   }
@@ -19,11 +31,11 @@
 
 .clearFog {
   position: absolute;
-  width: 345px;
-  height: 194px;
+  width: 430px;
+  height: 242px;
   background-color: rgba($color: #000000, $alpha: 0.5);
   z-index: 3;
-  border-radius: 10px 10px 0 0;
+  border-radius: 30px 30px 0 0;
   pointer-events: none;
 }
 
@@ -37,4 +49,39 @@
 
 :root {
   --swiper-pagination-color: #000000;
+  // --swiper-navigation-top-offset: 96%;
+  // --swiper-navigation-sides-offset: 40%;
+  --swiper-navigation-color: #000000;
+
+}
+
+.NavGroup {
+  z-index: 11;
+  position: absolute;
+  left: 48.75%;
+  transform: translateX(-200%);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  user-select: none;
+  flex-direction: row;
+}
+
+.NavBtn1 {
+  cursor: pointer;
+  display: flex;
+}
+
+.NavBtn2 {
+  margin-top: 10px;
+  z-index: 11;
+  position: absolute;
+  left: 48.75%;
+  transform: translateX(200%);
+  cursor: pointer;
+  display: flex;
+}
+
+.disable {
+  color: #cccccc;
 }
