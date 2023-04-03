@@ -9,6 +9,7 @@ import com.a608.ddobagi.common.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.a608.ddobagi.api.dto.respoonse.learning.SituationContentByCategoryQueryDto;
@@ -17,6 +18,7 @@ import com.a608.ddobagi.api.service.LearningService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class LearningController {
 

@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
  */
 
 @RestController
-@RequestMapping("/cultures")
+@RequestMapping("/api/cultures")
 @RequiredArgsConstructor
 public class CultureController {
 
