@@ -116,9 +116,11 @@ public class UserService {
 	}
 
 	//오답 리스트
-	public List<UserQuizReviewResponseDto> findUserQuizReviewList(Long userId) {
-		return userQuizRepositoryImpl.findUserQuizReviewList(userId);
+	public List<Long> findUserQuizReviewList(Long userId) {
+		// return userQuizRepositoryImpl.findUserQuizReviewList(userId);
+		return userQuizRepository.findIncorrectedQuizList(userId);
 	}
+
 
 	public UserProgressResponseDto findUserProgress(Long userId) {
 		int viewedVideoCount = Math.toIntExact(calCountUserViewedVideo(userId));
