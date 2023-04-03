@@ -1,5 +1,6 @@
 package com.a608.ddobagi.db.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -44,4 +45,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 		+ " and uq.isNowCorrected = true and uq.user.id = :userId")
 	Long countQuizBySituationIdAndUserQuizIsNowCorrected(
 		@Param("situationId") Long situationId, @Param("userId") Long userId);
+
 }
