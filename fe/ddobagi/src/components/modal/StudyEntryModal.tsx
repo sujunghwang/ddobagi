@@ -6,6 +6,8 @@ import Backdrop from "@mui/material/Backdrop";
 import CloseIcon from "@mui/icons-material/Close";
 import ColorBtn from "../ColorBtn";
 import styles from "./Modal.module.scss";
+import ConversationAnimation from "../animations/Consversation";
+import TestAnimation from "../animations/Test";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
@@ -15,7 +17,7 @@ type Props = {
   categoryName: string;
   color: string;
   progress: number;
-  situationId: number
+  situationId: number;
 };
 
 function StudyEntryModal({
@@ -25,17 +27,17 @@ function StudyEntryModal({
   categoryName,
   color,
   progress,
-  situationId
+  situationId,
 }: Props) {
   const exit = () => closeModal();
   const backGroundImgColor =
-    color === "#FF6B6B"
+    color === "#ffcfd8"
       ? "pink"
-      : color === "#92B4EC"
-        ? "blue"
-        : color === "#FFE69A"
-          ? "yellow"
-          : "green";
+      : color === "#e0f1ff"
+      ? "blue"
+      : color === "#fff9e2"
+      ? "yellow"
+      : "green";
   const style = {
     position: "absolute" as "absolute",
     width: { xs: "265px", md: "630px" },
@@ -59,7 +61,7 @@ function StudyEntryModal({
         situationTitle: situationTitle,
         progress: progress,
         color: color,
-        situationId: situationId
+        situationId: situationId,
       },
     });
   };
@@ -70,7 +72,7 @@ function StudyEntryModal({
         situationTitle: situationTitle,
         progress: progress,
         color: color,
-        situationId: situationId
+        situationId: situationId,
       },
     });
   };
@@ -100,31 +102,36 @@ function StudyEntryModal({
           <div
             onClick={exit}
             className={styles.CloseBtn}
-            style={{ paddingTop: "10px" }}
+            style={{ paddingTop: "10px", transform: "TranslateX(70%)" }}
           >
             <CloseIcon />
           </div>
           <div className={styles.SContainer}>
             <div className={styles.categoryName}>{categoryName}</div>
             <div className={styles.situationTitle}>{situationTitle}</div>
-            <div>애니메이션 두 개</div>
             <div className={styles.BtnGroup}>
-              <ColorBtn
-                content={"대화 연습"}
-                color={"#FFD93D"}
-                width={"220px"}
-                onClick={() => {
-                  navigateToConversation(situationTitle);
-                }}
-              />
-              <ColorBtn
-                content={"단어 연습"}
-                color={"#FF6B6B"}
-                width={"220px"}
-                onClick={() => {
-                  navigateToWord(situationTitle);
-                }}
-              />
+              <div className={styles.Group}>
+                <ConversationAnimation />
+                <ColorBtn
+                  content={"대화 연습"}
+                  color={"#FF6B6B"}
+                  width={"200px"}
+                  onClick={() => {
+                    navigateToConversation(situationTitle);
+                  }}
+                />
+              </div>
+              <div className={styles.Group}>
+                <TestAnimation />
+                <ColorBtn
+                  content={"단어 연습"}
+                  color={"#FFD93D"}
+                  width={"200px"}
+                  onClick={() => {
+                    navigateToWord(situationTitle);
+                  }}
+                />
+              </div>
             </div>
           </div>
         </Box>

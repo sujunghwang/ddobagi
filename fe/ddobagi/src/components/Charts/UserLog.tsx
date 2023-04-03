@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Charts.module.scss";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/RootReducer";
 interface Props {
   statistics: {
     viewedVideoCount: number;
@@ -18,34 +19,93 @@ interface Props {
 }
 
 function UserLog({ statistics }: Props) {
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+  );
+
   return (
     <div className={styles.Background2}>
-      <div className={styles.LogGroup}>
-        <div>본 영상</div>
-        <div className={styles.iconGroup}>
-          <img src={"/img/icon_1.png"} alt="icon_1" className={styles.icon} />
-          <div> x {statistics.viewedVideoCount}</div>
-        </div>
+      <div className={styles.title}>
+        {language === "CN"
+          ? "活动履历"
+          : language === "VI"
+          ? "lịch sử hoạt động"
+          : "활동 내역"}
       </div>
-      <div className={styles.LogGroup}>
-        <div>녹음한 문장</div>
-        <div className={styles.iconGroup}>
-          <img src={"/img/icon_2.png"} alt="icon_1" className={styles.icon} />
-          <div> x {statistics.recordedScriptCount}</div>
+      <hr className={styles.hr} />
+
+      <div className={styles.RowGroup}>
+        <div className={styles.SubGroup}>
+          <div className={styles.LogGroup}>
+            <div>
+              {language === "CN"
+                ? "观看过的视频"
+                : language === "VI"
+                ? "Lượt truy cập video"
+                : "본 영상"}
+            </div>
+            <div className={styles.iconGroup}>
+              <img
+                src={"/img/icon_1.png"}
+                alt="icon_1"
+                className={styles.icon}
+              />
+              <div> x {statistics.viewedVideoCount}</div>
+            </div>
+          </div>
+          <div className={styles.LogGroup}>
+            <div>
+              {language === "CN"
+                ? "录音次数"
+                : language === "VI"
+                ? "số lần thu âm"
+                : "녹음한 문장"}
+            </div>
+            <div className={styles.iconGroup}>
+              <img
+                src={"/img/icon_2.png"}
+                alt="icon_1"
+                className={styles.icon}
+              />
+              <div> x {statistics.recordedScriptCount}</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className={styles.LogGroup}>
-        <div>공부한 단어</div>
-        <div className={styles.iconGroup}>
-          <img src={"/img/icon_3.png"} alt="icon_1" className={styles.icon} />
-          <div> x {statistics.studiedQuizCount}</div>
-        </div>
-      </div>
-      <div className={styles.LogGroup}>
-        <div>모은 왕관</div>
-        <div className={styles.iconGroup}>
-          <img src={"/img/icon_4.png"} alt="icon_1" className={styles.icon} />
-          <div> x {statistics.viewedVideoCount}</div>
+        <div className={styles.SubGroup}>
+          <div className={styles.LogGroup}>
+            <div>
+              {language === "CN"
+                ? "学过的字"
+                : language === "VI"
+                ? "chữ đã học"
+                : "공부한 단어"}
+            </div>
+            <div className={styles.iconGroup}>
+              <img
+                src={"/img/icon_3.png"}
+                alt="icon_1"
+                className={styles.icon}
+              />
+              <div> x {statistics.studiedQuizCount}</div>
+            </div>
+          </div>
+          <div className={styles.LogGroup}>
+            <div>
+              {language === "CN"
+                ? "正确答案数"
+                : language === "VI"
+                ? "bộ sưu tập tem"
+                : "모은 도장"}
+            </div>
+            <div className={styles.iconGroup}>
+              <img
+                src={"/img/icon_4.png"}
+                alt="icon_1"
+                className={styles.icon}
+              />
+              <div> x {statistics.viewedVideoCount}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

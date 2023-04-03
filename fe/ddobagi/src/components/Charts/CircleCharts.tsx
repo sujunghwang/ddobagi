@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CircularProgress, {
   CircularProgressProps,
 } from "@mui/material/CircularProgress";
@@ -6,28 +6,38 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 function CircleCharts(
-  props: CircularProgressProps & { value: number; name: string }
+  props: CircularProgressProps & {
+    value: number;
+    name: string;
+    ChartColor: string;
+  }
 ) {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    setProgress(props.value);
+  });
+
   return (
-    <div>
+    <div style={{ color: props.ChartColor }}>
       <Box sx={{ position: "relative", display: "inline-flex" }}>
         <CircularProgress
           variant="determinate"
-          {...props}
-          size="12rem"
-          color="info"
-          thickness={4}
+          value={progress}
+          size="13rem"
+          color="inherit"
+          thickness={6}
           sx={{
-            position: 'absolute',
+            position: "absolute",
             left: 0,
-            zIndex: 2
+            zIndex: 2,
           }}
         />
         <CircularProgress
           variant="determinate"
           value={100}
-          size="12rem"
-          sx={{ color: "white" }} thickness={4}
+          size="13rem"
+          sx={{ color: "white" }}
+          thickness={6}
         />
         <Box
           sx={{
@@ -45,8 +55,10 @@ function CircleCharts(
           <Typography
             variant="h6"
             component="div"
-            color="white"
+            color="black"
             fontSize="1.5rem"
+            fontFamily={"MaplestoryOTFLight"}
+            zIndex={2}
             align="center"
           >
             {props.name}
@@ -54,8 +66,9 @@ function CircleCharts(
           <Typography
             variant="caption"
             component="div"
-            color="white"
+            color="black"
             fontSize="2rem"
+            fontFamily={"MaplestoryOTFLight"}
           >{`${Math.round(props.value)}%`}</Typography>
         </Box>
       </Box>{" "}

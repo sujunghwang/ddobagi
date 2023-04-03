@@ -10,6 +10,7 @@ import CultureList from "./pages/CultureList";
 import ParentPage1 from "./pages/ParentPage";
 import ParentPage2 from "./pages/ParentPage2";
 import ParentPage3 from "./pages/ParentPage3";
+import ParentPage4 from "./pages/ParentPage4";
 import MyPage from "./pages/MyPage";
 import ConversationStudy from "./components/learning/ConversationStudy";
 import WordStudy from "./components/learning/WordStudy";
@@ -31,6 +32,7 @@ function App() {
             <Route path="/parentpage/record" element={<ParentPage1 />}/>
             <Route path="/parentpage/map" element={<ParentPage2 />}/>
             <Route path="/parentpage/news" element={<ParentPage3 />}/>
+            <Route path="/parentpage/support" element={<ParentPage4 />}/>
             {/* <Route path = "/parentpage" element={<Landing />}/>
               <Route path = "/parentpage/map" element={<Landing />}/>
               <Route path = "/parentpage/news" element={<Landing />}/>

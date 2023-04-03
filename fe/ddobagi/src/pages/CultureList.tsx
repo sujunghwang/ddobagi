@@ -1,9 +1,7 @@
-import React from 'react';
-import { Typography, Box, Button } from '@mui/material';
-import cultureimg from '../assets/korean_culture.jpg'
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Typography, Box, Button } from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/RootReducer";
 import BreadCrumbs from "../components/BreadCrumbs";
@@ -11,6 +9,7 @@ import styles from "./CategoryList.module.scss";
 // import CultureDetail from '../components/Culture/CultureDetail';
 // import VideoScroll from "../components/VideoScroll";
 import SwiperList from "../components/Swiper/SwiperList";
+import Loading from "../components/Loading";
 
 // API에서 받아온 데이터의 타입을 선언합니다.
 interface ApiData {
@@ -55,9 +54,17 @@ function CultureList() {
 
   // 카테고리명을 변수화 ( 모달에 넘겨주기 위함 )
   const category1 =
-    language === "CN" ? "朝鲜纪念日" : language === "VI" ? "ngày kỷ niệm của Hàn Quốc" : "한국의 기념일";
+    language === "CN"
+      ? "朝鲜纪念日"
+      : language === "VI"
+      ? "ngày kỷ niệm của Hàn Quốc"
+      : "한국의 기념일";
   const category2 =
-    language === "CN" ? "朝鲜传统" : language === "VI" ? "truyền thống của Hàn Quốc" : "한국의 전통";
+    language === "CN"
+      ? "朝鲜传统"
+      : language === "VI"
+      ? "truyền thống của Hàn Quốc"
+      : "한국의 전통";
   const category3 =
     language === "CN"
       ? "朝鲜文化艺术"
@@ -82,20 +89,17 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get('http://j8a608.p.ssafy.io:8080/api/cultures/1?common=ANNIVERSARY')
+      .get("http://j8a608.p.ssafy.io:8080/api/cultures/1?common=ANNIVERSARY")
       .then((res) => {
         setApiData1(res.data);
-        console.log(apiData1)
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch((error) => {});
   }, []);
 
   useEffect(() => {
     // API 호출
     axios
-      .get('http://j8a608.p.ssafy.io:8080/api/cultures/1?common=TRADITION')
+      .get("http://j8a608.p.ssafy.io:8080/api/cultures/1?common=TRADITION")
       .then((res) => {
         setApiData2(res.data);
       })
@@ -107,7 +111,7 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get('http://j8a608.p.ssafy.io:8080/api/cultures/1?common=ART')
+      .get("http://j8a608.p.ssafy.io:8080/api/cultures/1?common=ART")
       .then((res) => {
         setApiData3(res.data);
       })
@@ -119,7 +123,7 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get('http://j8a608.p.ssafy.io:8080/api/cultures/1?common=FOOD')
+      .get("http://j8a608.p.ssafy.io:8080/api/cultures/1?common=FOOD")
       .then((res) => {
         setApiData4(res.data);
       })
@@ -128,62 +132,66 @@ function CultureList() {
       });
   }, []);
 
-
-  return(
-    <div>
-      <Box
-        sx={{
-          width:"100%",
-          height:"280px",
-          display:"flex",
-          justifyContent :"center",
-          backgroundColor: "primary.dark",
-        }}>
-        <Typography sx={{
-          display:"flex",
-          fontSize: "50px",
-          alignItems:"center",
-          fontFamily: "CookieRun-Regular",
-        }}>
-          한국 문화 학습
-        </Typography>
-      </Box>
+  return (
+    <div className={styles.Fcontainer}>
+      <div className={styles.Banner}>
+        <div
+          style={{
+            fontSize: "3.8rem",
+            alignItems: "center",
+            fontFamily: "MaplestoryOTFBold",
+          }}
+        >
+          {language === "CN"
+            ? "韩国文化"
+            : language === "VI"
+            ? "văn hoá"
+            : "한국 문화"}
+        </div>
+      </div>
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
       </div>
       <Box>
-        {/* <Typography>
-          한국의 예술 문화
-        </Typography> */}
-        <div className={styles.CategoryName}>{category1}</div>
-        <Box sx={{ height:"50px"}} />
-          {/* @ts-ignore */}
-          <SwiperList dataProp={apiData1} boxColor="red" />
-        <Box sx={{ height:"50px"}} />
-        <hr />
-        <Box sx={{ height:"50px"}} />
-      <div className={styles.CategoryName}>{category2}</div>
-        <Box sx={{ height:"50px"}} />
-        {/* @ts-ignore */}
-          <SwiperList dataProp={apiData2} boxColor="blue" />
-        <Box sx={{ height:"50px"}} />
-        <hr />
-        <Box sx={{ height:"50px"}} />
-      <div className={styles.CategoryName}>{category3}</div>
-        <Box sx={{ height:"50px"}} />
-        {/* @ts-ignore */}
-          <SwiperList dataProp={apiData3} boxColor="green" />
-        <Box sx={{ height:"50px"}} />
-        <hr />
-        <Box sx={{ height:"50px"}} />
-      <div className={styles.CategoryName}>{category4}</div>
-        <Box sx={{ height:"50px"}} />
-        {/* @ts-ignore */}
-          <SwiperList dataProp={apiData4} boxColor="yellow" />
-        </Box>
-      <Box sx={{ height:"50px"}} />
+        <div className={styles.CategoryBox2}>
+          <div className={styles.CategoryName}>{category1}</div>
+          {apiData1 ? (
+            // @ts-ignore
+            <SwiperList dataProp={apiData1} boxColor="red" />
+          ) : (
+            <Loading />
+          )}
+        </div>
+        <div className={styles.CategoryBox2}>
+          <div className={styles.CategoryName}>{category2}</div>
+          {apiData2 ? (
+            // @ts-ignore
+            <SwiperList dataProp={apiData2} boxColor="yellow" />
+          ) : (
+            <Loading />
+          )}
+        </div>
+        <div className={styles.CategoryBox2}>
+          <div className={styles.CategoryName}>{category3}</div>
+          {apiData3 ? (
+            // @ts-ignore
+            <SwiperList dataProp={apiData3} boxColor="green" />
+          ) : (
+            <Loading />
+          )}
+        </div>
+        <div className={styles.CategoryBox2}>
+          <div className={styles.CategoryName}>{category4}</div>
+          {apiData4 ? (
+            // @ts-ignore
+            <SwiperList dataProp={apiData4} boxColor="blue" />
+          ) : (
+            <Loading />
+          )}
+        </div>
+      </Box>
     </div>
-  )
+  );
 }
 
 export default CultureList;

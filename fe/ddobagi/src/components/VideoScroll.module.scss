@@ -1,91 +1,40 @@
 .FContainer {
-  border-radius: 30px;
-  margin: 1rem 5rem 5rem 5rem;
-  box-shadow: inset 0px 10px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 0px 30px 30px;
+  margin: 0 0 8rem 0;
   overflow: auto;
-  padding-top: 10px;
   box-sizing: border-box;
 }
 
-.FContainer::-webkit-scrollbar {
-  display: none;
-}
-
-.SContainer {
-  display: flex;
-  flex-wrap: nowrap;
-  margin: 2rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  gap: 4rem;
-}
 .CardContainer {
   position: relative;
-  width: 345;
+  width: 345px;
+  height: fit-content;
   flex-shrink: 0;
   flex-grow: 0;
+  transition: scale 0.3s ease-out;
+  &:hover {
+    scale: 0.97;
+  }
 }
 
-.Crown {
+.clearFog {
   position: absolute;
-  top: -15%;
-  left: 50%;
-  transform: translate(-50%, 15%);
-  z-index: 1;
+  width: 345px;
+  height: 194px;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  z-index: 3;
+  border-radius: 10px 10px 0 0;
+  pointer-events: none;
 }
 
-.LeftIcon {
-  font-size: 4rem;
-  opacity: 0.5;
+.Stamp {
   position: absolute;
-  z-index: 2;
-  left: 5rem;
-  transform: translate(0, 130%) scaleX(-1);
-  cursor: pointer;
+  transform: translate(-83%, -20%);
+  scale: 0.6;
+  z-index: 5;
+  pointer-events: none;
 }
 
-.RightIcon {
-  font-size: 4rem;
-  opacity: 0.5;
-  position: absolute;
-  z-index: 2;
-  right: 5rem;
-  transform: translate(0, 130%);
-  cursor: pointer;
-}
-
-@media (max-width: 900px) {
-  .FContainer {
-    border-radius: 30px;
-    margin: 1rem 1rem 5rem 1rem;
-    box-shadow: inset 0px 10px 0px rgba(0, 0, 0, 0.25);
-    overflow: auto;
-    padding-top: 10px;
-    box-sizing: border-box;
-  }
-  .SContainer {
-    display: flex;
-    flex-wrap: nowrap;
-    margin: 2rem;
-    gap: 4rem;
-  }
-  .LeftIcon {
-    font-size: 4rem;
-    opacity: 0.5;
-    position: absolute;
-    z-index: 2;
-    left: 0;
-    transform: translate(0, 130%) scaleX(-1);
-    cursor: pointer;
-  }
-
-  .RightIcon {
-    font-size: 4rem;
-    opacity: 0.5;
-    position: absolute;
-    z-index: 2;
-    right: 0;
-    transform: translate(0, 130%);
-    cursor: pointer;
-  }
+:root {
+  --swiper-pagination-color: #000000;
 }

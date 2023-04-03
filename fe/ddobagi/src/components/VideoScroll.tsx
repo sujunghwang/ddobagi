@@ -3,8 +3,8 @@ import VideoCard from "./VideoCard";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/RootReducer";
 import styles from "./VideoScroll.module.scss";
-import { IconButton } from "@mui/material";
-import PlayCircleOutlineOutlinedIcon from "@mui/icons-material/PlayCircleOutlineOutlined";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay, Mousewheel } from "swiper";
 
 interface SituationTrans {
   lang: string;
@@ -44,42 +44,48 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
       style={{ backgroundColor: color }}
       className={styles.FContainer}
     >
-      <IconButton
-        className={styles.LeftIcon}
-        onClick={() => {
-          componentRef.current?.scrollBy({ left: -330, behavior: "smooth" });
+      <Swiper
+        modules={[Pagination, Autoplay, Mousewheel]}
+        spaceBetween={100}
+        mousewheel={true}
+        grabCursor={true}
+        pagination={{
+          clickable: true,
         }}
-        sx={{ position: "absolute", color: "white" }}
-      >
-        <PlayCircleOutlineOutlinedIcon sx={{ fontSize: "4rem" }} />
-      </IconButton>
-      <IconButton
-        className={styles.RightIcon}
-        onClick={() => {
-          componentRef.current?.scrollBy({ left: 330, behavior: "smooth" });
+        autoplay={{ delay: 3300, disableOnInteraction: false }}
+        breakpoints={{
+          360: {
+            slidesPerView: 1,
+          },
+          760: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+          1520: {
+            slidesPerView: 4,
+          }
         }}
-        sx={{ position: "absolute", color: "white" }}
+        style={{ padding: "3rem" }}
+
       >
-        <PlayCircleOutlineOutlinedIcon sx={{ fontSize: "4rem" }} />
-      </IconButton>
-      <div className={styles.SContainer}>
         {videolist.situationList.map((item, index) => (
-          <VideoCard
-            key={index}
-            situationThumbnail={item.thumbnail}
-            progress={item.progress}
-            situationTitle={item.situationTransList[lang].title}
-            situationId={item.situationId}
-            isCompleted={item.isCompleted}
-            color={color}
-            categoryName={categoryName}
-          />
+          <SwiperSlide key={index}
+          >
+            <VideoCard
+              situationThumbnail={item.thumbnail}
+              progress={item.progress}
+              situationTitle={item.situationTransList[lang].title}
+              situationId={item.situationId}
+              isCompleted={item.isCompleted}
+              color={color}
+              categoryName={categoryName}
+            />
+          </SwiperSlide>
         ))}
-        <div className="noselect" style={{ color: color }}>
-          e
-        </div>
-      </div>
-    </div>
+      </Swiper>
+    </div >
   );
 }
 

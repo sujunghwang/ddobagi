@@ -11,6 +11,9 @@ import axios from "axios";
 import Loading from "../components/Loading";
 
 function MyPage() {
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+  );
   const [modal, setModal] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<string>("");
   const closeModal = () => setModal(false);
@@ -91,49 +94,84 @@ function MyPage() {
   // 리뷰용 API
 
   return (
-    <div>
-      <div className={styles.Banner}>
-        <div className={styles.Header}>마이 페이지</div>
-      </div>
+    <div className={styles.body}>
       <div className={styles.BreadCrum}>
         <BreadCrumbs />
       </div>
-      <div className={styles.title}>{userName}의 기록</div>
-      {statistics ? <UserLog statistics={statistics} /> : <Loading />}
-
-      <div className={styles.Btn}>
-        <ColorBtn
-          content="회원정보 수정"
-          color="#FF6B6B"
-          width="15rem"
-          onClick={() => {
-            setModal(true);
-            setModalContent("InfoEdit");
-          }}
-        />
-      </div>
-      <div className={styles.title}>학습 진행도</div>
-      {statistics ? <MypageCharts statistics={statistics} /> : <Loading />}
-      <div className={styles.CheckList}>
-        <div className={styles.Header}> 다시 풀기 </div>
-        <div style={{ fontSize: "1.5rem" }}>
-          틀렸던 문제들을 다시 풀어보세요!
+      <div className={styles.OuterContainer}>
+        <div className={styles.userName}>
+          <div className={styles.nameTxt}>{userName}</div>
+          <div className={styles.Btn}>
+            <ColorBtn
+              content={
+                language === "CN"
+                  ? "信息变更"
+                  : language === "VI"
+                  ? "thay đổi thông tin"
+                  : "회원정보 수정"
+              }
+              color="#FF6B6B"
+              width="15rem"
+              onClick={() => {
+                setModal(true);
+                setModalContent("InfoEdit");
+              }}
+            />
+          </div>
         </div>
-        <div className={styles.Btn}>
-          <ColorBtn
-            content="풀러 가기"
-            color="#FFD93D"
-            width="11.5rem"
-            onClick={() => {}}
+
+        <div className={styles.RContainer}>
+          <div className={styles.BContainer}>
+            {statistics ? <UserLog statistics={statistics} /> : <Loading />}
+          </div>
+          <div className={styles.BContainer}>
+            {statistics ? (
+              <MypageCharts statistics={statistics} />
+            ) : (
+              <Loading />
+            )}
+          </div>
+          <div className={styles.Retry}>
+            <div className={styles.title}>
+              {language === "CN"
+                ? "复习"
+                : language === "VI"
+                ? "việc ôn tập"
+                : "다시 풀기"}
+            </div>
+            <hr className={styles.hr} />
+            <div className={styles.DownGroup}>
+              <div>
+                {language === "CN"
+                  ? "又可以解决错题了！"
+                  : language === "VI"
+                  ? "Bạn có thể giải quyết vấn đề sai một lần nữa!"
+                  : "틀렸던 문제를 다시 풀어볼 수 있어요!"}
+              </div>
+              <div>
+                <ColorBtn
+                  content={
+                    language === "CN"
+                      ? "解题"
+                      : language === "VI"
+                      ? "giải quyết vấn đề"
+                      : "문제 풀기"
+                  }
+                  color="#FFD93D"
+                  width="11.5rem"
+                  onClick={() => {}}
+                />
+              </div>
+            </div>
+          </div>
+          <UserInfoModal
+            closeModal={closeModal}
+            modalContent={modalContent}
+            setModalContent={setModalContent}
+            modal={modal}
           />
         </div>
       </div>
-      <UserInfoModal
-        closeModal={closeModal}
-        modalContent={modalContent}
-        setModalContent={setModalContent}
-        modal={modal}
-      />
     </div>
   );
 }
