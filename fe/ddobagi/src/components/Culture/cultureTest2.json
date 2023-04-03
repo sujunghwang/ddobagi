@@ -1,0 +1,173 @@
+{
+  "data": {
+      "categoryName": [
+          {
+              "categoryId": 3,
+              "lang": "KR",
+              "categoryName": "한국의 예술문화2"
+          },
+          {
+              "categoryId": 1,
+              "lang": "CN",
+              "categoryName": "chi1"
+          },
+          {
+              "categoryId": 1,
+              "lang": "VI",
+              "categoryName": "vie1"
+          }
+      ],
+      "cultureList": [
+        {
+            "cultureId": 1,
+            "thumbnail": "https://www.youtube.com/watch?v=CINyyv0GMIU",
+            "cultureContentQueryDtoList": [
+                {
+                    "cultureId": 1,
+                    "lang": "KR",
+                    "title": "펭수의 독도 체험",
+                    "description": "한국설명1"
+                },
+                {
+                    "cultureId": 1,
+                    "lang": "CN",
+                    "title": "중국타이틀1",
+                    "description": "중국설명1"
+                },
+                {
+                    "cultureId": 1,
+                    "lang": "VI",
+                    "title": "베트타이틀1",
+                    "description": "베트설명1"
+                }
+            ],
+            "completed": true
+        },
+        {
+          "cultureId": 2,
+          "thumbnail": "https://www.youtube.com/watch?v=16t90uCcQH0",
+          "cultureContentQueryDtoList": [
+              {
+                  "cultureId": 2,
+                  "lang": "KR",
+                  "title": "한국의 K-POP문화",
+                  "description": "K-POP은 대한민국의 대중가요입니다. 싸이와 BTS, 블랙핑크 등 다양한 K-POP 가수들과 한국의 K-POP문화에 대해 알아보아요."
+              },
+              {
+                  "cultureId": 2,
+                  "lang": "CN",
+                  "title": "중국타이틀1",
+                  "description": "중국설명1"
+              },
+              {
+                  "cultureId": 2,
+                  "lang": "VI",
+                  "title": "베트타이틀1",
+                  "description": "베트설명1"
+              }
+          ],
+          "completed": true
+        },
+        {
+          "cultureId": 3,
+          "thumbnail": "https://www.youtube.com/watch?v=bEzDbc9r06Y",
+          "cultureContentQueryDtoList": [
+              {
+                  "cultureId": 3,
+                  "lang": "KR",
+                  "title": "외국인이 느끼는 한국의 문화 차이",
+                  "description": "한국설명1"
+              },
+              {
+                  "cultureId": 3,
+                  "lang": "CN",
+                  "title": "중국타이틀1",
+                  "description": "중국설명1"
+              },
+              {
+                  "cultureId": 3,
+                  "lang": "VI",
+                  "title": "베트타이틀1",
+                  "description": "베트설명1"
+              }
+          ],
+          "completed": true
+        },
+        {
+          "cultureId": 4,
+          "thumbnail": "https://www.youtube.com/watch?v=yVMFqV1zbjw",
+          "cultureContentQueryDtoList": [
+              {
+                  "cultureId": 4,
+                  "lang": "KR",
+                  "title": "경복궁",
+                  "description": "한국설명1"
+              },
+              {
+                  "cultureId": 4,
+                  "lang": "CN",
+                  "title": "중국타이틀1",
+                  "description": "중국설명1"
+              },
+              {
+                  "cultureId": 4,
+                  "lang": "VI",
+                  "title": "베트타이틀1",
+                  "description": "베트설명1"
+              }
+          ],
+          "completed": true
+        },
+        {
+          "cultureId": 5,
+          "thumbnail": "https://www.youtube.com/watch?v=3Z3cSy1WADs",
+          "cultureContentQueryDtoList": [
+              {
+                  "cultureId": 5,
+                  "lang": "KR",
+                  "title": "5번째임다",
+                  "description": "한국설명1"
+              },
+              {
+                  "cultureId": 5,
+                  "lang": "CN",
+                  "title": "중국타이틀1",
+                  "description": "중국설명1"
+              },
+              {
+                  "cultureId": 5,
+                  "lang": "VI",
+                  "title": "베트타이틀1",
+                  "description": "베트설명1"
+              }
+          ],
+          "completed": true
+        },
+        {
+          "cultureId": 6,
+          "thumbnail": "https://www.youtube.com/watch?v=ACxta4XqWgE",
+          "cultureContentQueryDtoList": [
+              {
+                  "cultureId": 6,
+                  "lang": "KR",
+                  "title": "더글로리",
+                  "description": "멋지다 연진아"
+              },
+              {
+                  "cultureId": 6,
+                  "lang": "CN",
+                  "title": "중국타이틀1",
+                  "description": "중국설명1"
+              },
+              {
+                  "cultureId": 6,
+                  "lang": "VI",
+                  "title": "베트타이틀1",
+                  "description": "베트설명1"
+              }
+          ],
+          "completed": true
+        }
+      ]
+  }
+}

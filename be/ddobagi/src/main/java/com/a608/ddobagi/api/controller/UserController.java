@@ -58,7 +58,7 @@ public class UserController {
 
 	//회원의 오답 리스트 조회
 	@GetMapping("/{userId}/review")
-	public ApiResponse<List<UserQuizReviewResponseDto>> getUserQuizReviewList(@PathVariable Long userId) {
+	public ApiResponse<List<Long>> getUserQuizReviewList(@PathVariable Long userId) {
 		return new ApiResponse<>(userService.findUserQuizReviewList(userId));
 	}
 

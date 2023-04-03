@@ -24,7 +24,7 @@ public class QScript extends EntityPathBase<Script> {
 
     public final StringPath defaultContent = createString("defaultContent");
 
-    public final TimePath<java.time.LocalTime> endTime = createTime("endTime", java.time.LocalTime.class);
+    public final NumberPath<Long> endTime = createNumber("endTime", Long.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -34,7 +34,7 @@ public class QScript extends EntityPathBase<Script> {
 
     public final QSituation situation;
 
-    public final TimePath<java.time.LocalTime> startTime = createTime("startTime", java.time.LocalTime.class);
+    public final NumberPath<Long> startTime = createNumber("startTime", Long.class);
 
     public final ListPath<UserScript, QUserScript> userScriptList = this.<UserScript, QUserScript>createList("userScriptList", UserScript.class, QUserScript.class, PathInits.DIRECT2);
 

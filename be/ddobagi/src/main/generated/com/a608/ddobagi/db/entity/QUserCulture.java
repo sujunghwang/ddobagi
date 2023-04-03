@@ -48,7 +48,7 @@ public class QUserCulture extends EntityPathBase<UserCulture> {
 
     public QUserCulture(Class<? extends UserCulture> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.culture = inits.isInitialized("culture") ? new QCulture(forProperty("culture")) : null;
+        this.culture = inits.isInitialized("culture") ? new QCulture(forProperty("culture"), inits.get("culture")) : null;
         this.user = inits.isInitialized("user") ? new QUser(forProperty("user")) : null;
     }
 
