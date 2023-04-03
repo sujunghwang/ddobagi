@@ -65,7 +65,7 @@ const Recording = (props: Props) => {
       const url = URL.createObjectURL(convertedBlob);
       setBlobUrl(url);
       const response = await axios.post(
-        "https://j8a608.p.ssafy.io.api/api/conversations/record",
+        "https://j8a608.p.ssafy.io/api/conversations/record",
         formData,
         {
           headers: {

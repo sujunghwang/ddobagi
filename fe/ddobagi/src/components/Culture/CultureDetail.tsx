@@ -80,7 +80,7 @@ function CultureDetail() {
     // API 호출
     axios
       .get(
-        `https://j8a608.p.ssafy.io.api/api/cultures/1?common=${NewCategoryName}`
+        `https://j8a608.p.ssafy.io/api/cultures/1?common=${NewCategoryName}`
       )
       .then((res) => {
         setApiData(res.data);

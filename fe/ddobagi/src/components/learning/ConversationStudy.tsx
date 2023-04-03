@@ -103,7 +103,7 @@ function ConversationStudy() {
     const fetchScript = async () => {
       try {
         const response = await axios.get<Script[]>(
-          `https://j8a608.p.ssafy.io.api/api/conversations/${situationId}/${userId}/script`
+          `https://j8a608.p.ssafy.io/api/conversations/${situationId}/${userId}/script`
         );
         const newScripts = [];
         if (language === "VI") {
@@ -155,7 +155,7 @@ function ConversationStudy() {
     const fetchVideoInfo = async () => {
       try {
         const response = await axios.get<MapType>(
-          `https://j8a608.p.ssafy.io.api/api/conversations/${situationId}`
+          `https://j8a608.p.ssafy.io/api/conversations/${situationId}`
         );
         setVideoInfo(response.data);
       } catch (error) {
@@ -196,7 +196,7 @@ function ConversationStudy() {
     const fetchRecordInfo = async () => {
       try {
         const response = await axios.get<number>(
-          `https://j8a608.p.ssafy.io.api/api/conversations/${situationId}/${userId}/record`
+          `https://j8a608.p.ssafy.io/api/conversations/${situationId}/${userId}/record`
         );
         setRecord(response.data);
       } catch (error) {

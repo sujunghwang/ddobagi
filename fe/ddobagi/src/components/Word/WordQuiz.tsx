@@ -54,7 +54,7 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz }) 
     const fetchData = async () => {
       setIsLoading(true);
       try {
-      const response = await axios.get(`https://j8a608.p.ssafy.io.api/api/quizzes/${userId}/question/${quizId}/`);
+      const response = await axios.get(`https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizId}/`);
       setQuizData(response.data);
       // options와 answer를 합침
       const arr = [response.data.option1, response.data.option2, response.data.option3, response.data.answer];

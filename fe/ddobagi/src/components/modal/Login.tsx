@@ -90,7 +90,7 @@ function Login({ setModalContent, closeModal }: Props) {
       const apiLogin = async () => {
         try {
           const response = await axios.post<LogInfo>(
-            "https://j8a608.p.ssafy.io.api/api/auth/login",
+            "https://j8a608.p.ssafy.io/api/auth/login",
             {
               "loginId": id,
               "pw": password

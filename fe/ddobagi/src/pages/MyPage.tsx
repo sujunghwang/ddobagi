@@ -60,7 +60,7 @@ function MyPage() {
     const fetchStatics = async () => {
       try {
         const response = await axios.get<Static>(
-          `https://j8a608.p.ssafy.io.api/api/users/${userId}/statistics`
+          `https://j8a608.p.ssafy.io/api/users/${userId}/statistics`
         );
         setStatistics(response.data.data);
       } catch (error) {
@@ -92,7 +92,7 @@ function MyPage() {
     const fetchWrongs = async () => {
       try {
         const response = await axios.get<reviews>(
-          `https://j8a608.p.ssafy.io.api/api/users/${userId}/review`
+          `https://j8a608.p.ssafy.io/api/users/${userId}/review`
         );
         setReviewList(response.data.data);
       } catch (error) {
