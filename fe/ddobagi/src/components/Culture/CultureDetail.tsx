@@ -175,6 +175,7 @@ function CultureDetail() {
 
   console.log(cultureNumber)
   console.log(OtherCulture)
+  console.log(targetCulture)
 
   return(
     <div>
