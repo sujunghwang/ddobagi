@@ -26,6 +26,7 @@ import lombok.RequiredArgsConstructor;
  */
 
 @RestController
+@RequestMapping("/api")
 // @RequestMapping("/parents/information")
 @RequiredArgsConstructor
 public class InformationController {
