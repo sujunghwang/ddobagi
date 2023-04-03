@@ -3,6 +3,7 @@ FROM node:18 AS build
 WORKDIR /ddobagi
 COPY package.json .
 RUN npm install
+RUN npm install typescript
 COPY . .
 RUN npm run build
 
