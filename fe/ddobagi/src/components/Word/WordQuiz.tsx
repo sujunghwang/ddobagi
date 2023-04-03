@@ -85,7 +85,7 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, se
   // const quizData = quizdata3
   const CorrectWord = () => {
     axios({
-      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
+      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
@@ -106,7 +106,7 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, se
 
   const WrongWord = () => {
     axios({
-      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
+      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
