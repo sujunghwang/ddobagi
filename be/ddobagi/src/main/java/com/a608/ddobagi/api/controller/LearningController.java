@@ -22,7 +22,7 @@ public class LearningController {
 
 	private final LearningService learningService;
 
-	 @GetMapping(value = "/api/learnings/{userId}/{categoryCommon}")
+	 @GetMapping(value = "/learnings/{userId}/{categoryCommon}")
 	 public ResponseEntity<Object> situationListByCategory(@PathVariable Long userId, @PathVariable String categoryCommon) {
 		 Map<String, Object> response = new HashMap<>();
 		 List<SituationContentByCategoryResponseDto> result = learningService.getSituationListByCategory(userId, categoryCommon);
@@ -30,7 +30,7 @@ public class LearningController {
 		 return ResponseEntity.ok(response);
 	 }
 
-	@GetMapping(value = "/api/learnings/{situationId}")
+	@GetMapping(value = "/learnings/{situationId}")
 	public List<Long> getQuizListBySituationId(@PathVariable Long situationId){
 		List<Long> quizList = learningService.findQuizListBySituationId(situationId);
 		return quizList;

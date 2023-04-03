@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
-@RequestMapping("/api/centers")
+@RequestMapping("/centers")
 @RestController
 public class CenterController {
 

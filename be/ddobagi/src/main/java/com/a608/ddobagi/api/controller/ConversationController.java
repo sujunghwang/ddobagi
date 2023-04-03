@@ -27,22 +27,22 @@ public class ConversationController {
 
     private final ConversationService conversationService;
 
-    @GetMapping(value = "/api/conversations/{situationId}")
+    @GetMapping(value = "/conversations/{situationId}")
     public SituationDetailResponse getSituationDetails(@PathVariable Long situationId){
         return conversationService.findSituationDetails(situationId);
     }
 
-    @GetMapping(value = "/api/conversations/{situationId}/{userId}/record")
+    @GetMapping(value = "/conversations/{situationId}/{userId}/record")
     public Long getRecordCount(@PathVariable Long situationId, @PathVariable Long userId){
         return conversationService.findRecordCount(situationId, userId);
     }
 
-    @GetMapping(value = "/api/conversations/{situationId}/{userId}/script")
+    @GetMapping(value = "/conversations/{situationId}/{userId}/script")
     public List<ScriptResponse> getScriptList(@PathVariable Long situationId, @PathVariable Long userId){
         return conversationService.findScriptList(situationId, userId);
     }
 
-    @PostMapping(value = "/api/conversations/record")
+    @PostMapping(value = "/conversations/record")
     public float saveRecord(@RequestParam("situation_id") String situationId,
         @RequestParam("user_id") String userId,
         @RequestParam("script_id") String scriptId,
