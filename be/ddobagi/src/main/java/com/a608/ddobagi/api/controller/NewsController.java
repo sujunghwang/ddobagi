@@ -25,7 +25,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/parents/news")
+@RequestMapping("api/parents/news")
 @RequiredArgsConstructor
 @Component
 public class NewsController {
