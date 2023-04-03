@@ -11,6 +11,8 @@ interface QuizProps {
   situationId: number;
   quizId: number;
   onNextQuiz: () => void;
+  setIsCorrect: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsWrong: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface Lang {
@@ -33,7 +35,7 @@ interface QuizData {
   solved: boolean;
 }
 
-const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz }) => {
+const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, setIsCorrect, setIsWrong }) => {
   //언어 변수
   const language = useSelector(
     (state: RootState) => state.languageChange.language
@@ -46,9 +48,9 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz }) 
   // const [quizIndex, setQuizIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(userId)
-  console.log(situationId)
-  console.log(quizId)
+  // console.log(userId)
+  // console.log(situationId)
+  // console.log(quizId)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,11 +77,53 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz }) 
     return <div>Loading...</div>;
   }
 
-  console.log(quizData)
-  console.log(options)
+  // console.log(quizData)
+  // console.log(options)
+  // console.log(userId)
+  // console.log(quizId)
 
   // const quizData = quizdata3
+  const CorrectWord = () => {
+    axios({
+      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
+      method: "POST",
+      // withCredentials: true,
+      data: {
+        corrected : "true"
+      },
+      // headers: {
+      //   // "Content-Type": "application/json",
+      //   Authorization: `Bearer ${accessToken}`,
+      // },
+    })
+      .then(() => {
+        console.log("정답이 보내져썽")
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
+  const WrongWord = () => {
+    axios({
+      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
+      method: "POST",
+      // withCredentials: true,
+      data: {
+        corrected : false
+      },
+      // headers: {
+      //   // "Content-Type": "application/json",
+      //   Authorization: `Bearer ${accessToken}`,
+      // },
+    })
+      .then(() => {
+        console.log("잘못된 오답이야")
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -89,13 +133,24 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz }) 
 
   const handleAnswerCheck = () => {
     if (selectedOption === quizData?.answer) {
-      alert("정답입니다!");
+      // alert("정답입니다!");
+      setIsCorrect(true);
+      CorrectWord()
       // setQuizIndex(quizIndex + 1); // 다음 퀴즈로 이동
       onNextQuiz(); // 다음 퀴즈로 이동
     } else {
-      alert("오답입니다!");
+      // alert("오답입니다!");
+      setIsWrong(true);
+      WrongWord()
     }
   };
+
+  // const handleClose = () => {
+  //   setIsCorrect(false);
+  //   setIsWrong(false);
+  //   setSelectedOption("");
+  //   onNextQuiz();
+  // };
 
   // if (!quizData) {
   //   return <div>Loading...</div>;
@@ -107,41 +162,6 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz }) 
   // 빈칸 박스 option1 - 그냥 ____ 밑줄
   const question = `${quizData.beforeSentence} ________ ${quizData.afterSentence}`;
 
-  // 빈칸 박스 option2 - 글자수 알려주는 박스
-  // const question = `${quizData.beforeSentence} ${
-  //   quizData.defaultContent
-  //     ? "[" + quizData.defaultContent.length + "글자]" // defaultContent가 있으면 글자수 표시
-  //     : "_______"
-  // } ${quizData.afterSentence}`;
-
-  // 빈칸 박스 option3 - 네모 박스
-  // const blanks = quizData.beforeSentence.match(/___+/g) || [];
-  // const blankBoxes = blanks.map((blank, i) => (
-  //   <span
-  //     key={i}
-  //     style={{
-  //       display: "inline-block",
-  //       minWidth: "1em",
-  //       border: "1px solid #ccc",
-  //       margin: "0 0.2em",
-  //       textAlign: "center",
-  //       borderRadius: "3px",
-  //       padding: "0.1em 0.5em",
-  //     }}
-  //   ></span>
-  // ));
-  // const question = (
-  //   <>
-  //     {quizData.beforeSentence.split("___").map((text, i) => (
-  //       <React.Fragment key={i}>
-  //         {text}
-  //         {i < blankBoxes.length && blankBoxes[i]}
-  //       </React.Fragment>
-  //     ))}
-  //     {quizData.afterSentence}
-  //   </>
-  // );
-
   const translation = () => {
     if (language === "CN") {
       return quizData.lang.CN.transContent
@@ -151,6 +171,10 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz }) 
   }
 
   // const options = [quizData.option1, quizData.option2, quizData.option3];
+
+  // console.log(quizData.solved)
+  // console.log(quizData.firstCorrected)
+  // console.log(quizData.nowCorrected)
 
   return (
     <div>
@@ -162,7 +186,7 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz }) 
       > 
         {question}
       </Typography>
-      <h3>{translation()}</h3>
+      <h2>{translation()}</h2>
       <ul>
         {options.map((option) => (
           <Button 
@@ -183,6 +207,7 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz }) 
         ))}
       </ul>
       <button onClick={handleAnswerCheck} style={{ width:"100px", height:"70px", borderRadius:"10px", fontSize: "20px", fontFamily: "CookieRun-Regular", }} >정답 확인</button>
+
     </div>
   );
 };

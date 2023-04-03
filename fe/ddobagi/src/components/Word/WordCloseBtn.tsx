@@ -24,7 +24,7 @@ function WordCloseBtn({ width }: BtnProp) {
         backgroundColor: "#6BCB77",
         borderRadius: 10,
         fontFamily: "CookieRun-Regular",
-        fontSize: 30,
+        fontSize: 20,
         borderColor: "rgba(0, 0, 0, .25)",
         borderWidth: "0px 4px 4px 0px",
         borderStyle: "solid",
