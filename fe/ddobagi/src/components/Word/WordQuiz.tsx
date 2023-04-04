@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import quizdata3 from "./quizdata3.json"
-import { Button } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
 import { Typography } from "@mui/joy";
+import QuestionBox from "./QuestionBox";
 
 interface QuizProps {
   userId: number;
@@ -178,14 +179,17 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, se
 
   return (
     <div>
-      <Typography
-        sx={{
-          fontSize : "40px",
-          fontFamily: "CookieRun-Regular",
-        }}
-      > 
-        {question}
-      </Typography>
+      <Box sx={{ display: "flex", alignItems: "center", justifyContent:"center", }}>
+        <Typography sx={{ fontSize : "40px", fontFamily: "CookieRun-Regular" }}>
+          {quizData.beforeSentence}
+        </Typography>
+        <Box width={20} />
+        <QuestionBox />
+        <Box width={20} />
+        <Typography sx={{ fontSize : "40px", fontFamily: "CookieRun-Regular" }}>
+          {quizData.afterSentence}
+        </Typography>
+      </Box>
       <h2>{translation()}</h2>
       <ul>
         {options.map((option) => (
