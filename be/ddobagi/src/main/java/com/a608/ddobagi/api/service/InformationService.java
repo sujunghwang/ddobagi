@@ -1,6 +1,7 @@
 package com.a608.ddobagi.api.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -8,6 +9,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
+import com.a608.ddobagi.api.dto.respoonse.InformationResponseDto;
 import com.a608.ddobagi.db.entity.information.Information;
 import com.a608.ddobagi.db.repository.InformationRepository;
 
@@ -31,8 +33,12 @@ public class InformationService {
 
 	private final InformationRepository informationRepository;
 
-	public List<Information> findAll() {
-		return informationRepository.findAll();
+	public List<InformationResponseDto> findAll() {
+		List<Information> list = informationRepository.findAll();
+
+		return list.stream()
+			.map(InformationResponseDto::new)
+			.collect(Collectors.toList());
 	}
 
 	public void addInformation(){

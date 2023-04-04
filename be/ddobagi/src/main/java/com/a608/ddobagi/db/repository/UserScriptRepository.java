@@ -35,7 +35,7 @@ public interface UserScriptRepository extends JpaRepository<UserScript, Long> {
 	Double avgByAllUserPronounce();
 
 	@Query("select avg(us.pronounce) from UserScript us where us.user.id = :userId")
-	Double avgByUserPronounce(Long userId);
+	Double avgByUserPronounce(@Param("userId") Long userId);
 
 	Long countBy();
 }
