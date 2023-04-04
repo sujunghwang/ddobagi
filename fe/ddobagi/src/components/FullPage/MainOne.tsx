@@ -46,7 +46,11 @@ export default function MainOne() {
               whiteSpace: "pre-line",
             }}
           >
-            또박또박 말하면서 익혀요
+            {language === "CN"
+                    ? "一字一句的熟悉起来"
+                    : language === "VI"
+                    ? "vừa nói rõ ràng vừa nấu chín"
+                    : "또박또박 말하면서 익혀요"}
           </Typography>
         </Box>
       </Box>
@@ -76,7 +80,11 @@ export default function MainOne() {
             color: "#ffffff",
           }}
         >
-          스크롤을 내려보세요
+          {language === "CN"
+                    ? "把滚动条放下来"
+                    : language === "VI"
+                    ? "Các bạn kéo xuống thử đi"
+                    : "스크롤을 내려보세요"}
         </Typography>
       </Box>
       <div className={styles.bubblesContainer}>

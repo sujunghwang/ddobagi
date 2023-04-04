@@ -21,6 +21,8 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import styles from "./Study.module.scss";
 import YouTube, { YouTubeProps, YouTubePlayer } from "react-youtube";
+import FinishAnimation from "../animations/Finish";
+import StudyAnimation from "../animations/Study";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 20,
@@ -105,6 +107,7 @@ function WordStudy() {
   // 정답 오답 모달 관련
   const [isCorrect, setIsCorrect] = useState(false);
   const [isWrong, setIsWrong] = useState(false);
+  const [isFinish, setIsFinish] = useState(false);
   //
   console.log(isCorrect);
   console.log(isWrong);
@@ -112,7 +115,7 @@ function WordStudy() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://j8a608.p.ssafy.io:8080/api/learnings/${situationId}`
+        `https://j8a608.p.ssafy.io/api/learnings/${situationId}`
       );
       setQuizIdData(response.data);
     };
@@ -122,7 +125,7 @@ function WordStudy() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${quizIdData[quizIndex]}/`
+        `https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizIdData[quizIndex]}/`
       );
       setQuizData(response.data);
       setVideoUrl(response.data.videoUrl.split(".be/")[1]);
@@ -132,17 +135,24 @@ function WordStudy() {
 
   const navigate = useNavigate();
 
+  const getOut = () => {
+    setIsFinish(false);
+    navigate("/CategoryList");
+  };
+
   const handleQuizSubmit = () => {
     if (quizIndex < quizIdData.length - 1) {
       setQuizIndex(quizIndex + 1);
     } else {
-      navigate("/CategoryList");
+      setIsFinish(true);
+      // navigate("/CategoryList");
     }
   };
 
   const handleClose = () => {
     setIsCorrect(false);
     setIsWrong(false);
+    setIsFinish(false);
     // setSelectedOption("");
     // onNextQuiz();
   };
@@ -156,10 +166,18 @@ function WordStudy() {
   return (
     <div>
       <div className={styles.loadAnime}>
+        <div
+          className={styles.Pin}
+          style={{
+            marginLeft: `${Percentage}%`,
+          }}
+        >
+          <img src={"/img/running.gif"} alt="run" style={{ width: "50px" }} />
+        </div>
         <div style={{ display: "none" }}>
           <YouTube videoId={videoUrl} onReady={onPlayerReady} />
         </div>
-        <div
+        {/* <div
           style={{
             width: "fit-content",
             marginLeft: `${Percentage}%`,
@@ -167,7 +185,7 @@ function WordStudy() {
           }}
         >
           <TwoWheelerIcon color="success" fontSize="large" />
-        </div>
+        </div> */}
         <BorderLinearProgress
           variant="determinate"
           value={Percentage}
@@ -186,11 +204,14 @@ function WordStudy() {
       {/* <Box sx={{ marginTop:"30px", position: "absolute", top: 10, left: 0, m: 2 }}>
         <WordCloseBtn width="280px" />
       </Box> */}
+      <div style={{ position:"absolute", left: "75%", top: "50%", zIndex:"-1" }}>
+          <StudyAnimation />
+      </div>
       <div style={{ marginTop: "30px" }}>
         <img
           src={"/img/notebook.png"}
           alt="notebook"
-          style={{ width: "1000px", marginTop: "50px" }}
+          style={{ width: "1000px", marginTop: "50px", boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.2)", borderRadius:"23px" }}
         />
         <div
           style={{
@@ -386,6 +407,67 @@ function WordStudy() {
                 marginX: "15px",
               }}
               onClick={handleClose}
+            >
+              확인
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* Finish modal */}
+      {isFinish && (
+        <div
+          className="modal"
+          style={{
+            position: "fixed",
+            top: "33%",
+            left: "33%",
+            width: "33%",
+            height: "50%",
+            backgroundColor: "white",
+            borderRadius: "20px",
+            border: "2px solid black",
+          }}
+        >
+          <div
+            className="modal-content"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <FinishAnimation />
+            <Typography
+              sx={{
+                fontSize: "30px",
+                fontFamily: "CookieRun-Regular",
+              }}
+            >
+              모든 문제를 풀었어요!
+            </Typography>
+            <Box sx={{ height: "20px" }} />
+            <Button
+              sx={{
+                width: "100px",
+                borderRadius: "10px",
+                mr: 2,
+                color: "#ffffff",
+                backgroundColor: "#6BCB77",
+                fontFamily: "CookieRun-Regular",
+                fontSize: 20,
+                borderColor: "rgba(0, 0, 0, .25)",
+                borderWidth: "0px 4px 4px 0px",
+                borderStyle: "solid",
+                transition: "border-width .1s ",
+                "&:hover": {
+                  backgroundColor: "#6BCB77",
+                  borderWidth: "0px",
+                },
+                marginX: "15px",
+              }}
+              onClick={getOut}
             >
               확인
             </Button>

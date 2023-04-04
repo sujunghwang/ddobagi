@@ -45,7 +45,11 @@ export default function MainFour() {
               whiteSpace: "pre-line",
             }}
           >
-            다문화 가정을 위한 다양한 정보 제공
+            {language === "CN"
+                    ? "为多文化家庭提供多种信息"
+                    : language === "VI"
+                    ? "Cung cấp nhiều thông tin đa dạng cho các gia đình đa văn hóa"
+                    : "다문화 가정을 위한 다양한 정보 제공"}
           </Typography>
         </Box>
 
@@ -77,8 +81,11 @@ export default function MainFour() {
               color: "#000000",
             }}
           >
-            아이의 학습 정보 뿐만 아니라, 다문화 센터 위치나 관련 정책 등 유용한
-            정보를 제공해 드려요.
+            {language === "CN"
+                    ? "不仅提供孩子的学习信息,还提供多文化中心位置或相关政策等有用的信息。"
+                    : language === "VI"
+                    ? "Không chỉ cung cấp thông tin học tập cho trẻ mà còn cung cấp thông tin hữu ích như vị trí trung tâm đa văn hóa và chính sách liên quan."
+                    : "아이의 학습 정보 뿐만 아니라, 다문화 센터 위치나 관련 정책 등 유용한 정보를 제공해 드려요."}
           </Typography>
         </Box>
       </Box>
