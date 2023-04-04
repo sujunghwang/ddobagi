@@ -200,7 +200,12 @@ function ParentPage1() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -238,7 +243,12 @@ function ParentPage1() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -276,7 +286,12 @@ function ParentPage1() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -314,7 +329,12 @@ function ParentPage1() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -348,7 +368,12 @@ function ParentPage1() {
           <Typography
             sx={{
               fontSize: "40px",
-              fontFamily: "MaplestoryOTFLight",
+              fontFamily:
+                language === "CN"
+                  ? "JingNanMaiYuanTi"
+                  : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
               color: "#ffffff",
               marginTop: "30px",
             }}
@@ -373,7 +398,12 @@ function ParentPage1() {
               <Typography
                 sx={{
                   fontSize: "40px",
-                  fontFamily: "MaplestoryOTFLight",
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                      ? "UVNHaiBaTrung"
+                      : "MaplestoryOTFLight",
                 }}
               >
                 {language === "CN"
@@ -481,7 +511,15 @@ function ParentPage1() {
               </Grid>
             </Box>
             <Typography
-              sx={{ fontSize: "25px", fontFamily: "MaplestoryOTFLight" }}
+              sx={{
+                fontSize: "25px",
+                fontFamily:
+                  language === "CN"
+                    ? "JingNanMaiYuanTi"
+                    : language === "VI"
+                    ? "UVNHaiBaTrung"
+                    : "MaplestoryOTFLight",
+              }}
             >
               {language === "CN" ? (
                 <span style={{ fontSize: "40px" }}>比较统计</span>
@@ -506,7 +544,7 @@ function ParentPage1() {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ height :"150px"}} />
+      <Box sx={{ height: "150px" }} />
     </div>
   );
 }

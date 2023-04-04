@@ -98,7 +98,12 @@ function ParentPage2() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -137,7 +142,12 @@ function ParentPage2() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -175,7 +185,12 @@ function ParentPage2() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -213,7 +228,12 @@ function ParentPage2() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -248,7 +268,12 @@ function ParentPage2() {
           <Typography
             sx={{
               fontSize: "40px",
-              fontFamily: "MaplestoryOTFLight",
+              fontFamily:
+                language === "CN"
+                  ? "JingNanMaiYuanTi"
+                  : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
               color: "#ffffff",
               marginTop: "20px",
             }}
@@ -278,7 +303,15 @@ function ParentPage2() {
               }}
             >
               <Typography
-                sx={{ fontSize: "25px", fontFamily: "MaplestoryOTFLight" }}
+                sx={{
+                  fontSize: "25px",
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                      ? "UVNHaiBaTrung"
+                      : "MaplestoryOTFLight",
+                }}
               >
                 {language === "CN"
                   ? "选择市/道及区/郡,可以获得多元文化中心及家庭中心的位置信息。"
@@ -298,7 +331,7 @@ function ParentPage2() {
           </div>
         </Box>
       </Box>
-      <Box sx={{ height :"150px"}} />
+      <Box sx={{ height: "150px" }} />
     </div>
   );
 }
