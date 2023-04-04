@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.a608.ddobagi.api.dto.respoonse.InformationResponseDto;
 import com.a608.ddobagi.api.service.InformationService;
 import com.a608.ddobagi.common.ApiResponse;
 import com.a608.ddobagi.db.entity.information.Information;
@@ -34,8 +35,8 @@ public class InformationController {
 	private final InformationService informationService;
 
 	@GetMapping(value = "/parents/information")
-	public ApiResponse<List<Information>> getInformationList() {
-		return new ApiResponse<>(informationService.findAll());
+	public List<InformationResponseDto> getInformationList() {
+		return informationService.findAll();
 	}
 
 	// @PutMapping(value = "/api/parents/information")

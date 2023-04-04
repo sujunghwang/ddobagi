@@ -7,10 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
+@Getter
 public class Information implements Serializable {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +31,5 @@ public class Information implements Serializable {
 		this.summary = summary;
 		this.url = url;
 	}
+
 }
