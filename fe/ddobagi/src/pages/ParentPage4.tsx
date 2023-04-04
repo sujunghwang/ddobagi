@@ -98,7 +98,17 @@ function ParentPage4() {
   return (
     <div className={styles.Fcontainer}>
       <div className={styles.Banner}>
-        <div className={styles.Header}>
+        <div
+          className={styles.Header}
+          style={{
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
+          }}
+        >
           {language === "CN"
             ? "父母亲"
             : language === "VI"

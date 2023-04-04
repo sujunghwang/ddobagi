@@ -1,10 +1,12 @@
 .Full {
-  // margin-top: 6rem;
+  position: relative;
   padding: 3.5rem;
-  background-color: #f2f2f2;
+  padding-bottom: 140px;
+  background-color: hsl(0, 0%, 95%);
   color: #544e4b;
   font-family: "Pretendard-Regular";
   text-align: start;
+  z-index: -5;
 }
 
 .vertical {
