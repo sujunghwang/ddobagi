@@ -30,16 +30,16 @@ import com.a608.ddobagi.db.repository.UserScriptRepository;
 import lombok.RequiredArgsConstructor;
 
 /**
- *packageName    : com.a608.ddobagi.api.service
- * fileName       : UserService
- * author         : modsiw
- * date           : 2023/03/20
- * description    : 유저의 마이페이지 서비스 로직
+ * packageName : com.a608.ddobagi.api.service
+ * fileName : UserService
+ * author : modsiw
+ * date : 2023/03/20
+ * description : 유저의 마이페이지 서비스 로직
  * ===========================================================
- * DATE              AUTHOR             NOTE
+ * DATE AUTHOR NOTE
  * -----------------------------------------------------------
- * 2023/03/20       modsiw      최초 생성
- * 2023/03/21		modsiw		부모님 페이지 통계 추가
+ * 2023/03/20 modsiw 최초 생성
+ * 2023/03/21 modsiw 부모님 페이지 통계 추가
  */
 
 @Service
@@ -68,45 +68,45 @@ public class UserService {
 
 	public UserResponseDto findUser(Long userId) {
 		User user = userRepository.findById(userId).orElseThrow(
-			() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
+				() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
 
 		return UserResponseDto.builder()
-			.userId(user.getId())
-			.loginId(user.getLoginId())
-			.name(user.getName())
-			.age(user.getAge())
-			.settleYear(user.getSettleYear())
-			.userLang(user.getUserLang().toString())
-			.build();
+				.userId(user.getId())
+				.loginId(user.getLoginId())
+				.name(user.getName())
+				.age(user.getAge())
+				.settleYear(user.getSettleYear())
+				.userLang(user.getUserLang().toString())
+				.build();
 	}
 
 	@Transactional
 	public UserResponseDto modifyUser(Long userId, UserUpdateRequestDto requestDto) {
 		User user = userRepository.findById(userId).orElseThrow(
-			() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
+				() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
 
 		User modifyUser = userRepository.save(user.toBuilder()
-			.id(userId)
-			.birth(requestDto.getBirth())
-			.name(requestDto.getName())
-			.settleYear(requestDto.getSettleYear())
-			.pw(passwordEncoder.encode(requestDto.getPw()))
-			.userLang(Lang.valueOf(requestDto.getUserLang()))
-			.build());
+				.id(userId)
+				.birth(requestDto.getBirth())
+				.name(requestDto.getName())
+				.settleYear(requestDto.getSettleYear())
+				.pw(passwordEncoder.encode(requestDto.getPw()))
+				.userLang(Lang.valueOf(requestDto.getUserLang()))
+				.build());
 
 		return UserResponseDto.builder()
-			.loginId(modifyUser.getLoginId())
-			.name(modifyUser.getName())
-			.age(modifyUser.getAge())
-			.settleYear(modifyUser.getSettleYear())
-			.userLang(modifyUser.getUserLang().toString())
-			.build();
+				.loginId(modifyUser.getLoginId())
+				.name(modifyUser.getName())
+				.age(modifyUser.getAge())
+				.settleYear(modifyUser.getSettleYear())
+				.userLang(modifyUser.getUserLang().toString())
+				.build();
 	}
 
-	//비밀번호 확인
+	// 비밀번호 확인
 	public boolean checkPassword(Long userId, CheckPwRequestDto requestDto) {
 		User user = userRepository.findById(userId).orElseThrow(
-			() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
+				() -> new IllegalArgumentException("사용자 아이디가 존재하지 않습니다.: " + userId));
 
 		if (passwordEncoder.matches(requestDto.getPw(), user.getPw())) {
 			return true;
@@ -115,12 +115,11 @@ public class UserService {
 		}
 	}
 
-	//오답 리스트
+	// 오답 리스트
 	public List<Long> findUserQuizReviewList(Long userId) {
 		// return userQuizRepositoryImpl.findUserQuizReviewList(userId);
 		return userQuizRepository.findIncorrectedQuizList(userId);
 	}
-
 
 	public UserProgressResponseDto findUserProgress(Long userId) {
 		int viewedVideoCount = Math.toIntExact(calCountUserViewedVideo(userId));
@@ -139,8 +138,8 @@ public class UserService {
 
 		// ===== 퀴즈, 스크립트, 문화 진행률 ==== //
 		if (!Objects.equals(userScriptRepository.countByUserId(userId), ZERO)) {
-			scriptProgress = (int)((double)userScriptRepository.countByUserId(userId)
-				/ scriptRepository.countBy() * HUNDRED);
+			scriptProgress = (int) ((double) userScriptRepository.countByUserId(userId)
+					/ scriptRepository.countBy() * HUNDRED);
 		}
 
 		// System.out.println(scriptProgress);
@@ -152,56 +151,56 @@ public class UserService {
 
 		if (!Objects.equals(userQuizRepository.countByUserId(userId), ZERO)) {
 			System.out.println("잘왓습니당");
-			quizProgress = (int)((double)userQuizRepository.countByUserId(userId)
-				/ quizRepository.countBy() * HUNDRED);
+			quizProgress = (int) ((double) userQuizRepository.countByUserId(userId)
+					/ quizRepository.countBy() * HUNDRED);
 		}
 
 		if (!Objects.equals(userCultureRepository.countByUserId(userId), ZERO)) {
-			cultureProgress = (int)((double)userCultureRepository.countByUserId(userId)
-				/ cultureRepository.countBy() * HUNDRED);
+			cultureProgress = (int) ((double) userCultureRepository.countByUserId(userId)
+					/ cultureRepository.countBy() * HUNDRED);
 		}
 
 		// ===== 카테고리 진행률 ===== //
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId), ZERO)) {
-			schoolCategoryProgress = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId)
-				/ (double)userRepository.categoryCnt(CATEGORY_SCHOOL) * HUNDRED);
+			schoolCategoryProgress = (int) ((double) userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId)
+					/ (double) userRepository.categoryCnt(CATEGORY_SCHOOL) * HUNDRED);
 		}
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId), ZERO)) {
-			homeCategoryProgess = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId)
-				/ userRepository.categoryCnt(CATEGORY_HOME) * HUNDRED);
+			homeCategoryProgess = (int) ((double) userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId)
+					/ userRepository.categoryCnt(CATEGORY_HOME) * HUNDRED);
 		}
 
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId), ZERO)) {
-			storeCategoryProgress = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId)
-				/ userRepository.categoryCnt(CATEGORY_STORE) * HUNDRED);
+			storeCategoryProgress = (int) ((double) userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId)
+					/ userRepository.categoryCnt(CATEGORY_STORE) * HUNDRED);
 		}
 
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId), ZERO)) {
-			playgroundCategoryProgress = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId)
-				/ userRepository.categoryCnt(CATEGORY_PLAYGROUND));
+			playgroundCategoryProgress = (int) ((double) userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId)
+					/ userRepository.categoryCnt(CATEGORY_PLAYGROUND));
 		}
 
 		return UserProgressResponseDto.builder()
-			.viewedVideoCount(viewedVideoCount)
-			.recordedScriptCount(recordedScriptCount)
-			.studiedQuizCount(studiedQuizCount)
-			.crownCount(crownCount)
-			.schoolCategoryProgress(schoolCategoryProgress)
-			.homeCategoryProgress(homeCategoryProgess)
-			.storeCategoryProgress(storeCategoryProgress)
-			.playgroundCategoryProgress(playgroundCategoryProgress)
-			.scriptProgress(scriptProgress)
-			.quizProgress(quizProgress)
-			.cultureProgress(cultureProgress)
-			.build();
+				.viewedVideoCount(viewedVideoCount)
+				.recordedScriptCount(recordedScriptCount)
+				.studiedQuizCount(studiedQuizCount)
+				.crownCount(crownCount)
+				.schoolCategoryProgress(schoolCategoryProgress)
+				.homeCategoryProgress(homeCategoryProgess)
+				.storeCategoryProgress(storeCategoryProgress)
+				.playgroundCategoryProgress(playgroundCategoryProgress)
+				.scriptProgress(scriptProgress)
+				.quizProgress(quizProgress)
+				.cultureProgress(cultureProgress)
+				.build();
 	}
 
 	public List<UserResponseDto> findUserList() {
 		List<User> all = userRepository.findAll();
 
 		List<UserResponseDto> collect = all.stream()
-			.map(UserResponseDto::new)
-			.collect(Collectors.toList());
+				.map(UserResponseDto::new)
+				.collect(Collectors.toList());
 
 		return collect;
 	}
@@ -218,53 +217,54 @@ public class UserService {
 
 		// ===== 퀴즈, 스크립트, 문화 진행률 ==== //
 		if (!Objects.equals(userScriptRepository.countByUserId(userId), ZERO)) {
-			scriptProgress = (int)((double)userScriptRepository.countByUserId(userId)
-				/ scriptRepository.countBy() * HUNDRED);
+			scriptProgress = (int) ((double) userScriptRepository.countByUserId(userId)
+					/ scriptRepository.countBy() * HUNDRED);
 		}
 
 		if (!Objects.equals(userQuizRepository.countByUserId(userId), ZERO)) {
-			quizProgress = (int)((double)userQuizRepository.countByUserId(userId)
-				/ quizRepository.countBy() * HUNDRED);
+			quizProgress = (int) ((double) userQuizRepository.countByUserId(userId)
+					/ quizRepository.countBy() * HUNDRED);
 		}
 
 		if (!Objects.equals(userCultureRepository.countByUserId(userId), ZERO)) {
-			cultureProgress = (int)((double)userCultureRepository.countByUserId(userId)
-				/ cultureRepository.countBy() * HUNDRED);
+			cultureProgress = (int) ((double) userCultureRepository.countByUserId(userId)
+					/ cultureRepository.countBy() * HUNDRED);
 		}
 
 		// ===== 카테고리 진행률 ===== //
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId), ZERO)) {
-			schoolCategoryProgress = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId)
-				/ userRepository.categoryCnt(CATEGORY_SCHOOL) * HUNDRED);
+			schoolCategoryProgress = (int) ((double) userRepository.categoryUserDoneCnt(CATEGORY_SCHOOL, userId)
+					/ userRepository.categoryCnt(CATEGORY_SCHOOL) * HUNDRED);
 		}
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId), ZERO)) {
-			homeCategoryProgess = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId)
-				/ userRepository.categoryCnt(CATEGORY_HOME) * HUNDRED);
+			homeCategoryProgess = (int) ((double) userRepository.categoryUserDoneCnt(CATEGORY_HOME, userId)
+					/ userRepository.categoryCnt(CATEGORY_HOME) * HUNDRED);
 		}
 
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId), ZERO)) {
-			storeCategoryProgress = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId)
-				/ userRepository.categoryCnt(CATEGORY_STORE) * HUNDRED);
+			storeCategoryProgress = (int) ((double) userRepository.categoryUserDoneCnt(CATEGORY_STORE, userId)
+					/ userRepository.categoryCnt(CATEGORY_STORE) * HUNDRED);
 		}
 
 		if (!Objects.equals(userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId), ZERO)) {
-			playgroundCategoryProgress = (int)((double)userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId)
-				/ userRepository.categoryCnt(CATEGORY_PLAYGROUND));
-		}
+			playgroundCategoryProgress = (int) ((double) userRepository.categoryUserDoneCnt(CATEGORY_PLAYGROUND, userId)
+					/ userRepository.categoryCnt(CATEGORY_PLAYGROUND));
 
+		}
+		calAllUserPronounceAvg();
 		return UserProgressParentsResponseDto.builder()
-			.schoolCategoryProgress(schoolCategoryProgress)
-			.homeCategoryProgress(homeCategoryProgess)
-			.storeCategoryProgress(storeCategoryProgress)
-			.playgroundCategoryProgress(playgroundCategoryProgress)
-			.scriptProgress(scriptProgress)
-			.quizProgress(quizProgress)
-			.cultureProgress(cultureProgress)
-			.userAllProgressAvg(calAllUserProgress(userId))
-			.otherAllProgressAvg(calUserProgress())
-			.userPronounceScoreAvg(calUserPronounceAvg(userId))
-			.otherPronounceScoreAvg(calAllUserPronounceAvg())
-			.build();
+				.schoolCategoryProgress(schoolCategoryProgress)
+				.homeCategoryProgress(homeCategoryProgess)
+				.storeCategoryProgress(storeCategoryProgress)
+				.playgroundCategoryProgress(playgroundCategoryProgress)
+				.scriptProgress(scriptProgress)
+				.quizProgress(quizProgress)
+				.cultureProgress(cultureProgress)
+				.userAllProgressAvg(calAllUserProgress(userId))
+				.otherAllProgressAvg(calUserProgress())
+				.userPronounceScoreAvg((Math.round(calUserPronounceAvg(userId)) * 1000) / 1000.0)
+				.otherPronounceScoreAvg((Math.round(calAllUserPronounceAvg()) * 1000) / 1000.0)
+				.build();
 	}
 
 	public List<UserQuizReviewResponseDto> getUserQuizReviewForParents(Long userId) {
@@ -273,7 +273,7 @@ public class UserService {
 
 	// ===== 계산 로직 ===== //
 
-	//왕관 개수 세기
+	// 왕관 개수 세기
 	public int getCrownCntByCategoryId(Long userId) {
 
 		int categoryId1 = calCountUserCrownByCategoryId(userId, 1L);
@@ -286,16 +286,16 @@ public class UserService {
 
 	public int calCountUserCrownByCategoryId(Long userId, Long categoryId) {
 		int crownCnt = 0;
-		//situationId들의 리스트 가져오기
+		// situationId들의 리스트 가져오기
 
 		// List<Long> situationIdList = situationRepository.findSituationIdList(1L);
 		List<Long> situationIdList = situationRepositoryImpl.findSituationList(categoryId);
 
 		for (Long situationId : situationIdList) {
 			if (Objects.equals(userRepository.countScriptBySituationId(situationId),
-				userRepository.countScriptBySituationIdAndUserScriptPronounceOver2(situationId, userId))
-				&& Objects.equals(userRepository.countQuizBySituationId(situationId),
-				userRepository.countQuizBySituationIdAndUserQuizIsNowCorrected(situationId, userId))) {
+					userRepository.countScriptBySituationIdAndUserScriptPronounceOver2(situationId, userId))
+					&& Objects.equals(userRepository.countQuizBySituationId(situationId),
+							userRepository.countQuizBySituationIdAndUserQuizIsNowCorrected(situationId, userId))) {
 				{
 					crownCnt++;
 				}
@@ -332,19 +332,21 @@ public class UserService {
 	public int calAllUserProgress(Long userId) {
 		Long all = situationRepository.countBy() + cultureRepository.countBy() + quizRepository.countBy();
 		Long user = userScriptRepository.countByUserId(userId) +
-			userQuizRepository.countByUserId(userId) + userCultureRepository.countByUserId(userId);
-
-		return (int)((user / all) * HUNDRED);
+				userQuizRepository.countByUserId(userId) + userCultureRepository.countByUserId(userId);
+		System.out.println(all);
+		System.out.println(user);
+		System.out.println((double)user / all * HUNDRED);
+		return (int)((double)user / all * HUNDRED);
 	}
 
 	public int calUserProgress() {
 		/*
 		 * 유저 전체수를 알잖아.
 		 * count(user_script) / (count(script)*count(user)) 다 더해서 곱하기 백
-		 * */
-		Long script = userScriptRepository.countBy() / (scriptRepository.countBy() * userRepository.countBy());
-		Long quiz = userQuizRepository.countBy() / (quizRepository.countBy() * userRepository.countBy());
-		Long culture = userCultureRepository.countBy() / (cultureRepository.countBy() * userRepository.count());
+		 */
+		double script = userScriptRepository.countBy() / (double)(scriptRepository.countBy() * userRepository.countBy());
+		double quiz = userQuizRepository.countBy() / (double)(quizRepository.countBy() * userRepository.countBy());
+		double culture = userCultureRepository.countBy() / (double)(cultureRepository.countBy() * userRepository.count());
 
 		return (int)((script + quiz + culture) * 100);
 	}
