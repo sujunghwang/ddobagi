@@ -1,5 +1,6 @@
 package com.a608.ddobagi.db.entity.information;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
+@Getter
 public class News implements Serializable {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
