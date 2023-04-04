@@ -24,7 +24,7 @@ export default function MainTwo() {
           <Typography
             sx={{
               fontSize: '80px',
-              fontFamily: "CookieRun-Regular",
+              fontFamily: "MaplestoryOTFLight",
               color: "#000000",
               marginBottom: '5px',
               whiteSpace: "pre-line"
@@ -58,7 +58,7 @@ export default function MainTwo() {
           <Typography
             sx={{
               fontSize: '35px',
-              fontFamily: "CookieRun-Regular",
+              fontFamily: "MaplestoryOTFLight",
               color: "#000000",
             }}>
             또바기는 다문화 가정 아이들의 한국어 학습을 도와줄 수 있는 서비스입니다.

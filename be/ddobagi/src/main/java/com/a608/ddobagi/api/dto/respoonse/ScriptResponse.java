@@ -17,17 +17,19 @@ public class ScriptResponse {
     ScriptRole scriptRole;
     String defaultContent;
     String recordedUrl;
+    float pronounce;
     Lang lang;
     String transContent;
 
-    public ScriptResponse(Long scriptId, Long startTime, Long endTime,
-        ScriptRole scriptRole, String defaultContent, String recordedUrl, Lang lang, String transContent) {
+    public ScriptResponse(Long scriptId, Long startTime, Long endTime, ScriptRole scriptRole,
+        String defaultContent, String recordedUrl, float pronounce, Lang lang, String transContent) {
         this.scriptId = scriptId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.scriptRole = scriptRole;
         this.defaultContent = defaultContent;
         this.recordedUrl = recordedUrl;
+        this.pronounce = pronounce;
         this.lang = lang;
         this.transContent = transContent;
     }

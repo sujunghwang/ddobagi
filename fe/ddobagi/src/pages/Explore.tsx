@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { useLocation } from "react-router-dom";
 import Container from "@mui/material/Container";
+import styles from "./Explore.module.scss"
 
 function Explore() {
   const location = useLocation();
@@ -13,10 +14,14 @@ function Explore() {
       <Container maxWidth="xl">
         <NavBar />
         {pathname !== "/" && <div style={{ height: "115px" }}></div>}
-        {pathname !== "/" && <Outlet />}
+        {(pathname !== "/" && pathname !== "/CategoryList") && <Outlet />}
       </Container>
-      {pathname === "/" && <Outlet />}
+      {(pathname === "/" || pathname === "/CategoryList") && <Outlet />}
       {pathname !== "/" && <Footer />}
+      {pathname !== "/" &&
+        <div>
+          <img src={"/img/fish.png"} className={styles.fish} alt="fish" />
+        </div>}
     </div>
   );
 }

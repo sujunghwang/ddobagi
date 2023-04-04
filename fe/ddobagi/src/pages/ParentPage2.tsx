@@ -266,6 +266,7 @@ function ParentPage2() {
               backgroundColor: "#FFF6DA",
               marginTop: "30px",
               borderRadius: "0 0 20px 20px",
+              // boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)"
             }}
           >
             <Box

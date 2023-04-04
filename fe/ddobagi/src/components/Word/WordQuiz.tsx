@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import quizdata3 from "./quizdata3.json"
-import { Button } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
 import { Typography } from "@mui/joy";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
+import styles from "./Quiz.module.scss"
+import QuestionBox from "./QuestionBox";
 
 interface QuizProps {
   userId: number;
@@ -13,6 +17,10 @@ interface QuizProps {
   onNextQuiz: () => void;
   setIsCorrect: React.Dispatch<React.SetStateAction<boolean>>;
   setIsWrong: React.Dispatch<React.SetStateAction<boolean>>;
+  startTime: number
+  endTime: number
+  videoFrame: React.MutableRefObject<any>
+  play: (start: number, end: number) => void
 }
 
 interface Lang {
@@ -29,13 +37,26 @@ interface QuizData {
   option2: string;
   option3: string;
   defaultContent: string;
+  videoUrl: string;
+  startTime: number;
+  endTime: number;
   lang: Lang;
   nowCorrected: boolean;
   firstCorrected: boolean;
   solved: boolean;
 }
 
-const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, setIsCorrect, setIsWrong }) => {
+const Quiz: React.FC<QuizProps> = ({
+  userId,
+  situationId,
+  quizId,
+  onNextQuiz,
+  setIsCorrect,
+  setIsWrong,
+  startTime,
+  endTime,
+  videoFrame,
+  play }) => {
   //언어 변수
   const language = useSelector(
     (state: RootState) => state.languageChange.language
@@ -47,6 +68,7 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, se
   const [options, setOptions] = useState<string[]>([]);
   // const [quizIndex, setQuizIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [onPlay, setOnPlay] = useState<boolean>(false)
 
   // console.log(userId)
   // console.log(situationId)
@@ -56,14 +78,14 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, se
     const fetchData = async () => {
       setIsLoading(true);
       try {
-      const response = await axios.get(`https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizId}/`);
-      setQuizData(response.data);
-      // options와 answer를 합침
-      const arr = [response.data.option1, response.data.option2, response.data.option3, response.data.answer];
-      // 합쳐진 배열을 무작위로 섞음
-      arr.sort(() => Math.random() - 0.5);
-      setOptions(arr);
-      setQuizData(response.data);
+        const response = await axios.get(`https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizId}/`);
+        setQuizData(response.data);
+        // options와 answer를 합침
+        const arr = [response.data.option1, response.data.option2, response.data.option3, response.data.answer];
+        // 합쳐진 배열을 무작위로 섞음
+        arr.sort(() => Math.random() - 0.5);
+        setOptions(arr);
+        setQuizData(response.data);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -89,7 +111,7 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, se
       method: "POST",
       // withCredentials: true,
       data: {
-        corrected : "true"
+        corrected: "true"
       },
       // headers: {
       //   // "Content-Type": "application/json",
@@ -110,7 +132,7 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, se
       method: "POST",
       // withCredentials: true,
       data: {
-        corrected : false
+        corrected: false
       },
       // headers: {
       //   // "Content-Type": "application/json",
@@ -160,14 +182,14 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, se
   }
 
   // 빈칸 박스 option1 - 그냥 ____ 밑줄
-  const question = `${quizData.beforeSentence} ________ ${quizData.afterSentence}`;
+  // const question = `${quizData.beforeSentence} ________ ${quizData.afterSentence}`;
 
   const translation = () => {
     if (language === "CN") {
       return quizData.lang.CN.transContent
     } else if (language === 'VI') {
       return quizData.lang.VI.transContent
-    } 
+    }
   }
 
   // const options = [quizData.option1, quizData.option2, quizData.option3];
@@ -177,37 +199,60 @@ const Quiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, se
   // console.log(quizData.nowCorrected)
 
   return (
-    <div>
-      <Typography
-        sx={{
-          fontSize : "40px",
-          fontFamily: "CookieRun-Regular",
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      {onPlay ? <div
+        className={styles.RBtn}
+        onClick={() => {
+          videoFrame.current.pauseVideo();
+          setOnPlay(false)
         }}
-      > 
-        {question}
-      </Typography>
+      >
+        <PauseRoundedIcon sx={{ fontSize: "2rem" }} />
+      </div> : <div
+        className={styles.RBtn}
+        onClick={() => {
+          play(startTime, endTime);
+          setOnPlay(true)
+          const duration = endTime - startTime;
+          setTimeout(() => {
+            setOnPlay(false)
+          }, duration * 1000);
+        }}
+      >
+        <PlayArrowRoundedIcon sx={{ fontSize: "2rem" }} />
+      </div>}
+      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", }}>
+        <Typography sx={{ fontSize: "40px", fontFamily: "CookieRun-Regular" }}>
+          {quizData.beforeSentence}
+        </Typography>
+        <Box width={20} />
+        <QuestionBox />
+        <Box width={20} />
+        <Typography sx={{ fontSize: "40px", fontFamily: "CookieRun-Regular" }}>
+          {quizData.afterSentence}
+        </Typography>
+      </Box>
       <h2>{translation()}</h2>
       <ul>
         {options.map((option) => (
-          <Button 
-            variant="contained" 
-            key={option} 
-            onClick={() => handleOptionClick(option)} 
-            sx={{ 
+          <Button
+            variant="contained"
+            key={option}
+            onClick={() => handleOptionClick(option)}
+            sx={{
               margin: "30px",
               width: "150px",
-              height : "80px",
-              fontSize : "25px",
+              height: "80px",
+              fontSize: "25px",
               fontFamily: "CookieRun-Regular",
               border:
                 selectedOption === option ? "8px solid blue" : "1px solid black",
-              }}>
+            }}>
             {option}
           </Button>
         ))}
       </ul>
-      <button onClick={handleAnswerCheck} style={{ width:"100px", height:"70px", borderRadius:"10px", fontSize: "20px", fontFamily: "CookieRun-Regular", }} >정답 확인</button>
-
+      <button onClick={handleAnswerCheck} style={{ width: "100px", height: "70px", borderRadius: "10px", fontSize: "20px", fontFamily: "CookieRun-Regular", }} >정답 확인</button>
     </div>
   );
 };
