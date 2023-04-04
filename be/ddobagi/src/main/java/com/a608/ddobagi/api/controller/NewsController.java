@@ -1,5 +1,6 @@
 package com.a608.ddobagi.api.controller;
 
+import com.a608.ddobagi.api.dto.respoonse.NewsResponseDto;
 import com.a608.ddobagi.api.service.NewsService;
 import com.a608.ddobagi.common.ApiResponse;
 import com.a608.ddobagi.db.entity.information.News;
@@ -33,8 +34,8 @@ public class NewsController {
 	private final NewsService newsService;
 
 	@GetMapping
-	public ApiResponse<List<News>> getNewsList() {
-		return new ApiResponse<>(newsService.findAll());
+	public List<NewsResponseDto> getNewsList() {
+		return newsService.findAll();
 	}
 
 	// cron "초 분 시 일 월 년"
