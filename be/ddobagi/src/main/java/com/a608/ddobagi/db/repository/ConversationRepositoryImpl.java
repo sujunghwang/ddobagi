@@ -75,9 +75,7 @@ public class ConversationRepositoryImpl {
                         script.scriptRole,
                         script.defaultContent,
                         userScript.recordUrl,
-                        // new CaseBuilder()
-                        //     .when(userScript.recordUrl.isNotNull()).then(userScript.recordUrl)
-                        //     .otherwise(""),
+                        userScript.pronounce,
                         scriptTrans.lang,
                         scriptTrans.transContent))
                 .from(script)
@@ -85,44 +83,6 @@ public class ConversationRepositoryImpl {
                 .join(scriptTrans).on(script.id.eq(scriptTrans.script.id))
                 .where(script.situation.id.eq(situationId))
                 .fetch();
-
-
-
-        // System.out.println(list);
-
-
-//        List<Tuple> result = queryFactory
-//                .select(
-//                        script.id,
-//                        script.startTime,
-//                        script.endTime,
-//                        script.scriptRole,
-//                        script.defaultContent,
-//                        userScript.recordUrl)
-//                .from(script)
-//                .leftJoin(userScript).on(script.id.eq(userScript.script.id))
-//                .join(scriptTrans).on(script.id.eq(scriptTrans.script.id))
-//                .where(script.situation.id.eq(situationId)
-//                        .and(userScript.user.id.eq(userId))
-//                        .and(script.id.eq(scriptTrans.script.id)))
-//                .distinct()
-//                .fetch();
-
-        /*
-        select script.id, script.start_time, script.end_time, script.script_role,
-        script.default_content, user_script.record_url, trans.content
-        from script
-        left outer join user_script
-        on script.id=user_script.script_id
-        join script_trans
-        on script.id=script_trans.script_id
-        join (select script_id, GROUP_CONCAT(lang, ":", trans_content) as content
-        from script_trans
-        group by script_id) as trans
-        on script.id=trans.script_id
-        where script.situation_id=1
-        and user_script.user_id=1;
-         */
 
         return list;
     }
