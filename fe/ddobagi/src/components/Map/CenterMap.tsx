@@ -34,7 +34,7 @@ function CenterMap(){
 
 
         // 시도 조회 => 처음에 불러와서 저장소에 저장해야함
-        axios.get('http://j8a608.p.ssafy.io:8080/api/centers/sido')
+        axios.get('https://j8a608.p.ssafy.io/api/centers/sido')
         .then(response => {
             const sidos = response.data;
             setSidos(sidos);
@@ -48,7 +48,7 @@ function CenterMap(){
         if (selectSido) {
             // 구군 목록 가져오기
             axios
-              .get(`http://j8a608.p.ssafy.io:8080/api/centers/gugun?sido=${selectSido}`)
+              .get(`https://j8a608.p.ssafy.io/api/centers/gugun?sido=${selectSido}`)
               .then((response) => {
                 const guguns = response.data;
                 setGuguns(guguns);
@@ -60,7 +60,7 @@ function CenterMap(){
         }
 
         // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열
-        axios.get(`http://j8a608.p.ssafy.io:8080/api/centers?sido=${selectSido}&gugun=${selectGugun}`)
+        axios.get(`https://j8a608.p.ssafy.io/api/centers?sido=${selectSido}&gugun=${selectGugun}`)
             .then(response => {
             const data = response.data;
             setData(data);

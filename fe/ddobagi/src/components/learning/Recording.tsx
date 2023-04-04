@@ -19,7 +19,7 @@ async function convertWebmToWav(blob: Blob) {
   const audioBuffer = await audioContext.decodeAudioData(await blob.arrayBuffer());
   const wav = toWav(audioBuffer);
 
-  return new Blob([ new DataView(wav) ], {
+  return new Blob([new DataView(wav)], {
     type: 'audio/wav'
   });
 }
@@ -39,6 +39,8 @@ interface Props {
   }
   videoFrame: React.MutableRefObject<any>
   play: (start: number, end: number) => void
+  recordedUrl: string
+  pronounce: number
 }
 
 const Recording = (props: Props) => {
@@ -51,6 +53,7 @@ const Recording = (props: Props) => {
 
   const [blobUrl, setBlobUrl] = useState<string>("");
   const audioRef = useRef<HTMLAudioElement>(null);
+  const audio2Ref = useRef<HTMLAudioElement>(null);
 
   const [score, setScore] = useState<number>(0);  // 서버에서 반환된 점수를 저장합니다.
   const addAudioElement = async (blob: Blob) => {
@@ -65,7 +68,7 @@ const Recording = (props: Props) => {
       const url = URL.createObjectURL(convertedBlob);
       setBlobUrl(url);
       const response = await axios.post(
-        "http://j8a608.p.ssafy.io:8080/api/conversations/record",
+        "https://j8a608.p.ssafy.io/api/conversations/record",
         formData,
         {
           headers: {
@@ -83,6 +86,8 @@ const Recording = (props: Props) => {
   const handlePlay = () => {
     if (audioRef.current && blobUrl) {
       audioRef.current.play();
+    } else if (audio2Ref.current) {
+      audio2Ref.current.play()
     }
   };
 
@@ -136,15 +141,16 @@ const Recording = (props: Props) => {
           onRecordingComplete={addAudioElement}
         />
       </div>
-      {score > 2 ?
+      {score > 2 || props.pronounce > 2 ?
         <div className={styles.confirmMark}>
-          {score}
+          {props.pronounce ? props.pronounce.toFixed(1) : score}
         </div>
         :
         <div className={styles.noConfirmMark}>
-          {score}
+          {props.pronounce ? props.pronounce.toFixed(1) : score}
         </div>}
       <audio src={blobUrl} ref={audioRef}></audio>
+      <audio src={props.recordedUrl} ref={audio2Ref}></audio>
     </div>
   );
 };

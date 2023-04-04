@@ -1,0 +1,32 @@
+.RBtn {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: white;
+    background-color: #ff0000;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: inset -1px -2px rgba(0, 0, 0, 0.25);
+    transform-origin: center;
+    z-index: 0;
+    margin-bottom: 2rem;
+    /* 중앙을 기준으로 확대 */
+  
+    &:hover {
+      scale: 1.1;
+      transition: scale ease-in 0.1s;
+    }
+  
+    &:not(:hover) {
+      transition: scale ease-in 0.1s;
+    }
+  
+    &:active {
+      background-color: #9c0000;
+    }
+  }
+  

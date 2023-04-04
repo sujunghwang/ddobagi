@@ -5,6 +5,7 @@ import Loading from "../components/Loading";
 import styles from "./CategoryList.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/RootReducer";
+import Container from "@mui/material/Container";
 import axios from "axios";
 interface SituationTrans {
   lang: string;
@@ -42,22 +43,22 @@ function CategoryList() {
     const fetchLearning = async () => {
       try {
         const response = await axios.get<Videolist>(
-          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/HOME`
+          `https://j8a608.p.ssafy.io/api/learnings/${userId}/HOME`
         );
         setHomeList(response.data);
 
         const response2 = await axios.get<Videolist>(
-          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/SCHOOL`
+          `https://j8a608.p.ssafy.io/api/learnings/${userId}/SCHOOL`
         );
         setSchoolList(response2.data);
 
         const response3 = await axios.get<Videolist>(
-          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/PLAYGROUND`
+          `https://j8a608.p.ssafy.io/api/learnings/${userId}/PLAYGROUND`
         );
         setPlayGroundList(response3.data);
 
         const response4 = await axios.get<Videolist>(
-          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/STORE`
+          `https://j8a608.p.ssafy.io/api/learnings/${userId}/STORE`
         );
         setStoreList(response4.data);
       } catch (error) {
@@ -77,32 +78,33 @@ function CategoryList() {
     language === "CN"
       ? "学习"
       : language === "VI"
-      ? "tại cửa hàng"
-      : "가게에서";
+        ? "tại cửa hàng"
+        : "가게에서";
   const playGround =
     language === "CN"
       ? "在操场上"
       : language === "VI"
-      ? "tại sân chơi"
-      : "놀이터에서";
+        ? "tại sân chơi"
+        : "놀이터에서";
   //
 
   return (
     <div className={styles.Fcontainer}>
-      <div className={styles.Banner}>
-        <div className={styles.Header}>
-          {language === "CN"
-            ? "学习"
-            : language === "VI"
-            ? "học hỏi"
-            : "한국어 연습"}
+      <Container maxWidth="xl">
+        <div className={styles.Banner}>
+          <div className={styles.Header}>
+            {language === "CN"
+              ? "学习"
+              : language === "VI"
+                ? "học hỏi"
+                : "한국어 연습"}
+          </div>
         </div>
-      </div>
-      <div className={styles.BreadCrum}>
-        <BreadCrumbs />
-      </div>
+        <div className={styles.BreadCrum}>
+          <BreadCrumbs />
+        </div>
+      </Container>
       <div className={styles.CategoryBox}>
-        <div className={styles.CategoryName}>{school}</div>
         {schoolList ? (
           <VideoScroll
             color={"#ffcfd8"}
@@ -114,7 +116,6 @@ function CategoryList() {
         )}
       </div>
       <div className={styles.CategoryBox}>
-        <div className={styles.CategoryName}>{house}</div>
         {homeList ? (
           <VideoScroll
             color={"#fff9e2"}
@@ -124,9 +125,9 @@ function CategoryList() {
         ) : (
           <Loading />
         )}
-      </div>
+      </div>     
+
       <div className={styles.CategoryBox}>
-        <div className={styles.CategoryName}>{store}</div>
         {playGroundList ? (
           <VideoScroll
             color={"#e8f9f6"}
@@ -136,9 +137,9 @@ function CategoryList() {
         ) : (
           <Loading />
         )}
-      </div>
+      </div>    
+
       <div className={styles.CategoryBox}>
-        <div className={styles.CategoryName}>{playGround}</div>
         {storeList ? (
           <VideoScroll
             color={"#e0f1ff"}

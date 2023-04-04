@@ -29,7 +29,7 @@ export default function MainFive() {
         <Box>
           <Typography
             sx={{
-              fontFamily: "CookieRun-Regular",
+              fontFamily: "MaplestoryOTFLight",
               fontWeight: "bold",
               fontSize: '45px',
               marginBottom: '5px',
@@ -39,7 +39,7 @@ export default function MainFive() {
           </Typography>
           <Typography
             style={{
-              fontFamily: "CookieRun-Regular",
+              fontFamily: "MaplestoryOTFLight",
               fontSize: '30px',
               marginBottom: '5px',
             }}
@@ -69,29 +69,32 @@ export default function MainFive() {
               height: "360px",
               borderRadius: "20px",
               margin: "50px",
+              padding: "2rem"
             }}
           >
             <Box
               sx={{
-                marginLeft: "40px",
-                marginTop: "25px",
-                paddingTop: "10px",
                 backgroundColor: "#FFDADA",
-                width: "280px",
-                height: "310px",
+                width: "100%",
+                height: "100%",
                 borderRadius: "20px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
               <img
                 src={image51}
                 alt="landing4"
-                width="209px"
-                height="209px"
+                width="300px"
+                height="300px"
               />
               <Typography
                 sx={{
                   fontSize: "30px",
-                  fontFamily: "CookieRun-Regular",
+                  fontFamily: "MaplestoryOTFLight",
+                  marginBottom: "1rem"
                 }}
               >
                 학습 결과 통계를 제공해요
@@ -105,17 +108,19 @@ export default function MainFive() {
               height: "360px",
               borderRadius: "20px",
               margin: "50px",
+              padding: "2rem",
             }}
           >
             <Box
               sx={{
-                marginLeft: "40px",
-                marginTop: "25px",
-                paddingTop: "10px",
                 backgroundColor: "#FFF5D7",
-                width: "280px",
-                height: "310px",
+                width: "100%",
+                height: "100%",
                 borderRadius: "20px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
               <img
@@ -123,14 +128,15 @@ export default function MainFive() {
                 alt="landing5"
                 width="240px"
                 height="160px"
+                style={{ marginTop: "4rem" }}
               />
               <Typography
                 sx={{
                   fontSize: "30px",
-                  fontFamily: "CookieRun-Regular",
+                  fontFamily: "MaplestoryOTFLight",
                 }}
               >
-                다문화 센터 위치 정보를 제공해요
+                다문화 센터의 <div>위치 정보를 제공해요</div>
               </Typography>
             </Box>
           </Box>
@@ -139,19 +145,21 @@ export default function MainFive() {
               backgroundColor: "#6BCB77",
               width: "360px",
               height: "360px",
+              padding: "2rem",
               borderRadius: "20px",
               margin: "50px",
             }}
           >
             <Box
               sx={{
-                marginLeft: "40px",
-                marginTop: "25px",
-                paddingTop: "10px",
                 backgroundColor: "#FFF5D7",
-                width: "280px",
-                height: "310px",
                 borderRadius: "20px",
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
               <img
@@ -159,14 +167,16 @@ export default function MainFive() {
                 alt="landing6"
                 width="210px"
                 height="210px"
+                style={{ marginTop: "3rem" }}
+
               />
               <Typography
                 sx={{
                   fontSize: "30px",
-                  fontFamily: "CookieRun-Regular",
+                  fontFamily: "MaplestoryOTFLight",
                 }}
               >
-                다문화 가정 관련 정보를 전달해요
+                다문화 가정 관련 <div>기사와 정책을 전달해요</div>
               </Typography>
             </Box>
           </Box>

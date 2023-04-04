@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 // import CloseIcon from "@mui/icons-material/Close";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,7 @@ import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 import styles from "./Study.module.scss";
+import YouTube, { YouTubeProps, YouTubePlayer } from "react-youtube";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 20,
@@ -48,6 +49,9 @@ interface QuizData {
   option2: string;
   option3: string;
   defaultContent: string;
+  videoUrl: string;
+  startTime: number;
+  endTime: number;
   lang: Lang;
   nowCorrected: boolean;
   firstCorrected: boolean;
@@ -73,6 +77,27 @@ function WordStudy() {
   const [quizIdData, setQuizIdData] = useState<number[]>([]);
   const [quizData, setQuizData] = useState<QuizData>();
   const [quizIndex, setQuizIndex] = useState<number>(0);
+  const [videoUrl, setVideoUrl] = useState<string>("")
+
+  // 영상 소리 재생 
+  // 유튜브 플레이어를 제어하기 위한 객체
+  const videoFrame = useRef<YouTubePlayer>();
+
+  // 재생하는 버튼
+  const play = (start: number, end: number) => {
+    const duration = end - start;
+    videoFrame.current.seekTo(start);
+    videoFrame.current.playVideo();
+    setTimeout(() => {
+      videoFrame.current.pauseVideo();
+    }, duration * 1000);
+  };
+
+  //영상이 준비되면 ref에 video컨트롤을 위한 데이터를 담음.
+  const onPlayerReady: YouTubeProps["onReady"] = (event) => {
+    const player = event.target;
+    videoFrame.current = player;
+  };
 
   // 정답 오답 모달 관련
   const [isCorrect, setIsCorrect] = useState(false);
@@ -83,7 +108,7 @@ function WordStudy() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`http://j8a608.p.ssafy.io:8080/api/learnings/${situationId}`);
+      const response = await axios.get(`https://j8a608.p.ssafy.io/api/learnings/${situationId}`);
       setQuizIdData(response.data);
     };
     fetchData();
@@ -91,8 +116,9 @@ function WordStudy() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${quizIdData[quizIndex]}/`);
+      const response = await axios.get(`https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizIdData[quizIndex]}/`);
       setQuizData(response.data);
+      setVideoUrl(response.data.videoUrl.split(".be/")[1])
     };
     fetchData();
   }, [userId, quizIdData, quizIndex]);
@@ -120,10 +146,14 @@ function WordStudy() {
 
   const Percentage = ((quizIndex + 1) / quizIdData.length) * 100
 
-
   return (
     <div>
       <div className={styles.loadAnime}>
+        <div style={{ display: "none" }}>
+          <YouTube
+            videoId={videoUrl}
+            onReady={onPlayerReady} />
+        </div>
         <div
           style={{
             width: "fit-content",
@@ -163,6 +193,10 @@ function WordStudy() {
               onNextQuiz={handleQuizSubmit}
               setIsCorrect={setIsCorrect} // React.Dispatch<React.SetStateAction<boolean>>
               setIsWrong={setIsWrong} // React.Dispatch<React.SetStateAction<boolean>>
+              startTime={quizData.startTime}
+              endTime={quizData.endTime}
+              videoFrame={videoFrame}
+              play={play}
             />
           </div>
         </div>
@@ -302,7 +336,6 @@ function WordStudy() {
           </div>
         </div>
       )}
-
     </div>
   );
 }

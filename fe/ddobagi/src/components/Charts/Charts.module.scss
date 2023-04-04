@@ -76,3 +76,10 @@
   border: none;
   border-radius: 10px;
 }
+
+
+.chartBox{
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}

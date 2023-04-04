@@ -9,6 +9,10 @@ export default function MainFour() {
       style={{
         width: '100%',
         height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#84D88F',
       }}
     >
@@ -58,7 +62,7 @@ export default function MainFour() {
           <Typography
             sx={{
               fontSize: '35px',
-              fontFamily: "CookieRun-Regular",
+              fontFamily: "MaplestoryOTFLight",
               color: "#000000",
             }}>
             아이의 학습 정보 뿐만 아니라, 다문화 센터 위치나 관련 정책 등 유용한 정보를 제공해 드려요.
