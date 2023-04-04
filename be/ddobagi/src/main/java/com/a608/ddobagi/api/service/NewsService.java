@@ -1,5 +1,6 @@
 package com.a608.ddobagi.api.service;
 
+import com.a608.ddobagi.api.dto.respoonse.NewsResponseDto;
 import com.a608.ddobagi.config.NaverConfig;
 import com.a608.ddobagi.db.entity.information.News;
 import com.a608.ddobagi.db.repository.NewsRepository;
@@ -20,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  *packageName    : com.a608.ddobagi.api.service
@@ -40,8 +42,11 @@ public class NewsService {
 	private final NewsRepository newsRepository;
 	private final NaverConfig naverConfig;
 
-	public List<News> findAll() {
-		return newsRepository.findAll();
+	public List<NewsResponseDto> findAll() {
+		List<News> list = newsRepository.findAll();
+		return list.stream()
+			.map(NewsResponseDto::new)
+			.collect(Collectors.toList());
 	}
 
 	public void addNews(){
