@@ -31,15 +31,22 @@ function SelectLanguage({ language, changeLanguageBy }: SelectLanguageProps) {
           value={language}
           label="Language"
           onChange={handleChange}
-          sx={{ fontFamily: "Pretendard-Regular" }}
+          sx={{
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
+          }}
         >
-          <MenuItem value={"KR"} sx={{ fontFamily: "Pretendard-Regular" }}>
+          <MenuItem value={"KR"} sx={{ fontFamily: "MaplestoryOTFLight" }}>
             한국어
           </MenuItem>
-          <MenuItem value={"CN"} sx={{ fontFamily: "Pretendard-Regular" }}>
+          <MenuItem value={"CN"} sx={{ fontFamily: "JingNanMaiYuanTi" }}>
             中文
           </MenuItem>
-          <MenuItem value={"VI"} sx={{ fontFamily: "Pretendard-Regular" }}>
+          <MenuItem value={"VI"} sx={{ fontFamily: "UVNHaiBaTrung" }}>
             Tiếng Việt
           </MenuItem>
         </Select>

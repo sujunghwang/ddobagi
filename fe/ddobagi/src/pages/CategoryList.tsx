@@ -43,22 +43,22 @@ function CategoryList() {
     const fetchLearning = async () => {
       try {
         const response = await axios.get<Videolist>(
-          `https://j8a608.p.ssafy.io/api/learnings/${userId}/HOME`
+          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/HOME`
         );
         setHomeList(response.data);
 
         const response2 = await axios.get<Videolist>(
-          `https://j8a608.p.ssafy.io/api/learnings/${userId}/SCHOOL`
+          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/SCHOOL`
         );
         setSchoolList(response2.data);
 
         const response3 = await axios.get<Videolist>(
-          `https://j8a608.p.ssafy.io/api/learnings/${userId}/PLAYGROUND`
+          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/PLAYGROUND`
         );
         setPlayGroundList(response3.data);
 
         const response4 = await axios.get<Videolist>(
-          `https://j8a608.p.ssafy.io/api/learnings/${userId}/STORE`
+          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/STORE`
         );
         setStoreList(response4.data);
       } catch (error) {
@@ -78,26 +78,36 @@ function CategoryList() {
     language === "CN"
       ? "学习"
       : language === "VI"
-        ? "tại cửa hàng"
-        : "가게에서";
+      ? "tại cửa hàng"
+      : "가게에서";
   const playGround =
     language === "CN"
       ? "在操场上"
       : language === "VI"
-        ? "tại sân chơi"
-        : "놀이터에서";
+      ? "tại sân chơi"
+      : "놀이터에서";
   //
 
   return (
     <div className={styles.Fcontainer}>
       <Container maxWidth="xl">
         <div className={styles.Banner}>
-          <div className={styles.Header}>
+          <div
+            className={styles.Header}
+            style={{
+              fontFamily:
+                language === "CN"
+                  ? "JingNanMaiYuanTi"
+                  : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
+            }}
+          >
             {language === "CN"
               ? "学习"
               : language === "VI"
-                ? "học hỏi"
-                : "한국어 연습"}
+              ? "học hỏi"
+              : "한국어 연습"}
           </div>
         </div>
         <div className={styles.BreadCrum}>
@@ -125,7 +135,7 @@ function CategoryList() {
         ) : (
           <Loading />
         )}
-      </div>     
+      </div>
 
       <div className={styles.CategoryBox}>
         {playGroundList ? (
@@ -137,7 +147,7 @@ function CategoryList() {
         ) : (
           <Loading />
         )}
-      </div>    
+      </div>
 
       <div className={styles.CategoryBox}>
         {storeList ? (

@@ -20,13 +20,13 @@ import GroupedColumnCharts from "../components/Charts/GroupChart";
 
 interface Props {
   chartdata: {
-  userAllProgressAvg: number;
-  otherAllProgressAvg: number;
-  userPronounceScoreAvg: number;
-  otherPronounceScoreProgress: number;
+    userAllProgressAvg: number;
+    otherAllProgressAvg: number;
+    userPronounceScoreAvg: number;
+    otherPronounceScoreProgress: number;
   };
   language: string;
-  }
+}
 
 function ParentPage1() {
   //언어 함수
@@ -65,7 +65,7 @@ function ParentPage1() {
     const fetchData = async () => {
       try {
         const result = await axios.get(
-          `https://j8a608.p.ssafy.io/api/users/${userId}/parents/statistics`
+          `http://j8a608.p.ssafy.io:8080/api/users/${userId}/parents/statistics`
         );
         setChartData(result.data);
       } catch (error) {
@@ -76,12 +76,12 @@ function ParentPage1() {
   }, [userId]);
 
   if (!chartData) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
-  const chartdata = chartData.data
+  const chartdata = chartData.data;
 
-  console.log(chartdata)
+  console.log(chartdata);
 
   // const ColumnChartData = [
   //   { name: "해당 사용자", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
@@ -144,7 +144,7 @@ function ParentPage1() {
     title = "유저 비교 통계";
   }
 
-  console.log(chartdata)
+  console.log(chartdata);
 
   return (
     <div className={styles.Fcontainer}>
@@ -366,7 +366,7 @@ function ParentPage1() {
               backgroundColor: "#FFDADA",
               marginTop: "30px",
               borderRadius: "0 0 20px 20px",
-              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)"
+              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)",
             }}
           >
             <Box>
@@ -496,16 +496,13 @@ function ParentPage1() {
                 ? "(tiêu chuẩn năm định cư Hàn Quốc)"
                 : "(한국 정착년도 기준)"}
             </Typography>
-            <Box sx={{ height:"60px" }} />
+            <Box sx={{ height: "60px" }} />
             {/* <ColumnChartWithGroupLabel
               data={ColumnChartData}
               categories={categories}
               title={title}
             /> */}
-            <GroupedColumnCharts 
-              chartdata={chartdata}
-              language={language}
-            />
+            <GroupedColumnCharts chartdata={chartdata} language={language} />
           </Box>
         </Box>
       </Box>

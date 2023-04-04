@@ -71,7 +71,9 @@ function ParentPage3() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://j8a608.p.ssafy.io/api/parents/news");
+        const response = await axios.get(
+          "http://j8a608.p.ssafy.io:8080/api/parents/news"
+        );
         // setData(response.data);
         setData(response.data.reverse().map((article: NewsType) => ({
           ...article,
@@ -333,7 +335,7 @@ function ParentPage3() {
               flexDirection: "column",
               // justifyContent: "center",
               alignItems: "center",
-              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)"
+              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)",
             }}
           >
             <Box
@@ -399,7 +401,10 @@ function ParentPage3() {
                         primary={
                           <Typography
                             variant="h5"
-                            sx={{ fontFamily: "MaplestoryOTFBold", marginBottom : "5px" }}
+                            sx={{
+                              fontFamily: "MaplestoryOTFBold",
+                              marginBottom: "5px",
+                            }}
                           >
                             {item.title}
                           </Typography>
@@ -412,13 +417,20 @@ function ParentPage3() {
                             >
                               {item.summary.slice(0, 150)}
                             </Typography>
-                            <Typography variant="body1" sx={{ fontFamily: "MaplestoryOTFLight", marginTop:"5px", color:"black" }}>
+                            <Typography
+                              variant="body1"
+                              sx={{
+                                fontFamily: "MaplestoryOTFLight",
+                                marginTop: "5px",
+                                color: "black",
+                              }}
+                            >
                               {item.publishedDate}
                             </Typography>
                           </React.Fragment>
                         }
-                        />
-                      </ListItem>
+                      />
+                    </ListItem>
                     <Divider variant="middle" component="li" />
                   </>
                 ))}

@@ -117,7 +117,12 @@ function BreadCrumbs() {
       {routes.map((route) => (
         <Typography
           sx={{
-            fontFamily: "MaplestoryOTFLight",
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
             display: "flex",
             alignItems: "center",
             cursor: "pointer",
