@@ -1,33 +1,43 @@
 // import './Main.css';
-import React from 'react';
-import Box from '@mui/material/Box';
-import { Typography } from '@mui/joy';
-import talk from "../../assets/4인대화.png"
-import styles from "./Two.module.scss"
+import React from "react";
+import Box from "@mui/material/Box";
+import { Typography } from "@mui/joy";
+import talk from "../../assets/4인대화.png";
+import styles from "./Two.module.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/RootReducer";
 
 export default function MainTwo() {
+  //언어 변수
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+  );
   return (
     <div
       style={{
-        width: '100%',
-        height: '100vh',
-        backgroundColor: '#FFE69A',
-        display: 'flex',
+        width: "100%",
+        height: "100vh",
+        backgroundColor: "#FFE69A",
+        display: "flex",
         flexDirection: "column",
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <Box
-      >
+      <Box>
         <Box className={styles.Fadeleft}>
           <Typography
             sx={{
-              fontSize: '80px',
-              fontFamily: "MaplestoryOTFLight",
+              fontSize: "80px",
+              fontFamily:
+                language === "CN"
+                  ? "JingNanMaiYuanTi"
+                  : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
               color: "#000000",
-              marginBottom: '5px',
-              whiteSpace: "pre-line"
+              marginBottom: "5px",
+              whiteSpace: "pre-line",
             }}
           >
             또바기는 어떤 서비스인가요?
@@ -40,28 +50,30 @@ export default function MainTwo() {
             marginBottom: "30px",
           }}
         >
-          <img
-            src={talk}
-            alt="talk4"
-            width="700px"
-            height="350px"
-          />
+          <img src={talk} alt="talk4" width="700px" height="350px" />
         </Box>
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <Typography
             sx={{
-              fontSize: '35px',
-              fontFamily: "MaplestoryOTFLight",
+              fontSize: "35px",
+              fontFamily:
+                language === "CN"
+                  ? "JingNanMaiYuanTi"
+                  : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
               color: "#000000",
-            }}>
-            또바기는 다문화 가정 아이들의 한국어 학습을 도와줄 수 있는 서비스입니다.
+            }}
+          >
+            또바기는 다문화 가정 아이들의 한국어 학습을 도와줄 수 있는
+            서비스입니다.
           </Typography>
         </Box>
       </Box>

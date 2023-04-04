@@ -58,6 +58,10 @@ interface QuizData {
 }
 
 function WordStudy() {
+  //언어 변수
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+  );
   const location = useLocation();
   const categoryName = location.state?.categoryName;
   const situationTitle = location.state?.situationTitle;
@@ -237,7 +241,12 @@ function WordStudy() {
             color: "#ffffff",
             backgroundColor: "#6BCB77",
             borderRadius: 10,
-            fontFamily: "MaplestoryOTFLight",
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
             fontSize: 20,
             borderColor: "rgba(0, 0, 0, .25)",
             borderWidth: "0px 4px 4px 0px",

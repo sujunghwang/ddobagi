@@ -40,7 +40,17 @@ function SelectLanguage({ language, changeLanguageBy }: SelectLanguageProps) {
                 : "MaplestoryOTFLight",
           }}
         >
-          <MenuItem value={"KR"} sx={{ fontFamily: "MaplestoryOTFLight" }}>
+          <MenuItem
+            value={"KR"}
+            sx={{
+              fontFamily:
+                language === "CN"
+                  ? "JingNanMaiYuanTi"
+                  : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
+            }}
+          >
             한국어
           </MenuItem>
           <MenuItem value={"CN"} sx={{ fontFamily: "JingNanMaiYuanTi" }}>
