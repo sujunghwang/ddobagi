@@ -98,10 +98,10 @@ function SignUp({ closeModal }: Props) {
   const navigate = useNavigate();
 
   //제출 실패 애니메이션
-  const signupBtn = useRef<HTMLDivElement>(null)
+  const signupBtn = useRef<HTMLDivElement>(null);
   const shakeanime = () => {
     if (signupBtn.current) {
-      signupBtn.current.classList.add(styles.ErrorBtn)
+      signupBtn.current.classList.add(styles.ErrorBtn);
 
       signupBtn.current.addEventListener("animationend", () => {
         if (signupBtn.current) {
@@ -109,7 +109,7 @@ function SignUp({ closeModal }: Props) {
         }
       });
     }
-  }
+  };
 
   const navigateToCategory = () => {
     navigate("/CategoryList");
@@ -129,7 +129,7 @@ function SignUp({ closeModal }: Props) {
     const apiLogin = async () => {
       try {
         const response = await axios.post<LogInfo>(
-          "https://j8a608.p.ssafy.io/api/auth/login",
+          "http://j8a608.p.ssafy.io:8080/api/auth/login",
           {
             loginId: id,
             pw: password,
@@ -153,7 +153,7 @@ function SignUp({ closeModal }: Props) {
         navigateToCategory();
         closeModal();
       } catch (error) {
-        shakeanime()
+        shakeanime();
       }
     };
 
@@ -169,7 +169,7 @@ function SignUp({ closeModal }: Props) {
     const signup = async () => {
       try {
         const response = await axios.post<SignupInfo>(
-          "https://j8a608.p.ssafy.io/api/auth/signup",
+          "http://j8a608.p.ssafy.io:8080/api/auth/signup",
           {
             loginId: id,
             pw: password,
@@ -179,20 +179,22 @@ function SignUp({ closeModal }: Props) {
             settle: submitSettle,
           }
         );
-        apiLogin()
+        apiLogin();
       } catch (error) {
-        shakeanime()
+        shakeanime();
       }
     };
     // 입력값 검증
     setSubmitted(true);
-    if (password !== confirmPassword ||
+    if (
+      password !== confirmPassword ||
       birthDay === null ||
       settleDay === null ||
       id === "" ||
       language === "" ||
-      name === "") {
-      shakeanime()
+      name === ""
+    ) {
+      shakeanime();
       return;
     } else {
       signup();
@@ -208,8 +210,8 @@ function SignUp({ closeModal }: Props) {
               {reduxLanguage === "CN"
                 ? "姓名"
                 : reduxLanguage === "VI"
-                  ? "tên"
-                  : "이름"}
+                ? "tên"
+                : "이름"}
             </div>
             <Input
               error={submitted === true && name === "" ? true : false}
@@ -227,8 +229,8 @@ function SignUp({ closeModal }: Props) {
               {reduxLanguage === "CN"
                 ? "语言"
                 : reduxLanguage === "VI"
-                  ? "ngôn ngữ"
-                  : "언어"}
+                ? "ngôn ngữ"
+                : "언어"}
             </div>
             <FormControl sx={{ minWidth: "100%" }} size="small">
               <InputLabel id="select-label" className={styles.SelectLabel}>
@@ -256,8 +258,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "进入韩国的年份"
             : reduxLanguage === "VI"
-              ? "năm nhập cảnh"
-              : "입국년도"}
+            ? "năm nhập cảnh"
+            : "입국년도"}
         </div>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["DatePicker"]}>
@@ -280,8 +282,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "出生年月日"
             : reduxLanguage === "VI"
-              ? "sinh nhật"
-              : "생일"}
+            ? "sinh nhật"
+            : "생일"}
         </div>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["DatePicker"]}>
@@ -302,8 +304,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "帐户"
             : reduxLanguage === "VI"
-              ? "tài khoản"
-              : "아이디"}
+            ? "tài khoản"
+            : "아이디"}
         </div>
         <Input
           placeholder="ID"
@@ -318,8 +320,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "密码"
             : reduxLanguage === "VI"
-              ? "mật khẩu"
-              : "비밀번호"}
+            ? "mật khẩu"
+            : "비밀번호"}
         </div>
         <FormControl sx={{ width: "100%" }} variant="outlined" size="small">
           <OutlinedInput
@@ -349,8 +351,8 @@ function SignUp({ closeModal }: Props) {
           {reduxLanguage === "CN"
             ? "验证密码"
             : reduxLanguage === "VI"
-              ? "Xác nhận lại mật khẩu"
-              : "비밀번호 확인"}
+            ? "Xác nhận lại mật khẩu"
+            : "비밀번호 확인"}
         </div>
         <FormControl sx={{ width: "100%" }} variant="outlined" size="small">
           <OutlinedInput
@@ -384,8 +386,8 @@ function SignUp({ closeModal }: Props) {
             reduxLanguage === "CN"
               ? "加入会员"
               : reduxLanguage === "VI"
-                ? "tham gia thành viên"
-                : "회원가입"
+              ? "tham gia thành viên"
+              : "회원가입"
           }
           color="#FF6B6B"
           width="100%"

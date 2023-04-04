@@ -35,7 +35,14 @@ interface QuizData {
   solved: boolean;
 }
 
-const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQuiz, setIsCorrect, setIsWrong }) => {
+const ReviewQuiz: React.FC<QuizProps> = ({
+  userId,
+  situationId,
+  quizId,
+  onNextQuiz,
+  setIsCorrect,
+  setIsWrong,
+}) => {
   //언어 변수
   const language = useSelector(
     (state: RootState) => state.languageChange.language
@@ -56,14 +63,21 @@ const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQu
     const fetchData = async () => {
       setIsLoading(true);
       try {
-      const response = await axios.get(`https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizId}/`);
-      setQuizData(response.data);
-      // options와 answer를 합침
-      const arr = [response.data.option1, response.data.option2, response.data.option3, response.data.answer];
-      // 합쳐진 배열을 무작위로 섞음
-      arr.sort(() => Math.random() - 0.5);
-      setOptions(arr);
-      setQuizData(response.data);
+        const response = await axios.get(
+          `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${quizId}/`
+        );
+        setQuizData(response.data);
+        // options와 answer를 합침
+        const arr = [
+          response.data.option1,
+          response.data.option2,
+          response.data.option3,
+          response.data.answer,
+        ];
+        // 합쳐진 배열을 무작위로 섞음
+        arr.sort(() => Math.random() - 0.5);
+        setOptions(arr);
+        setQuizData(response.data);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -85,11 +99,11 @@ const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQu
   // const quizData = quizdata3
   const CorrectWord = () => {
     axios({
-      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
+      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
-        corrected : "true"
+        corrected: "true",
       },
       // headers: {
       //   // "Content-Type": "application/json",
@@ -97,7 +111,7 @@ const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQu
       // },
     })
       .then(() => {
-        console.log("정답이 보내져썽")
+        console.log("정답이 보내져썽");
       })
       .catch((error) => {
         console.error(error);
@@ -106,11 +120,11 @@ const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQu
 
   const WrongWord = () => {
     axios({
-      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
+      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
-        corrected : false
+        corrected: false,
       },
       // headers: {
       //   // "Content-Type": "application/json",
@@ -118,7 +132,7 @@ const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQu
       // },
     })
       .then(() => {
-        console.log("잘못된 오답이야")
+        console.log("잘못된 오답이야");
       })
       .catch((error) => {
         console.error(error);
@@ -129,19 +143,19 @@ const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQu
     setSelectedOption(option);
   };
 
-  console.log(selectedOption)
+  console.log(selectedOption);
 
   const handleAnswerCheck = () => {
     if (selectedOption === quizData?.answer) {
       // alert("정답입니다!");
       setIsCorrect(true);
-      CorrectWord()
+      CorrectWord();
       // setQuizIndex(quizIndex + 1); // 다음 퀴즈로 이동
       onNextQuiz(); // 다음 퀴즈로 이동
     } else {
       // alert("오답입니다!");
       setIsWrong(true);
-      WrongWord()
+      WrongWord();
     }
   };
 
@@ -164,11 +178,11 @@ const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQu
 
   const translation = () => {
     if (language === "CN") {
-      return quizData.lang.CN.transContent
-    } else if (language === 'VI') {
-      return quizData.lang.VI.transContent
-    } 
-  }
+      return quizData.lang.CN.transContent;
+    } else if (language === "VI") {
+      return quizData.lang.VI.transContent;
+    }
+  };
 
   // const options = [quizData.option1, quizData.option2, quizData.option3];
 
@@ -180,34 +194,47 @@ const ReviewQuiz: React.FC<QuizProps> = ({ userId, situationId, quizId, onNextQu
     <div>
       <Typography
         sx={{
-          fontSize : "40px",
+          fontSize: "40px",
           fontFamily: "CookieRun-Regular",
         }}
-      > 
+      >
         {question}
       </Typography>
       <h2>{translation()}</h2>
       <ul>
         {options.map((option) => (
-          <Button 
-            variant="contained" 
-            key={option} 
-            onClick={() => handleOptionClick(option)} 
-            sx={{ 
+          <Button
+            variant="contained"
+            key={option}
+            onClick={() => handleOptionClick(option)}
+            sx={{
               margin: "30px",
               width: "150px",
-              height : "80px",
-              fontSize : "25px",
+              height: "80px",
+              fontSize: "25px",
               fontFamily: "CookieRun-Regular",
               border:
-                selectedOption === option ? "8px solid blue" : "1px solid black",
-              }}>
+                selectedOption === option
+                  ? "8px solid blue"
+                  : "1px solid black",
+            }}
+          >
             {option}
           </Button>
         ))}
       </ul>
-      <button onClick={handleAnswerCheck} style={{ width:"100px", height:"70px", borderRadius:"10px", fontSize: "20px", fontFamily: "CookieRun-Regular", }} >정답 확인</button>
-
+      <button
+        onClick={handleAnswerCheck}
+        style={{
+          width: "100px",
+          height: "70px",
+          borderRadius: "10px",
+          fontSize: "20px",
+          fontFamily: "CookieRun-Regular",
+        }}
+      >
+        정답 확인
+      </button>
     </div>
   );
 };

@@ -65,10 +65,12 @@ function ParentPage4() {
     const fetchData = async () => {
       try {
         // const response = await axios.get("/data/mockData.json");
-        const response = await axios.get("https://j8a608.p.ssafy.io/api/parents/information");
+        const response = await axios.get(
+          "http://j8a608.p.ssafy.io:8080/api/parents/information"
+        );
         // setData(response.data.data.news);
         setData(response.data);
-        console.log(response.data)
+        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -321,7 +323,7 @@ function ParentPage4() {
               flexDirection: "column",
               // justifyContent: "center",
               alignItems: "center",
-              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)"
+              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)",
             }}
           >
             <Box
@@ -386,7 +388,10 @@ function ParentPage4() {
                         primary={
                           <Typography
                             variant="h5"
-                            sx={{ fontFamily: "MaplestoryOTFBold", marginBottom:"10px" }}
+                            sx={{
+                              fontFamily: "MaplestoryOTFBold",
+                              marginBottom: "10px",
+                            }}
                           >
                             {item.title}
                           </Typography>

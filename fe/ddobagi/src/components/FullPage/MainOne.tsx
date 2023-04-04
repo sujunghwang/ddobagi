@@ -1,71 +1,91 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import { Typography } from '@mui/joy';
-import './Mouse.css';
-import styles from "./Two.module.scss"
+import React from "react";
+import Box from "@mui/material/Box";
+import { Typography } from "@mui/joy";
+import "./Mouse.css";
+import styles from "./Two.module.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/RootReducer";
 
 export default function MainOne() {
+  //언어 변수
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+  );
   return (
     <div
       style={{
-        width: '100%',
-        height: '100vh',
-        backgroundColor: '#92B4EC',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
+        width: "100%",
+        height: "100vh",
+        backgroundColor: "#92B4EC",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Box
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingTop: '115px'
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: "115px",
         }}
       >
         <Box>
           <Typography
             sx={{
-              fontSize: '80px',
-              fontFamily: "ONE-Mobile-POP",
+              fontSize: "80px",
+              fontFamily:
+                language === "CN"
+                  ? "JingNanMaiYuanTi"
+                  : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "ONE-Mobile-POP",
               color: "#ffffff",
-              marginBottom: '5px',
-              whiteSpace: "pre-line"
+              marginBottom: "5px",
+              whiteSpace: "pre-line",
             }}
           >
-            또박또박
-            말하면서 익혀요
+            또박또박 말하면서 익혀요
           </Typography>
         </Box>
       </Box>
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '6rem'
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "6rem",
         }}
       >
-        <Box className="mouse" sx={{ marginBottom: '10px' }}>
+        <Box className="mouse" sx={{ marginBottom: "10px" }}>
           <div className="scroll-icon ex-1">
             <span className="wheel"></span>
           </div>
         </Box>
         <Typography
           sx={{
-            fontSize: '35px',
-            fontFamily: "MaplestoryOTFLight",
+            fontSize: "35px",
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
             color: "#ffffff",
-          }}>
+          }}
+        >
           스크롤을 내려보세요
         </Typography>
       </Box>
       <div className={styles.bubblesContainer}>
-        <svg className={styles.bubbles} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 701 1024" style={{ overflow: "visible" }}>
-
+        <svg
+          className={styles.bubbles}
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 701 1024"
+          style={{ overflow: "visible" }}
+        >
           <g className={styles.bubblesLarge} stroke-width="7">
             <g>
               <g transform="translate(10 940)">
@@ -146,9 +166,8 @@ export default function MainOne() {
               </g>
             </g>
           </g>
-
         </svg>
       </div>
-    </div >
+    </div>
   );
 }

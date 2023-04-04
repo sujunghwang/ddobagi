@@ -13,10 +13,9 @@ import WordCloseBtn from "../Word/WordCloseBtn";
 import { useState, useEffect } from "react";
 import CorrectAnimation from "../animations/Correct";
 import WrongAnimation from "../animations/Wrong";
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+import SkipNextIcon from "@mui/icons-material/SkipNext";
 import ReviewCloseBtn from "../Word/ReviewCloseBtn";
 import YouTube, { YouTubeProps, YouTubePlayer } from "react-youtube";
-
 
 interface Lang {
   [key: string]: {
@@ -42,7 +41,7 @@ interface QuizData {
 }
 
 function ReviewStudy() {
-  // 영상 소리 재생 
+  // 영상 소리 재생
   // 유튜브 플레이어를 제어하기 위한 객체
   const videoFrame = useRef<YouTubePlayer>();
 
@@ -76,8 +75,8 @@ function ReviewStudy() {
   // console.log(situationTitle)
   // console.log(color)
   // console.log(situationId)
-  console.log(userId)
-  console.log(reviewNum)
+  console.log(userId);
+  console.log(reviewNum);
 
   // const [quizIdData, setQuizIdData] = useState<number[]>([]);
   const [quizData, setQuizData] = useState<QuizData>();
@@ -87,12 +86,12 @@ function ReviewStudy() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [isWrong, setIsWrong] = useState(false);
   //
-  console.log(isCorrect)
-  console.log(isWrong)
+  console.log(isCorrect);
+  console.log(isWrong);
 
   // useEffect(() => {
   //   const fetchData = async () => {
-  //     const response = await axios.get(`https://j8a608.p.ssafy.io/api/learnings/${situationId}`);
+  //     const response = await axios.get(`http://j8a608.p.ssafy.io:8080/api/learnings/${situationId}`);
   //     setQuizIdData(response.data);
   //   };
   //   fetchData();
@@ -102,7 +101,9 @@ function ReviewStudy() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${reviewNum[quizIndex]}/`);
+      const response = await axios.get(
+        `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${reviewNum[quizIndex]}/`
+      );
       setQuizData(response.data);
     };
     fetchData();
@@ -129,22 +130,42 @@ function ReviewStudy() {
     return <div>Loading...</div>;
   }
 
-
   return (
     <div>
       {/* <Box sx={{ marginTop:"30px", position: "absolute", top: 10, left: 0, m: 2 }}>
         <WordCloseBtn width="280px" />
       </Box> */}
-      <div style={{ marginTop: "30px", }}>
-        <img src={"/img/notebook.png"} alt="notebook" style={{ width: "1000px", marginTop: "50px", }} />
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", marginTop: "70px" }}>
+      <div style={{ marginTop: "30px" }}>
+        <img
+          src={"/img/notebook.png"}
+          alt="notebook"
+          style={{ width: "1000px", marginTop: "50px" }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            marginTop: "70px",
+          }}
+        >
           {/* <div className={styles.scores}> */}
-          <div style={{ display: "flex", float: "right", paddingBottom: "20px", fontSize: "22px" }}>
+          <div
+            style={{
+              display: "flex",
+              float: "right",
+              paddingBottom: "20px",
+              fontSize: "22px",
+            }}
+          >
             {quizIndex + 1} / {reviewNum.length}
           </div>
-          <div style={{
-            marginTop: "60px"
-          }}>
+          <div
+            style={{
+              marginTop: "60px",
+            }}
+          >
             <Quiz
               userId={userId}
               situationId={situationId}
@@ -157,7 +178,6 @@ function ReviewStudy() {
               videoFrame={videoFrame}
               play={play}
             />
-
           </div>
         </div>
       </div>
@@ -182,7 +202,11 @@ function ReviewStudy() {
             },
             marginX: "15px",
           }}
-          startIcon={<SkipNextIcon sx={{ width: "38px", height: "35px", color: "white" }} />}
+          startIcon={
+            <SkipNextIcon
+              sx={{ width: "38px", height: "35px", color: "white" }}
+            />
+          }
         >
           {quizIndex === reviewNum.length - 1 ? "학습 완료" : "다음 문제"}
         </Button>
@@ -193,7 +217,8 @@ function ReviewStudy() {
 
       {/* correct modal */}
       {isCorrect && (
-        <div className="modal"
+        <div
+          className="modal"
           style={{
             position: "fixed",
             top: "33%",
@@ -202,15 +227,18 @@ function ReviewStudy() {
             height: "50%",
             backgroundColor: "white",
             borderRadius: "20px",
-            border: "2px solid black"
-          }}>
-          <div className="modal-content"
+            border: "2px solid black",
+          }}
+        >
+          <div
+            className="modal-content"
             style={{
               position: "absolute",
               top: "50%",
               left: "50%",
-              transform: "translate(-50%, -50%)"
-            }}>
+              transform: "translate(-50%, -50%)",
+            }}
+          >
             <CorrectAnimation />
             <Typography
               sx={{
@@ -221,31 +249,37 @@ function ReviewStudy() {
               정답입니다!
             </Typography>
             <Box sx={{ height: "20px" }} />
-            <Button sx={{
-              width: "100px",
-              borderRadius: "10px",
-              mr: 2,
-              color: "#ffffff",
-              backgroundColor: "#6BCB77",
-              fontFamily: "CookieRun-Regular",
-              fontSize: 20,
-              borderColor: "rgba(0, 0, 0, .25)",
-              borderWidth: "0px 4px 4px 0px",
-              borderStyle: "solid",
-              transition: "border-width .1s ",
-              "&:hover": {
+            <Button
+              sx={{
+                width: "100px",
+                borderRadius: "10px",
+                mr: 2,
+                color: "#ffffff",
                 backgroundColor: "#6BCB77",
-                borderWidth: "0px",
-              },
-              marginX: "15px",
-            }} onClick={handleClose}>확인</Button>
+                fontFamily: "CookieRun-Regular",
+                fontSize: 20,
+                borderColor: "rgba(0, 0, 0, .25)",
+                borderWidth: "0px 4px 4px 0px",
+                borderStyle: "solid",
+                transition: "border-width .1s ",
+                "&:hover": {
+                  backgroundColor: "#6BCB77",
+                  borderWidth: "0px",
+                },
+                marginX: "15px",
+              }}
+              onClick={handleClose}
+            >
+              확인
+            </Button>
           </div>
         </div>
       )}
 
       {/* wrong modal */}
       {isWrong && (
-        <div className="modal"
+        <div
+          className="modal"
           style={{
             position: "fixed",
             top: "33%",
@@ -254,15 +288,18 @@ function ReviewStudy() {
             height: "50%",
             backgroundColor: "white",
             borderRadius: "20px",
-            border: "2px solid black"
-          }}>
-          <div className="modal-content"
+            border: "2px solid black",
+          }}
+        >
+          <div
+            className="modal-content"
             style={{
               position: "absolute",
               top: "50%",
               left: "50%",
-              transform: "translate(-50%, -50%)"
-            }}>
+              transform: "translate(-50%, -50%)",
+            }}
+          >
             <WrongAnimation />
             <Typography
               sx={{
@@ -292,18 +329,18 @@ function ReviewStudy() {
                 },
                 marginX: "15px",
               }}
-              onClick={handleClose}>확인</Button>
+              onClick={handleClose}
+            >
+              확인
+            </Button>
           </div>
         </div>
       )}
       <div>
-        <YouTube
-          videoId={quizData.videoUrl}
-          onReady={onPlayerReady} />
+        <YouTube videoId={quizData.videoUrl} onReady={onPlayerReady} />
       </div>
     </div>
   );
 }
-
 
 export default ReviewStudy;

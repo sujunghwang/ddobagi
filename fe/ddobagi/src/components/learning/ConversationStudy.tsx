@@ -12,22 +12,19 @@ import { styled } from "@mui/material/styles";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 20,
   borderRadius: 5,
   [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: "#e1e1e1"
+    backgroundColor: "#e1e1e1",
   },
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 5,
-    backgroundImage:
-      "linear-gradient(to right, #74ebd5, #acb6e5)"
+    backgroundImage: "linear-gradient(to right, #74ebd5, #acb6e5)",
   },
 }));
-
 
 function ConversationStudy() {
   // navigate에 넣어 둔 state 값들을 가져옵니다.
@@ -96,7 +93,7 @@ function ConversationStudy() {
     recordedUrl: string;
     lang: string;
     transContent: string;
-    pronounce: number
+    pronounce: number;
   }
   const [scripts, setScripts] = useState<Script[]>([]);
 
@@ -104,7 +101,7 @@ function ConversationStudy() {
     const fetchScript = async () => {
       try {
         const response = await axios.get<Script[]>(
-          `https://j8a608.p.ssafy.io/api/conversations/${situationId}/${userId}/script`
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}/${userId}/script`
         );
         const newScripts = [];
         if (language === "VI") {
@@ -156,7 +153,7 @@ function ConversationStudy() {
     const fetchVideoInfo = async () => {
       try {
         const response = await axios.get<MapType>(
-          `https://j8a608.p.ssafy.io/api/conversations/${situationId}`
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}`
         );
         setVideoInfo(response.data);
       } catch (error) {
@@ -191,13 +188,12 @@ function ConversationStudy() {
     };
   }, []);
 
-
   // 녹음 결과를 가져옵니다.
   useEffect(() => {
     const fetchRecordInfo = async () => {
       try {
         const response = await axios.get<number>(
-          `https://j8a608.p.ssafy.io/api/conversations/${situationId}/${userId}/record`
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}/${userId}/record`
         );
         setRecord(response.data);
       } catch (error) {
@@ -207,32 +203,42 @@ function ConversationStudy() {
 
     fetchRecordInfo();
   });
-  const Percentage = (record / scripts.length) * 100
-
+  const Percentage = (record / scripts.length) * 100;
 
   return (
     <>
       <div className={styles.loadAnime}>
-        <div className={styles.Pin}
+        <div
+          className={styles.Pin}
           style={{
             marginLeft: `${Percentage}%`,
           }}
         >
           <img src={"/img/running.gif"} alt="run" style={{ width: "50px" }} />
         </div>
-        <BorderLinearProgress variant="determinate" value={Percentage} sx={{
-          boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.2)"
-        }} />
-        <div style={{
-          textAlign: "end",
-          fontSize: "1.2rem",
-          marginTop: ".5rem"
-        }}>
+        <BorderLinearProgress
+          variant="determinate"
+          value={Percentage}
+          sx={{
+            boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.2)",
+          }}
+        />
+        <div
+          style={{
+            textAlign: "end",
+            fontSize: "1.2rem",
+            marginTop: ".5rem",
+          }}
+        >
           {record} / {scripts.length}
         </div>
       </div>
       <div className={styles.FullContainer}>
-        <div className={`${styles.LeftContainer} ${videoLoaded ? `${styles.Leftanime}` : ''}`}>
+        <div
+          className={`${styles.LeftContainer} ${
+            videoLoaded ? `${styles.Leftanime}` : ""
+          }`}
+        >
           <div>
             <YouTube
               ref={videoRef}
@@ -246,7 +252,11 @@ function ConversationStudy() {
           <div className={styles.SubTitle}>{situationTitle}</div>
           <div className={styles.Description}>{videoDescription}</div>
           <div onClick={goBack} className={styles.CloseBtn}>
-            나가기
+            {language === "CN"
+              ? "回去"
+              : language === "VI"
+              ? "lối ra"
+              : "나가기"}
           </div>
         </div>
         <div className={styles.RightContainer}>
@@ -259,8 +269,9 @@ function ConversationStudy() {
                 <div key={index} className={styles.bubbleGroup}>
                   <div className={styles.Scripts}>
                     <div
-                      className={`${styles.bubble} ${item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
-                        }`}
+                      className={`${styles.bubble} ${
+                        item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
+                      }`}
                     >
                       <div>{item.defaultContent}</div>
                       <div>{item.transContent}</div>
