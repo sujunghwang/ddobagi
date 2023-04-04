@@ -12,8 +12,8 @@ import { styled } from "@mui/material/styles";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
-import Container from "@mui/material/Container";
-import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 20,
@@ -96,6 +96,7 @@ function ConversationStudy() {
     recordedUrl: string;
     lang: string;
     transContent: string;
+    pronounce: number
   }
   const [scripts, setScripts] = useState<Script[]>([]);
 
@@ -212,22 +213,20 @@ function ConversationStudy() {
   return (
     <>
       <div className={styles.loadAnime}>
-        <div
+        <div className={styles.Pin}
           style={{
-            width: "fit-content",
             marginLeft: `${Percentage}%`,
-            transform: "translate(-50%,0)",
           }}
         >
-          <TwoWheelerIcon color="success" fontSize="large" />
+          <img src={"/img/running.gif"} alt="run" style={{ width: "50px" }} />
         </div>
         <BorderLinearProgress variant="determinate" value={Percentage} sx={{
           boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.2)"
         }} />
         <div style={{
           textAlign: "end",
-          fontSize:"1.2rem",
-          marginTop:".5rem"
+          fontSize: "1.2rem",
+          marginTop: ".5rem"
         }}>
           {record} / {scripts.length}
         </div>
@@ -273,6 +272,8 @@ function ConversationStudy() {
                         item={item}
                         videoFrame={videoFrame}
                         play={play}
+                        recordedUrl={item.recordedUrl}
+                        pronounce={item.pronounce}
                       />
                     </div>
                   </div>

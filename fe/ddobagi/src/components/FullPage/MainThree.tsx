@@ -29,7 +29,7 @@ export default function MainThree() {
         <Box>
           <Typography
             sx={{
-              fontFamily: "CookieRun-Regular",
+              fontFamily: "MaplestoryOTFLight",
               fontWeight: "bold",
               fontSize: '45px',
               marginBottom: '5px',
@@ -39,7 +39,7 @@ export default function MainThree() {
           </Typography>
           <Typography
             style={{
-              fontFamily: "CookieRun-Regular",
+              fontFamily: "MaplestoryOTFLight",
               fontSize: '30px',
               marginBottom: '5px',
             }}
@@ -69,17 +69,19 @@ export default function MainThree() {
               height: "360px",
               borderRadius: "20px",
               margin: "50px",
+              padding: "2rem"
             }}
           >
             <Box
               sx={{
-                marginLeft: "40px",
-                marginTop: "25px",
-                paddingTop: "10px",
                 backgroundColor: "#FFDADA",
-                width: "280px",
-                height: "310px",
+                width: "100%",
+                height: "100%",
                 borderRadius: "20px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
               <img
@@ -87,14 +89,17 @@ export default function MainThree() {
                 alt="landing1"
                 width="240px"
                 height="160px"
+                style={{ marginTop: "5rem" }}
+
               />
               <Typography
                 sx={{
                   fontSize: "30px",
-                  fontFamily: "CookieRun-Regular",
+                  fontFamily: "MaplestoryOTFLight",
+                  marginBottom: "1rem"
                 }}
               >
-                상황에 맞는 대사를 따라하며 배워요
+                상황에 맞는 대사를 <div>따라하며 배워요</div>
               </Typography>
             </Box>
           </Box>
@@ -105,32 +110,35 @@ export default function MainThree() {
               height: "360px",
               borderRadius: "20px",
               margin: "50px",
+              padding: "2rem",
             }}
           >
             <Box
               sx={{
-                marginLeft: "40px",
-                marginTop: "25px",
-                paddingTop: "10px",
                 backgroundColor: "#FFF5D7",
-                width: "280px",
-                height: "310px",
+                width: "100%",
+                height: "100%",
                 borderRadius: "20px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
               <img
                 src={image32}
                 alt="landing2"
                 width="240px"
-                height="160px"
+                height="250px"
               />
               <Typography
                 sx={{
                   fontSize: "30px",
-                  fontFamily: "CookieRun-Regular",
+                  fontFamily: "MaplestoryOTFLight",
+                  marginBottom: "1rem"
                 }}
               >
-                따라했던 문장에서 단어를 익혀요
+                따라했던 문장에서 <div>단어를 익혀요</div>
               </Typography>
             </Box>
           </Box>
@@ -139,19 +147,21 @@ export default function MainThree() {
               backgroundColor: "#6BCB77",
               width: "360px",
               height: "360px",
+              padding: "2rem",
               borderRadius: "20px",
               margin: "50px",
             }}
           >
             <Box
               sx={{
-                marginLeft: "40px",
-                marginTop: "25px",
-                paddingTop: "10px",
                 backgroundColor: "#FFF5D7",
-                width: "280px",
-                height: "310px",
                 borderRadius: "20px",
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
               <img
@@ -159,14 +169,16 @@ export default function MainThree() {
                 alt="landing3"
                 width="210px"
                 height="210px"
+                style={{ marginTop: "3rem" }}
               />
               <Typography
                 sx={{
                   fontSize: "30px",
-                  fontFamily: "CookieRun-Regular",
+                  fontFamily: "MaplestoryOTFLight",
+                  marginBottom: "1rem"
                 }}
               >
-                한국의 문화를 영상으로 봐요
+                한국의 문화를 <div>영상으로 봐요</div>
               </Typography>
             </Box>
           </Box>

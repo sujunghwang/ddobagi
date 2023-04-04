@@ -1,81 +1,64 @@
 import React, { useEffect, useState } from "react";
-import CircularProgress, {
-  CircularProgressProps,
-} from "@mui/material/CircularProgress";
+import { styled } from '@mui/material/styles';
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+import LinearProgress, { linearProgressClasses, LinearProgressProps } from '@mui/material/LinearProgress';
 
 function CircleCharts(
-  props: CircularProgressProps & {
+  props: LinearProgressProps & {
     value: number;
     name: string;
     ChartColor: string;
   }
 ) {
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState<number>(0);
 
   useEffect(() => {
     setTimeout(() => {
       setProgress(props.value);
     }, 1000);
-  });
+  }, []);
+
+  const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+    height: 30,
+    borderRadius: 5,
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+      backgroundColor: "white"
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+      borderRadius: 5,
+      backgroundColor: props.ChartColor
+    },
+  }));
 
   return (
-    <div style={{ color: props.ChartColor }}>
-      <Box sx={{ position: "relative", display: "inline-flex" }}>
-        <CircularProgress
-          variant="determinate"
-          value={progress}
-          size="13rem"
-          color="inherit"
-          thickness={6}
+    <div style={{ color: props.ChartColor, display: "flex", justifyContent: "space-between", alignItems: "center", gap: "3rem" }}>
+      <Typography
+        component="div"
+        color="black"
+        fontSize="2rem"
+        fontFamily={"MaplestoryOTFLight"}
+        zIndex={2}
+        align="center"
+      >
+        {props.name}
+      </Typography>
+      <div style={{ width: "40vw", position: "relative" }}>
+        <BorderLinearProgress variant="determinate" value={progress} />
+        <Typography
           sx={{
             position: "absolute",
-            left: 0,
-            zIndex: 2,
+            zIndex: 3,
+            top: -3,
+            left: 10
           }}
-        />
-        <CircularProgress
-          variant="determinate"
-          value={100}
-          size="13rem"
-          sx={{ color: "white" }}
-          thickness={6}
-        />
-        <Box
-          sx={{
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            position: "absolute",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Typography
-            variant="h6"
-            component="div"
-            color="black"
-            fontSize="1.5rem"
-            fontFamily={"MaplestoryOTFLight"}
-            zIndex={2}
-            align="center"
-          >
-            {props.name}
-          </Typography>
-          <Typography
-            variant="caption"
-            component="div"
-            color="black"
-            fontSize="2rem"
-            fontFamily={"MaplestoryOTFLight"}
-          >{`${Math.round(props.value)}%`}</Typography>
-        </Box>
-      </Box>{" "}
-    </div>
+          variant="caption"
+          component="div"
+          color="black"
+          fontSize="1.5rem"
+          fontFamily={"MaplestoryOTFLight"}
+        >{`${Math.round(props.value)}%`}</Typography>
+      </div>
+    </div >
   );
 }
 

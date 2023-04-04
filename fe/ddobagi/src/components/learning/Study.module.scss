@@ -362,3 +362,27 @@
     opacity: 1;
   }
 }
+
+
+
+.Pin {
+  width: fit-content;
+  transform: translate(-50%, 5%);
+  color: #acb6e5;
+  animation: UpDown 2s ease-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes UpDown {
+  0% {
+    transform: translate(-50%, 5%);
+  }
+
+  50% {
+    transform: translate(-50%, -5%);
+  }
+
+  100% {
+    transform: translate(-50%, 5%);
+  }
+}

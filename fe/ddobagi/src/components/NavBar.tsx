@@ -274,48 +274,50 @@ function NavBar() {
                         : "보호자"}
                   </div>
                 )}
-                <div
-                  key="한국어 연습"
-                  className={styles.Router}
-                  onClick={navigateToCategory}
-                  style={{
-                    borderWidth:
-                      location.pathname === "/CategoryList"
-                        ? "0px 0px 4px 0px"
-                        : "0px 0px 0px 0px",
-                    color:
-                      location.pathname === "/CategoryList"
-                        ? "rgb(255, 218, 80)"
-                        : "#000000",
-                  }}
-                >
-                  {language === "CN"
-                    ? "学习"
-                    : language === "VI"
-                      ? "học hỏi"
-                      : "한국어 연습"}
-                </div>
-                <div
-                  key="한국 문화"
-                  className={styles.Router}
-                  onClick={navigateToCulture}
-                  style={{
-                    borderWidth:
-                      location.pathname === "/CultureList"
-                        ? "0px 0px 4px 0px"
-                        : "0px 0px 0px 0px",
-                    color:
-                      location.pathname === "/CultureList"
-                        ? "rgb(255, 218, 80)"
-                        : "#000000",
-                  }}
-                >
-                  {language === "CN"
-                    ? "韩国文化"
-                    : language === "VI"
-                      ? "văn hoá"
-                      : "한국 문화"}
-                </div>
+                {userStr && (
+                  <div
+                    key="한국어 연습"
+                    className={styles.Router}
+                    onClick={navigateToCategory}
+                    style={{
+                      borderWidth:
+                        location.pathname === "/CategoryList"
+                          ? "0px 0px 4px 0px"
+                          : "0px 0px 0px 0px",
+                      color:
+                        location.pathname === "/CategoryList"
+                          ? "rgb(255, 218, 80)"
+                          : "#000000",
+                    }}
+                  >
+                    {language === "CN"
+                      ? "学习"
+                      : language === "VI"
+                        ? "học hỏi"
+                        : "한국어 연습"}
+                  </div>)}
+                {userStr && (
+                  <div
+                    key="한국 문화"
+                    className={styles.Router}
+                    onClick={navigateToCulture}
+                    style={{
+                      borderWidth:
+                        location.pathname === "/CultureList"
+                          ? "0px 0px 4px 0px"
+                          : "0px 0px 0px 0px",
+                      color:
+                        location.pathname === "/CultureList"
+                          ? "rgb(255, 218, 80)"
+                          : "#000000",
+                    }}
+                  >
+                    {language === "CN"
+                      ? "韩国文化"
+                      : language === "VI"
+                        ? "văn hoá"
+                        : "한국 문화"}
+                  </div>)}
                 <div style={{ marginRight: "1rem" }}>
                   <SelectLanguage />
                 </div>

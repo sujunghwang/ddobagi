@@ -67,7 +67,7 @@ function VideoCard({
       <Card
         sx={{
           Width: 430,
-          borderRadius: "30px",
+          borderRadius: "20px",
           boxShadow: "0px 5px 10px rgba(0,0,0,0.4)"
         }}
         onClick={() => {
@@ -88,7 +88,7 @@ function VideoCard({
             <BorderLinearProgress variant="determinate" value={progress} />
             <Typography
               gutterBottom
-              variant="h6"
+              variant="h5"
               component="div"
               sx={{
                 textAlign: "center",
