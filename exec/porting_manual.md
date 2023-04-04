@@ -12,52 +12,52 @@
 
 ## Contents
 
-1. [CI/CD 설계](#1. CI/CD 설계)
+1. [CI/CD 설계](#1.-CI/CD-설계)
 
-     - [개발서버와 운영서버](#개발서버와 운영서버)
-
-
-     - [CI/CD 구조도](#CI/CD 구조도)
+     - [개발서버와 운영서버](#개발서버와-운영서버)
 
 
-     - [포트 목록](#포트 목록)
+     - [CI/CD 구조도](#CI/CD-구조도)
 
 
-2. [EC2 환경설정](#2. EC2 환경설정)
-
-     - [Docker 설치](#Docker 설치)
-
-     - [MySQL 설치 및 설정](#MySQL 설치 및 설정)
-
-     - [Docker Network, Volume](#Docker Network, Volume)
-
-     - [MySQL Docker Container](#MySQL Docker Container)
-
-     - [Jenkins Container](#Jenkins Container)
-       - [Jenkins Container 실행 및 기본설정](#Jenkins Container 실행 및 기본설정)
-       - [Docker in Docker (젠킨스 컨테이너 안에 도커 설치)](#Docker in Docker (젠킨스 컨테이너 안에 도커 설치))
+     - [포트 목록](#포트-목록)
 
 
-3. [Jenkins - GitLab](#3. Jenkins - GitLab)
+2. [EC2 환경설정](#2.-EC2-환경설정)
 
-   - [3-1. Jenkins Item](#3-1. Jenkins Item)
+     - [Docker 설치](#Docker-설치)
 
-   - [3-2. Gitlab Webhooks 등록](#3-2. Gitlab Webhooks 등록)
+     - [MySQL 설치 및 설정](#MySQL-설치-및-설정)
 
-   - [3-3. Webhook Test](#3-3. Webhook Test)
+     - [Docker Network, Volume](#Docker-Network,-Volume)
 
-4. [개발 서버](#4. 개발 서버)
+     - [MySQL Docker Container](#MySQL-Docker-Container)
 
-   - [React Frontend 빌드 및 배포 (개발 서버)](#React Frontend 빌드 및 배포 (개발 서버))
-   - [SpringBoot Backend 빌드 및 배포 (개발 서버)](#SpringBoot Backend 빌드 및 배포 (개발 서버))
+     - [Jenkins Container](#Jenkins-Container)
+       - [Jenkins Container 실행 및 기본설정](#Jenkins-Container-실행-및-기본설정)
+       - [Docker in Docker: 젠킨스 컨테이너 안에 도커 설치)](#Docker-in-Docker:-젠킨스-컨테이너-안에-도커-설치)
 
-5. [운영 서버](#5. 운영 서버)
 
-   - [React Frontend 빌드 및 배포 (운영 서버)](#React Frontend 빌드 및 배포 (운영 서버))
-   - [SpringBoot Backend 빌드 및 배포 (운영 서버)](#SpringBoot Backend 빌드 및 배포 (운영 서버))
-   - [NginX, certbot 설치 및 SSL 설정](#NginX, certbot 설치 및 SSL 설정)
+3. [Jenkins GitLab 연동](#3.-Jenkins-GitLab-연동)
 
-6. [(참고) Docker 명령어](#6. (참고) Docker 명령어)
+   - [3-1. Jenkins Item](#3-1.-Jenkins-Item)
+
+   - [3-2. Gitlab Webhooks 등록](#3-2.-Gitlab-Webhooks-등록)
+
+   - [3-3. Webhook Test](#3-3.-Webhook-Test)
+
+4. [개발 서버](#4.-개발-서버)
+
+   - [React Frontend 빌드 및 배포 (개발 서버)](#React-Frontend-빌드-및-배포:-개발-서버)
+   - [SpringBoot Backend 빌드 및 배포 (개발 서버)](#SpringBoot-Backend-빌드-및-배포:-개발-서버)
+
+5. [운영 서버](#5.-운영-서버)
+
+   - [React Frontend 빌드 및 배포 (운영 서버)](#React-Frontend-빌드-및-배포:-운영-서버)
+   - [SpringBoot Backend 빌드 및 배포 (운영 서버)](#SpringBoot-Backend-빌드-및-배포:-운영-서버)
+   - [NginX, certbot 설치 및 SSL 설정](#NginX,-certbot-설치-및-SSL-설정)
+
+6. [(참고) Docker 명령어](#6.-참고:-Docker-명령어)
 
    
 
@@ -192,7 +192,7 @@ ec2 for Hadoop
 
     
 
-- ##### Docker in Docker (젠킨스 컨테이너 안에 도커 설치)
+- ##### Docker in Docker: 젠킨스 컨테이너 안에 도커 설치
 
   - Jenkins container에 접속
 
@@ -334,7 +334,7 @@ test 후 build 확인
 
 ---
 
-#### React Frontend 빌드 및 배포 (개발 서버)
+#### React Frontend 빌드 및 배포: 개발 서버
 
 Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습니다.
 
@@ -418,7 +418,7 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
 
   
 
-#### SpringBoot Backend 빌드 및 배포 (개발 서버)
+#### SpringBoot Backend 빌드 및 배포: 개발 서버
 
 Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습니다.
 
@@ -639,7 +639,7 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
   
     
   
-  #### SpringBoot Backend 빌드 및 배포 (운영 서버)
+  #### SpringBoot Backend 빌드 및 배포: 운영 서버
   
   Dockerfile_prod, shell script(build_prod.sh)는 gitlab repository에 포함되어 있습니다.
   
