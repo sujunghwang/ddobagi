@@ -78,7 +78,8 @@ function ParentPage4() {
 
   // 링크 이동 함수
   const handleItemClick = (item: any) => {
-    window.location.replace(`${item.url}`);
+    // window.location.replace(`${item.url}`);
+    window.open(`${item.url}`, '_blank');
   };
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -424,6 +425,7 @@ function ParentPage4() {
         </Box>
       </Box>
       <Box sx={{ height: "250px" }} />
+      <Box sx={{ height :"150px"}} />
     </div>
   );
 }

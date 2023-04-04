@@ -59,6 +59,12 @@ function ParentPage3() {
   };
   // 탭 선택 함수 끝
 
+  function removeTags(text: string) {
+    return text.replace(/<b>/g, '')
+               .replace(/<\/b>/g, '')
+               .replace(/&apos;/g, '');
+  }
+
   // newsList data axios 통신
   const [data, setData] = useState<NewsType[]>([]);
 
@@ -67,7 +73,12 @@ function ParentPage3() {
       try {
         const response = await axios.get("https://j8a608.p.ssafy.io/api/parents/news");
         // setData(response.data);
-        setData(response.data.reverse());
+        setData(response.data.reverse().map((article: NewsType) => ({
+          ...article,
+          title: removeTags(article.title),
+          summary: removeTags(article.summary),
+        })));
+        console.log(data)
       } catch (error) {
         console.error(error);
       }
@@ -77,7 +88,8 @@ function ParentPage3() {
 
   // 링크 이동 함수
   const handleItemClick = (item: any) => {
-    window.location.replace(`${item.url}`);
+    // window.location.replace(`${item.url}`);
+    window.open(`${item.url}`, '_blank');
   };
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -380,7 +392,7 @@ function ParentPage3() {
                           }}
                         >
                           {/* {item.id} */}
-                          {1001 - item.id}
+                          {data.length + 1 - item.id}
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText
@@ -430,6 +442,7 @@ function ParentPage3() {
         </Box>
       </Box>
       <Box sx={{ height: "250px" }} />
+      <Box sx={{ height :"150px"}} />
     </div>
   );
 }
