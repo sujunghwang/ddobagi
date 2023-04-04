@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BreadCrumbs from "../components/BreadCrumbs";
 import styles from "./CategoryList.module.scss";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../redux/RootReducer";
 import { Box, Grid, Typography } from "@mui/material";
+import axios from "axios";
 import ParentHeader from "../assets/ParentHeader.png";
 // import RadialBarChart2 from '../components/Charts/ParentChart2';
 // import RadialBarChart3 from '../components/Charts/ParentChart3';
@@ -15,6 +16,17 @@ import ChartAnimation from "../components/animations/ParentChart";
 import MapAnimation from "../components/animations/Map";
 import NewsAnimation from "../components/animations/News";
 import SupportAnimation from "../components/animations/Support";
+import GroupedColumnCharts from "../components/Charts/GroupChart";
+
+interface Props {
+  chartdata: {
+  userAllProgressAvg: number;
+  otherAllProgressAvg: number;
+  userPronounceScoreAvg: number;
+  otherPronounceScoreProgress: number;
+  };
+  language: string;
+  }
 
 function ParentPage1() {
   //언어 함수
@@ -22,6 +34,11 @@ function ParentPage1() {
     (state: RootState) => state.languageChange.language
   );
   // 언어 함수 끝
+
+  const userId = useSelector(
+    (state: RootState) => state.inputUserInfo.payload.id
+  );
+
   // 탭 선택 함수
   const navigate = useNavigate();
   const navigateToParent1 = () => {
@@ -39,7 +56,32 @@ function ParentPage1() {
   // 탭 선택 함수 끝
 
   // 임시 차트 데이터
-  const chartdata = ChartData;
+  // const chartdata = ChartData;
+
+  // 차트데이터 axios 연결
+  const [chartData, setChartData] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await axios.get(
+          `https://j8a608.p.ssafy.io/api/users/${userId}/parents/statistics`
+        );
+        setChartData(result.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [userId]);
+
+  if (!chartData) {
+    return <div>Loading...</div>;
+  }
+
+  const chartdata = chartData.data
+
+  console.log(chartdata)
 
   // const ColumnChartData = [
   //   { name: "해당 사용자", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
@@ -101,6 +143,8 @@ function ParentPage1() {
     categories = ["발음 평균 점수", "전체 진행도"];
     title = "유저 비교 통계";
   }
+
+  console.log(chartdata)
 
   return (
     <div className={styles.Fcontainer}>
@@ -322,6 +366,7 @@ function ParentPage1() {
               backgroundColor: "#FFDADA",
               marginTop: "30px",
               borderRadius: "0 0 20px 20px",
+              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)"
             }}
           >
             <Box>
@@ -451,10 +496,15 @@ function ParentPage1() {
                 ? "(tiêu chuẩn năm định cư Hàn Quốc)"
                 : "(한국 정착년도 기준)"}
             </Typography>
-            <ColumnChartWithGroupLabel
+            <Box sx={{ height:"60px" }} />
+            {/* <ColumnChartWithGroupLabel
               data={ColumnChartData}
               categories={categories}
               title={title}
+            /> */}
+            <GroupedColumnCharts 
+              chartdata={chartdata}
+              language={language}
             />
           </Box>
         </Box>

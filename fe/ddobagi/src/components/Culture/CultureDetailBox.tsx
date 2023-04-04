@@ -137,11 +137,12 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others}:
           height:"auto",
           borderRadius: "50px",
           alignItems : "center",
+          boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)",
         }}>
         <Typography 
           sx={{
             fontSize: "50px",
-            fontFamily: "CookieRun-Regular",
+            fontFamily: "MaplestoryOTFBold",
           }}
         >
           {contentType}
@@ -150,7 +151,8 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others}:
         sx={{
           width: "1100px",
           height: "auto",
-          backgroundColor:"#FFE8E8",
+          // backgroundColor:"#FFE8E8",
+          backgroundColor:"#FFFFFF",
           borderRadius : "20px",
         }}>
           {/* <Box>
@@ -175,7 +177,7 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others}:
             <Typography
               sx={{
                 fontSize:"40px",
-                fontFamily: "CookieRun-Regular",
+                fontFamily: "MaplestoryOTFBold",
                 marginBottom: "10px",
               }}
             >
@@ -184,7 +186,7 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others}:
             <Typography
               sx={{
                 fontSize:"24px",
-                fontFamily: "CookieRun-Regular",
+                fontFamily: "MaplestoryOTFLight",
               }}
             >
               {content}
@@ -208,7 +210,7 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others}:
           <Typography
             sx={{
               fontSize:"30px",
-              fontFamily: "CookieRun-Regular",
+              fontFamily: "MaplestoryOTFBold",
               marginTop: "10px"
             }}
           >
@@ -219,7 +221,8 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others}:
           sx={{
             width: "1100px",
             height: "auto",
-            backgroundColor:"#FFE8E8",
+            // backgroundColor:"#FFE8E8",
+            backgroundColor:"#FFFFFF",
             borderRadius : "20px",
             marginBottom: "20px",
           }}
@@ -246,7 +249,7 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others}:
                         <Typography
                           sx={{
                             fontSize:"20px",
-                            fontFamily: "CookieRun-Regular",
+                            fontFamily: "MaplestoryOTFLight",
                           }}
                         >
                           {language === "CN"

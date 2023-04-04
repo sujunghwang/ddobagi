@@ -64,8 +64,11 @@ function ParentPage4() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/data/mockData.json");
-        setData(response.data.data.news);
+        // const response = await axios.get("/data/mockData.json");
+        const response = await axios.get("https://j8a608.p.ssafy.io/api/parents/information");
+        // setData(response.data.data.news);
+        setData(response.data);
+        console.log(response.data)
       } catch (error) {
         console.error(error);
       }
@@ -75,7 +78,7 @@ function ParentPage4() {
 
   // 링크 이동 함수
   const handleItemClick = (item: any) => {
-    window.location.replace(`http://${item.url}`);
+    window.location.replace(`${item.url}`);
   };
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -310,7 +313,7 @@ function ParentPage4() {
           <div // 다문화센터 정책 및 지원 정보 내용 들어갈 부분
             style={{
               width: "100%",
-              height: "870px",
+              height: "1050px",
               backgroundColor: "#D8E8FF",
               marginTop: "30px",
               borderRadius: "0 0 20px 20px",
@@ -318,6 +321,7 @@ function ParentPage4() {
               flexDirection: "column",
               // justifyContent: "center",
               alignItems: "center",
+              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)"
             }}
           >
             <Box
@@ -382,7 +386,7 @@ function ParentPage4() {
                         primary={
                           <Typography
                             variant="h5"
-                            sx={{ fontFamily: "MaplestoryOTFLight" }}
+                            sx={{ fontFamily: "MaplestoryOTFBold", marginBottom:"10px" }}
                           >
                             {item.title}
                           </Typography>
@@ -419,6 +423,7 @@ function ParentPage4() {
           </div>
         </Box>
       </Box>
+      <Box sx={{ height: "250px" }} />
     </div>
   );
 }
