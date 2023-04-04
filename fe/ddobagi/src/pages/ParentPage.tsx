@@ -509,6 +509,7 @@ function ParentPage1() {
           </Box>
         </Box>
       </Box>
+      <Box sx={{ height :"150px"}} />
     </div>
   );
 }
