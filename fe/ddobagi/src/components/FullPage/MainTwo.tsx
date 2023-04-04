@@ -40,7 +40,11 @@ export default function MainTwo() {
               whiteSpace: "pre-line",
             }}
           >
-            또바기는 어떤 서비스인가요?
+            {language === "CN"
+                    ? "또바기 是什么样的服务？"
+                    : language === "VI"
+                    ? "또바기 Là dịch vụ gì vậy?"
+                    : "또바기는 어떤 서비스인가요?"}
           </Typography>
         </Box>
 
@@ -72,8 +76,11 @@ export default function MainTwo() {
               color: "#000000",
             }}
           >
-            또바기는 다문화 가정 아이들의 한국어 학습을 도와줄 수 있는
-            서비스입니다.
+            {language === "CN"
+                    ? "这是帮助多文化家庭孩子们学习韩语的服务。"
+                    : language === "VI"
+                    ? "Đây là dịch vụ có thể giúp trẻ em trong các gia đình đa văn hóa học tiếng Hàn."
+                    : "또바기는 다문화 가정 아이들의 한국어 학습을 도와줄 수 있는 서비스입니다."}
           </Typography>
         </Box>
       </Box>

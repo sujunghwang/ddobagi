@@ -15,6 +15,7 @@ import CorrectAnimation from "../animations/Correct";
 import WrongAnimation from "../animations/Wrong";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import ReviewCloseBtn from "../Word/ReviewCloseBtn";
+import StudyAnimation from "../animations/Study";
 import YouTube, { YouTubeProps, YouTubePlayer } from "react-youtube";
 
 interface Lang {
@@ -91,7 +92,7 @@ function ReviewStudy() {
 
   // useEffect(() => {
   //   const fetchData = async () => {
-  //     const response = await axios.get(`http://j8a608.p.ssafy.io:8080/api/learnings/${situationId}`);
+  //     const response = await axios.get(`https://j8a608.p.ssafy.io/api/learnings/${situationId}`);
   //     setQuizIdData(response.data);
   //   };
   //   fetchData();
@@ -102,7 +103,7 @@ function ReviewStudy() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${reviewNum[quizIndex]}/`
+        `https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${reviewNum[quizIndex]}/`
       );
       setQuizData(response.data);
     };
@@ -135,11 +136,14 @@ function ReviewStudy() {
       {/* <Box sx={{ marginTop:"30px", position: "absolute", top: 10, left: 0, m: 2 }}>
         <WordCloseBtn width="280px" />
       </Box> */}
+      <div style={{ position:"absolute", left: "75%", top: "50%", zIndex:"-1" }}>
+          <StudyAnimation />
+      </div>
       <div style={{ marginTop: "30px" }}>
         <img
           src={"/img/notebook.png"}
           alt="notebook"
-          style={{ width: "1000px", marginTop: "50px" }}
+          style={{ width: "1000px", marginTop: "50px" , boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.2)", borderRadius:"23px"}}
         />
         <div
           style={{
@@ -147,7 +151,7 @@ function ReviewStudy() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            marginTop: "70px",
+            marginTop: "5px",
           }}
         >
           {/* <div className={styles.scores}> */}

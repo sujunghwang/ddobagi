@@ -46,7 +46,11 @@ export default function MainThree() {
               marginBottom: "5px",
             }}
           >
-            또박또박, 따라하며 배워요
+            {language === "CN"
+                    ? "清清楚楚地，跟着学吧"
+                    : language === "VI"
+                    ? "Vừa học theo vừa làm theo"
+                    : "또박또박, 따라하며 배워요"}
           </Typography>
           <Typography
             style={{
@@ -60,7 +64,11 @@ export default function MainThree() {
               marginBottom: "5px",
             }}
           >
-            실생활에 바로 활용 가능한 표현들을 영상으로 보고, 듣고 따라 말해요.
+            {language === "CN"
+                    ? "通过视频观看、听、跟着说可以在现实生活中直接使用的表达方式。"
+                    : language === "VI"
+                    ? "Xem video, nghe và nói theo những biểu hiện có thể sử dụng ngay trong cuộc sống thực tế."
+                    : "실생활에 바로 활용 가능한 표현들을 영상으로 보고, 듣고 따라 말해요."}
           </Typography>
         </Box>
       </Box>
@@ -119,7 +127,23 @@ export default function MainThree() {
                   marginBottom: "1rem",
                 }}
               >
-                상황에 맞는 대사를 <div>따라하며 배워요</div>
+                {language === "CN" && (
+                  <>
+                    模仿符合情况的台词学习
+                  </>
+                )}
+                {language === "VI" && (
+                  <>
+                    Học theo lời thoại phù hợp với hoàn cảnh
+                  </>
+                )}
+                {language !== "CN" && language !== "VI" && (
+                  <>
+                    상황에 맞는 대사를 
+                    <div>따라하며 배워요</div>
+                  </>
+                )}
+                {/* 상황에 맞는 대사를 <div>따라하며 배워요</div> */}
               </Typography>
             </Box>
           </Box>
@@ -158,7 +182,21 @@ export default function MainThree() {
                   marginBottom: "1rem",
                 }}
               >
-                따라했던 문장에서 <div>단어를 익혀요</div>
+                {language === "CN" && (
+                  <>
+                    从模仿的文章中熟悉单词
+                  </>
+                )}
+                {language === "VI" && (
+                  <>
+                    Học thuộc từ vựng trong câu đã bắt chước
+                  </>
+                )}
+                {language !== "CN" && language !== "VI" && (
+                  <>
+                    따라했던 문장에서 <div>단어를 익혀요</div>
+                  </>
+                )}
               </Typography>
             </Box>
           </Box>
@@ -203,7 +241,21 @@ export default function MainThree() {
                   marginBottom: "1rem",
                 }}
               >
-                한국의 문화를 <div>영상으로 봐요</div>
+                {language === "CN" && (
+                  <>
+                    通过视频观看韩国的文化
+                  </>
+                )}
+                {language === "VI" && (
+                  <>
+                    Chúng ta hãy xem qua video về văn hóa Hàn Quốc nhé
+                  </>
+                )}
+                {language !== "CN" && language !== "VI" && (
+                  <>
+                    한국의 문화를 <div>영상으로 봐요</div>
+                  </>
+                )}
               </Typography>
             </Box>
           </Box>

@@ -46,7 +46,11 @@ export default function MainFive() {
               marginBottom: "5px",
             }}
           >
-            부모님도 함께 해요
+            {language === "CN"
+                    ? "父母也在一起吧"
+                    : language === "VI"
+                    ? "Ba mẹ cũng ở bên cạnh nữa"
+                    : "부모님도 함께 해요"}
           </Typography>
           <Typography
             style={{
@@ -60,8 +64,11 @@ export default function MainFive() {
               marginBottom: "5px",
             }}
           >
-            아이가 배우는 내용을 확인하고, 어느 정도 학습이 진행되었는지 파악할
-            수 있어요.
+            {language === "CN"
+                    ? "可以确认孩子学习的内容,掌握学习进行到什么程度。"
+                    : language === "VI"
+                    ? "Tôi có thể kiểm tra nội dung học tập của trẻ và nắm bắt được mức độ học tập đã được tiến hành."
+                    : "아이가 배우는 내용을 확인하고, 어느 정도 학습이 진행되었는지 파악할 수 있어요."}
           </Typography>
         </Box>
       </Box>
@@ -114,7 +121,11 @@ export default function MainFive() {
                   marginBottom: "1rem",
                 }}
               >
-                학습 결과 통계를 제공해요
+                {language === "CN"
+                    ? "提供学习结果统计"
+                    : language === "VI"
+                    ? "Cung cấp số liệu thống kê kết quả học tập"
+                    : "학습 결과 통계를 제공해요"}
               </Typography>
             </Box>
           </Box>
@@ -158,7 +169,21 @@ export default function MainFive() {
                       : "MaplestoryOTFLight",
                 }}
               >
-                다문화 센터의 <div>위치 정보를 제공해요</div>
+                {language === "CN" && (
+                  <>
+                    提供多文化中心的位置信息
+                  </>
+                )}
+                {language === "VI" && (
+                  <>
+                    Cung cấp thông tin vị trí của trung tâm đa văn hóa
+                  </>
+                )}
+                {language !== "CN" && language !== "VI" && (
+                  <>
+                    다문화 센터의 <div>위치 정보를 제공해요</div>
+                  </>
+                )}
               </Typography>
             </Box>
           </Box>
@@ -202,7 +227,21 @@ export default function MainFive() {
                       : "MaplestoryOTFLight",
                 }}
               >
-                다문화 가정 관련 <div>기사와 정책을 전달해요</div>
+                {language === "CN" && (
+                  <>
+                    传达多文化家庭相关报道和政策
+                  </>
+                )}
+                {language === "VI" && (
+                  <>
+                    Truyền tải những bài báo và chính sách liên quan đến các gia đình đa văn hóa
+                  </>
+                )}
+                {language !== "CN" && language !== "VI" && (
+                  <>
+                    다문화 가정 관련 <div>기사와 정책을 전달해요</div>
+                  </>
+                )}
               </Typography>
             </Box>
           </Box>

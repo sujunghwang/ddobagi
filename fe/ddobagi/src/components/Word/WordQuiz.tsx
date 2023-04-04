@@ -80,7 +80,7 @@ const Quiz: React.FC<QuizProps> = ({
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${quizId}/`
+          `https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizId}/`
         );
         setQuizData(response.data);
         // options와 answer를 합침
@@ -115,7 +115,7 @@ const Quiz: React.FC<QuizProps> = ({
   // const quizData = quizdata3
   const CorrectWord = () => {
     axios({
-      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
+      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
@@ -136,7 +136,7 @@ const Quiz: React.FC<QuizProps> = ({
 
   const WrongWord = () => {
     axios({
-      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
+      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
@@ -200,11 +200,7 @@ const Quiz: React.FC<QuizProps> = ({
     }
   };
 
-  // const options = [quizData.option1, quizData.option2, quizData.option3];
-
-  // console.log(quizData.solved)
-  // console.log(quizData.firstCorrected)
-  // console.log(quizData.nowCorrected)
+  const BtnColor = ["#FF6B6B", "#FFD93D", "#6BCB77", "#4D96FF"];
 
   return (
     <div
@@ -271,18 +267,22 @@ const Quiz: React.FC<QuizProps> = ({
           </Button>
         ))}
       </ul>
-      <button
+      <Button
+        variant="contained"
         onClick={handleAnswerCheck}
-        style={{
-          width: "100px",
+        sx={{
+          width: "120px",
           height: "70px",
           borderRadius: "10px",
           fontSize: "20px",
           fontFamily: "CookieRun-Regular",
+          cursor: "pointer",
+          backgroundColor: "#FFD93D",
+          color:"black",
         }}
       >
         정답 확인
-      </button>
+      </Button>
     </div>
   );
 };
