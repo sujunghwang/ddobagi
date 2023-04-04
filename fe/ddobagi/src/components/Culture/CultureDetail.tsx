@@ -52,6 +52,10 @@ function CultureDetail() {
   );
   //
 
+  const userId = useSelector(
+    (state: RootState) => state.inputUserInfo.payload.id
+  );
+
   const { id } = useParams();
   // @ts-ignore
   const [CategoryNumber, cultureNumber] = id.split('_');
@@ -81,9 +85,7 @@ function CultureDetail() {
   useEffect(() => {
     // API 호출
     axios
-      .get(
-        `https://j8a608.p.ssafy.io/api/cultures/1?common=${NewCategoryName}`
-      )
+      .get(`https://j8a608.p.ssafy.io/api/cultures/${userId}?common=${NewCategoryName}`)
       .then((res) => {
         setApiData(res.data);
         console.log(res.data)
@@ -119,16 +121,20 @@ function CultureDetail() {
 
   const getColorCode = () => {
     if (categoryID === 1) {
-      return "#FF6B6B";
+      // return "#FF6B6B";
+      return "#FFCFD8";
     }
     else if (categoryID === 2) {
-      return "#4D96FF"
+      // return "#4D96FF"
+      return "#FFF9E2"
     }
     else if (categoryID === 3) {
-      return "#6BCB77"
+      // return "#6BCB77"
+      return "#E8F9F6"
     }
     else if (categoryID === 4) {
-      return "#FFD93D"
+      // return "#FFD93D"
+      return "#e0f1ff"
     }
     // 다른 색상에 대한 처리
     return "#FFE69A";
@@ -194,7 +200,7 @@ function CultureDetail() {
           display:"flex",
           fontSize: "50px",
           alignItems:"center",
-          fontFamily: "CookieRun-Regular",
+          fontFamily: "MaplestoryOTFBold",
         }}>
           한국 문화 학습
         </Typography>

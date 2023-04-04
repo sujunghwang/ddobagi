@@ -51,6 +51,9 @@ function CultureList() {
     (state: RootState) => state.languageChange.language
   );
   //
+  const userId = useSelector(
+    (state: RootState) => state.inputUserInfo.payload.id
+  );
 
   // 카테고리명을 변수화 ( 모달에 넘겨주기 위함 )
   const category1 =
@@ -89,7 +92,7 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get("https://j8a608.p.ssafy.io/api/cultures/1?common=ANNIVERSARY")
+      .get(`https://j8a608.p.ssafy.io/api/cultures/${userId}?common=ANNIVERSARY`)
       .then((res) => {
         setApiData1(res.data);
       })
@@ -99,7 +102,7 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get("https://j8a608.p.ssafy.io/api/cultures/1?common=TRADITION")
+      .get(`https://j8a608.p.ssafy.io/api/cultures/${userId}?common=TRADITION`)
       .then((res) => {
         setApiData2(res.data);
       })
@@ -111,7 +114,7 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get("https://j8a608.p.ssafy.io/api/cultures/1?common=ART")
+      .get(`https://j8a608.p.ssafy.io/api/cultures/${userId}?common=ART`)
       .then((res) => {
         setApiData3(res.data);
       })
@@ -123,7 +126,7 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get("https://j8a608.p.ssafy.io/api/cultures/1?common=FOOD")
+      .get(`https://j8a608.p.ssafy.io/api/cultures/${userId}?common=FOOD`)
       .then((res) => {
         setApiData4(res.data);
       })
