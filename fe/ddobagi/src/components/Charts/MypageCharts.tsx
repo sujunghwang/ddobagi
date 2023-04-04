@@ -27,11 +27,11 @@ function MypageCharts({ statistics }: Props) {
         {language === "CN"
           ? "学习水平"
           : language === "VI"
-          ? "tiến độ học vấn"
-          : "학습 진행도"}
+            ? "tiến độ học vấn"
+            : "학습 진행도"}
       </div>
       <hr className={styles.hr} />
-      <div className={styles.UpperGroup}>
+      <div className={styles.chartBox} >
         <CircleCharts
           value={Number(statistics.schoolCategoryProgress)}
           ChartColor="#FF6B6B"
@@ -39,8 +39,8 @@ function MypageCharts({ statistics }: Props) {
             language === "CN"
               ? "在家里"
               : language === "VI"
-              ? "ở nhà"
-              : "집에서"
+                ? "ở nhà"
+                : "집에서"
           }
         />
         <CircleCharts
@@ -50,8 +50,8 @@ function MypageCharts({ statistics }: Props) {
             language === "CN"
               ? "在学校"
               : language === "VI"
-              ? "Ở trường"
-              : "학교에서"
+                ? "Ở trường"
+                : "학교에서"
           }
         />
         <CircleCharts
@@ -61,8 +61,8 @@ function MypageCharts({ statistics }: Props) {
             language === "CN"
               ? "学习"
               : language === "VI"
-              ? "tại cửa hàng"
-              : "가게에서"
+                ? "tại cửa hàng"
+                : "가게에서"
           }
         />
         <CircleCharts
@@ -72,12 +72,10 @@ function MypageCharts({ statistics }: Props) {
             language === "CN"
               ? "在操场上"
               : language === "VI"
-              ? "tại sân chơi"
-              : "놀이터에서"
+                ? "tại sân chơi"
+                : "놀이터에서"
           }
         />
-      </div>
-      <div className={styles.DownGroup}>
         <CircleCharts
           value={Number(statistics.scriptProgress)}
           ChartColor="#FF6B6B"
@@ -85,8 +83,8 @@ function MypageCharts({ statistics }: Props) {
             language === "CN"
               ? "对话练习"
               : language === "VI"
-              ? "luyện tập đối thoại"
-              : "대화 연습"
+                ? "luyện tập đối thoại"
+                : "대화 연습"
           }
         />
         <CircleCharts
@@ -96,8 +94,8 @@ function MypageCharts({ statistics }: Props) {
             language === "CN"
               ? "单词练习"
               : language === "VI"
-              ? "luyện tập từ vựng"
-              : "단어 연습"
+                ? "luyện tập từ vựng"
+                : "단어 연습"
           }
         />
         <CircleCharts
@@ -107,12 +105,12 @@ function MypageCharts({ statistics }: Props) {
             language === "CN"
               ? "文化影像"
               : language === "VI"
-              ? "Video văn hóa"
-              : "문화 영상"
+                ? "Video văn hóa"
+                : "문화 영상"
           }
         />
       </div>
-    </div>
+    </div >
   );
 }
 

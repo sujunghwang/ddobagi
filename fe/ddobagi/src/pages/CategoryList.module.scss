@@ -1,21 +1,13 @@
 .Fcontainer {
-  > .Banner {
-    animation: slide-up 0.8s ease-out;
-    animation-fill-mode: forwards;
-    opacity: 0;
-  }
-  > .BreadCrum {
-    animation: slide-up 0.8s ease-out;
-    animation-fill-mode: forwards;
-    opacity: 0;
-  }
-  > .BtnBoxes {
+
+  >.BtnBoxes {
     animation: slide-up 0.8s ease-out;
     animation-fill-mode: forwards;
     opacity: 0;
     animation-delay: 0.2s;
   }
-  > .MainBox {
+
+  >.MainBox {
     animation: slide-up 0.8s ease-out;
     animation-fill-mode: forwards;
     opacity: 0;
@@ -24,11 +16,15 @@
 }
 
 .Banner {
+  animation: slide-up 0.8s ease-out;
+  animation-fill-mode: forwards;
+  opacity: 0;
   width: 100%;
   height: 10rem;
+  padding-top: 3rem;
   display: flex;
   justify-content: start;
-  align-items: end;
+  align-items: center;
   user-select: none;
 }
 
@@ -47,17 +43,12 @@
   transform: translate(-50%, -25%);
 }
 
-.CategoryName {
-  text-align: start;
-  padding-top: 1rem;
-  font-size: 3rem;
-}
-
-@media (min-width: 901px) {
-  .BreadCrum {
-    align-self: flex-start;
-    margin-top: 2rem;
-  }
+.BreadCrum {
+  align-self: flex-start;
+  margin-top: 2rem;
+  animation: slide-up 0.8s ease-out;
+  animation-fill-mode: forwards;
+  opacity: 0;
 }
 
 .Noscroll::-webkit-scrollbar {
@@ -69,21 +60,22 @@
 }
 
 .CategoryBox {
-  margin-bottom: 3rem;
-  // box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 30px;
   animation: slide-up 0.8s ease-out;
   animation-fill-mode: forwards;
   opacity: 0;
+
   &:nth-of-type(3) {
     animation-delay: 0.2s;
   }
+
   &:nth-of-type(4) {
     animation-delay: 0.4s;
   }
+
   &:nth-of-type(5) {
     animation-delay: 0.6s;
   }
+
   &:nth-of-type(6) {
     animation-delay: 0.8s;
   }
@@ -95,15 +87,19 @@
   animation: slide-up 0.8s ease-out;
   animation-fill-mode: forwards;
   opacity: 0;
+
   &:nth-of-type(1) {
     animation-delay: 0.2s;
   }
+
   &:nth-of-type(2) {
     animation-delay: 0.4s;
   }
+
   &:nth-of-type(3) {
     animation-delay: 0.6s;
   }
+
   &:nth-of-type(4) {
     animation-delay: 0.8s;
   }
@@ -126,6 +122,7 @@
     transform: translateY(10%);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0%);
     opacity: 1;
@@ -134,7 +131,187 @@
 
 .BtnBox {
   transition: scale 0.3s ease;
+
   &:hover {
     scale: 0.95;
+  }
+}
+
+.AnimeBack {
+  z-index: 1100;
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+  animation: BGA 3.5s ease-in-out;
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+.StartLogo {
+  position: absolute;
+  z-index: 1101;
+  top: 50%;
+  left: 50%;
+  font-size: 20rem;
+  transform: translate(-50%, -50%);
+  animation: fade 3.5s ease-in-out;
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+@keyframes start {
+  0% {
+    height: 0;
+  }
+
+  50% {
+    top: 0;
+    height: 100vh;
+
+  }
+
+  100% {
+    top: 100%;
+    height: 0;
+    display: none
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0;
+    display: none
+  }
+
+  100% {
+    opacity: 0;
+    display: none
+  }
+}
+
+@keyframes BGA {
+  0% {}
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+
+
+//wave anitmation
+
+.waves {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1200;
+  width: 100%;
+  height: 140px;
+  animation: FillUP 3.5s ease-in-out;
+  animation-fill-mode: forwards;
+  pointer-events: none;
+
+}
+
+.BlueBottom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1200;
+  width: 100%;
+  height: 100%;
+  background-color: #92B4EC;
+  animation: FillUP2 3.5s ease-in-out;
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+/* Animation */
+.parallax>use {
+  animation: move-forever 25s cubic-bezier(0.55, .5, 0.45, .5) infinite;
+}
+
+.parallax>use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+
+.parallax>use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+
+.parallax>use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+
+.parallax>use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+
+@keyframes FillUP {
+  0% {
+    top: 100%;
+  }
+
+  80% {
+    top: -140px;
+    opacity: 1;
+  }
+
+  100% {
+    top: -140px;
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes FillUP2 {
+  0% {
+    top: 110%;
+  }
+
+  80% {
+    top: 0;
+    opacity: 1;
+  }
+
+  100% {
+    top: 0;
+    opacity: 0;
+    display: none;
   }
 }

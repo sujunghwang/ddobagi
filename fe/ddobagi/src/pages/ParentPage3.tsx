@@ -34,6 +34,7 @@ interface NewsType {
   title: string;
   summary: string;
   url: string;
+  publishedDate: string;
 }
 
 function ParentPage3() {
@@ -64,8 +65,9 @@ function ParentPage3() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/data/mockData.json");
-        setData(response.data.data.news);
+        const response = await axios.get("https://j8a608.p.ssafy.io/api/parents/news");
+        // setData(response.data);
+        setData(response.data.reverse());
       } catch (error) {
         console.error(error);
       }
@@ -75,11 +77,12 @@ function ParentPage3() {
 
   // 링크 이동 함수
   const handleItemClick = (item: any) => {
-    window.location.replace(`http://${item.url}`);
+    window.location.replace(`${item.url}`);
   };
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  // const itemsPerPage = 8;
+  const itemsPerPage = 6;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const filteredData = data.slice(indexOfFirstItem, indexOfLastItem);
@@ -310,7 +313,7 @@ function ParentPage3() {
           <div // 다문화센터 정책 및 지원 정보 내용 들어갈 부분
             style={{
               width: "100%",
-              height: "870px",
+              height: "1050px",
               backgroundColor: "#C4FFCB",
               marginTop: "30px",
               borderRadius: "0 0 20px 20px",
@@ -318,6 +321,7 @@ function ParentPage3() {
               flexDirection: "column",
               // justifyContent: "center",
               alignItems: "center",
+              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)"
             }}
           >
             <Box
@@ -375,28 +379,34 @@ function ParentPage3() {
                               AvatarColor[item.id % AvatarColor.length],
                           }}
                         >
-                          {item.id}
+                          {/* {item.id} */}
+                          {1001 - item.id}
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText
                         primary={
                           <Typography
                             variant="h5"
-                            sx={{ fontFamily: "MaplestoryOTFLight" }}
+                            sx={{ fontFamily: "MaplestoryOTFBold", marginBottom : "5px" }}
                           >
                             {item.title}
                           </Typography>
                         }
                         secondary={
-                          <Typography
-                            variant="body1"
-                            sx={{ fontFamily: "MaplestoryOTFLight" }}
-                          >
-                            {item.summary.slice(0, 150)}
-                          </Typography>
+                          <React.Fragment>
+                            <Typography
+                              variant="body1"
+                              sx={{ fontFamily: "MaplestoryOTFLight" }}
+                            >
+                              {item.summary.slice(0, 150)}
+                            </Typography>
+                            <Typography variant="body1" sx={{ fontFamily: "MaplestoryOTFLight", marginTop:"5px", color:"black" }}>
+                              {item.publishedDate}
+                            </Typography>
+                          </React.Fragment>
                         }
-                      />
-                    </ListItem>
+                        />
+                      </ListItem>
                     <Divider variant="middle" component="li" />
                   </>
                 ))}
@@ -419,6 +429,7 @@ function ParentPage3() {
           </div>
         </Box>
       </Box>
+      <Box sx={{ height: "250px" }} />
     </div>
   );
 }
