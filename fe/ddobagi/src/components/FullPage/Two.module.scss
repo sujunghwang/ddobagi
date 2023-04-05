@@ -352,10 +352,10 @@
 .fish {
     width: 100px;
     position: absolute;
-    transform: translate(-600%, 600%);
+    top: 50%;
+    left: 20%;
     z-index: 1300;
-    animation: FillUPIcon 3s ease-in-out;
-    animation-fill-mode: forwards;
+    animation: FillUPIcon2 3s ease-in-out;
     pointer-events: none;
 }
 
@@ -364,19 +364,20 @@
     position: absolute;
     z-index: 1300;
     animation: FillUPIcon 3s ease-in-out;
-    animation-fill-mode: forwards;
     pointer-events: none;
-    transform: translate(-500%, 980%);
+    top: 100%;
+    left: 65%;
+    transform: translateY(-100%);
 }
 
 .submarine {
     width: 100px;
     position: absolute;
     z-index: 1300;
-    animation: FillUPIcon 3s ease-in-out;
-    animation-fill-mode: forwards;
+    top: 60%;
+    left: 80%;
+    animation: FillUPIcon3 3s ease-in-out;
     pointer-events: none;
-    transform: translate(500%, 600%);
 }
 
 .reef {
@@ -384,9 +385,10 @@
     position: absolute;
     z-index: 1300;
     animation: FillUPIcon 3s ease-in-out;
-    animation-fill-mode: forwards;
     pointer-events: none;
-    transform: translate(-300%, 980%);
+    top: 100%;
+    left: 30%;
+    transform: translateY(-100%);
 }
 
 @keyframes start {
@@ -458,7 +460,6 @@
     width: 100%;
     height: 140px;
     animation: FillUP 3s ease-in-out;
-    animation-fill-mode: forwards;
     pointer-events: none;
 }
 
@@ -558,14 +559,42 @@
 
 @keyframes FillUPIcon {
     0% {
-        top: 100%;
+        top: 200%;
     }
 
     80% {
-        top: -140px;
+        top: 100%;
     }
 
     100% {
-        top: -140px;
+        top: 100%;
+    }
+}
+
+@keyframes FillUPIcon2 {
+    0% {
+        top: 200%;
+    }
+
+    80% {
+        top: 50%;
+    }
+
+    100% {
+        top: 50%;
+    }
+}
+
+@keyframes FillUPIcon3 {
+    0% {
+        top: 200%;
+    }
+
+    80% {
+        top: 60%;
+    }
+
+    100% {
+        top: 60%;
     }
 }
