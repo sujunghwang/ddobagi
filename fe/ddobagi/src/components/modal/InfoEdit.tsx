@@ -92,7 +92,7 @@ function InfoEdit({ closeModal }: Props) {
     const fetchBase = async () => {
       try {
         const response = await axios.get<dataOfBase>(
-          `https://j8a608.p.ssafy.io/api/users/${userId}`
+          `http://j8a608.p.ssafy.io:8080/api/users/${userId}`
         );
         setName(response.data.data.name);
         setLanguage(response.data.data.userLang);
@@ -129,7 +129,7 @@ function InfoEdit({ closeModal }: Props) {
   const checkPassword = async () => {
     try {
       const response = await axios.post<check>(
-        `https://j8a608.p.ssafy.io/api/users/${userId}/password`,
+        `http://j8a608.p.ssafy.io:8080/api/users/${userId}/password`,
         {
           userId: userId,
           pw: prevPassword,
@@ -150,7 +150,7 @@ function InfoEdit({ closeModal }: Props) {
     const fetchEdit = async () => {
       try {
         const response = await axios.put<dataOfBase>(
-          `https://j8a608.p.ssafy.io/api/users/${userId}`,
+          `http://j8a608.p.ssafy.io:8080/api/users/${userId}`,
           {
             name: name,
             birth: birthDay,

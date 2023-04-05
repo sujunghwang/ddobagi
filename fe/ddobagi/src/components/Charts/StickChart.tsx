@@ -8,9 +8,10 @@ interface Props {
   data: { name: string; data: string[] }[];
   categories: string[];
   title: string;
+  unit?: string;
 }
 
-const ColumnChartWithGroupLabel = ({ data, categories, title }: Props) => {
+const ColumnChartWithGroupLabel = ({ data, categories, title, unit }: Props) => {
   const series = data.map((d) => ({ name: d.name, data: d.data.map(Number) }));
   //언어 변수
   const language = useSelector(
@@ -68,10 +69,20 @@ const ColumnChartWithGroupLabel = ({ data, categories, title }: Props) => {
     },
     tooltip: {
       y: {
-        formatter: function (val: number) {
-          return val.toString();
+        // formatter: function (val: number) {
+        //   return val.toString();
+        formatter: (val) => {
+          return `${val} ${unit}`;
         },
       },
+      style: {
+        fontFamily:
+            language === "CN"
+              ? "JingNanMaiYuanTi"
+              : language === "VI"
+              ? "UVNHaiBaTrung"
+              : "MaplestoryOTFLight",
+      }
     },
     fill: {
       opacity: 1,
@@ -80,6 +91,13 @@ const ColumnChartWithGroupLabel = ({ data, categories, title }: Props) => {
       position: "top",
       horizontalAlign: "left",
       offsetX: 40,
+      fontSize: "15px",
+      fontFamily:
+            language === "CN"
+              ? "JingNanMaiYuanTi"
+              : language === "VI"
+              ? "UVNHaiBaTrung"
+              : "MaplestoryOTFLight",
     },
   };
 

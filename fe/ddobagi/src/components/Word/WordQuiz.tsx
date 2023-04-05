@@ -80,7 +80,7 @@ const Quiz: React.FC<QuizProps> = ({
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizId}/`
+          `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${quizId}/`
         );
         setQuizData(response.data);
         // options와 answer를 합침
@@ -115,7 +115,7 @@ const Quiz: React.FC<QuizProps> = ({
   // const quizData = quizdata3
   const CorrectWord = () => {
     axios({
-      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
+      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
@@ -136,7 +136,7 @@ const Quiz: React.FC<QuizProps> = ({
 
   const WrongWord = () => {
     axios({
-      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
+      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
@@ -206,7 +206,7 @@ const Quiz: React.FC<QuizProps> = ({
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      {onPlay ? (
+      {/* {onPlay ? (
         <div
           className={styles.RBtn}
           onClick={() => {
@@ -230,7 +230,7 @@ const Quiz: React.FC<QuizProps> = ({
         >
           <PlayArrowRoundedIcon sx={{ fontSize: "2rem" }} />
         </div>
-      )}
+      )} */}
       <Box
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       >
@@ -243,6 +243,38 @@ const Quiz: React.FC<QuizProps> = ({
         <Typography sx={{ fontSize: "40px", fontFamily: "CookieRun-Regular" }}>
           {quizData.afterSentence}
         </Typography>
+        <div // 재생버튼 있는 위치
+        style={{
+          marginTop:"30px",
+          marginLeft:"25PX",
+        }}
+        >
+          {onPlay ? (
+          <div
+            className={styles.RBtn}
+            onClick={() => {
+              videoFrame.current.pauseVideo();
+              setOnPlay(false);
+            }}
+          >
+            <PauseRoundedIcon sx={{ fontSize: "2rem" }} />
+          </div>
+        ) : (
+          <div
+            className={styles.RBtn}
+            onClick={() => {
+              play(startTime, endTime);
+              setOnPlay(true);
+              const duration = endTime - startTime;
+              setTimeout(() => {
+                setOnPlay(false);
+              }, duration * 1000);
+            }}
+          >
+            <PlayArrowRoundedIcon sx={{ fontSize: "2rem" }} />
+          </div>
+        )}
+        </div>
       </Box>
       <h2 style={{
         fontFamily:
@@ -291,6 +323,7 @@ const Quiz: React.FC<QuizProps> = ({
           cursor: "pointer",
           backgroundColor: "#FFD93D",
           color: "black",
+          marginTop: "20px",
         }}
       >
         {language === "CN"
