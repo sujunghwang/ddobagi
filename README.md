@@ -35,13 +35,13 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 
 
 
-### 개발환경
+## 개발환경
 
 ![개발환경](/uploads/114b5675068686e73ea01ac7a5e665f2/DDOBAGI_개발환경.png)
 
 
 
-## 서비스 아키텍처
+## 시스템 아키텍처
 
 ![아키텍처](/uploads/6bd0dae94d1dbe3378329466a8f65bad/시스템구성도.png)
 
@@ -297,6 +297,26 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
         <a href="https://github.com/sujunghwang">
           황수정
         </a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+          팀장, BE
+      </td>
+      <td align="center">
+          FE
+      </td>
+      <td align="center">
+          BE
+      </td>
+      <td align="center">
+          FE
+      </td>
+      <td align="center">
+          BE, Infra
+      </td>
+      <td align="center">
+          BE
       </td>
     </tr>
   </table>
