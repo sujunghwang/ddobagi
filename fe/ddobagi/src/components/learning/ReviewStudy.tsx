@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
 import Quiz from "../Word/WordQuiz";
 import WordCloseBtn from "../Word/WordCloseBtn";
+import styles from "./Study.module.scss";
 import { useState, useEffect } from "react";
 import CorrectAnimation from "../animations/Correct";
 import WrongAnimation from "../animations/Wrong";
@@ -17,6 +18,22 @@ import SkipNextIcon from "@mui/icons-material/SkipNext";
 import ReviewCloseBtn from "../Word/ReviewCloseBtn";
 import StudyAnimation from "../animations/Study";
 import YouTube, { YouTubeProps, YouTubePlayer } from "react-youtube";
+import { styled } from "@mui/material/styles";
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
+
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 20,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: "#e1e1e1",
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 5,
+    backgroundImage: "linear-gradient(to right, #74ebd5, #acb6e5)",
+  },
+}));
 
 interface Lang {
   [key: string]: {
@@ -86,6 +103,7 @@ function ReviewStudy() {
   // const [quizIdData, setQuizIdData] = useState<number[]>([]);
   const [quizData, setQuizData] = useState<QuizData>();
   const [quizIndex, setQuizIndex] = useState<number>(0);
+  const [videoUrl, setVideoUrl] = useState<string>("");
 
   // 정답 오답 모달 관련
   const [isCorrect, setIsCorrect] = useState(false);
@@ -110,6 +128,7 @@ function ReviewStudy() {
         `https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${reviewNum[quizIndex]}/`
       );
       setQuizData(response.data);
+      setVideoUrl(response.data.videoUrl.split(".be/")[1]);
     };
     fetchData();
   }, [userId, reviewNum, quizIndex]);
@@ -135,11 +154,51 @@ function ReviewStudy() {
     return <div>Loading...</div>;
   }
 
+  const Percentage = ((quizIndex + 1) / reviewNum.length) * 100;
+
   return (
     <div>
       {/* <Box sx={{ marginTop:"30px", position: "absolute", top: 10, left: 0, m: 2 }}>
         <WordCloseBtn width="280px" />
       </Box> */}
+      <div className={styles.loadAnime}>
+        <div
+          className={styles.Pin}
+          style={{
+            marginLeft: `${Percentage}%`,
+          }}
+        >
+          <img src={"/img/running.gif"} alt="run" style={{ width: "50px" }} />
+        </div>
+        {/* <div style={{ display: "none" }}>
+          <YouTube videoId={videoUrl} onReady={onPlayerReady} />
+        </div> */}
+        {/* <div
+          style={{
+            width: "fit-content",
+            marginLeft: `${Percentage}%`,
+            transform: "translate(-50%,0)",
+          }}
+        >
+          <TwoWheelerIcon color="success" fontSize="large" />
+        </div> */}
+        <BorderLinearProgress
+          variant="determinate"
+          value={Percentage}
+          sx={{
+            boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.2)",
+          }}
+        />
+        <div
+          style={{
+            textAlign: "end",
+            fontSize: "1.2rem",
+            marginTop: ".5rem",
+          }}
+        >
+          {quizIndex + 1} / {reviewNum.length}
+        </div>
+      </div>
       <div style={{ position: "absolute", left: "75%", top: "50%", zIndex: "-1" }}>
         <StudyAnimation />
       </div>
@@ -147,7 +206,11 @@ function ReviewStudy() {
         <img
           src={"/img/notebook.png"}
           alt="notebook"
-          style={{ width: "1000px", marginTop: "50px", boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.2)", borderRadius: "23px" }}
+          style={{ 
+            width: "1020px", 
+            marginTop: "30px", 
+            // boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.2)", 
+            borderRadius: "23px" }}
         />
         <div
           style={{
@@ -155,11 +218,11 @@ function ReviewStudy() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            marginTop: "5px",
+            marginTop: "35px",
           }}
         >
           {/* <div className={styles.scores}> */}
-          <div
+          {/* <div
             style={{
               display: "flex",
               float: "right",
@@ -168,7 +231,7 @@ function ReviewStudy() {
             }}
           >
             {quizIndex + 1} / {reviewNum.length}
-          </div>
+          </div> */}
           <div
             style={{
               marginTop: "60px",
@@ -189,7 +252,7 @@ function ReviewStudy() {
           </div>
         </div>
       </div>
-      <Box display="flex" justifyContent="center" mt={5}>
+      <Box display="flex" justifyContent="center" mt={3}>
         <Button
           onClick={handleQuizSubmit}
           variant="contained"
@@ -197,7 +260,7 @@ function ReviewStudy() {
             width: "180px",
             color: "#ffffff",
             backgroundColor: "#6BCB77",
-
+            marginRight: "30px",
             borderRadius: 50,
             fontFamily:
               language === "CN"
@@ -358,8 +421,11 @@ function ReviewStudy() {
           </div>
         </div>
       )}
-      <div>
+      {/* <div>
         <YouTube videoId={quizData.videoUrl} onReady={onPlayerReady} />
+      </div> */}
+      <div style={{ display: "none" }}>
+        <YouTube videoId={videoUrl} onReady={onPlayerReady} />
       </div>
     </div>
   );

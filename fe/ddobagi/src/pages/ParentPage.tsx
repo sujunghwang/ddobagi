@@ -407,7 +407,8 @@ function ParentPage1() {
             <Box>
               <Typography
                 sx={{
-                  fontSize: "40px",
+                  fontSize: "36px",
+                  paddingTop: "10px",
                   fontFamily:
                     language === "CN"
                       ? "JingNanMaiYuanTi"
@@ -532,11 +533,11 @@ function ParentPage1() {
               }}
             >
               {language === "CN" ? (
-                <span style={{ fontSize: "40px" }}>比较统计</span>
+                <span style={{ fontSize: "36px" }}>比较统计</span>
               ) : language === "VI" ? (
-                <span style={{ fontSize: "30px" }}>So sánh thống kê </span>
+                <span style={{ fontSize: "36px" }}>So sánh thống kê </span>
               ) : (
-                <span style={{ fontSize: "40px" }}>비교통계</span>
+                <span style={{ fontSize: "36px" }}>비교통계</span>
               )}{" "}
               {language === "CN"
                 ? "（以韩国定居年度为准）"

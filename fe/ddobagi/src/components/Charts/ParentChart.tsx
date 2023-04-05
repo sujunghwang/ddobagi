@@ -1,5 +1,7 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/RootReducer";
 
 interface Props {
   totalLabel: string;
@@ -8,6 +10,10 @@ interface Props {
 }
 
 const RadialBarChart = ({ totalLabel, totalValue, totalColor }: Props) => {
+  //언어 변수
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+  );
   const value = totalValue <= 100 ? totalValue : 100;
   const gradient = {
     shade: "dark",
@@ -29,6 +35,12 @@ const RadialBarChart = ({ totalLabel, totalValue, totalColor }: Props) => {
           },
           value: {
             fontSize: "20px",
+            fontFamily:
+            language === "CN"
+              ? "JingNanMaiYuanTi"
+              : language === "VI"
+              ? "UVNHaiBaTrung"
+              : "MaplestoryOTFLight",
           },
           total: {
             show: true,
@@ -36,6 +48,13 @@ const RadialBarChart = ({ totalLabel, totalValue, totalColor }: Props) => {
             formatter: (w: any): string => {
               return `${value}%`;
             },
+            fontSize:"25px",
+            fontFamily:
+            language === "CN"
+              ? "JingNanMaiYuanTi"
+              : language === "VI"
+              ? "UVNHaiBaTrung"
+              : "MaplestoryOTFLight",
           },
         },
         fill: {

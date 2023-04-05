@@ -199,7 +199,9 @@ function WordStudy() {
             fontSize: "1.2rem",
             marginTop: ".5rem",
           }}
-        ></div>
+        >
+          {quizIndex + 1} / {quizIdData.length}
+        </div>
       </div>
       {/* <Box sx={{ marginTop:"30px", position: "absolute", top: 10, left: 0, m: 2 }}>
         <WordCloseBtn width="280px" />
@@ -211,7 +213,11 @@ function WordStudy() {
         <img
           src={"/img/notebook.png"}
           alt="notebook"
-          style={{ width: "1000px", marginTop: "50px", boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.2)", borderRadius: "23px" }}
+          style={{ 
+            width: "1020px", 
+            marginTop: "30px", 
+            // boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.2)", 
+            borderRadius: "23px" }}
         />
         <div
           style={{
@@ -219,11 +225,11 @@ function WordStudy() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            marginTop: "70px",
+            marginTop: "35px",
           }}
         >
           {/* <div className={styles.scores}> */}
-          <div
+          {/* <div // 원래 점수바 위치
             style={{
               display: "flex",
               float: "right",
@@ -232,7 +238,7 @@ function WordStudy() {
             }}
           >
             {quizIndex + 1} / {quizIdData.length}
-          </div>
+          </div> */}
           <div
             style={{
               marginTop: "60px",
@@ -253,7 +259,7 @@ function WordStudy() {
           </div>
         </div>
       </div>
-      <Box display="flex" justifyContent="center" mt={5}>
+      <Box display="flex" justifyContent="center" mt={3}>
         <Button
           onClick={handleQuizSubmit}
           variant="contained"
@@ -261,7 +267,7 @@ function WordStudy() {
             width: "180px",
             color: "#ffffff",
             backgroundColor: "#6BCB77",
-
+            marginRight: "30px",
             borderRadius: 50,
             fontFamily:
               language === "CN"
