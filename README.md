@@ -174,7 +174,7 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 
 - 아이의 학습 통계와 다른 사용자들과의 비교 통계를 확인할 수 있습니다.
 
-![자녀학습기록.gif](/uploads/94fceac84a58605b5ced6b7460e6aa5e/ezgif.com-video-to-gif.gif)
+![자녀학습기록.gif](/uploads/3e93e068e6d2dd8b929e601d22427e34/parents.gif)
 
 
 
@@ -182,7 +182,7 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 
 - 전국의 다문화 센터 위치와 정보를 볼 수 있습니다.
 
-![다문화센터위치.gif](./assets/다문화센터위치.gif)
+![다문화센터위치.gif](/uploads/19eccc7973c5fc82053eb1faddaeba5f/center.gif)
 
 
 
@@ -199,7 +199,7 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 
 - 다문화 가족에게 필요한 소식을 제공합니다.
 
-![다문화소식.gif](./assets/다문화소식.gif)
+![다문화소식.gif](/uploads/fbfd8a6c350fb0489f855e15e89388b8/info.gif)
 
 
 
