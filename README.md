@@ -129,12 +129,12 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 
 
 
-#### 한국어 연습 (GIF에서 각각 번역 보여주기)
+#### 한국어 연습
 
 - 한국어 연습 탭에 들어가면 카테고리 별 영상을 볼 수 있습니다.
 - 영상을 선택하면 해당 영상을 통해 한국어 학습을 진행할 수 있습니다.
 
-![한국어연습.gif](/uploads/a77a302b217a00a215c9729a95db0864/learning.gif)
+![한국어연습.gif](/uploads/c02172186038e1dc511c1f3b5e65aa07/learning.gif)
 
 
 
@@ -164,7 +164,7 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 - 기념일, 전통, 문화예술, 음식 등의 카테고리를 통해 한국의 문화를 학습할 수 있습니다.
 - 영상을 선택해서 들어가면 영상과 함께 설명을 확인할 수 있습니다.
 
-![한국문화학습.gif](/uploads/b23d366bd25e3c6f8f65b09ecc85cce6/culture.gif)
+![한국문화학습.gif](/uploads/76c084985164ac7591a5ece8c19a300b/culture.gif)
 
 
 
@@ -291,7 +291,7 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
         </a>
       </td>
       <td align="center">
-        <a href="">
+        <a href="https://github.com/sssungjooon">
           임성준
         </a>
       </td>
