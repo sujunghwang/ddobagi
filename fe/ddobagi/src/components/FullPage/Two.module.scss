@@ -312,14 +312,28 @@
 }
 
 .StartLogo {
+    color: white;
+    position: absolute;
+    z-index: 1201;
+    top: 50%;
+    left: 50%;
+    font-size: 15rem;
+    transform: translate(-50%, 170%);
+    animation: fade 3s ease-in-out,
+        FillUP 3s ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+}
+
+
+.whale {
     position: absolute;
     z-index: 1101;
     top: 50%;
     left: 50%;
     font-size: 15rem;
-    transform: translate(-50%, -50%);
-    animation: fade 3s ease-in-out,
-        FillUP 3s ease-in-out;
+    transform: translate(-50%, -45%);
+    animation: FillUP 3s ease-in-out;
     animation-fill-mode: forwards;
     pointer-events: none;
 }
@@ -330,7 +344,7 @@
     transform: translate(200%, -50%);
     z-index: 1101;
     font-size: 15rem;
-    animation: FillUP 3s ease-in-out;
+    animation: FillUP 3s ease-in-out, waving;
     animation-fill-mode: forwards;
     pointer-events: none;
 }
@@ -363,6 +377,16 @@
     animation-fill-mode: forwards;
     pointer-events: none;
     transform: translate(500%, 600%);
+}
+
+.reef {
+    width: 100px;
+    position: absolute;
+    z-index: 1300;
+    animation: FillUPIcon 3s ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+    transform: translate(-300%, 980%);
 }
 
 @keyframes start {

@@ -101,7 +101,7 @@ function CultureBox({
 
   const CultureFinish = () => {
     axios({
-      url: `http://j8a608.p.ssafy.io:8080/api/cultures/${cultureNumber}/users/${userId}`,
+      url: `https://j8a608.p.ssafy.io/api/cultures/${cultureNumber}/users/${userId}`,
       method: "POST",
       // withCredentials: true,
       // data: {
@@ -156,9 +156,9 @@ function CultureBox({
           borderRadius: "20px 20px 0 0",
         }}
       >
-        {" "}
-        <div>
+        <div >
           <Typography
+            className={styles.Title}
             sx={{
               fontSize: "4rem",
               textAlign: "start",
@@ -166,13 +166,14 @@ function CultureBox({
                 language === "CN"
                   ? "JingNanMaiYuanTi"
                   : language === "VI"
-                  ? "UVNHaiBaTrung"
-                  : "MaplestoryOTFLight",
+                    ? "UVNHaiBaTrung"
+                    : "MaplestoryOTFLight",
             }}
           >
             {contentType}
           </Typography>
           <Box
+            className={styles.Player}
             sx={{
               paddingBottom: "2rem",
               width: "900px",
@@ -209,8 +210,8 @@ function CultureBox({
                     language === "CN"
                       ? "JingNanMaiYuanTi"
                       : language === "VI"
-                      ? "UVNHaiBaTrung"
-                      : "MaplestoryOTFLight",
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                 }}
               >
                 {title}
@@ -226,8 +227,8 @@ function CultureBox({
                     language === "CN"
                       ? "JingNanMaiYuanTi"
                       : language === "VI"
-                      ? "UVNHaiBaTrung"
-                      : "MaplestoryOTFLight",
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                 }}
               >
                 {content}
@@ -251,8 +252,8 @@ function CultureBox({
                     language === "CN"
                       ? "JingNanMaiYuanTi"
                       : language === "VI"
-                      ? "UVNHaiBaTrung"
-                      : "MaplestoryOTFLight",
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                   marginTop: "10px",
                 }}
               >
@@ -274,6 +275,7 @@ function CultureBox({
               {/* {idnumbers.map((one) => ( */}
               {others.map((other) => (
                 <Card
+                  className={styles.card}
                   sx={{
                     width: "25rem",
                     height: "9rem",
@@ -305,21 +307,23 @@ function CultureBox({
                             language === "CN"
                               ? "JingNanMaiYuanTi"
                               : language === "VI"
-                              ? "UVNHaiBaTrung"
-                              : "MaplestoryOTFLight",
+                                ? "UVNHaiBaTrung"
+                                : "MaplestoryOTFLight",
                         }}
                       >
                         {language === "CN"
                           ? other.cultureContentQueryDtoList[1].title
                           : language === "VI"
-                          ? other.cultureContentQueryDtoList[2].title
-                          : other.cultureContentQueryDtoList[0].title}
+                            ? other.cultureContentQueryDtoList[2].title
+                            : other.cultureContentQueryDtoList[0].title}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
                 </Card>
               ))}
-              <BackBtn width="10rem" />
+              <div className={styles.BTN}>
+                <BackBtn width="10rem" />
+              </div>
             </Box>
           </Box>
         </div>

@@ -85,7 +85,7 @@ function CultureDetail() {
     // API 호출
     axios
       .get(
-        `http://j8a608.p.ssafy.io:8080/api/cultures/${userId}?common=${NewCategoryName}`
+        `https://j8a608.p.ssafy.io/api/cultures/${userId}?common=${NewCategoryName}`
       )
       .then((res) => {
         setApiData(res.data);
@@ -186,26 +186,7 @@ function CultureDetail() {
   console.log(targetCulture);
 
   return (
-    <div>
-      {/* <div className={styles.Banner}>
-        <div
-          className={styles.Header}
-          style={{
-            fontFamily:
-              language === "CN"
-                ? "JingNanMaiYuanTi"
-                : language === "VI"
-                ? "UVNHaiBaTrung"
-                : "MaplestoryOTFLight",
-          }}
-        >
-          {language === "CN"
-            ? "学习韩国文化"
-            : language === "VI"
-            ? "tìm hiểu văn hóa hàn quốc"
-            : "한국 문화 학습"}
-        </div>
-      </div> */}
+    <div className={styles.Fcontainer}>
       <CultureBox
         contentType={culCategory()}
         backColor={getColorCode()}
