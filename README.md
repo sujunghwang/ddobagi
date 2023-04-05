@@ -182,7 +182,7 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 
 - 아이의 학습 통계와 다른 사용자들과의 비교 통계를 확인할 수 있습니다.
 
-![자녀학습기록.gif](./assets/자녀학습기록.gif)
+![자녀학습기록.gif](/uploads/94fceac84a58605b5ced6b7460e6aa5e/ezgif.com-video-to-gif.gif)
 
 
 
