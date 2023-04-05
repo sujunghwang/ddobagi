@@ -12,6 +12,13 @@
 
 <br/>  
 
+## System Architecture
+
+![시스템 아키텍쳐](images/시스템아키텍쳐.png)
+
+
+<br/>  
+
 <br/>  
 
 
