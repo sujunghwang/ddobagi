@@ -5,8 +5,8 @@ import { RootState } from "../redux/RootReducer";
 import styles from "./VideoScroll.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper";
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import Container from "@mui/material/Container";
 
 interface SituationTrans {
@@ -40,16 +40,25 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
   );
 
   const lang = language === "CN" ? 0 : language === "VI" ? 2 : 1;
-  const prevRef = useRef<HTMLDivElement>(null)
-  const nextRef = useRef<HTMLDivElement>(null)
+  const prevRef = useRef<HTMLDivElement>(null);
+  const nextRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div
-      ref={componentRef}
-      className={styles.FContainer}
-    >
+    <div ref={componentRef} className={styles.FContainer}>
       <Container maxWidth="xl">
-        <div className={styles.CategoryName}>{categoryName}</div>
+        <div
+          className={styles.CategoryName}
+          style={{
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
+          }}
+        >
+          {categoryName}
+        </div>
       </Container>
       <Container maxWidth="xl">
         <Swiper
@@ -78,15 +87,12 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
             },
             1520: {
               slidesPerView: 3,
-            }
+            },
           }}
           style={{ padding: "3rem" }}
-
         >
-
           {videolist.situationList.map((item, index) => (
-            <SwiperSlide key={index}
-            >
+            <SwiperSlide key={index}>
               <VideoCard
                 situationThumbnail={item.thumbnail}
                 progress={item.progress}
@@ -98,13 +104,17 @@ function VideoScroll({ color, videolist, categoryName }: VidProp) {
               />
             </SwiperSlide>
           ))}
-          <div className={styles.NavGroup} >
-            <div ref={prevRef} className={styles.NavBtn1}><NavigateBeforeIcon sx={{ fontSize: "2.5rem" }} /></div>
+          <div className={styles.NavGroup}>
+            <div ref={prevRef} className={styles.NavBtn1}>
+              <NavigateBeforeIcon sx={{ fontSize: "2.5rem" }} />
+            </div>
           </div>
-          <div ref={nextRef} className={styles.NavBtn2}><NavigateNextIcon sx={{ fontSize: "2.5rem" }} /></div>
+          <div ref={nextRef} className={styles.NavBtn2}>
+            <NavigateNextIcon sx={{ fontSize: "2.5rem" }} />
+          </div>
         </Swiper>
       </Container>
-    </div >
+    </div>
   );
 }
 

@@ -1,7 +1,15 @@
 import React from "react";
-import Card from '@mui/material/Card';
-import { Button, Box, Typography, CardActionArea, CardMedia, CardContent, Grid } from "@mui/material";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import Card from "@mui/material/Card";
+import {
+  Button,
+  Box,
+  Typography,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  Grid,
+} from "@mui/material";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 // import { MouseEventHandler } from 'react';
 import axios from "axios";
 import { RootState } from "../../redux/RootReducer";
@@ -9,13 +17,15 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ReactPlayer from "react-player";
+import BackBtn from "./BackButton";
+import styles from "./Culture.module.scss";
 
 // 문화 상세 사진
 // import dokdo from "../../assets/dokdopeng.jpg"
 // import game from "../../assets/game.jpg"
 // import kb from "../../assets/kyungbok.jpg"
 // import netflix from "../../assets/netflix.jpg"
-import ddobak from "../../assets/말남아.png"
+import ddobak from "../../assets/말남아.png";
 
 interface Culture {
   cultureId: number;
@@ -41,50 +51,54 @@ type CultureBoxProp = {
   // onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-
-function CultureBox({ contentType, backColor, title, content, videoURL, others}: CultureBoxProp) {
-
+function CultureBox({
+  contentType,
+  backColor,
+  title,
+  content,
+  videoURL,
+  others,
+}: CultureBoxProp) {
   //언어 변수
   const language = useSelector(
     (state: RootState) => state.languageChange.language
-    );
+  );
   //
 
-  const introduce = () =>  {
+  const introduce = () => {
     if (language === "CN") {
-      return "其他视频"
-    } else if (language === 'VI') {
+      return "其他视频";
+    } else if (language === "VI") {
       // @ts-ignore
-      return "Có cái này nữa nè!"
+      return "Có cái này nữa nè!";
     } else {
-      return "이런 것도 있어요!"
+      return "다른 영상 보기";
     }
-  }
+  };
 
   const userId = useSelector(
     (state: RootState) => state.inputUserInfo.payload.id
   );
 
   // let idnumbers : Array<[number, string, any ]>;
-  
+
   // idnumbers = [[1, '독도', dokdo], [2, '놀이문화', game], [3, '경복궁', kb], [4, '한국의 넷플릭스', netflix]]
-  
+
   const getYouTubeThumbnailUrl = (youtubeUrl: string) => {
     const videoId = youtubeUrl.split("v=")[1];
     return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   };
-  
-  
+
   // const NowCategory = categoryProp
   // console.log(NowCategory)
   const { id } = useParams();
-  
+
   // @ts-ignore
-  const [CategoryNumber, cultureNumber] = id.split('_');
-  
-  console.log(CategoryNumber)
-  console.log(cultureNumber)
-  
+  const [CategoryNumber, cultureNumber] = id.split("_");
+
+  console.log(CategoryNumber);
+  console.log(cultureNumber);
+
   const CultureFinish = () => {
     axios({
       url: `https://j8a608.p.ssafy.io/api/cultures/${cultureNumber}/users/${userId}`,
@@ -95,7 +109,7 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others}:
       // },
     })
       .then(() => {
-        console.log("영상을 다봤어요")
+        console.log("영상을 다봤어요");
       })
       .catch((error) => {
         console.error(error);
@@ -105,8 +119,8 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others}:
   // 영상 학습 완료 함수 (추후에 API POST 보낼 곳)
   const handleEnded = () => {
     console.log("비디오 재생이 완료되었습니다.");
-    CultureFinish()
-  }
+    CultureFinish();
+  };
 
   const navigate = useNavigate();
 
@@ -115,159 +129,204 @@ function CultureBox({ contentType, backColor, title, content, videoURL, others}:
   // }
 
   // @ts-ignore
-  const OtherMove = (MoveNum : number) => {
-    const CategoryNum = CategoryNumber
+  const OtherMove = (MoveNum: number) => {
+    const CategoryNum = CategoryNumber;
     navigate(`/cultureitem/${CategoryNum}_${MoveNum}`);
   };
 
-
-  console.log(others)
+  console.log(others);
 
   return (
-    <Box sx={{
-      display:"flex",
-      justifyContent:"center",
-    }}>
-      <Box 
+    <Box
+      sx={{
+        borderRadius: "20px 20px 0 0",
+        backgroundColor: backColor,
+        padding: "2rem 2rem 0 2rem",
+        boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.2)",
+      }}
+    >
+      <Box
         sx={{
           display: "flex",
-          backgroundColor: backColor,
-          flexDirection:"column",
-          width:"1200px",
-          height:"auto",
-          borderRadius: "50px",
-          alignItems : "center",
-          boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)",
-        }}>
-        <Typography 
-          sx={{
-            fontSize: "50px",
-            fontFamily: "MaplestoryOTFBold",
-          }}
-        >
-          {contentType}
-        </Typography>
-        <Box 
-        sx={{
-          width: "1100px",
-          height: "auto",
-          // backgroundColor:"#FFE8E8",
-          backgroundColor:"#FFFFFF",
-          borderRadius : "20px",
-        }}>
-          {/* <Box>
-            {videoURL}
-          </Box> */}
-          <Box sx={{
-            display: "flex",
-            justifyContent: "center",
-            margin:"30px",
-          }}>
-            <ReactPlayer 
-              url={videoURL} 
-              width="80%"
-              height="650px"
-              // muted={true}
-              playing={true}
-              onEnded={handleEnded}
-              />
-
-          </Box>
-          <Box sx={{ margin: "30px",}}>
-            <Typography
-              sx={{
-                fontSize:"40px",
-                fontFamily: "MaplestoryOTFBold",
-                marginBottom: "10px",
-              }}
-            >
-              { title }
-            </Typography>
-            <Typography
-              sx={{
-                fontSize:"24px",
-                fontFamily: "MaplestoryOTFLight",
-              }}
-            >
-              {content}
-            </Typography>
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            marginTop: "10px",
-            marginBottom: "10px",
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <img 
-            src={ddobak}
-            alt="또박이"
-            width="75px"
-            height="80px"
-          />
+          backgroundColor: "rgba(255,255,255,0.6)",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "start",
+          padding: "1rem 2rem 2rem 2rem",
+          borderRadius: "20px 20px 0 0",
+        }}
+      >
+        <div >
           <Typography
+            className={styles.Title}
             sx={{
-              fontSize:"30px",
-              fontFamily: "MaplestoryOTFBold",
-              marginTop: "10px"
+              fontSize: "4rem",
+              textAlign: "start",
+              fontFamily:
+                language === "CN"
+                  ? "JingNanMaiYuanTi"
+                  : language === "VI"
+                    ? "UVNHaiBaTrung"
+                    : "MaplestoryOTFLight",
             }}
           >
-            {introduce()}
+            {contentType}
           </Typography>
-        </Box>
-        <Box
-          sx={{
-            width: "1100px",
-            height: "auto",
-            // backgroundColor:"#FFE8E8",
-            backgroundColor:"#FFFFFF",
-            borderRadius : "20px",
-            marginBottom: "20px",
-          }}
-        >
-          {/* {others} */}
-          <Box sx={{ margin: "10px"}}>
-            <Grid container spacing={2}>
+          <Box
+            className={styles.Player}
+            sx={{
+              paddingBottom: "2rem",
+              width: "900px",
+              backgroundColor: "#FFFFFF",
+              borderRadius: "10px",
+              overflow: "hidden",
+            }}
+          >
+            {/* <Box>
+            {videoURL}
+          </Box> */}
+            <Box
+              sx={{
+                borderRadius: "10px",
+                width: "900px",
+                height: "506px",
+              }}
+            >
+              <ReactPlayer
+                width="900px"
+                height="506px"
+                url={videoURL}
+                playing={true}
+                onEnded={handleEnded}
+              />
+            </Box>
+            <Box>
+              <Typography
+                sx={{
+                  paddingLeft: "2rem",
+                  textAlign: "start",
+                  fontSize: "3rem",
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
+                }}
+              >
+                {title}
+              </Typography>
+              <Typography
+                sx={{
+                  wordBreak: "keep-all",
+                  paddingLeft: "2rem",
+                  paddingRight: "2rem",
+                  textAlign: "start",
+                  fontSize: "20px",
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
+                }}
+              >
+                {content}
+              </Typography>
+            </Box>{" "}
+          </Box>
+        </div>
+        <div className={styles.ColumnFlex}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <div className={styles.RowFlex}>
+              <Typography
+                sx={{
+                  paddingTop: ".3rem",
+                  fontSize: "30px",
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
+                  marginTop: "10px",
+                }}
+              >
+                {introduce()}
+              </Typography>
+              <img src={ddobak} alt="또박이" width="55px" height="80px" />{" "}
+            </div>
+          </Box>
+          <Box>
+            {/* {others} */}
+            <Box
+              sx={{
+                margin: "10px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "end",
+              }}
+            >
               {/* {idnumbers.map((one) => ( */}
               {others.map((other) => (
-                <Grid item xs={12} md={6} lg={3}>
-                  <Card
+                <Card
+                  className={styles.card}
+                  sx={{
+                    width: "25rem",
+                    height: "9rem",
+                    borderRadius: "10px",
+                    marginBottom: "2rem",
+                  }}
+                  onClick={() => OtherMove(other.cultureId)}
+                >
+                  <CardActionArea
                     sx={{
-                      borderRadius:"20px",
+                      display: "flex",
+                      justifyContent: "space-between",
                     }}
-                    onClick={() => OtherMove(other.cultureId)}
                   >
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="220"
-                        image={getYouTubeThumbnailUrl(other.url)}
-                      />
-                      <CardContent>
-                        <Typography
-                          sx={{
-                            fontSize:"20px",
-                            fontFamily: "MaplestoryOTFLight",
-                          }}
-                        >
-                          {language === "CN"
-                            ? other.cultureContentQueryDtoList[1].title
-                            : language === "VI"
+                    <CardMedia
+                      component="img"
+                      image={getYouTubeThumbnailUrl(other.url)}
+                      sx={{
+                        maxWidth: "16rem",
+                        height: "9rem",
+                      }}
+                    />
+                    <CardContent sx={{ width: "100%" }}>
+                      <Typography
+                        sx={{
+                          textAlign: "center",
+                          fontSize: "20px",
+                          fontFamily:
+                            language === "CN"
+                              ? "JingNanMaiYuanTi"
+                              : language === "VI"
+                                ? "UVNHaiBaTrung"
+                                : "MaplestoryOTFLight",
+                        }}
+                      >
+                        {language === "CN"
+                          ? other.cultureContentQueryDtoList[1].title
+                          : language === "VI"
                             ? other.cultureContentQueryDtoList[2].title
                             : other.cultureContentQueryDtoList[0].title}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea> 
-                  </Card>
-
-                </Grid>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
               ))}
-            </Grid>
-
+              <div className={styles.BTN}>
+                <BackBtn width="10rem" />
+              </div>
+            </Box>
           </Box>
-        </Box>
+        </div>
       </Box>
     </Box>
   );

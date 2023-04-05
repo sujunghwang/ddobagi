@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import ScrollToTop from "./components/ScrollToTop";
@@ -27,13 +27,13 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/categorylist" element={<CategoryList />} />
             <Route path="/culturelist" element={<CultureList />} />
-            <Route path = "/cultureitem/:id" element={<CultureDetail />}/>
+            <Route path="/cultureitem/:id" element={<CultureDetail />} />
             {/* <Route path = "/cultureitem/:id" element={<Landing />}/> */}
             <Route path="/mypage" element={<MyPage />} />
-            <Route path="/parentpage/record" element={<ParentPage1 />}/>
-            <Route path="/parentpage/map" element={<ParentPage2 />}/>
-            <Route path="/parentpage/news" element={<ParentPage3 />}/>
-            <Route path="/parentpage/support" element={<ParentPage4 />}/>
+            <Route path="/parentpage/record" element={<ParentPage1 />} />
+            <Route path="/parentpage/map" element={<ParentPage2 />} />
+            <Route path="/parentpage/news" element={<ParentPage3 />} />
+            <Route path="/parentpage/support" element={<ParentPage4 />} />
             {/* <Route path = "/parentpage" element={<Landing />}/>
               <Route path = "/parentpage/map" element={<Landing />}/>
               <Route path = "/parentpage/news" element={<Landing />}/>

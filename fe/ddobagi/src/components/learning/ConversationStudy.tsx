@@ -12,22 +12,19 @@ import { styled } from "@mui/material/styles";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 20,
   borderRadius: 5,
   [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: "#e1e1e1"
+    backgroundColor: "#e1e1e1",
   },
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 5,
-    backgroundImage:
-      "linear-gradient(to right, #74ebd5, #acb6e5)"
+    backgroundImage: "linear-gradient(to right, #74ebd5, #acb6e5)",
   },
 }));
-
 
 function ConversationStudy() {
   // navigate에 넣어 둔 state 값들을 가져옵니다.
@@ -96,7 +93,7 @@ function ConversationStudy() {
     recordedUrl: string;
     lang: string;
     transContent: string;
-    pronounce: number
+    pronounce: number;
   }
   const [scripts, setScripts] = useState<Script[]>([]);
 
@@ -191,7 +188,6 @@ function ConversationStudy() {
     };
   }, []);
 
-
   // 녹음 결과를 가져옵니다.
   useEffect(() => {
     const fetchRecordInfo = async () => {
@@ -207,32 +203,41 @@ function ConversationStudy() {
 
     fetchRecordInfo();
   });
-  const Percentage = (record / scripts.length) * 100
-
+  const Percentage = (record / scripts.length) * 100;
 
   return (
     <>
       <div className={styles.loadAnime}>
-        <div className={styles.Pin}
+        <div
+          className={styles.Pin}
           style={{
             marginLeft: `${Percentage}%`,
           }}
         >
           <img src={"/img/running.gif"} alt="run" style={{ width: "50px" }} />
         </div>
-        <BorderLinearProgress variant="determinate" value={Percentage} sx={{
-          boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.2)"
-        }} />
-        <div style={{
-          textAlign: "end",
-          fontSize: "1.2rem",
-          marginTop: ".5rem"
-        }}>
+        <BorderLinearProgress
+          variant="determinate"
+          value={Percentage}
+          sx={{
+            boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.2)",
+          }}
+        />
+        <div
+          style={{
+            textAlign: "end",
+            fontSize: "1.2rem",
+            marginTop: ".5rem",
+          }}
+        >
           {record} / {scripts.length}
         </div>
       </div>
       <div className={styles.FullContainer}>
-        <div className={`${styles.LeftContainer} ${videoLoaded ? `${styles.Leftanime}` : ''}`}>
+        <div
+          className={`${styles.LeftContainer} ${videoLoaded ? `${styles.Leftanime}` : ""
+            }`}
+        >
           <div>
             <YouTube
               ref={videoRef}
@@ -242,12 +247,30 @@ function ConversationStudy() {
               onEnd={onPlayerEnd}
             />
           </div>
-          <div className={styles.Title}>{categoryName}</div>
-          <div className={styles.SubTitle}>{situationTitle}</div>
-          <div className={styles.Description}>{videoDescription}</div>
-          <div onClick={goBack} className={styles.CloseBtn}>
-            나가기
-          </div>
+          <div className={styles.Title} style={{
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
+          }}>{categoryName}</div>
+          <div className={styles.SubTitle} style={{
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
+          }}>{situationTitle}</div>
+          <div className={styles.Description} style={{
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
+          }}>{videoDescription}</div>
         </div>
         <div className={styles.RightContainer}>
           <div
@@ -263,7 +286,12 @@ function ConversationStudy() {
                         }`}
                     >
                       <div>{item.defaultContent}</div>
-                      <div>{item.transContent}</div>
+                      <div style={{
+                        fontFamily:
+                          language === "VI"
+                            ? "UVNHaiBaTrung"
+                            : "JingNanMaiYuanTi"
+                      }}>{item.transContent}</div>
                     </div>
                     <div className={styles.BtnGroup}>
                       <Recording
@@ -281,13 +309,17 @@ function ConversationStudy() {
               ))}
               <div className={styles.LastGroup}>
                 <ColorBtn
-                  content="뒤로가기"
+                  content={language === "CN" ? "回去" : language === "VI" ? "lối ra" : "나가기"}
                   color="#ffffff"
                   width="10rem"
                   onClick={goBack}
                 ></ColorBtn>
                 <ColorBtn
-                  content="단어공부"
+                  content={language === "CN"
+                    ? "单词练习"
+                    : language === "VI"
+                      ? "luyện từ"
+                      : "단어 연습"}
                   color="#ffffff"
                   width="10rem"
                   onClick={goWord}
@@ -297,7 +329,7 @@ function ConversationStudy() {
           </div>
           <img src="/img/Hands2.png" alt="hands" className={styles.handImg} />
         </div>
-      </div>
+      </div >
     </>
   );
 }

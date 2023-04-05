@@ -295,3 +295,277 @@
     }
 
 }
+
+
+
+.AnimeBack {
+    z-index: 1100;
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    animation: BGA 3s ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+}
+
+.StartLogo {
+    color: white;
+    position: absolute;
+    z-index: 1201;
+    top: 50%;
+    left: 50%;
+    font-size: 15rem;
+    transform: translate(-50%, 170%);
+    animation: fade 3s ease-in-out,
+        FillUP 3s ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+}
+
+
+.whale {
+    position: absolute;
+    z-index: 1101;
+    top: 50%;
+    left: 50%;
+    font-size: 15rem;
+    transform: translate(-50%, -45%);
+    animation: FillUP 3s ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+}
+
+.ship {
+    width: 200px;
+    position: absolute;
+    transform: translate(200%, -50%);
+    z-index: 1101;
+    font-size: 15rem;
+    animation: FillUP 3s ease-in-out, waving;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+}
+
+.fish {
+    width: 100px;
+    position: absolute;
+    transform: translate(-600%, 600%);
+    z-index: 1300;
+    animation: FillUPIcon 3s ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+}
+
+.seaweed {
+    width: 100px;
+    position: absolute;
+    z-index: 1300;
+    animation: FillUPIcon 3s ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+    transform: translate(-500%, 980%);
+}
+
+.submarine {
+    width: 100px;
+    position: absolute;
+    z-index: 1300;
+    animation: FillUPIcon 3s ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+    transform: translate(500%, 600%);
+}
+
+.reef {
+    width: 100px;
+    position: absolute;
+    z-index: 1300;
+    animation: FillUPIcon 3s ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+    transform: translate(-300%, 980%);
+}
+
+@keyframes start {
+    0% {
+        height: 0;
+    }
+
+    50% {
+        top: 0;
+        height: 100vh;
+    }
+
+    100% {
+        top: 100%;
+        height: 0;
+        display: none;
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 0;
+        display: none;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes BGA {
+    0% {}
+
+    70% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 0;
+        display: none;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+//wave anitmation
+
+.waves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1200;
+    width: 100%;
+    height: 140px;
+    animation: FillUP 3s ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+}
+
+.BlueBottom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1200;
+    width: 100%;
+    height: 100%;
+    background-color: #92b4ec;
+    animation: FillUP2 3s ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+}
+
+/* Animation */
+.parallax>use {
+    animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+
+.parallax>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+
+.parallax>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+
+.parallax>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+
+.parallax>use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(85px, 0, 0);
+    }
+}
+
+@keyframes FillUP {
+    0% {
+        top: 100%;
+    }
+
+    80% {
+        top: -140px;
+        opacity: 1;
+    }
+
+    100% {
+        top: -140px;
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes FillUP2 {
+    0% {
+        top: 110%;
+    }
+
+    80% {
+        top: 0;
+        opacity: 1;
+    }
+
+    100% {
+        top: 0;
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes waving {
+    33% {
+        transform: translateY(-5%);
+    }
+
+    66% {
+        top: -140px;
+        transform: translateY(5%);
+    }
+
+}
+
+@keyframes FillUPIcon {
+    0% {
+        top: 100%;
+    }
+
+    80% {
+        top: -140px;
+    }
+
+    100% {
+        top: -140px;
+    }
+}

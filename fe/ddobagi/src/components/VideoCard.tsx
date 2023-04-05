@@ -11,6 +11,8 @@ import LinearProgress, {
 import StudyEntryModal from "./modal/StudyEntryModal";
 import styles from "./VideoScroll.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/RootReducer";
 
 type CardProp = {
   situationThumbnail: string;
@@ -46,11 +48,14 @@ function VideoCard({
       backgroundImage: "linear-gradient(to right, #74ebd5, #acb6e5)",
     },
   }));
-
+  //언어 변수
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+  );
   //로그인 확인 변수
   const userStr = sessionStorage.getItem("token");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className={styles.CardContainer}>
@@ -68,13 +73,13 @@ function VideoCard({
         sx={{
           Width: 430,
           borderRadius: "20px",
-          boxShadow: "0px 5px 10px rgba(0,0,0,0.4)"
+          boxShadow: "0px 5px 10px rgba(0,0,0,0.4)",
         }}
         onClick={() => {
           if (userStr) {
             setModal(true);
           } else {
-            navigate('/')
+            navigate("/");
           }
         }}
       >
@@ -93,7 +98,12 @@ function VideoCard({
               sx={{
                 textAlign: "center",
                 marginTop: "10px",
-                fontFamily: "MaplestoryOTFLight",
+                fontFamily:
+                  language === "CN"
+                    ? "JingNanMaiYuanTi"
+                    : language === "VI"
+                    ? "UVNHaiBaTrung"
+                    : "MaplestoryOTFLight",
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",

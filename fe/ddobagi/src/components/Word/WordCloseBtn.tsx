@@ -3,6 +3,8 @@ import { Button } from "@mui/material";
 // import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/RootReducer";
 
 type BtnProp = {
   width: string;
@@ -14,7 +16,10 @@ function WordCloseBtn({ width }: BtnProp) {
   const handleClick = () => {
     navigate("/CategoryList");
   }
-
+  //언어 변수
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+  );
   return (
     <Button
       variant="contained"
@@ -22,24 +27,32 @@ function WordCloseBtn({ width }: BtnProp) {
         width: width,
         color: "#ffffff",
         backgroundColor: "#6BCB77",
-        borderRadius: 10,
-        fontFamily: "CookieRun-Regular",
-        fontSize: 20,
-        borderColor: "rgba(0, 0, 0, .25)",
-        borderWidth: "0px 4px 4px 0px",
-        borderStyle: "solid",
-        transition: "border-width .1s ",
+
+        borderRadius: 50,
+        fontFamily:
+          language === "CN"
+            ? "JingNanMaiYuanTi"
+            : language === "VI"
+              ? "UVNHaiBaTrung"
+              : "MaplestoryOTFLight",
+        fontSize: "1.2rem",
+        transition: "top .1s ",
+        boxShadow: "inset 0 -1px 5px rgba(0, 0, 0, 0.15)",
+
         "&:hover": {
           backgroundColor: "#6BCB77",
-          borderWidth: "0px",
+          boxShadow: "inset 0 -4px 5px rgba(0, 0, 0, 0.15)",
         },
-        marginX: "15px",
       }}
-      startIcon={<CloseIcon sx={{ width: "38px", height: "35px", color:"white" }} />}
+      startIcon={<CloseIcon sx={{ width: "38px", height: "35px", color: "white" }} />}
       disableElevation
       onClick={handleClick}
     >
-        나가기
+      {language === "CN"
+        ? "回去"
+        : language === "VI"
+          ? "lối ra"
+          : "나가기"}
     </Button>
   );
 }

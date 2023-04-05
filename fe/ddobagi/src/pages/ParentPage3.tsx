@@ -59,15 +59,31 @@ function ParentPage3() {
   };
   // 탭 선택 함수 끝
 
+  function removeTags(text: string) {
+    return text
+      .replace(/<b>/g, "")
+      .replace(/<\/b>/g, "")
+      .replace(/&apos;/g, "");
+  }
+
   // newsList data axios 통신
   const [data, setData] = useState<NewsType[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://j8a608.p.ssafy.io/api/parents/news");
+        const response = await axios.get(
+          "https://j8a608.p.ssafy.io/api/parents/news"
+        );
         // setData(response.data);
-        setData(response.data.reverse());
+        setData(
+          response.data.reverse().map((article: NewsType) => ({
+            ...article,
+            title: removeTags(article.title),
+            summary: removeTags(article.summary),
+          }))
+        );
+        console.log(data);
       } catch (error) {
         console.error(error);
       }
@@ -77,7 +93,8 @@ function ParentPage3() {
 
   // 링크 이동 함수
   const handleItemClick = (item: any) => {
-    window.location.replace(`${item.url}`);
+    // window.location.replace(`${item.url}`);
+    window.open(`${item.url}`, "_blank");
   };
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -95,7 +112,17 @@ function ParentPage3() {
   return (
     <div className={styles.Fcontainer}>
       <div className={styles.Banner}>
-        <div className={styles.Header}>
+        <div
+          className={styles.Header}
+          style={{
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
+          }}
+        >
           {language === "CN"
             ? "父母亲"
             : language === "VI"
@@ -145,7 +172,12 @@ function ParentPage3() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -183,7 +215,12 @@ function ParentPage3() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -222,7 +259,12 @@ function ParentPage3() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -260,7 +302,12 @@ function ParentPage3() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -299,7 +346,12 @@ function ParentPage3() {
           <Typography
             sx={{
               fontSize: "40px",
-              fontFamily: "MaplestoryOTFLight",
+              fontFamily:
+                language === "CN"
+                  ? "JingNanMaiYuanTi"
+                  : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
               color: "#ffffff",
               marginTop: "30px",
             }}
@@ -321,7 +373,7 @@ function ParentPage3() {
               flexDirection: "column",
               // justifyContent: "center",
               alignItems: "center",
-              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)"
+              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)",
             }}
           >
             <Box
@@ -334,19 +386,40 @@ function ParentPage3() {
             >
               <Typography
                 variant="h5"
-                sx={{ fontFamily: "MaplestoryOTFLight" }}
+                sx={{
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                      ? "UVNHaiBaTrung"
+                      : "MaplestoryOTFLight",
+                }}
               >
                 총&nbsp;
               </Typography>
               <Typography
                 variant="h5"
-                sx={{ fontFamily: "MaplestoryOTFLight" }}
+                sx={{
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                      ? "UVNHaiBaTrung"
+                      : "MaplestoryOTFLight",
+                }}
               >
                 {data.length}
               </Typography>
               <Typography
                 variant="h5"
-                sx={{ fontFamily: "MaplestoryOTFLight" }}
+                sx={{
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                      ? "UVNHaiBaTrung"
+                      : "MaplestoryOTFLight",
+                }}
               >
                 건
               </Typography>
@@ -380,14 +453,17 @@ function ParentPage3() {
                           }}
                         >
                           {/* {item.id} */}
-                          {1001 - item.id}
+                          {data.length + 1 - item.id}
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText
                         primary={
                           <Typography
                             variant="h5"
-                            sx={{ fontFamily: "MaplestoryOTFBold", marginBottom : "5px" }}
+                            sx={{
+                              fontFamily: "MaplestoryOTFBold",
+                              marginBottom: "5px",
+                            }}
                           >
                             {item.title}
                           </Typography>
@@ -396,17 +472,36 @@ function ParentPage3() {
                           <React.Fragment>
                             <Typography
                               variant="body1"
-                              sx={{ fontFamily: "MaplestoryOTFLight" }}
+                              sx={{
+                                fontFamily:
+                                  language === "CN"
+                                    ? "JingNanMaiYuanTi"
+                                    : language === "VI"
+                                    ? "UVNHaiBaTrung"
+                                    : "MaplestoryOTFLight",
+                              }}
                             >
                               {item.summary.slice(0, 150)}
                             </Typography>
-                            <Typography variant="body1" sx={{ fontFamily: "MaplestoryOTFLight", marginTop:"5px", color:"black" }}>
+                            <Typography
+                              variant="body1"
+                              sx={{
+                                fontFamily:
+                                  language === "CN"
+                                    ? "JingNanMaiYuanTi"
+                                    : language === "VI"
+                                    ? "UVNHaiBaTrung"
+                                    : "MaplestoryOTFLight",
+                                marginTop: "5px",
+                                color: "black",
+                              }}
+                            >
                               {item.publishedDate}
                             </Typography>
                           </React.Fragment>
                         }
-                        />
-                      </ListItem>
+                      />
+                    </ListItem>
                     <Divider variant="middle" component="li" />
                   </>
                 ))}
@@ -430,6 +525,7 @@ function ParentPage3() {
         </Box>
       </Box>
       <Box sx={{ height: "250px" }} />
+      <Box sx={{ height: "150px" }} />
     </div>
   );
 }

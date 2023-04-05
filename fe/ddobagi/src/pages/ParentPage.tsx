@@ -20,13 +20,13 @@ import GroupedColumnCharts from "../components/Charts/GroupChart";
 
 interface Props {
   chartdata: {
-  userAllProgressAvg: number;
-  otherAllProgressAvg: number;
-  userPronounceScoreAvg: number;
-  otherPronounceScoreProgress: number;
+    userAllProgressAvg: number;
+    otherAllProgressAvg: number;
+    userPronounceScoreAvg: number;
+    otherPronounceScoreProgress: number;
   };
   language: string;
-  }
+}
 
 function ParentPage1() {
   //언어 함수
@@ -76,12 +76,12 @@ function ParentPage1() {
   }, [userId]);
 
   if (!chartData) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
-  const chartdata = chartData.data
+  const chartdata = chartData.data;
 
-  console.log(chartdata)
+  console.log(chartdata);
 
   // const ColumnChartData = [
   //   { name: "해당 사용자", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
@@ -144,12 +144,22 @@ function ParentPage1() {
     title = "유저 비교 통계";
   }
 
-  console.log(chartdata)
+  console.log(chartdata);
 
   return (
     <div className={styles.Fcontainer}>
       <div className={styles.Banner}>
-        <div className={styles.Header}>
+        <div
+          className={styles.Header}
+          style={{
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
+          }}
+        >
           {language === "CN"
             ? "父母亲"
             : language === "VI"
@@ -200,7 +210,12 @@ function ParentPage1() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -238,7 +253,12 @@ function ParentPage1() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -276,7 +296,12 @@ function ParentPage1() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -314,7 +339,12 @@ function ParentPage1() {
                 <Typography
                   sx={{
                     fontSize: "20px",
-                    fontFamily: "MaplestoryOTFLight",
+                    fontFamily:
+                      language === "CN"
+                        ? "JingNanMaiYuanTi"
+                        : language === "VI"
+                        ? "UVNHaiBaTrung"
+                        : "MaplestoryOTFLight",
                     userSelect: "none",
                   }}
                 >
@@ -348,7 +378,12 @@ function ParentPage1() {
           <Typography
             sx={{
               fontSize: "40px",
-              fontFamily: "MaplestoryOTFLight",
+              fontFamily:
+                language === "CN"
+                  ? "JingNanMaiYuanTi"
+                  : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
               color: "#ffffff",
               marginTop: "30px",
             }}
@@ -366,14 +401,20 @@ function ParentPage1() {
               backgroundColor: "#FFDADA",
               marginTop: "30px",
               borderRadius: "0 0 20px 20px",
-              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)"
+              boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)",
             }}
           >
             <Box>
               <Typography
                 sx={{
-                  fontSize: "40px",
-                  fontFamily: "MaplestoryOTFLight",
+                  fontSize: "36px",
+                  paddingTop: "10px",
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                      ? "UVNHaiBaTrung"
+                      : "MaplestoryOTFLight",
                 }}
               >
                 {language === "CN"
@@ -481,14 +522,22 @@ function ParentPage1() {
               </Grid>
             </Box>
             <Typography
-              sx={{ fontSize: "25px", fontFamily: "MaplestoryOTFLight" }}
+              sx={{
+                fontSize: "25px",
+                fontFamily:
+                  language === "CN"
+                    ? "JingNanMaiYuanTi"
+                    : language === "VI"
+                    ? "UVNHaiBaTrung"
+                    : "MaplestoryOTFLight",
+              }}
             >
               {language === "CN" ? (
-                <span style={{ fontSize: "40px" }}>比较统计</span>
+                <span style={{ fontSize: "36px" }}>比较统计</span>
               ) : language === "VI" ? (
-                <span style={{ fontSize: "30px" }}>So sánh thống kê </span>
+                <span style={{ fontSize: "36px" }}>So sánh thống kê </span>
               ) : (
-                <span style={{ fontSize: "40px" }}>비교통계</span>
+                <span style={{ fontSize: "36px" }}>비교통계</span>
               )}{" "}
               {language === "CN"
                 ? "（以韩国定居年度为准）"
@@ -496,19 +545,17 @@ function ParentPage1() {
                 ? "(tiêu chuẩn năm định cư Hàn Quốc)"
                 : "(한국 정착년도 기준)"}
             </Typography>
-            <Box sx={{ height:"60px" }} />
+            <Box sx={{ height: "60px" }} />
             {/* <ColumnChartWithGroupLabel
               data={ColumnChartData}
               categories={categories}
               title={title}
             /> */}
-            <GroupedColumnCharts 
-              chartdata={chartdata}
-              language={language}
-            />
+            <GroupedColumnCharts chartdata={chartdata} language={language} />
           </Box>
         </Box>
       </Box>
+      <Box sx={{ height: "150px" }} />
     </div>
   );
 }

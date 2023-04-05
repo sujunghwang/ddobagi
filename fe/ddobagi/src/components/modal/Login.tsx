@@ -54,25 +54,25 @@ function Login({ setModalContent, closeModal }: Props) {
   //
 
   //로그인 함수
-  const LoginBtn = useRef<HTMLDivElement>(null)
+  const LoginBtn = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const navigateToCategory = () => {
     navigate("/CategoryList");
   };
 
   interface LogInfo {
-    grantType: string,
-    accessToken: string,
-    refreshToken: null,
-    tokenExpiresIn: number,
-    id: number,
-    loginId: string,
-    name: string,
-    userLang: string
+    grantType: string;
+    accessToken: string;
+    refreshToken: null;
+    tokenExpiresIn: number;
+    id: number;
+    loginId: string;
+    name: string;
+    userLang: string;
   }
   const shakeanime = () => {
     if (LoginBtn.current) {
-      LoginBtn.current.classList.add(styles.ErrorBtn)
+      LoginBtn.current.classList.add(styles.ErrorBtn);
 
       LoginBtn.current.addEventListener("animationend", () => {
         if (LoginBtn.current) {
@@ -80,20 +80,20 @@ function Login({ setModalContent, closeModal }: Props) {
         }
       });
     }
-  }
-  
-  const dispatch = useDispatch()
+  };
+
+  const dispatch = useDispatch();
   const Login = () => {
     if (id === "" || password === "") {
-      shakeanime()
+      shakeanime();
     } else {
       const apiLogin = async () => {
         try {
           const response = await axios.post<LogInfo>(
             "https://j8a608.p.ssafy.io/api/auth/login",
             {
-              "loginId": id,
-              "pw": password
+              loginId: id,
+              pw: password,
             }
           );
 
@@ -107,16 +107,16 @@ function Login({ setModalContent, closeModal }: Props) {
             id: response.data.id,
           };
           dispatch(inputUserInfo(newUserInfo));
-          const token = response.data.accessToken
+          const token = response.data.accessToken;
           const AccessToken = JSON.stringify(token);
           sessionStorage.setItem("token", AccessToken);
           navigateToCategory();
           closeModal();
         } catch (error) {
-          shakeanime()
+          shakeanime();
         }
-      }
-      apiLogin()
+      };
+      apiLogin();
     }
   };
   //
@@ -160,7 +160,6 @@ function Login({ setModalContent, closeModal }: Props) {
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
-
             }
             onKeyDown={(event) => {
               if (event.key === "Enter") {
@@ -177,8 +176,8 @@ function Login({ setModalContent, closeModal }: Props) {
             language === "CN"
               ? "登录"
               : language === "VI"
-                ? "đăng nhập"
-                : "로그인"
+              ? "đăng nhập"
+              : "로그인"
           }
           color="#FFD93D"
           width="100%"
@@ -191,8 +190,8 @@ function Login({ setModalContent, closeModal }: Props) {
             language === "CN"
               ? "加入会员"
               : language === "VI"
-                ? "tham gia thành viên"
-                : "회원가입"
+              ? "tham gia thành viên"
+              : "회원가입"
           }
           color="#FF6B6B"
           width="100%"

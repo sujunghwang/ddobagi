@@ -1,8 +1,11 @@
+import React, { useRef } from "react";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // import Swiper core and required modules
 import { RootState } from "../../redux/RootReducer";
-import { Pagination, Autoplay, Mousewheel } from "swiper";
+import { Pagination, Autoplay, Navigation } from "swiper";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
@@ -16,6 +19,7 @@ import {
   Grid,
 } from "@mui/material";
 import styles from "../VideoScroll.module.scss";
+import Container from "@mui/material/Container";
 
 // Import Swiper styles
 import "swiper/css";
@@ -60,9 +64,10 @@ interface ApiData {
 type CultureProp = {
   dataProp: ApiData;
   boxColor: string;
+  CategoryName: string;
 };
 
-function SwiperList({ dataProp, boxColor }: CultureProp) {
+function SwiperList({ dataProp, boxColor, CategoryName }: CultureProp) {
   const getColorCode = (color: string): string => {
     if (color === "red") {
       return "#ffcfd8";
@@ -84,6 +89,8 @@ function SwiperList({ dataProp, boxColor }: CultureProp) {
     (state: RootState) => state.languageChange.language
   );
   //
+  const prevRef = useRef<HTMLDivElement>(null);
+  const nextRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
   // const moveCulture = () => {
@@ -110,86 +117,122 @@ function SwiperList({ dataProp, boxColor }: CultureProp) {
     <Box
       sx={{
         width: "100%",
-        backgroundColor: colorCode,
-        borderRadius: "0px 0px 30px 30px",
-        boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2) ",
         overflow: "hidden",
-        marginBottom: "8rem",
+        marginBottom: "2rem",
       }}
     >
-      <Swiper
-        modules={[Pagination, Autoplay, Mousewheel]}
-        spaceBetween={100}
-        mousewheel={true}
-        grabCursor={true}
-        pagination={{
-          clickable: true,
-        }}
-        autoplay={{ delay: 3300, disableOnInteraction: false }}
-        breakpoints={{
-          360: {
-            slidesPerView: 1,
-          },
-          760: {
-            slidesPerView: 2,
-          },
-          1024: {
-            slidesPerView: 3,
-          },
-          1520: {
-            slidesPerView: 4,
-          },
-        }}
-        style={{ padding: "3rem" }}
-      >
-        {Slides.map((slide) => (
-          <SwiperSlide key={slide.cultureId}>
-            <div className={styles.CardContainer}>
-              {/* {isCompleted && ( */}
-              {slide.completed && (
-                <>
-                  <div className={styles.clearFog}></div>
-                  <img
-                    className={`${styles.Stamp} noselect`}
-                    src="img/Stamp.png"
-                    alt="Stamp"
-                  />
-                </>
-              )}
-              <Card
-                sx={{ minWidth: 345, borderRadius: "10px" }}
-                onClick={() => moveCulture(slide.cultureId)}
-              >
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    image={getYouTubeThumbnailUrl(slide.url)}
-                  />
-                  <CardContent>
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      sx={{
-                        fontFamily: "MaplestoryOTFLight",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                      }}
-                      gutterBottom
-                    >
-                      {language === "CN"
-                        ? slide.cultureContentQueryDtoList[1].title
-                        : language === "VI"
-                        ? slide.cultureContentQueryDtoList[2].title
-                        : slide.cultureContentQueryDtoList[0].title}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+      <Container maxWidth="xl">
+        <div
+          className={styles.CategoryName}
+          style={{
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
+          }}
+        >
+          {CategoryName}
+        </div>
+        <Swiper
+          modules={[Pagination, Autoplay, Navigation]}
+          navigation={{
+            prevEl: prevRef.current!, // Assert non-null
+            nextEl: nextRef.current!, // Assert non-null
+            disabledClass: `${styles.disable}`,
+          }}
+          spaceBetween={100}
+          grabCursor={true}
+          pagination={{
+            // el: `${styles.Pagenation}`,
+            clickable: true,
+          }}
+          autoplay={{ delay: 3300, disableOnInteraction: true }}
+          breakpoints={{
+            360: {
+              slidesPerView: 1,
+            },
+            760: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+            1520: {
+              slidesPerView: 3,
+            },
+          }}
+          style={{ padding: "3rem" }}
+        >
+          {Slides.map((slide) => (
+            <SwiperSlide key={slide.cultureId}>
+              <div className={styles.CardContainer}>
+                {/* {isCompleted && ( */}
+                {slide.completed && (
+                  <>
+                    <div className={styles.clearFog}></div>
+                    <img
+                      className={`${styles.Stamp} noselect`}
+                      src="img/Stamp.png"
+                      alt="Stamp"
+                    />
+                  </>
+                )}
+                <Card
+                  sx={{
+                    Width: 430,
+                    borderRadius: "20px",
+                    boxShadow: "0px 5px 10px rgba(0,0,0,0.4)",
+                  }}
+                  onClick={() => moveCulture(slide.cultureId)}
+                >
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      image={getYouTubeThumbnailUrl(slide.url)}
+                      alt="thumbNail"
+                    />
+                    <CardContent>
+                      <Typography
+                        variant="h5"
+                        component="div"
+                        sx={{
+                          textAlign: "center",
+                          fontFamily:
+                            language === "CN"
+                              ? "JingNanMaiYuanTi"
+                              : language === "VI"
+                              ? "UVNHaiBaTrung"
+                              : "MaplestoryOTFLight",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                        gutterBottom
+                      >
+                        {language === "CN"
+                          ? slide.cultureContentQueryDtoList[1].title
+                          : language === "VI"
+                          ? slide.cultureContentQueryDtoList[2].title
+                          : slide.cultureContentQueryDtoList[0].title}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </div>
+            </SwiperSlide>
+          ))}
+          <div className={styles.NavGroup}>
+            <div ref={prevRef} className={styles.NavBtn1}>
+              <NavigateBeforeIcon sx={{ fontSize: "2.5rem" }} />
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          </div>
+          <div ref={nextRef} className={styles.NavBtn2}>
+            <NavigateNextIcon sx={{ fontSize: "2.5rem" }} />
+          </div>
+        </Swiper>
+      </Container>
     </Box>
   );
 }
