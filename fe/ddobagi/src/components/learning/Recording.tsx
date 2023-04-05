@@ -10,17 +10,18 @@ import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
 
-
-const toWav = require('audiobuffer-to-wav');
-const audioContext = new (window.AudioContext)();
+const toWav = require("audiobuffer-to-wav");
+const audioContext = new window.AudioContext();
 const fileReader = new FileReader();
 
 async function convertWebmToWav(blob: Blob) {
-  const audioBuffer = await audioContext.decodeAudioData(await blob.arrayBuffer());
+  const audioBuffer = await audioContext.decodeAudioData(
+    await blob.arrayBuffer()
+  );
   const wav = toWav(audioBuffer);
 
   return new Blob([new DataView(wav)], {
-    type: 'audio/wav'
+    type: "audio/wav",
   });
 }
 
@@ -36,11 +37,11 @@ interface Props {
     recordedUrl: string;
     lang: string;
     transContent: string;
-  }
-  videoFrame: React.MutableRefObject<any>
-  play: (start: number, end: number) => void
-  recordedUrl: string
-  pronounce: number
+  };
+  videoFrame: React.MutableRefObject<any>;
+  play: (start: number, end: number) => void;
+  recordedUrl: string;
+  pronounce: number;
 }
 
 const Recording = (props: Props) => {
@@ -55,7 +56,7 @@ const Recording = (props: Props) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const audio2Ref = useRef<HTMLAudioElement>(null);
 
-  const [score, setScore] = useState<number>(0);  // 서버에서 반환된 점수를 저장합니다.
+  const [score, setScore] = useState<number>(0); // 서버에서 반환된 점수를 저장합니다.
   const addAudioElement = async (blob: Blob) => {
     const convertedBlob = await convertWebmToWav(blob);
     const formData = new FormData();
@@ -77,7 +78,7 @@ const Recording = (props: Props) => {
         }
       );
       const roundedNum: number = Math.round(response.data * 10) / 10; // 소수 첫째자리까지
-      setScore(roundedNum)
+      setScore(roundedNum);
     } catch (error) {
       console.error(error);
     }
@@ -87,36 +88,43 @@ const Recording = (props: Props) => {
     if (audioRef.current && blobUrl) {
       audioRef.current.play();
     } else if (audio2Ref.current) {
-      audio2Ref.current.play()
+      audio2Ref.current.play();
     }
   };
 
-  const [onPlay, setOnPlay] = useState<boolean>(false)
-
+  const [onPlay, setOnPlay] = useState<boolean>(false);
 
   return (
     <div className={styles.BtnGroup2}>
-      {onPlay ? <div
-        className={styles.RBtn}
-        onClick={() => {
-          props.videoFrame.current.pauseVideo();
-          setOnPlay(false)
-        }}
-      >
-        <PauseRoundedIcon sx={{ fontSize: "2rem" }} />
-      </div> : <div
-        className={styles.RBtn}
-        onClick={() => {
-          props.play(Number(props.item.startTime), Number(props.item.endTime));
-          setOnPlay(true)
-          const duration = Number(props.item.endTime) - Number(props.item.startTime);
-          setTimeout(() => {
-            setOnPlay(false)
-          }, duration * 1000);
-        }}
-      >
-        <PlayArrowRoundedIcon sx={{ fontSize: "2rem" }} />
-      </div>}
+      {onPlay ? (
+        <div
+          className={styles.RBtn}
+          onClick={() => {
+            props.videoFrame.current.pauseVideo();
+            setOnPlay(false);
+          }}
+        >
+          <PauseRoundedIcon sx={{ fontSize: "2rem" }} />
+        </div>
+      ) : (
+        <div
+          className={styles.RBtn}
+          onClick={() => {
+            props.play(
+              Number(props.item.startTime),
+              Number(props.item.endTime)
+            );
+            setOnPlay(true);
+            const duration =
+              Number(props.item.endTime) - Number(props.item.startTime);
+            setTimeout(() => {
+              setOnPlay(false);
+            }, duration * 1000);
+          }}
+        >
+          <PlayArrowRoundedIcon sx={{ fontSize: "2rem" }} />
+        </div>
+      )}
       {recorderControls.isRecording ? (
         <div className={styles.RBtn} onClick={recorderControls.stopRecording}>
           <FiberManualRecordRoundedIcon
@@ -141,14 +149,15 @@ const Recording = (props: Props) => {
           onRecordingComplete={addAudioElement}
         />
       </div>
-      {score > 2 || props.pronounce > 2 ?
+      {score > 2 || props.pronounce > 2 ? (
         <div className={styles.confirmMark}>
           {props.pronounce ? props.pronounce.toFixed(1) : score}
         </div>
-        :
+      ) : (
         <div className={styles.noConfirmMark}>
           {props.pronounce ? props.pronounce.toFixed(1) : score}
-        </div>}
+        </div>
+      )}
       <audio src={blobUrl} ref={audioRef}></audio>
       <audio src={props.recordedUrl} ref={audio2Ref}></audio>
     </div>

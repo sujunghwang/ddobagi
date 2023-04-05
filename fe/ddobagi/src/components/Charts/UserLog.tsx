@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styles from "./Charts.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
+import Typography from "@mui/material/Typography";
+
 interface Props {
   statistics: {
     viewedVideoCount: number;
@@ -50,7 +52,21 @@ function UserLog({ statistics }: Props) {
                 alt="icon_1"
                 className={styles.icon}
               />
-              <div> x {statistics.viewedVideoCount}</div>
+              <Typography
+                sx={{
+                  whiteSpace: "pre",
+                  fontSize: "2.5rem",
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                      ? "UVNHaiBaTrung"
+                      : "MaplestoryOTFLight",
+                }}
+              >
+                {" "}
+                x {statistics.viewedVideoCount}
+              </Typography>
             </div>
           </div>
           <div className={styles.LogGroup}>
@@ -67,7 +83,21 @@ function UserLog({ statistics }: Props) {
                 alt="icon_1"
                 className={styles.icon}
               />
-              <div> x {statistics.recordedScriptCount}</div>
+              <Typography
+                sx={{
+                  whiteSpace: "pre",
+                  fontSize: "2.5rem",
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                      ? "UVNHaiBaTrung"
+                      : "MaplestoryOTFLight",
+                }}
+              >
+                {" "}
+                x {statistics.recordedScriptCount}
+              </Typography>
             </div>
           </div>
         </div>
@@ -86,7 +116,21 @@ function UserLog({ statistics }: Props) {
                 alt="icon_1"
                 className={styles.icon}
               />
-              <div> x {statistics.studiedQuizCount}</div>
+              <Typography
+                sx={{
+                  whiteSpace: "pre",
+                  fontSize: "2.5rem",
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                      ? "UVNHaiBaTrung"
+                      : "MaplestoryOTFLight",
+                }}
+              >
+                {" "}
+                x {statistics.studiedQuizCount}{" "}
+              </Typography>
             </div>
           </div>
           <div className={styles.LogGroup}>
@@ -103,7 +147,21 @@ function UserLog({ statistics }: Props) {
                 alt="icon_1"
                 className={styles.icon}
               />
-              <div> x {statistics.viewedVideoCount}</div>
+              <Typography
+                sx={{
+                  whiteSpace: "pre",
+                  fontSize: "2.5rem",
+                  fontFamily:
+                    language === "CN"
+                      ? "JingNanMaiYuanTi"
+                      : language === "VI"
+                      ? "UVNHaiBaTrung"
+                      : "MaplestoryOTFLight",
+                }}
+              >
+                {" "}
+                x {statistics.viewedVideoCount}
+              </Typography>
             </div>
           </div>
         </div>

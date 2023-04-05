@@ -1,26 +1,192 @@
-.fish {
-    position: fixed;
-    left: 92%;
-    top: 50%;
-    z-index: -10;
-    width: 100px;
-    animation: swim 3s infinite ease-in-out;
-
-    &:hover {
-        scale: 1.5;
-    }
+.cloud {
+  position: fixed;
+  left: 94%;
+  top: 20%;
+  z-index: -1;
+  width: 70px;
+  animation: cloud 7s infinite ease-in-out;
 }
 
-@keyframes swim {
-    33% {
-        transform: translateX(-50px), scaleX(1);
-    }
+.seaweed {
+  position: fixed;
+  left: 90%;
+  top: 93.5%;
+  z-index: -1;
+  width: 70px;
+}
 
-    34% {
-        transform: translateX(-50px), scaleX(-1);;
-    }
+.ship {
+  position: fixed;
+  left: 2%;
+  top: 84%;
+  z-index: -1;
+  width: 100px;
+  animation: ship 7s infinite ease-in-out;
+}
 
-    66% {
-        transform: translateX(50px), scaleX(-1);
-    }
+.seagull {
+  position: fixed;
+  left: 7%;
+  top: 60%;
+  width: 50px;
+  animation: bird 10s infinite ease;
+  z-index: -1;
+}
+
+@keyframes bird {
+  0% {
+    transform: rotate(5deg);
+  }
+
+  30% {
+    transform: rotate(-5deg);
+  }
+
+  70% {
+    transform: rotate(5deg);
+  }
+
+  100% {
+    transform: rotate(-5deg);
+  }
+
+}
+
+@keyframes ship {
+  0% {
+    transform: translateY(30%) rotate(10deg);
+  }
+
+  30% {
+    transform: translateY(0%) rotate(-10deg);
+  }
+
+  70% {
+    transform: translateY(0%) rotate(10deg);
+  }
+
+  100% {
+    transform: translateY(30%) rotate(10deg);
+  }
+
+}
+
+@keyframes cloud {
+  0% {
+    transform: translateX(-20%);
+  }
+
+  50% {
+    transform: translateX(20%);
+  }
+
+  100% {
+    transform: translateX(-20%);
+  }
+}
+
+//wave anitmation
+
+.waves {
+  position: fixed;
+  top: calc(100% - 140px);
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 140px;
+  animation: FillUP 3.5s ease-in-out;
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+.parallax>use {
+  animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+
+.parallax>use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+
+.parallax>use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+
+.parallax>use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+
+.parallax>use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+
+
+.GotoTop {
+  width: 70px;
+  position: fixed;
+  top: 90%;
+  left: 95%;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+  // animation: upDown 2s infinite ease-in;
+}
+
+.appear {
+  opacity: 0;
+  animation: slide-up .3s ease-in;
+  animation-fill-mode: forwards;
+}
+
+.hidden {
+  opacity: 1;
+  animation: slide-down .3s ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes upDown {
+  33% {
+    scale: 1.2;
+  }
+
+  66% {
+    scale: 0.8;
+  }
 }

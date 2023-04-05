@@ -10,6 +10,7 @@ import styles from "./CategoryList.module.scss";
 // import VideoScroll from "../components/VideoScroll";
 import SwiperList from "../components/Swiper/SwiperList";
 import Loading from "../components/Loading";
+import Container from "@mui/material/Container";
 
 // API에서 받아온 데이터의 타입을 선언합니다.
 interface ApiData {
@@ -92,7 +93,9 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get(`https://j8a608.p.ssafy.io/api/cultures/${userId}?common=ANNIVERSARY`)
+      .get(
+        `https://j8a608.p.ssafy.io/api/cultures/${userId}?common=ANNIVERSARY`
+      )
       .then((res) => {
         setApiData1(res.data);
       })
@@ -102,7 +105,9 @@ function CultureList() {
   useEffect(() => {
     // API 호출
     axios
-      .get(`https://j8a608.p.ssafy.io/api/cultures/${userId}?common=TRADITION`)
+      .get(
+        `https://j8a608.p.ssafy.io/api/cultures/${userId}?common=TRADITION`
+      )
       .then((res) => {
         setApiData2(res.data);
       })
@@ -137,57 +142,77 @@ function CultureList() {
 
   return (
     <div className={styles.Fcontainer}>
-      <div className={styles.Banner}>
-        <div
-          style={{
-            fontSize: "3.8rem",
-            alignItems: "center",
-            fontFamily: "MaplestoryOTFBold",
-          }}
-        >
-          {language === "CN"
-            ? "韩国文化"
-            : language === "VI"
-            ? "văn hoá"
-            : "한국 문화"}
+      <Container maxWidth="xl">
+        <div className={styles.Banner}>
+          <div
+            style={{
+              fontSize: "5rem",
+              alignItems: "center",
+              fontFamily:
+                language === "CN"
+                  ? "JingNanMaiYuanTi"
+                  : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFBold",
+            }}
+          >
+            {language === "CN"
+              ? "韩国文化"
+              : language === "VI"
+              ? "văn hoá"
+              : "한국 문화"}
+          </div>
         </div>
-      </div>
-      <div className={styles.BreadCrum}>
-        <BreadCrumbs />
-      </div>
+        <div className={styles.BreadCrum}>
+          <BreadCrumbs />
+        </div>
+      </Container>
+
       <Box>
         <div className={styles.CategoryBox2}>
-          <div className={styles.CategoryName}>{category1}</div>
           {apiData1 ? (
-            // @ts-ignore
-            <SwiperList dataProp={apiData1} boxColor="red" />
+            <SwiperList
+              // @ts-ignore
+              dataProp={apiData1}
+              boxColor="red"
+              CategoryName={category1}
+            />
           ) : (
             <Loading />
           )}
         </div>
         <div className={styles.CategoryBox2}>
-          <div className={styles.CategoryName}>{category2}</div>
           {apiData2 ? (
-            // @ts-ignore
-            <SwiperList dataProp={apiData2} boxColor="yellow" />
+            <SwiperList
+              // @ts-ignore
+              dataProp={apiData2}
+              boxColor="yellow"
+              CategoryName={category2}
+            />
           ) : (
             <Loading />
           )}
         </div>
         <div className={styles.CategoryBox2}>
-          <div className={styles.CategoryName}>{category3}</div>
           {apiData3 ? (
-            // @ts-ignore
-            <SwiperList dataProp={apiData3} boxColor="green" />
+            <SwiperList
+              // @ts-ignore
+              dataProp={apiData3}
+              boxColor="green"
+              CategoryName={category3}
+            />
           ) : (
             <Loading />
           )}
         </div>
         <div className={styles.CategoryBox2}>
-          <div className={styles.CategoryName}>{category4}</div>
           {apiData4 ? (
-            // @ts-ignore
-            <SwiperList dataProp={apiData4} boxColor="blue" />
+            <SwiperList
+              // @ts-ignore
+              dataProp={apiData4}
+              boxColor="blue"
+              CategoryName={category4}
+            />
           ) : (
             <Loading />
           )}

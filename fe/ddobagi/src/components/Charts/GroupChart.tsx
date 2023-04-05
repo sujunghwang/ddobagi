@@ -98,10 +98,16 @@ const GroupedColumnCharts = ({ chartdata, language }: Props) => {
   : "발음 평균 점수"
 
   const progressCategories = language === "CN"
-  ? "整体进度"
+  ? "整体进度 (%)"
   : language === "VI"
   ? "toàn bộ quá trình thực hiện"
-  : "전체 진행도"
+  : "전체 진행도 (%)"
+
+  const point = language === "CN"
+  ? "分数"
+  : language === "VI"
+  ? "điểm"
+  : "점";
 
   return (
     <>
@@ -112,11 +118,12 @@ const GroupedColumnCharts = ({ chartdata, language }: Props) => {
             // @ts-ignore
             data={pronounceScoreData}
             categories={[pronounCategories]}
-            title={language === "CN"
-            ? "用户比较 - 发音平均分数"
-            : language === "VI"
-            ? "So sánh người dùng - điểm trung bình phát âmc"
-            : "유저 비교 - 발음 평균 점수"}
+            unit={point}
+            // title={language === "CN"
+            // ? "用户比较 - 发音平均分数"
+            // : language === "VI"
+            // ? "So sánh người dùng - điểm trung bình phát âmc"
+            // : "유저 비교 - 발음 평균 점수"}
           />
         </Grid>
         <Grid item component="div" xs={12} md={6}>
@@ -124,11 +131,12 @@ const GroupedColumnCharts = ({ chartdata, language }: Props) => {
           // @ts-ignore
             data={allProgressData}
             categories={[progressCategories]}
-            title={language === "CN"
-            ? "用户比较 - 整体进度"
-            : language === "VI"
-            ? "So sánh người dùng - toàn bộ tiến trình"
-            : "유저 비교 - 전체 진행도"}
+            unit="%"
+            // title={language === "CN"
+            // ? "用户比较 - 整体进度"
+            // : language === "VI"
+            // ? "So sánh người dùng - toàn bộ tiến trình"
+            // : "유저 비교 - 전체 진행도"}
           />
         </Grid>
       </Grid>

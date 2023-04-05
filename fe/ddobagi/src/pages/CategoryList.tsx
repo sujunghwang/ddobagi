@@ -78,26 +78,36 @@ function CategoryList() {
     language === "CN"
       ? "学习"
       : language === "VI"
-        ? "tại cửa hàng"
-        : "가게에서";
+      ? "tại cửa hàng"
+      : "가게에서";
   const playGround =
     language === "CN"
       ? "在操场上"
       : language === "VI"
-        ? "tại sân chơi"
-        : "놀이터에서";
+      ? "tại sân chơi"
+      : "놀이터에서";
   //
 
   return (
     <div className={styles.Fcontainer}>
       <Container maxWidth="xl">
         <div className={styles.Banner}>
-          <div className={styles.Header}>
+          <div
+            className={styles.Header}
+            style={{
+              fontFamily:
+                language === "CN"
+                  ? "JingNanMaiYuanTi"
+                  : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
+            }}
+          >
             {language === "CN"
               ? "学习"
               : language === "VI"
-                ? "học hỏi"
-                : "한국어 연습"}
+              ? "học hỏi"
+              : "한국어 연습"}
           </div>
         </div>
         <div className={styles.BreadCrum}>
@@ -125,7 +135,7 @@ function CategoryList() {
         ) : (
           <Loading />
         )}
-      </div>     
+      </div>
 
       <div className={styles.CategoryBox}>
         {playGroundList ? (
@@ -137,7 +147,7 @@ function CategoryList() {
         ) : (
           <Loading />
         )}
-      </div>    
+      </div>
 
       <div className={styles.CategoryBox}>
         {storeList ? (
