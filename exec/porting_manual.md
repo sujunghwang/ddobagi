@@ -1,65 +1,87 @@
 # Porting Manual
 
 
+<br/>  
+
+
 
 ## 개발 환경
 
 ![개발 환경](images/DDOBAGI_개발환경.png)
 
 
+<br/>  
 
+## System Architecture
+
+![시스템 아키텍쳐](images/시스템아키텍쳐.png)
+
+
+<br/>  
+
+<br/>  
 
 
 ## Contents
 
-[1. CI/CD 설계](#1.-CI/CD-설계)
+[1. CI/CD 설계](#1-cicd-설계)
 
 - [개발서버와 운영서버](#개발서버와-운영서버)
 
 
-- [CI/CD 구조도](#CI/CD-구조도)
+- [CI/CD 구조도](#cicd-구조도)
 
 
 - [포트 목록](#포트-목록)
 
 
-[2. EC2 환경설정](#2.-EC2-환경설정)
+[2. EC2 환경설정](#2-ec2-환경설정)
 
- - [Docker 설치](#Docker-설치)
+ - [Docker 설치](#docker-설치)
 
- - [MySQL 설치 및 설정](#MySQL-설치-및-설정)
+ - [MySQL 설치 및 설정](#mysql-설치-및-설정)
 
- - [Docker Network, Volume](#Docker-Network,-Volume)
+ - [Docker Network, Volume](#docker-network-volume)
 
- - [MySQL Docker Container](#MySQL-Docker-Container)
+ - [MySQL Docker Container](#mysql-docker-container)
 
- - [Jenkins Container](#Jenkins-Container)
-   - [Jenkins Container 실행 및 기본설정](#Jenkins-Container-실행-및-기본설정)
-   - [Docker in Docker: 젠킨스 컨테이너 안에 도커 설치](#Docker-in-Docker:-젠킨스-컨테이너-안에-도커-설치)
+ - [Jenkins Container](#jenkins-container)
+   - [Jenkins Container 실행 및 기본설정](#jenkins-container-실행-및-기본설정)
+   - [Docker in Docker: 젠킨스 컨테이너 안에 도커 설치](#docker-in-docker-젠킨스-컨테이너-안에-도커-설치)
 
 
-[3. Jenkins GitLab 연동](#3.-Jenkins-GitLab-연동)
+[3. Jenkins GitLab 연동](#3-jenkins-gitlab-연동)
 
-   - [3-1. Jenkins Item](#3-1.-Jenkins-Item)
+   - [3-1. Jenkins Item](#3-1-jenkins-item)
 
-   - [3-2. Gitlab Webhooks 등록](#3-2.-Gitlab-Webhooks-등록)
+   - [3-2. Gitlab Webhooks 등록](#3-2-gitlab-webhooks-등록)
 
-   - [3-3. Webhook Test](#3-3.-Webhook-Test)
+   - [3-3. Webhook Test](#3-3-webhook-test)
 
-[4. 개발 서버](#4.-개발-서버)
+[4. 개발 서버](#4-개발-서버)
 
-   - [React Frontend 빌드 및 배포: 개발 서버](#React-Frontend-빌드-및-배포:-개발-서버)
-   - [SpringBoot Backend 빌드 및 배포: 개발 서버](#SpringBoot-Backend-빌드-및-배포:-개발-서버)
+   - [React Frontend 빌드 및 배포: 개발 서버](#개발-서버-react-frontend-빌드-및-배포)
+   - [SpringBoot Backend 빌드 및 배포: 개발 서버](#개발-서버-springboot-backend-빌드-및-배포)
 
-[5. 운영 서버](#5.-운영-서버)
+[5. 운영 서버](#5-운영-서버)
 
-   - [React Frontend 빌드 및 배포: 운영 서버](#React-Frontend-빌드-및-배포:-운영-서버)
-   - [SpringBoot Backend 빌드 및 배포: 운영 서버](#SpringBoot-Backend-빌드-및-배포:-운영-서버)
-   - [NginX, certbot 설치 및 SSL 설정](#NginX,-certbot-설치-및-SSL-설정)
+   - [React Frontend 빌드 및 배포: 운영 서버](#운영-서버-react-frontend-빌드-및-배포)
+   - [SpringBoot Backend 빌드 및 배포: 운영 서버](#운영-서버-springboot-backend-빌드-및-배포)
+   - [NginX, certbot 설치 및 SSL 설정](#nginx-certbot-설치-및-ssl-설정)
 
-[6. 참고: Docker 명령어](#6.-참고:-Docker-명령어)
+[6. 외부 서비스](#6-외부-서비스)
 
-   
+   - [S3 설정](#S3-설정)
+   - [AWS S3 Bucket 설정](#AWS-S3-Bucket-설정)
+
+[참고: Docker 명령어](#docker-명령어)
+
+
+<br/>  
+
+<br/>  
+
+
 
 ## 1. CI/CD 설계
 
@@ -75,34 +97,49 @@
 
 - master 브랜치 → 운영 서버 (prod)
 
-  
+<br/>  
+
 
 #### CI/CD 구조도
 
 ![또바기_배포_구조도_ver2](images/또바기_배포_구조도_ver2.png)
 
 
+<br/>  
+
+
 
 #### 포트 목록
 
-ec2
+##### [ec2]
 
-|      |      |
+| 포트번호 | 설명 |
 | :--- | ---- |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
+| 80 | http - https로 리다이렉트 |
+| 443 | https |
+| 3000 | 개발서버 React Docker Container |
+| 8080 | 개발서버 SpringBoot Docker Container |
+| 8081 | 운영서버 React, NginX Docker Container |
+| 8082 | 운영서버 SpringBoot Docker Container |
+| 8090 | Jenkins Docker Container |
+| 3306 | MySQL Docker Container |
 
 
 
-ec2 for Hadoop
+##### [ec2 for Hadoop]
+| 포트번호 | 설명 |
+| :--- | ---- |
+| 9000 | Hadoop |
+| 9870 | Hadoop Daemon |
+| 10000 | Hive |
+| 10001 | Hive http (외부접속) |
+| 9083 | Hive metastore |
+| 3306 | MySQL |
 
-표
+
+<br/>  
+
+<br/>  
 
 
 
@@ -115,6 +152,9 @@ ec2 for Hadoop
 공식문서: https://docs.docker.com/engine/install/ubuntu/
 
 참고 블로그: [[Docker] ubuntu에 docker 설치하는 방법](https://systorage.tistory.com/entry/Docker-ubuntu%EC%97%90-docker-%EC%84%A4%EC%B9%98%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95)
+
+
+<br/>  
 
 
 
@@ -139,6 +179,9 @@ ec2 for Hadoop
 `cd /etc/mysql/mysql.conf.d/  sudo vi mysqld.cnf` : bind-address를 0.0.0.0으로 변경하여 외부 접속 허용
 
 
+<br/>  
+
+
 
 #### Docker Network, Volume
 
@@ -150,6 +193,9 @@ ec2 for Hadoop
   ```
 
   
+<br/>  
+
+
 
 #### MySQL Docker Container
 
@@ -158,6 +204,9 @@ ec2 for Hadoop
   ```bash
   docker run -dp 3939:3306 --network ddobagi-net --network-alias ddobagi-db  --mount type=volume,src=ddobagi-vol,target=/var/lib/mysql --env MYSQL_ROOT_PASSWORD=Ehqkrl608! --env MYSQL_DATABASE=ddobagi --env MYSQL_USER=devs --env MYSQL_PASSWORD=Ehqkrl608! mysql:latest
   ```
+
+<br/>  
+
 
   
 
@@ -221,10 +270,12 @@ ec2 for Hadoop
     ```
 
 
+<br/>  
+
+<br/>  
 
 
-
-## 3. Jenkins - GitLab
+## 3. Jenkins - GitLab 연동
 
 ---
 
@@ -294,7 +345,9 @@ ec2 for Hadoop
 
   - Execute shell: Jenkins container 내에서 실행될 shell script 작성을 할 곳인데, 일단 지금은 넘어간다.
 
-    
+
+<br/>  
+
 
 #### 3-2. Gitlab Webhooks 등록
 
@@ -320,6 +373,9 @@ ec2 for Hadoop
 
 
 
+<br/>  
+
+
 #### 3-3. Webhook Test
 
 test 후 build 확인
@@ -328,13 +384,18 @@ test 후 build 확인
 
 
 
+<br/>  
+
+
+<br/>  
+
 
 
 ## 4. 개발 서버
 
 ---
 
-#### React Frontend 빌드 및 배포: 개발 서버
+#### 개발 서버 React Frontend 빌드 및 배포
 
 Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습니다.
 
@@ -416,9 +477,12 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
   docker run -dp 3000:3000 --mount type=bind,src=$(pwd)/src,target=/react/src --name ddobagi-front-dev ddobagi-front-dev
   ```
 
-  
 
-#### SpringBoot Backend 빌드 및 배포: 개발 서버
+<br/>  
+
+
+
+#### 개발 서버 SpringBoot Backend 빌드 및 배포
 
 Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습니다.
 
@@ -543,7 +607,11 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
   docker run -dp 8080:8080 --name ddobagi-backend-dev --network ddobagi-net ddobagi-backend-dev
   ```
 
-  
+
+<br/>  
+
+
+<br/>  
 
 
 
@@ -551,7 +619,7 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
 
 ---
 
-- #### React Frontend 빌드 및 배포 (운영 서버)
+#### 운영 서버 React Frontend 빌드 및 배포
 
   운영 서버에서는 프론트 프로젝트를 Nginx 까지 dockerizing하고 host NGINX에서 port forwading 하는 방식으로 배포합니다.
   
@@ -636,10 +704,11 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
     ```bash
     docker run -dp 8082:80 --mount type=bind,src=$(pwd)/src,target=/ddobagi/src --name ddobagi-front-prod ddobagi-front-prod
     ```
-  
+
+<br/>  
     
   
-  #### SpringBoot Backend 빌드 및 배포: 운영 서버
+  #### 운영 서버 SpringBoot Backend 빌드 및 배포
   
   Dockerfile_prod, shell script(build_prod.sh)는 gitlab repository에 포함되어 있습니다.
   
@@ -771,6 +840,9 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
   
 
 
+<br/>  
+
+
 
 #### NginX, certbot 설치 및 SSL 설정
 
@@ -880,9 +952,80 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
 
   
 
-  
+<br/>  
 
-## 6. (참고) Docker 명령어
+
+<br/>  
+
+## 6. 외부 서비스
+
+#### S3 설정
+1. https://www.aws.amazon.com/ 에 가입 후 S3로 이동
+2. 프로젝트에 사용할 버킷을 생성
+3. 버킷 이름, 리전, 퍼블릭 액세스 설정
+4. IAM 에서 사용자 생성 후 AmazonS3FullAccess 권한 부여
+5. 생성한 사용자의 AccessKey와 SecretKey를 발급 받고 프로젝트에 적용
+
+#### AWS S3 Bucket 설정
+1. 버킷 정책
+
+   ```json
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "PublicReadGetObject",
+               "Effect": "Allow",
+               "Principal": "*",
+               "Action": "s3:GetObject",
+               "Resource": "arn:aws:s3:::s3ffmpegtest/*"
+           }
+       ]
+   }
+   ```
+
+2. ACL
+
+   - 버킷 소유자
+     - 객체 : 나열, 쓰기, 읽기
+     - 버킷 ACL : 읽기, 쓰기
+   - 버킷 소유자
+     - 객체 : 읽기
+     - 버킷 ACL : 읽기
+
+3. CORS
+
+   ```json
+   [
+       {
+           "AllowedHeaders": [
+               "*"
+           ],
+           "AllowedMethods": [
+               "HEAD",
+               "GET",
+               "PUT",
+               "POST",
+               "DELETE"
+           ],
+           "AllowedOrigins": [
+               "*"
+           ],
+           "ExposeHeaders": [
+               "ETag",
+               "x-amz-meta-custom-header"
+           ]
+       }
+   ]
+   ```
+  
+<br/>  
+
+
+<br/>  
+
+
+## Docker 명령어
 
 ---
 
@@ -900,5 +1043,9 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
 
 `docker logs {{container-id}}` : 컨테이너 로그 확인
 
+
+<br/>  
+
+<br/>  
 
 
