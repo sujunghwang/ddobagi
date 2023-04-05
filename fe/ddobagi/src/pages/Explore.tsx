@@ -32,7 +32,7 @@ function Explore() {
           pathname !== "/CultureList" && <Outlet />}
       </Container>
       {pathname !== "/" && (
-        <div style={{ position: "fixed" }}>
+        <div style={{ position: "fixed", zIndex: -1 }}>
           <svg
             className={styles.waves}
             xmlns="http://www.w3.org/2000/svg"
