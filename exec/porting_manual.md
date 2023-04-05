@@ -69,6 +69,11 @@
    - [SpringBoot Backend 빌드 및 배포: 운영 서버](#운영-서버-springboot-backend-빌드-및-배포)
    - [NginX, certbot 설치 및 SSL 설정](#nginx-certbot-설치-및-ssl-설정)
 
+[6. 외부 서비스](#6-외부-서비스)
+
+   - [S3 설정](#S3-설정)
+   - [AWS S3 Bucket 설정](#AWS-S3-Bucket-설정)
+
 [참고: Docker 명령어](#docker-명령어)
 
 
@@ -952,7 +957,73 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
 
 <br/>  
 
+## 6. 외부 서비스
+
+#### S3 설정
+1. https://www.aws.amazon.com/ 에 가입 후 S3로 이동
+2. 프로젝트에 사용할 버킷을 생성
+3. 버킷 이름, 리전, 퍼블릭 액세스 설정
+4. IAM 에서 사용자 생성 후 AmazonS3FullAccess 권한 부여
+5. 생성한 사용자의 AccessKey와 SecretKey를 발급 받고 프로젝트에 적용
+
+#### AWS S3 Bucket 설정
+1. 버킷 정책
+
+   ```json
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "PublicReadGetObject",
+               "Effect": "Allow",
+               "Principal": "*",
+               "Action": "s3:GetObject",
+               "Resource": "arn:aws:s3:::s3ffmpegtest/*"
+           }
+       ]
+   }
+   ```
+
+2. ACL
+
+   - 버킷 소유자
+     - 객체 : 나열, 쓰기, 읽기
+     - 버킷 ACL : 읽기, 쓰기
+   - 버킷 소유자
+     - 객체 : 읽기
+     - 버킷 ACL : 읽기
+
+3. CORS
+
+   ```json
+   [
+       {
+           "AllowedHeaders": [
+               "*"
+           ],
+           "AllowedMethods": [
+               "HEAD",
+               "GET",
+               "PUT",
+               "POST",
+               "DELETE"
+           ],
+           "AllowedOrigins": [
+               "*"
+           ],
+           "ExposeHeaders": [
+               "ETag",
+               "x-amz-meta-custom-header"
+           ]
+       }
+   ]
+   ```
   
+<br/>  
+
+
+<br/>  
+
 
 ## Docker 명령어
 
