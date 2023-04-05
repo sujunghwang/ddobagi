@@ -101,7 +101,7 @@ function ConversationStudy() {
     const fetchScript = async () => {
       try {
         const response = await axios.get<Script[]>(
-          `https://j8a608.p.ssafy.io/api/conversations/${situationId}/${userId}/script`
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}/${userId}/script`
         );
         const newScripts = [];
         if (language === "VI") {
@@ -153,7 +153,7 @@ function ConversationStudy() {
     const fetchVideoInfo = async () => {
       try {
         const response = await axios.get<MapType>(
-          `https://j8a608.p.ssafy.io/api/conversations/${situationId}`
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}`
         );
         setVideoInfo(response.data);
       } catch (error) {
@@ -193,7 +193,7 @@ function ConversationStudy() {
     const fetchRecordInfo = async () => {
       try {
         const response = await axios.get<number>(
-          `https://j8a608.p.ssafy.io/api/conversations/${situationId}/${userId}/record`
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}/${userId}/record`
         );
         setRecord(response.data);
       } catch (error) {
@@ -235,9 +235,8 @@ function ConversationStudy() {
       </div>
       <div className={styles.FullContainer}>
         <div
-          className={`${styles.LeftContainer} ${
-            videoLoaded ? `${styles.Leftanime}` : ""
-          }`}
+          className={`${styles.LeftContainer} ${videoLoaded ? `${styles.Leftanime}` : ""
+            }`}
         >
           <div>
             <YouTube
@@ -248,15 +247,36 @@ function ConversationStudy() {
               onEnd={onPlayerEnd}
             />
           </div>
-          <div className={styles.Title}>{categoryName}</div>
-          <div className={styles.SubTitle}>{situationTitle}</div>
-          <div className={styles.Description}>{videoDescription}</div>
+          <div className={styles.Title} style={{
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
+          }}>{categoryName}</div>
+          <div className={styles.SubTitle} style={{
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
+          }}>{situationTitle}</div>
+          <div className={styles.Description} style={{
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
+          }}>{videoDescription}</div>
           <div onClick={goBack} className={styles.CloseBtn}>
             {language === "CN"
               ? "回去"
               : language === "VI"
-              ? "lối ra"
-              : "나가기"}
+                ? "lối ra"
+                : "나가기"}
           </div>
         </div>
         <div className={styles.RightContainer}>
@@ -269,12 +289,16 @@ function ConversationStudy() {
                 <div key={index} className={styles.bubbleGroup}>
                   <div className={styles.Scripts}>
                     <div
-                      className={`${styles.bubble} ${
-                        item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
-                      }`}
+                      className={`${styles.bubble} ${item.scriptRole === "RIGHT" ? styles.RIGHT : styles.LEFT
+                        }`}
                     >
                       <div>{item.defaultContent}</div>
-                      <div>{item.transContent}</div>
+                      <div style={{
+                        fontFamily:
+                          language === "VI"
+                            ? "UVNHaiBaTrung"
+                            : "JingNanMaiYuanTi"
+                      }}>{item.transContent}</div>
                     </div>
                     <div className={styles.BtnGroup}>
                       <Recording
@@ -292,13 +316,17 @@ function ConversationStudy() {
               ))}
               <div className={styles.LastGroup}>
                 <ColorBtn
-                  content="뒤로가기"
+                  content={language === "CN" ? "回去" : language === "VI" ? "lối ra" : "나가기"}
                   color="#ffffff"
                   width="10rem"
                   onClick={goBack}
                 ></ColorBtn>
                 <ColorBtn
-                  content="단어공부"
+                  content={language === "CN"
+                    ? "单词练习"
+                    : language === "VI"
+                      ? "luyện từ"
+                      : "단어 연습"}
                   color="#ffffff"
                   width="10rem"
                   onClick={goWord}
@@ -308,7 +336,7 @@ function ConversationStudy() {
           </div>
           <img src="/img/Hands2.png" alt="hands" className={styles.handImg} />
         </div>
-      </div>
+      </div >
     </>
   );
 }

@@ -115,7 +115,7 @@ function WordStudy() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `https://j8a608.p.ssafy.io/api/learnings/${situationId}`
+        `http://j8a608.p.ssafy.io:8080/api/learnings/${situationId}`
       );
       setQuizIdData(response.data);
     };
@@ -125,7 +125,7 @@ function WordStudy() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizIdData[quizIndex]}/`
+        `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${quizIdData[quizIndex]}/`
       );
       setQuizData(response.data);
       setVideoUrl(response.data.videoUrl.split(".be/")[1]);
@@ -204,14 +204,14 @@ function WordStudy() {
       {/* <Box sx={{ marginTop:"30px", position: "absolute", top: 10, left: 0, m: 2 }}>
         <WordCloseBtn width="280px" />
       </Box> */}
-      <div style={{ position:"absolute", left: "75%", top: "50%", zIndex:"-1" }}>
-          <StudyAnimation />
+      <div style={{ position: "absolute", left: "75%", top: "50%", zIndex: "-1" }}>
+        <StudyAnimation />
       </div>
       <div style={{ marginTop: "30px" }}>
         <img
           src={"/img/notebook.png"}
           alt="notebook"
-          style={{ width: "1000px", marginTop: "50px", boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.2)", borderRadius:"23px" }}
+          style={{ width: "1000px", marginTop: "50px", boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.2)", borderRadius: "23px" }}
         />
         <div
           style={{
@@ -256,28 +256,27 @@ function WordStudy() {
       <Box display="flex" justifyContent="center" mt={5}>
         <Button
           onClick={handleQuizSubmit}
+          variant="contained"
           sx={{
-            mr: 2,
             width: "180px",
             color: "#ffffff",
             backgroundColor: "#6BCB77",
-            borderRadius: 10,
+
+            borderRadius: 50,
             fontFamily:
               language === "CN"
                 ? "JingNanMaiYuanTi"
                 : language === "VI"
-                ? "UVNHaiBaTrung"
-                : "MaplestoryOTFLight",
-            fontSize: 20,
-            borderColor: "rgba(0, 0, 0, .25)",
-            borderWidth: "0px 4px 4px 0px",
-            borderStyle: "solid",
-            transition: "border-width .1s ",
+                  ? "UVNHaiBaTrung"
+                  : "MaplestoryOTFLight",
+            fontSize: "1.2rem",
+            transition: "top .1s ",
+            boxShadow: "inset 0 -1px 5px rgba(0, 0, 0, 0.15)",
+
             "&:hover": {
               backgroundColor: "#6BCB77",
-              borderWidth: "0px",
+              boxShadow: "inset 0 -4px 5px rgba(0, 0, 0, 0.15)",
             },
-            marginX: "15px",
           }}
           startIcon={
             <SkipNextIcon
@@ -285,7 +284,16 @@ function WordStudy() {
             />
           }
         >
-          {quizIndex === quizIdData.length - 1 ? "학습 완료" : "다음 문제"}
+          {quizIndex === quizIdData.length - 1 ? language === "CN" ?
+            "学习完成" :
+            language === "VI" ?
+              "học xong" :
+              "학습 완료" :
+            language === "CN" ?
+              "下一个问题" :
+              language === "VI" ?
+                "vấn đề tiếp theo" :
+                "다음 문제"}
         </Button>
         {/* <Button onClick={() => navigate("/CategoryList")}>학습 종료</Button> */}
         <WordCloseBtn width="180px" />
