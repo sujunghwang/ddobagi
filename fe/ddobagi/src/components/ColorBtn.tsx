@@ -29,8 +29,8 @@ function ColorBtn({ content, color, width, onClick }: BtnProp): JSX.Element {
             language === "CN"
               ? "JingNanMaiYuanTi"
               : language === "VI"
-              ? "UVNHaiBaTrung"
-              : "MaplestoryOTFLight",
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
           fontSize: "1.2rem",
           transition: "top .1s ",
           boxShadow: "inset 0 -1px 5px rgba(0, 0, 0, 0.15)",
@@ -45,7 +45,6 @@ function ColorBtn({ content, color, width, onClick }: BtnProp): JSX.Element {
       >
         {content}
       </Button>
-      {/* <div className={styles.Btn}></div> */}
     </div>
   );
 }

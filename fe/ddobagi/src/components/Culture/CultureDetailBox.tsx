@@ -101,7 +101,7 @@ function CultureBox({
 
   const CultureFinish = () => {
     axios({
-      url: `https://j8a608.p.ssafy.io/api/cultures/${cultureNumber}/users/${userId}`,
+      url: `http://j8a608.p.ssafy.io:8080/api/cultures/${cultureNumber}/users/${userId}`,
       method: "POST",
       // withCredentials: true,
       // data: {

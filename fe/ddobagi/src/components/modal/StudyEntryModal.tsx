@@ -9,6 +9,8 @@ import styles from "./Modal.module.scss";
 import ConversationAnimation from "../animations/Consversation";
 import TestAnimation from "../animations/Test";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/RootReducer";
 
 type Props = {
   closeModal: Function;
@@ -34,10 +36,10 @@ function StudyEntryModal({
     color === "#ffcfd8"
       ? "pink"
       : color === "#e0f1ff"
-      ? "blue"
-      : color === "#fff9e2"
-      ? "yellow"
-      : "green";
+        ? "blue"
+        : color === "#fff9e2"
+          ? "yellow"
+          : "green";
   const style = {
     position: "absolute" as "absolute",
     width: { xs: "265px", md: "630px" },
@@ -77,6 +79,11 @@ function StudyEntryModal({
     });
   };
 
+  //언어 변수
+  const language = useSelector(
+    (state: RootState) => state.languageChange.language
+  );
+
   return (
     <Modal
       style={{
@@ -113,7 +120,11 @@ function StudyEntryModal({
               <div className={styles.Group}>
                 <ConversationAnimation />
                 <ColorBtn
-                  content={"대화 연습"}
+                  content={language === "CN"
+                    ? "会话练习"
+                    : language === "VI"
+                      ? "thực hành giao tiếp"
+                      : "대화 연습"}
                   color={"#FF6B6B"}
                   width={"200px"}
                   onClick={() => {
@@ -124,7 +135,11 @@ function StudyEntryModal({
               <div className={styles.Group}>
                 <TestAnimation />
                 <ColorBtn
-                  content={"단어 연습"}
+                  content={language === "CN"
+                    ? "单词练习"
+                    : language === "VI"
+                      ? "luyện từ"
+                      : "단어 연습"}
                   color={"#FFD93D"}
                   width={"200px"}
                   onClick={() => {

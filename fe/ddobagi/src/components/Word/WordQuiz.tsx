@@ -80,7 +80,7 @@ const Quiz: React.FC<QuizProps> = ({
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizId}/`
+          `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${quizId}/`
         );
         setQuizData(response.data);
         // options와 answer를 합침
@@ -115,7 +115,7 @@ const Quiz: React.FC<QuizProps> = ({
   // const quizData = quizdata3
   const CorrectWord = () => {
     axios({
-      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
+      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
@@ -136,7 +136,7 @@ const Quiz: React.FC<QuizProps> = ({
 
   const WrongWord = () => {
     axios({
-      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
+      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
@@ -244,7 +244,14 @@ const Quiz: React.FC<QuizProps> = ({
           {quizData.afterSentence}
         </Typography>
       </Box>
-      <h2>{translation()}</h2>
+      <h2 style={{
+        fontFamily:
+          language === "CN"
+            ? "JingNanMaiYuanTi"
+            : language === "VI"
+              ? "UVNHaiBaTrung"
+              : "MaplestoryOTFLight",
+      }}>{translation()}</h2>
       <ul>
         {options.map((option) => (
           <Button
@@ -275,14 +282,22 @@ const Quiz: React.FC<QuizProps> = ({
           height: "70px",
           borderRadius: "10px",
           fontSize: "20px",
-          fontFamily: "CookieRun-Regular",
+          fontFamily:
+            language === "CN"
+              ? "JingNanMaiYuanTi"
+              : language === "VI"
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
           cursor: "pointer",
           backgroundColor: "#FFD93D",
-          color:"black",
+          color: "black",
         }}
       >
-        정답 확인
-      </Button>
+        {language === "CN"
+          ? "检查答案"
+          : language === "VI"
+            ? "Kiểm tra câu trả lời"
+            : "정답 확인"}      </Button>
     </div>
   );
 };
