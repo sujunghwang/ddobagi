@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -9,6 +9,19 @@ import styles from "./Explore.module.scss";
 function Explore() {
   const location = useLocation();
   const pathname = location.pathname;
+  const [isScrolling, setIsScrolling] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleScroll = (e: WheelEvent) => {
+      setIsScrolling(e.deltaY < 0);
+    };
+
+    window.addEventListener('wheel', handleScroll);
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+    };
+  }, []);
+
   return (
     <div>
       <Container maxWidth="xl">
@@ -60,10 +73,24 @@ function Explore() {
               <use xlinkHref="#gentle-wave" x="48" y="7" fill="#92B4EC" />
             </g>
           </svg>
-          <img src={"/img/fish.png"} className={styles.fish} alt="fish" />
-          <img src={"/img/fish.png"} className={styles.fish2} alt="fish" />
+          <img src={"/img/seaweed.png"} className={styles.seaweed} alt="seaweed" />
+          <img src={"/img/seagull.png"} className={styles.seagull} alt="seagull" />
+          <img src={"/img/ship.png"} className={styles.ship} alt="ship" />
+          <img src={"/img/cloud.png"} className={styles.cloud} alt="cloud" />
         </div>
       )}
+      {pathname !== "/" &&
+        <img className={`${styles.GotoTop} ${isScrolling ? styles.appear : styles.hidden}`}
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            });
+          }}
+          alt="fishing"
+          src={"/img/fishing-tool.png"} />
+      }
     </div>
   );
 }

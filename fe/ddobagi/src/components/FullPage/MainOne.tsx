@@ -50,11 +50,13 @@ export default function MainOne() {
     </svg>
       <div className={styles.AnimeBack}>
       </div>
+      <img src={"./img/whale.png"} alt="whale" className={styles.whale} />
       <div className={styles.StartLogo}>또바기</div>
       <img src={"./img/ship.png"} alt="ship" className={styles.ship} />
       <img src={"./img/fishes.png"} alt="fish" className={styles.fish} />
       <img src={"./img/seaweed.png"} alt="seaweed" className={styles.seaweed} />
       <img src={"./img/submarine.png"} alt="submarine" className={styles.submarine} />
+      <img src={"./img/reef.png"} alt="reef" className={styles.reef} />
       <div className={styles.BlueBottom}></div>
       <div
         style={{
