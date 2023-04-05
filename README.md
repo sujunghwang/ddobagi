@@ -221,7 +221,7 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 
 ## 🛢︎ ERD
 
-![ERD](/ERD.png)
+![ERD](/uploads/2acb043fa8f113f034884679c374b505/특화erd.png)
 
 ## 📜 API 설계서
 
