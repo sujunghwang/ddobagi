@@ -116,8 +116,8 @@
 | 8080 | 개발서버 SpringBoot Docker Container |
 | 8081 | 운영서버 React, NginX Docker Container |
 | 8082 | 운영서버 SpringBoot Docker Container |
-| 8090 | Jenkins |
-| 3306 | MySQL |
+| 8090 | Jenkins Docker Container |
+| 3306 | MySQL Docker Container |
 
 
 
