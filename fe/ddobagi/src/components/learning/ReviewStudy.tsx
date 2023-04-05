@@ -114,7 +114,7 @@ function ReviewStudy() {
 
   // useEffect(() => {
   //   const fetchData = async () => {
-  //     const response = await axios.get(`http://j8a608.p.ssafy.io:8080/api/learnings/${situationId}`);
+  //     const response = await axios.get(`https://j8a608.p.ssafy.io/api/learnings/${situationId}`);
   //     setQuizIdData(response.data);
   //   };
   //   fetchData();
@@ -125,7 +125,7 @@ function ReviewStudy() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${reviewNum[quizIndex]}/`
+        `https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${reviewNum[quizIndex]}/`
       );
       setQuizData(response.data);
       setVideoUrl(response.data.videoUrl.split(".be/")[1]);
