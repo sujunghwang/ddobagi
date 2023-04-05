@@ -1,4 +1,4 @@
-# 🎞또바기
+# ✏️또바기
 
 
 
@@ -50,7 +50,7 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 
 ## 서비스 아키텍처
 
-![아키텍처](./assets/아키텍처.png)
+![아키텍처](/uploads/6bd0dae94d1dbe3378329466a8f65bad/시스템구성도.png)
 
 
 
@@ -208,6 +208,33 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 - 다문화 가족에게 필요한 소식을 제공합니다.
 
 ![다문화소식.gif](./assets/다문화소식.gif)
+
+
+
+## 🎨 화면 설계서
+
+<a href="https://www.figma.com/file/BA3a3yKtxlXB9lLzRZOsI6/%EB%AA%A9%EC%97%85-%EB%B0%8F-%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84?node-id=2%3A3&t=pXWA3Yq5bmyOA1cF-1">
+    <img src="/uploads/2392f7286140c6ce5b961ea7d51b39e1/image.png" title="화면설계서로 이동"/>
+</a>
+<a href="https://www.figma.com/file/BA3a3yKtxlXB9lLzRZOsI6/%EB%AA%A9%EC%97%85-%EB%B0%8F-%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84?node-id=2%3A3&t=pXWA3Yq5bmyOA1cF-1">
+    <img src="/uploads/eacd8ba2acfa260b25aa301e05583991/image.png" title="화면설계서로 이동"/>
+</a>
+
+## 💭 요구사항 정의서
+
+<a href="https://docs.google.com/spreadsheets/d/1j6hN3UW_iQyiBY1wCHxmRhKxvF29wjGXiwaEdRoH36E/edit#gid=1981292293">
+    <img src="/uploads/2caa6f575c290e45ec0616b475102686/요구사항_명세서.gif" title="요구사항 정의서로 이동"/>
+</a>
+
+## 🛢︎ ERD
+
+![ERD](/ERD.png)
+
+## 📜 API 설계서
+
+<a href="https://www.notion.so/984bc8788e794a3d96ca646551d56e2c?v=aea718149b354480b686056fa755340c&pvs=4">
+    <img src="/uploads/0831ad34585fa089ac45271f6daaa959/image.png" title="API 설계서로 이동"/>
+</a>
 
 
 
