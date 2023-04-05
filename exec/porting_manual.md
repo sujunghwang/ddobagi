@@ -4,60 +4,61 @@
 
 ## 개발 환경
 
-![개발 환경](images/DDOBAGI_개발환경.png)
+![개발 환경](images/DDOBAGI_개발환경.png){: width="100" height="100"}
 
+<img src="/images/DDOBAGI_개발환경.png" width="800">
 
 
 
 
 ## Contents
 
-[1. CI/CD 설계](#1.-CI/CD-설계)
+[1. CI/CD 설계](#1.-ci/cd-설계)
 
 - [개발서버와 운영서버](#개발서버와-운영서버)
 
 
-- [CI/CD 구조도](#CI/CD-구조도)
+- [CI/CD 구조도](#ci/cd-구조도)
 
 
 - [포트 목록](#포트-목록)
 
 
-[2. EC2 환경설정](#2.-EC2-환경설정)
+[2. EC2 환경설정](#2.-ec2-환경설정)
 
- - [Docker 설치](#Docker-설치)
+ - [Docker 설치](#docker-설치)
 
- - [MySQL 설치 및 설정](#MySQL-설치-및-설정)
+ - [MySQL 설치 및 설정](#mysql-설치-및-설정)
 
- - [Docker Network, Volume](#Docker-Network,-Volume)
+ - [Docker Network, Volume](#docker-network,-volume)
 
- - [MySQL Docker Container](#MySQL-Docker-Container)
+ - [MySQL Docker Container](#mysql-docker-container)
 
- - [Jenkins Container](#Jenkins-Container)
-   - [Jenkins Container 실행 및 기본설정](#Jenkins-Container-실행-및-기본설정)
-   - [Docker in Docker: 젠킨스 컨테이너 안에 도커 설치](#Docker-in-Docker:-젠킨스-컨테이너-안에-도커-설치)
+ - [Jenkins Container](#jenkins-container)
+   - [Jenkins Container 실행 및 기본설정](#jenkins-container-실행-및-기본설정)
+   - [Docker in Docker: 젠킨스 컨테이너 안에 도커 설치](#docker-in-docker-/-젠킨스-컨테이너-안에-도커-설치)
 
 
-[3. Jenkins GitLab 연동](#3.-Jenkins-GitLab-연동)
+[3. Jenkins GitLab 연동](#3.-jenkins-gitLab-연동)
 
-   - [3-1. Jenkins Item](#3-1.-Jenkins-Item)
+   - [3-1. Jenkins Item](#3-1.-jenkins-item)
 
-   - [3-2. Gitlab Webhooks 등록](#3-2.-Gitlab-Webhooks-등록)
+   - [3-2. Gitlab Webhooks 등록](#3-2.-gitLab-webhooks-등록)
 
-   - [3-3. Webhook Test](#3-3.-Webhook-Test)
+   - [3-3. Webhook Test](#3-3.-webhook-test)
 
 [4. 개발 서버](#4.-개발-서버)
 
-   - [React Frontend 빌드 및 배포: 개발 서버](#React-Frontend-빌드-및-배포:-개발-서버)
-   - [SpringBoot Backend 빌드 및 배포: 개발 서버](#SpringBoot-Backend-빌드-및-배포:-개발-서버)
+   - [React Frontend 빌드 및 배포: 개발 서버](#개발-서버-react-frontend-빌드-및-배포)
+   - [SpringBoot Backend 빌드 및 배포: 개발 서버](#개발-서버-springBoot-backend-빌드-및-배포)
 
 [5. 운영 서버](#5.-운영-서버)
 
-   - [React Frontend 빌드 및 배포: 운영 서버](#React-Frontend-빌드-및-배포:-운영-서버)
-   - [SpringBoot Backend 빌드 및 배포: 운영 서버](#SpringBoot-Backend-빌드-및-배포:-운영-서버)
-   - [NginX, certbot 설치 및 SSL 설정](#NginX,-certbot-설치-및-SSL-설정)
+   - [React Frontend 빌드 및 배포: 운영 서버](#운영-서버-react-frontend-빌드-및-배포)
+   - [SpringBoot Backend 빌드 및 배포: 운영 서버](#운영-서버-springBoot-backend-빌드-및-배포)
+   - [NginX, certbot 설치 및 SSL 설정](#nginx,-certbot-설치-및-ssl-설정)
 
-[6. 참고: Docker 명령어](#6.-참고:-Docker-명령어)
+[참고: Docker 명령어](#docker-명령어)
 
    
 
@@ -334,7 +335,7 @@ test 후 build 확인
 
 ---
 
-#### React Frontend 빌드 및 배포: 개발 서버
+#### 개발 서버 React Frontend 빌드 및 배포
 
 Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습니다.
 
@@ -418,7 +419,7 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
 
   
 
-#### SpringBoot Backend 빌드 및 배포: 개발 서버
+#### 개발 서버 SpringBoot Backend 빌드 및 배포
 
 Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습니다.
 
@@ -551,7 +552,7 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
 
 ---
 
-- #### React Frontend 빌드 및 배포 (운영 서버)
+#### 운영 서버 React Frontend 빌드 및 배포
 
   운영 서버에서는 프론트 프로젝트를 Nginx 까지 dockerizing하고 host NGINX에서 port forwading 하는 방식으로 배포합니다.
   
@@ -639,7 +640,7 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
   
     
   
-  #### SpringBoot Backend 빌드 및 배포: 운영 서버
+  #### 운영 서버 SpringBoot Backend 빌드 및 배포
   
   Dockerfile_prod, shell script(build_prod.sh)는 gitlab repository에 포함되어 있습니다.
   
@@ -882,7 +883,7 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
 
   
 
-## 6. (참고) Docker 명령어
+## Docker 명령어
 
 ---
 
