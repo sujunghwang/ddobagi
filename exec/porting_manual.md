@@ -43,23 +43,23 @@
    - [Docker in Docker: 젠킨스 컨테이너 안에 도커 설치](#docker-in-docker-젠킨스-컨테이너-안에-도커-설치)
 
 
-[3. Jenkins GitLab 연동](#3-jenkins-gitLab-연동)
+[3. Jenkins GitLab 연동](#3-jenkins-gitlab-연동)
 
-   - [3-1. Jenkins Item](#31-jenkins-item)
+   - [3-1. Jenkins Item](#3-1-jenkins-item)
 
-   - [3-2. Gitlab Webhooks 등록](#32-gitLab-webhooks-등록)
+   - [3-2. Gitlab Webhooks 등록](#3-2-gitlab-webhooks-등록)
 
-   - [3-3. Webhook Test](#33-webhook-test)
+   - [3-3. Webhook Test](#3-3-webhook-test)
 
 [4. 개발 서버](#4-개발-서버)
 
    - [React Frontend 빌드 및 배포: 개발 서버](#개발-서버-react-frontend-빌드-및-배포)
-   - [SpringBoot Backend 빌드 및 배포: 개발 서버](#개발-서버-springBoot-backend-빌드-및-배포)
+   - [SpringBoot Backend 빌드 및 배포: 개발 서버](#개발-서버-springboot-backend-빌드-및-배포)
 
 [5. 운영 서버](#5-운영-서버)
 
    - [React Frontend 빌드 및 배포: 운영 서버](#운영-서버-react-frontend-빌드-및-배포)
-   - [SpringBoot Backend 빌드 및 배포: 운영 서버](#운영-서버-springBoot-backend-빌드-및-배포)
+   - [SpringBoot Backend 빌드 및 배포: 운영 서버](#운영-서버-springboot-backend-빌드-및-배포)
    - [NginX, certbot 설치 및 SSL 설정](#nginx-certbot-설치-및-ssl-설정)
 
 [참고: Docker 명령어](#docker-명령어)
@@ -263,7 +263,7 @@
 <br/>  
 
 
-## 3. Jenkins - GitLab
+## 3. Jenkins - GitLab 연동
 
 ---
 
@@ -965,5 +965,9 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
 
 `docker logs {{container-id}}` : 컨테이너 로그 확인
 
+
+<br/>  
+
+<br/>  
 
 
