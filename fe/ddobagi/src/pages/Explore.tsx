@@ -31,12 +31,8 @@ function Explore() {
           pathname !== "/CategoryList" &&
           pathname !== "/CultureList" && <Outlet />}
       </Container>
-      {(pathname === "/" ||
-        pathname === "/CategoryList" ||
-        pathname === "/CultureList") && <Outlet />}
-      {pathname !== "/" && <Footer />}
       {pathname !== "/" && (
-        <div>
+        <div style={{ position: "fixed" }}>
           <svg
             className={styles.waves}
             xmlns="http://www.w3.org/2000/svg"
@@ -77,8 +73,13 @@ function Explore() {
           <img src={"/img/seagull.png"} className={styles.seagull} alt="seagull" />
           <img src={"/img/ship.png"} className={styles.ship} alt="ship" />
           <img src={"/img/cloud.png"} className={styles.cloud} alt="cloud" />
+          <img src={"/img/sun.png"} className={styles.sun} alt="sun" />
         </div>
       )}
+      {(pathname === "/" ||
+        pathname === "/CategoryList" ||
+        pathname === "/CultureList") && <Outlet />}
+      {pathname !== "/" && <Footer />}
       {pathname !== "/" &&
         <img className={`${styles.GotoTop} ${isScrolling ? styles.appear : styles.hidden}`}
           onClick={() => {
