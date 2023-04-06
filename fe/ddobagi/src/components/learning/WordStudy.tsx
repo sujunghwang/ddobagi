@@ -14,7 +14,6 @@ import { useState, useEffect } from "react";
 import CorrectAnimation from "../animations/Correct";
 import WrongAnimation from "../animations/Wrong";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
-import TwoWheelerIcon from "@mui/icons-material/TwoWheeler";
 import { styled } from "@mui/material/styles";
 import LinearProgress, {
   linearProgressClasses,
@@ -73,11 +72,11 @@ function WordStudy() {
     (state: RootState) => state.inputUserInfo.payload.id
   );
 
-  console.log(categoryName);
-  console.log(situationTitle);
-  console.log(color);
-  console.log(situationId);
-  console.log(userId);
+  // console.log(categoryName);
+  // console.log(situationTitle);
+  // console.log(color);
+  // console.log(situationId);
+  // console.log(userId);
 
   const [quizIdData, setQuizIdData] = useState<number[]>([]);
   const [quizData, setQuizData] = useState<QuizData>();
@@ -109,8 +108,8 @@ function WordStudy() {
   const [isWrong, setIsWrong] = useState(false);
   const [isFinish, setIsFinish] = useState(false);
   //
-  console.log(isCorrect);
-  console.log(isWrong);
+  // console.log(isCorrect);
+  // console.log(isWrong);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -177,15 +176,6 @@ function WordStudy() {
         <div style={{ display: "none" }}>
           <YouTube videoId={videoUrl} onReady={onPlayerReady} />
         </div>
-        {/* <div
-          style={{
-            width: "fit-content",
-            marginLeft: `${Percentage}%`,
-            transform: "translate(-50%,0)",
-          }}
-        >
-          <TwoWheelerIcon color="success" fontSize="large" />
-        </div> */}
         <BorderLinearProgress
           variant="determinate"
           value={Percentage}
@@ -228,17 +218,6 @@ function WordStudy() {
             marginTop: "35px",
           }}
         >
-          {/* <div className={styles.scores}> */}
-          {/* <div // 원래 점수바 위치
-            style={{
-              display: "flex",
-              float: "right",
-              paddingBottom: "20px",
-              fontSize: "22px",
-            }}
-          >
-            {quizIndex + 1} / {quizIdData.length}
-          </div> */}
           <div
             style={{
               marginTop: "60px",
@@ -337,7 +316,12 @@ function WordStudy() {
                 fontFamily: "CookieRun-Regular",
               }}
             >
-              정답입니다!
+              {language === "CN"
+              ? "回答正确！"
+              : language === "VI"
+              ? "Chính xác!"
+              : "정답입니다!"}
+              {/* 정답입니다! */}
             </Typography>
             <Box sx={{ height: "20px" }} />
             <Button
@@ -361,7 +345,12 @@ function WordStudy() {
               }}
               onClick={handleClose}
             >
-              확인
+              {language === "CN"
+              ? "确认"
+              : language === "VI"
+              ? "sự xác nhận"
+              : "확인"}
+              {/* 확인 */}
             </Button>
           </div>
         </div>
@@ -398,7 +387,12 @@ function WordStudy() {
                 fontFamily: "CookieRun-Regular",
               }}
             >
-              오답입니다!
+              {language === "CN"
+              ? "答错了！"
+              : language === "VI"
+              ? "Đáp án sai rồi!"
+              : "오답입니다!"}
+              {/* 오답입니다! */}
             </Typography>
             <Box sx={{ height: "20px" }} />
             <Button
@@ -422,7 +416,12 @@ function WordStudy() {
               }}
               onClick={handleClose}
             >
-              확인
+              {language === "CN"
+              ? "确认"
+              : language === "VI"
+              ? "sự xác nhận"
+              : "확인"}
+              {/* 확인 */}
             </Button>
           </div>
         </div>
@@ -459,7 +458,12 @@ function WordStudy() {
                 fontFamily: "CookieRun-Regular",
               }}
             >
-              모든 문제를 풀었어요!
+              {language === "CN"
+              ? "所有的题都答完了！"
+              : language === "VI"
+              ? "Tôi đã giải được tất cả các vấn đề."
+              : "모든 문제를 풀었어요!"}
+              {/* 모든 문제를 풀었어요! */}
             </Typography>
             <Box sx={{ height: "20px" }} />
             <Button
@@ -483,7 +487,12 @@ function WordStudy() {
               }}
               onClick={getOut}
             >
-              확인
+              {language === "CN"
+              ? "确认"
+              : language === "VI"
+              ? "sự xác nhận"
+              : "확인"}
+              {/* 확인 */}
             </Button>
           </div>
         </div>

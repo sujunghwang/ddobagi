@@ -192,7 +192,7 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 - '다문화'가 제목이나 내용에 포함된 뉴스를 볼 수 있습니다.
 - 클릭 시 해당 뉴스 페이지로 이동됩니다.
 
-![다문화뉴스.gif](./assets/다문화뉴스.gif)
+![다문화뉴스.gif](/uploads/5717d3cdcaca8c1cc02fd8d0fc5e1719/news.gif)
 
 
 

@@ -71,8 +71,8 @@
 
 [6. 외부 서비스](#6-외부-서비스)
 
-   - [S3 설정](#S3-설정)
-   - [AWS S3 Bucket 설정](#AWS-S3-Bucket-설정)
+   - [S3 설정](#s3-설정)
+   - [AWS S3 Bucket 설정](#aws-s3-bucket-설정)
 
 [참고: Docker 명령어](#docker-명령어)
 
@@ -969,55 +969,55 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
 #### AWS S3 Bucket 설정
 1. 버킷 정책
 
-   ```json
-   {
-       "Version": "2012-10-17",
-       "Statement": [
-           {
-               "Sid": "PublicReadGetObject",
-               "Effect": "Allow",
-               "Principal": "*",
-               "Action": "s3:GetObject",
-               "Resource": "arn:aws:s3:::s3ffmpegtest/*"
-           }
-       ]
-   }
-   ```
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "PublicReadGetObject",
+          "Effect": "Allow",
+          "Principal": "*",
+          "Action": "s3:GetObject",
+          "Resource": "arn:aws:s3:::ddobagi/*"
+        }
+      ]
+    }
+    ```
 
 2. ACL
 
-   - 버킷 소유자
-     - 객체 : 나열, 쓰기, 읽기
-     - 버킷 ACL : 읽기, 쓰기
-   - 버킷 소유자
-     - 객체 : 읽기
-     - 버킷 ACL : 읽기
+    - 버킷 소유자
+      - 객체 : 나열, 쓰기, 읽기
+      - 버킷 ACL : 읽기, 쓰기
+    - 버킷 소유자
+      - 객체 : 읽기
+      - 버킷 ACL : 읽기
 
 3. CORS
 
-   ```json
-   [
-       {
-           "AllowedHeaders": [
-               "*"
-           ],
-           "AllowedMethods": [
-               "HEAD",
-               "GET",
-               "PUT",
-               "POST",
-               "DELETE"
-           ],
-           "AllowedOrigins": [
-               "*"
-           ],
-           "ExposeHeaders": [
-               "ETag",
-               "x-amz-meta-custom-header"
-           ]
-       }
-   ]
-   ```
+    ```json
+    [
+      {
+        "AllowedHeaders": [
+          "*"
+        ],
+        "AllowedMethods": [
+          "HEAD",
+          "GET",
+          "PUT",
+          "POST",
+          "DELETE"
+        ],
+        "AllowedOrigins": [
+          "*"
+        ],
+        "ExposeHeaders": [
+          "ETag",
+          "x-amz-meta-custom-header"
+        ]
+      }
+    ]
+    ```
   
 <br/>  
 

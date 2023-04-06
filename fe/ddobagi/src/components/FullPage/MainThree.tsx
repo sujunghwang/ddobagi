@@ -1,9 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/joy";
-import image31 from "../../assets/랜딩31.png";
-import image32 from "../../assets/랜딩32.png";
-import image33 from "../../assets/랜딩33.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
 import Landing31Animation from "../animations/Landing31";
@@ -111,13 +108,6 @@ export default function MainThree() {
                 justifyContent: "space-between",
               }}
             >
-              {/* <img
-                src={image31}
-                alt="landing1"
-                width="240px"
-                height="160px"
-                style={{ marginTop: "5rem" }}
-              /> */}
               <Landing31Animation />
               <Typography
                 sx={{
@@ -172,7 +162,6 @@ export default function MainThree() {
                 justifyContent: "space-between",
               }}
             >
-              {/* <img src={image32} alt="landing2" width="240px" height="250px" /> */}
               <Landing32Animation />
               <Typography
                 sx={{
@@ -226,13 +215,6 @@ export default function MainThree() {
                 justifyContent: "space-between",
               }}
             >
-              {/* <img
-                src={image33}
-                alt="landing3"
-                width="210px"
-                height="210px"
-                style={{ marginTop: "3rem" }}
-              /> */}
               <Landing33Animation />
               <Typography
                 sx={{
