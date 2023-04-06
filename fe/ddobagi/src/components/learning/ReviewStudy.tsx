@@ -22,6 +22,7 @@ import { styled } from "@mui/material/styles";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
+import NodataAnimation from "../animations/Nodata";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 20,
@@ -132,8 +133,51 @@ function ReviewStudy() {
     // onNextQuiz();
   };
 
+  // if (!quizData) {
+  //   return <div>Loading...</div>;
+  // }
   if (!quizData) {
-    return <div>Loading...</div>;
+    return <div>
+      <Box sx={{
+        height:"250px"
+      }} />
+      <Box
+        sx={{
+          position: "fixed",
+            top: "25%",
+            left: "33%",
+            width: "33%",
+            height: "50%",
+            backgroundColor: "white",
+            borderRadius: "20px",
+            border: "2px solid green",
+        }}
+      >
+        <Box
+          sx={{
+            display:"flex",
+            justifyContent:"center",
+          }}
+        >
+          <NodataAnimation />
+        </Box>
+        <Typography
+          sx={{
+            marginBottom:"30px",
+            fontSize: "2.5rem",
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
+          }}
+        >
+          틀린 문제가 없어요!
+        </Typography>
+        <ReviewCloseBtn width="180px" />
+      </Box>
+    </div>;
   }
 
   const Percentage = ((quizIndex + 1) / reviewNum.length) * 100;
@@ -145,7 +189,6 @@ function ReviewStudy() {
           className={styles.Pin}
           style={{
             marginLeft: `${Percentage}%`,
-            transition: "margin .5s ease-in"
           }}
         >
           <img src={"/img/running.gif"} alt="run" style={{ width: "50px" }} />
