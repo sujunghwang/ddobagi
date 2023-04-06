@@ -114,7 +114,7 @@ function WordStudy() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `https://j8a608.p.ssafy.io/api/learnings/${situationId}`
+        `http://j8a608.p.ssafy.io:8080/api/learnings/${situationId}`
       );
       setQuizIdData(response.data);
     };
@@ -124,7 +124,7 @@ function WordStudy() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizIdData[quizIndex]}/`
+        `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${quizIdData[quizIndex]}/`
       );
       setQuizData(response.data);
       setVideoUrl(response.data.videoUrl.split(".be/")[1]);

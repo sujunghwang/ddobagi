@@ -33,7 +33,7 @@ function CenterMap() {
 
     // 시도 조회 => 처음에 불러와서 저장소에 저장해야함
     axios
-      .get("https://j8a608.p.ssafy.io/api/centers/sido")
+      .get("http://j8a608.p.ssafy.io:8080/api/centers/sido")
       .then((response) => {
         const sidos = response.data;
         setSidos(sidos);
@@ -47,7 +47,7 @@ function CenterMap() {
       // 구군 목록 가져오기
       axios
         .get(
-          `https://j8a608.p.ssafy.io/api/centers/gugun?sido=${selectSido}`
+          `http://j8a608.p.ssafy.io:8080/api/centers/gugun?sido=${selectSido}`
         )
         .then((response) => {
           const guguns = response.data;
@@ -62,7 +62,7 @@ function CenterMap() {
     // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열
     axios
       .get(
-        `https://j8a608.p.ssafy.io/api/centers?sido=${selectSido}&gugun=${selectGugun}`
+        `http://j8a608.p.ssafy.io:8080/api/centers?sido=${selectSido}&gugun=${selectGugun}`
       )
       .then((response) => {
         const data = response.data;
@@ -80,7 +80,8 @@ function CenterMap() {
           });
 
           var imageSrc = `/img/marker2.png`, // 마커이미지의 주소입니다
-            imageSize = new kakao.maps.Size(28, 34), // 마커이미지의 크기입니다
+            // imageSize = new kakao.maps.Size(28, 34), // 마커이미지의 크기입니다
+            imageSize = new kakao.maps.Size(22, 34), // 마커이미지의 크기입니다
             imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
           // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
@@ -111,7 +112,8 @@ function CenterMap() {
               ),
             });
             var imageSrc = `/img/marker.png`, // 마커이미지의 주소입니다
-              imageSize = new kakao.maps.Size(60, 64); // 마커이미지의 크기입니다
+              // imageSize = new kakao.maps.Size(60, 64); // 마커이미지의 크기입니다
+              imageSize = new kakao.maps.Size(55, 68); // 마커이미지의 크기입니다
 
             // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);

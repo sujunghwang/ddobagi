@@ -102,7 +102,7 @@ function ConversationStudy() {
     const fetchScript = async () => {
       try {
         const response = await axios.get<Script[]>(
-          `https://j8a608.p.ssafy.io/api/conversations/${situationId}/${userId}/script`
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}/${userId}/script`
         );
         const newScripts = [];
         const recordArray = []
@@ -158,7 +158,7 @@ function ConversationStudy() {
     const fetchVideoInfo = async () => {
       try {
         const response = await axios.get<MapType>(
-          `https://j8a608.p.ssafy.io/api/conversations/${situationId}`
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}`
         );
         setVideoInfo(response.data);
       } catch (error) {

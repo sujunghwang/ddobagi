@@ -17,6 +17,8 @@ import MapAnimation from "../components/animations/Map";
 import NewsAnimation from "../components/animations/News";
 import SupportAnimation from "../components/animations/Support";
 import GroupedColumnCharts from "../components/Charts/GroupChart";
+import NodataAnimation from "../components/animations/Nodata";
+import ColorBtn from "../components/ColorBtn";
 
 interface Props {
   chartdata: {
@@ -54,6 +56,9 @@ function ParentPage1() {
     navigate("/parentpage/support");
   };
   // 탭 선택 함수 끝
+  const navigateToStudy = () => {
+    navigate("/categorylist");
+  };
 
   // 임시 차트 데이터
   // const chartdata = ChartData;
@@ -65,7 +70,7 @@ function ParentPage1() {
     const fetchData = async () => {
       try {
         const result = await axios.get(
-          `https://j8a608.p.ssafy.io/api/users/${userId}/parents/statistics`
+          `http://j8a608.p.ssafy.io:8080/api/users/${userId}/parents/statistics`
         );
         setChartData(result.data);
       } catch (error) {
@@ -75,12 +80,68 @@ function ParentPage1() {
     fetchData();
   }, [userId]);
 
+  // if (!chartData) {
+  //   return <div></div>;
+  // }
   if (!chartData) {
-    return <div></div>;
+    return <div>
+<Box sx={{
+        height:"150px",
+      }} />
+      <Box
+        sx={{
+            width: "500px",
+            height: "500px",
+            marginLeft:"33%",
+            marginBottom:"100px",
+            backgroundColor: "white",
+            borderRadius: "20px",
+            border: "2px solid #FFCFD8",
+        }}
+      >
+        <Box
+          sx={{
+            display:"flex",
+            justifyContent:"center",
+          }}
+        >
+          <NodataAnimation />
+        </Box>
+        <Typography
+          sx={{
+            marginBottom:"30px",
+            fontSize: "2.5rem",
+            fontFamily:
+              language === "CN"
+                ? "JingNanMaiYuanTi"
+                : language === "VI"
+                ? "UVNHaiBaTrung"
+                : "MaplestoryOTFLight",
+          }}
+        >
+          차트 데이터가 없어요!
+          <div>
+            문제를 풀면 페이지가 보여요
+          </div>
+        </Typography>
+        <ColorBtn
+                  content={language === "CN" ? "学习" : language === "VI" ? "học tập" : "학습하기"}
+                  color="#FFCFD8"
+                  width="10rem"
+                  onClick={() => {
+                    navigateToStudy();
+                  }}
+                ></ColorBtn>
+      </Box>
+
+    </div>;
   }
 
+  
   const chartdata = chartData.data;
-
+  
+  console.log(userId)
+  console.log(chartdata)
   // console.log(chartdata);
 
   let ColumnChartData, categories, title;

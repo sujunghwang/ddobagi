@@ -61,7 +61,7 @@ function ParentPage4() {
       try {
         // const response = await axios.get("/data/mockData.json");
         const response = await axios.get(
-          "https://j8a608.p.ssafy.io/api/parents/information"
+          "http://j8a608.p.ssafy.io:8080/api/parents/information"
         );
         // setData(response.data.data.news);
         setData(response.data);
