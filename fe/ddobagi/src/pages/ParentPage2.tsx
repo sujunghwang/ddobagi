@@ -10,19 +10,12 @@ import ParentHeader from "../assets/ParentHeader.png";
 import "../components/ParentPage/ParentPage2.css";
 import SidoSelect from "../components/ParentPage/SelectBox/sidoSelect";
 import SigoonSelect from "../components/ParentPage/SelectBox/sigoonSelect";
-// import CenterFields from '../components/ParentPage/SelectBox/CenterField';
-// import styles2 from "../components/ParentPage/SelectBox/BoxStyle.module.scss";
-// import studyBtn from '../components/ParentPage/studyBtn';
 import SearchBtn from "../components/ParentPage/SelectBox/SearchBtn";
 import CenterMap from "../components/Map/CenterMap";
 import ChartAnimation from "../components/animations/ParentChart";
 import MapAnimation from "../components/animations/Map";
 import NewsAnimation from "../components/animations/News";
 import SupportAnimation from "../components/animations/Support";
-
-// interface StudyButtonProps {
-//   studyBtn: string;
-// }
 
 function ParentPage2() {
   //언어 변수
@@ -56,7 +49,7 @@ function ParentPage2() {
                 ? "JingNanMaiYuanTi"
                 : language === "VI"
                 ? "UVNHaiBaTrung"
-                : "MaplestoryOTFLight",
+                : "MaplestoryOTFBold",
           }}
         >
           {language === "CN"
@@ -332,12 +325,6 @@ function ParentPage2() {
               </Typography>
               <CenterMap />
             </Box>
-            {/* <Button
-              onClick={() => {
-                navigateToParent4();
-              }}>
-              여기요 맵으로 이동 뾰로롱
-            </Button> */}
           </div>
         </Box>
       </Box>

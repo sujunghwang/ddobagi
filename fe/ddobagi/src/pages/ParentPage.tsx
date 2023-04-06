@@ -81,16 +81,7 @@ function ParentPage1() {
 
   const chartdata = chartData.data;
 
-  console.log(chartdata);
-
-  // const ColumnChartData = [
-  //   { name: "해당 사용자", data: [chartdata.userPronounceScoreAvg, chartdata.userAllProgressAvg] },
-  //   { name: "전체 사용자", data: [chartdata.otherPronounceScoreProgress, chartdata.otherAllProgressAvg] },
-  // ]
-
-  // const categories = ["발음 평균 점수", "전체 진행도"];
-
-  // const title = "유저 비교 통계";
+  // console.log(chartdata);
 
   let ColumnChartData, categories, title;
 
@@ -157,7 +148,7 @@ function ParentPage1() {
                 ? "JingNanMaiYuanTi"
                 : language === "VI"
                 ? "UVNHaiBaTrung"
-                : "MaplestoryOTFLight",
+                : "MaplestoryOTFBold",
           }}
         >
           {language === "CN"
@@ -546,11 +537,6 @@ function ParentPage1() {
                 : "(한국 정착년도 기준)"}
             </Typography>
             <Box sx={{ height: "60px" }} />
-            {/* <ColumnChartWithGroupLabel
-              data={ColumnChartData}
-              categories={categories}
-              title={title}
-            /> */}
             <GroupedColumnCharts chartdata={chartdata} language={language} />
           </Box>
         </Box>
