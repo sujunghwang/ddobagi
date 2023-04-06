@@ -21,10 +21,6 @@ import BackBtn from "./BackButton";
 import styles from "./Culture.module.scss";
 
 // 문화 상세 사진
-// import dokdo from "../../assets/dokdopeng.jpg"
-// import game from "../../assets/game.jpg"
-// import kb from "../../assets/kyungbok.jpg"
-// import netflix from "../../assets/netflix.jpg"
 import ddobak from "../../assets/말남아.png";
 
 interface Culture {
@@ -80,33 +76,20 @@ function CultureBox({
     (state: RootState) => state.inputUserInfo.payload.id
   );
 
-  // let idnumbers : Array<[number, string, any ]>;
-
-  // idnumbers = [[1, '독도', dokdo], [2, '놀이문화', game], [3, '경복궁', kb], [4, '한국의 넷플릭스', netflix]]
-
   const getYouTubeThumbnailUrl = (youtubeUrl: string) => {
     const videoId = youtubeUrl.split("v=")[1];
     return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   };
 
-  // const NowCategory = categoryProp
-  // console.log(NowCategory)
   const { id } = useParams();
 
   // @ts-ignore
   const [CategoryNumber, cultureNumber] = id.split("_");
 
-  console.log(CategoryNumber);
-  console.log(cultureNumber);
-
   const CultureFinish = () => {
     axios({
       url: `https://j8a608.p.ssafy.io/api/cultures/${cultureNumber}/users/${userId}`,
       method: "POST",
-      // withCredentials: true,
-      // data: {
-      //   corrected : false
-      // },
     })
       .then(() => {
         console.log("영상을 다봤어요");
@@ -123,10 +106,6 @@ function CultureBox({
   };
 
   const navigate = useNavigate();
-
-  // const OtherMove = (Number : string) => {
-  //   navigate(`/cultureitem/${CategoryNumber}_${Number}`);
-  // }
 
   // @ts-ignore
   const OtherMove = (MoveNum: number) => {
@@ -182,9 +161,6 @@ function CultureBox({
               overflow: "hidden",
             }}
           >
-            {/* <Box>
-            {videoURL}
-          </Box> */}
             <Box
               sx={{
                 borderRadius: "10px",
@@ -263,7 +239,6 @@ function CultureBox({
             </div>
           </Box>
           <Box>
-            {/* {others} */}
             <Box
               sx={{
                 margin: "10px",
@@ -272,7 +247,6 @@ function CultureBox({
                 alignItems: "end",
               }}
             >
-              {/* {idnumbers.map((one) => ( */}
               {others.map((other) => (
                 <Card
                   className={styles.card}

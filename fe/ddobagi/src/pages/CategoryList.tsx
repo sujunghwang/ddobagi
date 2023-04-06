@@ -100,7 +100,7 @@ function CategoryList() {
                   ? "JingNanMaiYuanTi"
                   : language === "VI"
                   ? "UVNHaiBaTrung"
-                  : "MaplestoryOTFLight",
+                  : "MaplestoryOTFBold",
             }}
           >
             {language === "CN"
