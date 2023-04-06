@@ -363,7 +363,7 @@
 
   - URL : Jenkins 설정 시 확인한 GitLab webhook URL 입력
 
-    `http://j8a608.p.ssafy.io:8090/project/ddobagi` http://i8a810.p.ssafy.io:8888/project/Bundler Develop stage
+    `http://j8a608.p.ssafy.io:8090/project/ddobagi`
 
   - Trigger : 위에서 설정한 Trigger 설정
 
