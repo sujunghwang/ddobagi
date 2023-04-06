@@ -202,7 +202,7 @@
 - docker container로 MySQL 배포
 
   ```bash
-  docker run -dp 3939:3306 --network ddobagi-net --network-alias ddobagi-db  --mount type=volume,src=ddobagi-vol,target=/var/lib/mysql --env MYSQL_ROOT_PASSWORD=Ehqkrl608! --env MYSQL_DATABASE=ddobagi --env MYSQL_USER=devs --env MYSQL_PASSWORD=Ehqkrl608! mysql:latest
+  docker run -dp 3939:3306 --network ddobagi-net --network-alias ddobagi-db  --mount type=volume,src=ddobagi-vol,target=/var/lib/mysql --env MYSQL_ROOT_PASSWORD={{루트 비밀번호}} --env MYSQL_DATABASE={{데이터베이스 이름}} --env MYSQL_USER=devs --env MYSQL_PASSWORD={{비밀번호}} mysql:latest
   ```
 
 <br/>  
