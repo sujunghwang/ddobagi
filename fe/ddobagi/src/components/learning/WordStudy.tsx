@@ -169,6 +169,7 @@ function WordStudy() {
           className={styles.Pin}
           style={{
             marginLeft: `${Percentage}%`,
+            transition: "margin .5s ease-in"
           }}
         >
           <img src={"/img/running.gif"} alt="run" style={{ width: "50px" }} />
