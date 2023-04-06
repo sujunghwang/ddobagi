@@ -76,7 +76,7 @@ function CultureDetail() {
     // API 호출
     axios
       .get(
-        `https://j8a608.p.ssafy.io/api/cultures/${userId}?common=${NewCategoryName}`
+        `http://j8a608.p.ssafy.io:8080/api/cultures/${userId}?common=${NewCategoryName}`
       )
       .then((res) => {
         setApiData(res.data);

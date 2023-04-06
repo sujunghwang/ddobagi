@@ -43,22 +43,22 @@ function CategoryList() {
     const fetchLearning = async () => {
       try {
         const response = await axios.get<Videolist>(
-          `https://j8a608.p.ssafy.io/api/learnings/${userId}/HOME`
+          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/HOME`
         );
         setHomeList(response.data);
 
         const response2 = await axios.get<Videolist>(
-          `https://j8a608.p.ssafy.io/api/learnings/${userId}/SCHOOL`
+          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/SCHOOL`
         );
         setSchoolList(response2.data);
 
         const response3 = await axios.get<Videolist>(
-          `https://j8a608.p.ssafy.io/api/learnings/${userId}/PLAYGROUND`
+          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/PLAYGROUND`
         );
         setPlayGroundList(response3.data);
 
         const response4 = await axios.get<Videolist>(
-          `https://j8a608.p.ssafy.io/api/learnings/${userId}/STORE`
+          `http://j8a608.p.ssafy.io:8080/api/learnings/${userId}/STORE`
         );
         setStoreList(response4.data);
       } catch (error) {
