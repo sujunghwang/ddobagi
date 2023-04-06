@@ -71,7 +71,7 @@ function ParentPage3() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://j8a608.p.ssafy.io:8080/api/parents/news"
+          "https://j8a608.p.ssafy.io/api/parents/news"
         );
         // setData(response.data);
         setData(
