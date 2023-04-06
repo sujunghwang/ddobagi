@@ -6,6 +6,7 @@ import talk from "../../assets/4인대화.png";
 import styles from "./Two.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
+import Landing2Animation from "../animations/Landing2";
 
 export default function MainTwo() {
   //언어 변수
@@ -54,7 +55,7 @@ export default function MainTwo() {
             marginBottom: "30px",
           }}
         >
-          <img src={talk} alt="talk4" width="700px" height="350px" />
+          <Landing2Animation />
         </Box>
         <Box
           sx={{

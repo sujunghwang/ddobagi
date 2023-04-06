@@ -14,7 +14,6 @@ import { useState, useEffect } from "react";
 import CorrectAnimation from "../animations/Correct";
 import WrongAnimation from "../animations/Wrong";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
-import TwoWheelerIcon from "@mui/icons-material/TwoWheeler";
 import { styled } from "@mui/material/styles";
 import LinearProgress, {
   linearProgressClasses,
@@ -73,11 +72,11 @@ function WordStudy() {
     (state: RootState) => state.inputUserInfo.payload.id
   );
 
-  console.log(categoryName);
-  console.log(situationTitle);
-  console.log(color);
-  console.log(situationId);
-  console.log(userId);
+  // console.log(categoryName);
+  // console.log(situationTitle);
+  // console.log(color);
+  // console.log(situationId);
+  // console.log(userId);
 
   const [quizIdData, setQuizIdData] = useState<number[]>([]);
   const [quizData, setQuizData] = useState<QuizData>();
@@ -109,8 +108,8 @@ function WordStudy() {
   const [isWrong, setIsWrong] = useState(false);
   const [isFinish, setIsFinish] = useState(false);
   //
-  console.log(isCorrect);
-  console.log(isWrong);
+  // console.log(isCorrect);
+  // console.log(isWrong);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -178,15 +177,6 @@ function WordStudy() {
         <div style={{ display: "none" }}>
           <YouTube videoId={videoUrl} onReady={onPlayerReady} />
         </div>
-        {/* <div
-          style={{
-            width: "fit-content",
-            marginLeft: `${Percentage}%`,
-            transform: "translate(-50%,0)",
-          }}
-        >
-          <TwoWheelerIcon color="success" fontSize="large" />
-        </div> */}
         <BorderLinearProgress
           variant="determinate"
           value={Percentage}
@@ -200,7 +190,9 @@ function WordStudy() {
             fontSize: "1.2rem",
             marginTop: ".5rem",
           }}
-        ></div>
+        >
+          {quizIndex + 1} / {quizIdData.length}
+        </div>
       </div>
       {/* <Box sx={{ marginTop:"30px", position: "absolute", top: 10, left: 0, m: 2 }}>
         <WordCloseBtn width="280px" />
@@ -212,7 +204,11 @@ function WordStudy() {
         <img
           src={"/img/notebook.png"}
           alt="notebook"
-          style={{ width: "1000px", marginTop: "50px", boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.2)", borderRadius: "23px" }}
+          style={{ 
+            width: "1020px", 
+            marginTop: "30px", 
+            // boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.2)", 
+            borderRadius: "23px" }}
         />
         <div
           style={{
@@ -220,20 +216,9 @@ function WordStudy() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            marginTop: "70px",
+            marginTop: "35px",
           }}
         >
-          {/* <div className={styles.scores}> */}
-          <div
-            style={{
-              display: "flex",
-              float: "right",
-              paddingBottom: "20px",
-              fontSize: "22px",
-            }}
-          >
-            {quizIndex + 1} / {quizIdData.length}
-          </div>
           <div
             style={{
               marginTop: "60px",
@@ -254,7 +239,7 @@ function WordStudy() {
           </div>
         </div>
       </div>
-      <Box display="flex" justifyContent="center" mt={5}>
+      <Box display="flex" justifyContent="center" mt={3}>
         <Button
           onClick={handleQuizSubmit}
           variant="contained"
@@ -262,7 +247,7 @@ function WordStudy() {
             width: "180px",
             color: "#ffffff",
             backgroundColor: "#6BCB77",
-
+            marginRight: "30px",
             borderRadius: 50,
             fontFamily:
               language === "CN"
@@ -332,7 +317,12 @@ function WordStudy() {
                 fontFamily: "CookieRun-Regular",
               }}
             >
-              정답입니다!
+              {language === "CN"
+              ? "回答正确！"
+              : language === "VI"
+              ? "Chính xác!"
+              : "정답입니다!"}
+              {/* 정답입니다! */}
             </Typography>
             <Box sx={{ height: "20px" }} />
             <Button
@@ -356,7 +346,12 @@ function WordStudy() {
               }}
               onClick={handleClose}
             >
-              확인
+              {language === "CN"
+              ? "确认"
+              : language === "VI"
+              ? "sự xác nhận"
+              : "확인"}
+              {/* 확인 */}
             </Button>
           </div>
         </div>
@@ -393,7 +388,12 @@ function WordStudy() {
                 fontFamily: "CookieRun-Regular",
               }}
             >
-              오답입니다!
+              {language === "CN"
+              ? "答错了！"
+              : language === "VI"
+              ? "Đáp án sai rồi!"
+              : "오답입니다!"}
+              {/* 오답입니다! */}
             </Typography>
             <Box sx={{ height: "20px" }} />
             <Button
@@ -417,7 +417,12 @@ function WordStudy() {
               }}
               onClick={handleClose}
             >
-              확인
+              {language === "CN"
+              ? "确认"
+              : language === "VI"
+              ? "sự xác nhận"
+              : "확인"}
+              {/* 확인 */}
             </Button>
           </div>
         </div>
@@ -454,7 +459,12 @@ function WordStudy() {
                 fontFamily: "CookieRun-Regular",
               }}
             >
-              모든 문제를 풀었어요!
+              {language === "CN"
+              ? "所有的题都答完了！"
+              : language === "VI"
+              ? "Tôi đã giải được tất cả các vấn đề."
+              : "모든 문제를 풀었어요!"}
+              {/* 모든 문제를 풀었어요! */}
             </Typography>
             <Box sx={{ height: "20px" }} />
             <Button
@@ -478,7 +488,12 @@ function WordStudy() {
               }}
               onClick={getOut}
             >
-              확인
+              {language === "CN"
+              ? "确认"
+              : language === "VI"
+              ? "sự xác nhận"
+              : "확인"}
+              {/* 확인 */}
             </Button>
           </div>
         </div>

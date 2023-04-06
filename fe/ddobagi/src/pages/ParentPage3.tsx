@@ -15,9 +15,7 @@ import {
   Avatar,
   Divider,
 } from "@mui/material";
-import ParentHeader from "../assets/ParentHeader.png";
-// import Background from '../components/ParentPage/Background';
-// import studyBtn from '../components/ParentPage/studyBtn';
+// import ParentHeader from "../assets/ParentHeader.png";
 import "../components/ParentPage/hovertest.scss";
 import axios from "axios";
 import PaginationComponent from "../components/PaginationComponent";
@@ -26,9 +24,6 @@ import MapAnimation from "../components/animations/Map";
 import NewsAnimation from "../components/animations/News";
 import SupportAnimation from "../components/animations/Support";
 
-// interface StudyButtonProps {
-//   studyBtn: string;
-// }
 interface NewsType {
   id: number;
   title: string;
@@ -63,7 +58,10 @@ function ParentPage3() {
     return text
       .replace(/<b>/g, "")
       .replace(/<\/b>/g, "")
-      .replace(/&apos;/g, "");
+      .replace(/&lt;/g, "")
+      .replace(/&gt;/g, "")
+      .replace(/&apos;/g, "")
+      .replace(/&quot;/g, "");
   }
 
   // newsList data axios 통신
@@ -120,7 +118,7 @@ function ParentPage3() {
                 ? "JingNanMaiYuanTi"
                 : language === "VI"
                 ? "UVNHaiBaTrung"
-                : "MaplestoryOTFLight",
+                : "MaplestoryOTFBold",
           }}
         >
           {language === "CN"
@@ -333,11 +331,6 @@ function ParentPage3() {
         <Box
           sx={{
             width: "1200px",
-            // width: {
-            //   xs: '100%', // 모바일 크기에서는 100%의 너비를 가짐
-            //   sm: '50%', // 태블릿 크기에서는 50%의 너비를 가짐
-            //   md: '60%', // 데스크탑 크기에서는 33%의 너비를 가짐
-            // },
             height: "900px",
             backgroundColor: "#6BCB77",
             borderRadius: "20px",
@@ -452,7 +445,6 @@ function ParentPage3() {
                               AvatarColor[item.id % AvatarColor.length],
                           }}
                         >
-                          {/* {item.id} */}
                           {data.length + 1 - item.id}
                         </Avatar>
                       </ListItemAvatar>

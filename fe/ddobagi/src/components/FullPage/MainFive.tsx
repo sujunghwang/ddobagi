@@ -1,12 +1,12 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/joy";
-import image51 from "../../assets/랜딩51.png";
-import image52 from "../../assets/랜딩52.png";
-import image53 from "../../assets/랜딩53.png";
 // import './Main.css';
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
+import Landing51Animation from "../animations/Landing51";
+import Landing52Animation from "../animations/Landing52";
+import Landing53Animation from "../animations/Landing53";
 
 export default function MainFive() {
   //언어 변수
@@ -108,7 +108,7 @@ export default function MainFive() {
                 justifyContent: "space-between",
               }}
             >
-              <img src={image51} alt="landing4" width="300px" height="300px" />
+              <Landing51Animation />
               <Typography
                 sx={{
                   fontSize: "30px",
@@ -151,13 +151,7 @@ export default function MainFive() {
                 justifyContent: "space-between",
               }}
             >
-              <img
-                src={image52}
-                alt="landing5"
-                width="240px"
-                height="160px"
-                style={{ marginTop: "4rem" }}
-              />
+              <Landing52Animation />
               <Typography
                 sx={{
                   fontSize: "30px",
@@ -209,13 +203,7 @@ export default function MainFive() {
                 justifyContent: "space-between",
               }}
             >
-              <img
-                src={image53}
-                alt="landing6"
-                width="210px"
-                height="210px"
-                style={{ marginTop: "3rem" }}
-              />
+              <Landing53Animation />
               <Typography
                 sx={{
                   fontSize: "30px",

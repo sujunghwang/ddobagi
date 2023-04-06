@@ -4,6 +4,7 @@ import { Typography } from "@mui/joy";
 import support from "../../assets/support.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
+import Landing4Animation from "../animations/Landing4";
 
 export default function MainFour() {
   //언어 변수
@@ -59,7 +60,7 @@ export default function MainFour() {
             marginBottom: "30px",
           }}
         >
-          <img src={support} alt="support" width="570px" height="420px" />
+          <Landing4Animation />
         </Box>
         <Box
           sx={{

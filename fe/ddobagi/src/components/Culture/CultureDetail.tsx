@@ -39,11 +39,6 @@ interface Params {
   id: string;
 }
 
-// type DetailProp = {
-//   categoryId : number;
-//   cultureId : number;
-// }
-
 function CultureDetail() {
   //언어 변수
   const language = useSelector(
@@ -58,8 +53,6 @@ function CultureDetail() {
   const { id } = useParams();
   // @ts-ignore
   const [CategoryNumber, cultureNumber] = id.split("_");
-  // console.log(CategoryNumber);
-  // console.log(cultureNumber);
 
   function getCategoryName(categoryNumber: string): string {
     switch (categoryNumber) {
@@ -76,10 +69,8 @@ function CultureDetail() {
     }
   }
 
-  // const [apiData, setApiData] = useState<ApiData | null>(null);
   const [apiData, setApiData] = useState<ApiData>();
   const NewCategoryName = getCategoryName(CategoryNumber);
-  // console.log(NewCategoryName)
 
   useEffect(() => {
     // API 호출
@@ -89,8 +80,8 @@ function CultureDetail() {
       )
       .then((res) => {
         setApiData(res.data);
-        console.log(res.data);
-        console.log(apiData);
+        // console.log(res.data);
+        // console.log(apiData);
       })
       .catch((error) => {
         console.error(error);
@@ -142,7 +133,7 @@ function CultureDetail() {
     // @ts-ignore
     (culture) => culture.cultureId.toString() === cultureNumber
   );
-  console.log(targetCulture);
+  // console.log(targetCulture);
 
   const getTitle = (id: string): string => {
     if (language === "CN") {
@@ -174,16 +165,12 @@ function CultureDetail() {
     // @ts-ignore
     return targetCulture.url;
   };
-  console.log(getURL(cultureNumber));
+  // console.log(getURL(cultureNumber));
 
   // @ts-ignore
   const OtherCulture = DetailInfo.filter((cultureOther) => {
     return cultureOther.cultureId !== parseInt(cultureNumber);
   });
-
-  console.log(cultureNumber);
-  console.log(OtherCulture);
-  console.log(targetCulture);
 
   return (
     <div className={styles.Fcontainer}>

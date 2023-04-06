@@ -1,11 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/joy";
-import image31 from "../../assets/랜딩31.png";
-import image32 from "../../assets/랜딩32.png";
-import image33 from "../../assets/랜딩33.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
+import Landing31Animation from "../animations/Landing31";
+import Landing32Animation from "../animations/Landing32";
+import Landing33Animation from "../animations/Landing33";
 // import './Main.css';
 
 export default function MainThree() {
@@ -108,13 +108,7 @@ export default function MainThree() {
                 justifyContent: "space-between",
               }}
             >
-              <img
-                src={image31}
-                alt="landing1"
-                width="240px"
-                height="160px"
-                style={{ marginTop: "5rem" }}
-              />
+              <Landing31Animation />
               <Typography
                 sx={{
                   fontSize: "30px",
@@ -143,7 +137,6 @@ export default function MainThree() {
                     <div>따라하며 배워요</div>
                   </>
                 )}
-                {/* 상황에 맞는 대사를 <div>따라하며 배워요</div> */}
               </Typography>
             </Box>
           </Box>
@@ -169,7 +162,7 @@ export default function MainThree() {
                 justifyContent: "space-between",
               }}
             >
-              <img src={image32} alt="landing2" width="240px" height="250px" />
+              <Landing32Animation />
               <Typography
                 sx={{
                   fontSize: "30px",
@@ -222,13 +215,7 @@ export default function MainThree() {
                 justifyContent: "space-between",
               }}
             >
-              <img
-                src={image33}
-                alt="landing3"
-                width="210px"
-                height="210px"
-                style={{ marginTop: "3rem" }}
-              />
+              <Landing33Animation />
               <Typography
                 sx={{
                   fontSize: "30px",
