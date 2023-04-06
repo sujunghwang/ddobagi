@@ -108,7 +108,7 @@ function ReviewStudy() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${reviewNum[quizIndex]}/`
+        `https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${reviewNum[quizIndex]}/`
       );
       setQuizData(response.data);
       setVideoUrl(response.data.videoUrl.split(".be/")[1]);
