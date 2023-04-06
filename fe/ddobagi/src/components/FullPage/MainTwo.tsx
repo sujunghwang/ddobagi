@@ -55,7 +55,6 @@ export default function MainTwo() {
             marginBottom: "30px",
           }}
         >
-          {/* <img src={talk} alt="talk4" width="700px" height="350px" /> */}
           <Landing2Animation />
         </Box>
         <Box

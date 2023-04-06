@@ -9,7 +9,7 @@ import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/RootReducer";
 import Quiz from "../Word/WordQuiz";
-import WordCloseBtn from "../Word/WordCloseBtn";
+// import WordCloseBtn from "../Word/WordCloseBtn";
 import styles from "./Study.module.scss";
 import { useState, useEffect } from "react";
 import CorrectAnimation from "../animations/Correct";
@@ -84,23 +84,15 @@ function ReviewStudy() {
   };
 
   const location = useLocation();
-  // const categoryName = location.state?.categoryName;
-  // const situationTitle = location.state?.situationTitle;
-  // const color = location.state?.color;
   const situationId = location.state?.situationId;
   const userId = useSelector(
     (state: RootState) => state.inputUserInfo.payload.id
   );
   const reviewNum = location.state?.reviewNum;
 
-  // console.log(categoryName)
-  // console.log(situationTitle)
-  // console.log(color)
-  // console.log(situationId)
-  console.log(userId);
-  console.log(reviewNum);
+  // console.log(userId);
+  // console.log(reviewNum);
 
-  // const [quizIdData, setQuizIdData] = useState<number[]>([]);
   const [quizData, setQuizData] = useState<QuizData>();
   const [quizIndex, setQuizIndex] = useState<number>(0);
   const [videoUrl, setVideoUrl] = useState<string>("");
@@ -111,16 +103,6 @@ function ReviewStudy() {
   //
   console.log(isCorrect);
   console.log(isWrong);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await axios.get(`https://j8a608.p.ssafy.io/api/learnings/${situationId}`);
-  //     setQuizIdData(response.data);
-  //   };
-  //   fetchData();
-  // }, [situationId]);
-
-  // console.log(quizIdData)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -158,9 +140,6 @@ function ReviewStudy() {
 
   return (
     <div>
-      {/* <Box sx={{ marginTop:"30px", position: "absolute", top: 10, left: 0, m: 2 }}>
-        <WordCloseBtn width="280px" />
-      </Box> */}
       <div className={styles.loadAnime}>
         <div
           className={styles.Pin}
@@ -170,18 +149,6 @@ function ReviewStudy() {
         >
           <img src={"/img/running.gif"} alt="run" style={{ width: "50px" }} />
         </div>
-        {/* <div style={{ display: "none" }}>
-          <YouTube videoId={videoUrl} onReady={onPlayerReady} />
-        </div> */}
-        {/* <div
-          style={{
-            width: "fit-content",
-            marginLeft: `${Percentage}%`,
-            transform: "translate(-50%,0)",
-          }}
-        >
-          <TwoWheelerIcon color="success" fontSize="large" />
-        </div> */}
         <BorderLinearProgress
           variant="determinate"
           value={Percentage}
@@ -221,17 +188,6 @@ function ReviewStudy() {
             marginTop: "35px",
           }}
         >
-          {/* <div className={styles.scores}> */}
-          {/* <div
-            style={{
-              display: "flex",
-              float: "right",
-              paddingBottom: "20px",
-              fontSize: "22px",
-            }}
-          >
-            {quizIndex + 1} / {reviewNum.length}
-          </div> */}
           <div
             style={{
               marginTop: "60px",
@@ -331,7 +287,12 @@ function ReviewStudy() {
                 fontFamily: "CookieRun-Regular",
               }}
             >
-              정답입니다!
+              {language === "CN"
+              ? "回答正确！"
+              : language === "VI"
+              ? "Chính xác!"
+              : "정답입니다!"}
+              {/* 정답입니다! */}
             </Typography>
             <Box sx={{ height: "20px" }} />
             <Button
@@ -355,7 +316,12 @@ function ReviewStudy() {
               }}
               onClick={handleClose}
             >
-              확인
+              {language === "CN"
+              ? "确认"
+              : language === "VI"
+              ? "sự xác nhận"
+              : "확인"}
+              {/* 확인 */}
             </Button>
           </div>
         </div>
@@ -392,7 +358,12 @@ function ReviewStudy() {
                 fontFamily: "CookieRun-Regular",
               }}
             >
-              오답입니다!
+              {language === "CN"
+              ? "答错了！"
+              : language === "VI"
+              ? "Đáp án sai rồi!"
+              : "오답입니다!"}
+              {/* 오답입니다! */}
             </Typography>
             <Box sx={{ height: "20px" }} />
             <Button
@@ -416,14 +387,16 @@ function ReviewStudy() {
               }}
               onClick={handleClose}
             >
-              확인
+              {language === "CN"
+              ? "确认"
+              : language === "VI"
+              ? "sự xác nhận"
+              : "확인"}
+              {/* 확인 */}
             </Button>
           </div>
         </div>
       )}
-      {/* <div>
-        <YouTube videoId={quizData.videoUrl} onReady={onPlayerReady} />
-      </div> */}
       <div style={{ display: "none" }}>
         <YouTube videoId={videoUrl} onReady={onPlayerReady} />
       </div>

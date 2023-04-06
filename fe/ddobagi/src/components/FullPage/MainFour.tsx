@@ -60,7 +60,6 @@ export default function MainFour() {
             marginBottom: "30px",
           }}
         >
-          {/* <img src={support} alt="support" width="570px" height="420px" /> */}
           <Landing4Animation />
         </Box>
         <Box

@@ -16,8 +16,6 @@ import {
   Divider,
 } from "@mui/material";
 import ParentHeader from "../assets/ParentHeader.png";
-// import Background from '../components/ParentPage/Background';
-// import studyBtn from '../components/ParentPage/studyBtn';
 import "../components/ParentPage/hovertest.scss";
 import axios from "axios";
 import PaginationComponent from "../components/PaginationComponent";
@@ -26,9 +24,6 @@ import MapAnimation from "../components/animations/Map";
 import NewsAnimation from "../components/animations/News";
 import SupportAnimation from "../components/animations/Support";
 
-// interface StudyButtonProps {
-//   studyBtn: string;
-// }
 interface NewsType {
   id: number;
   title: string;
@@ -106,7 +101,7 @@ function ParentPage4() {
                 ? "JingNanMaiYuanTi"
                 : language === "VI"
                 ? "UVNHaiBaTrung"
-                : "MaplestoryOTFLight",
+                : "MaplestoryOTFBold",
           }}
         >
           {language === "CN"
@@ -319,11 +314,6 @@ function ParentPage4() {
         <Box
           sx={{
             width: "1200px",
-            // width: {
-            //   xs: '100%', // 모바일 크기에서는 100%의 너비를 가짐
-            //   sm: '50%', // 태블릿 크기에서는 50%의 너비를 가짐
-            //   md: '60%', // 데스크탑 크기에서는 33%의 너비를 가짐
-            // },
             height: "900px",
             backgroundColor: "#07449C",
             borderRadius: "20px",
