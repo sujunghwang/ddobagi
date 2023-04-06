@@ -202,7 +202,7 @@
 - docker container로 MySQL 배포
 
   ```bash
-  docker run -dp 3939:3306 --network ddobagi-net --network-alias ddobagi-db  --mount type=volume,src=ddobagi-vol,target=/var/lib/mysql --env MYSQL_ROOT_PASSWORD=Ehqkrl608! --env MYSQL_DATABASE=ddobagi --env MYSQL_USER=devs --env MYSQL_PASSWORD=Ehqkrl608! mysql:latest
+  docker run -dp 3939:3306 --network ddobagi-net --network-alias ddobagi-db  --mount type=volume,src=ddobagi-vol,target=/var/lib/mysql --env MYSQL_ROOT_PASSWORD={{루트 비밀번호}} --env MYSQL_DATABASE={{데이터베이스 이름}} --env MYSQL_USER=devs --env MYSQL_PASSWORD={{비밀번호}} mysql:latest
   ```
 
 <br/>  
@@ -363,7 +363,7 @@
 
   - URL : Jenkins 설정 시 확인한 GitLab webhook URL 입력
 
-    `http://j8a608.p.ssafy.io:8090/project/ddobagi` http://i8a810.p.ssafy.io:8888/project/Bundler Develop stage
+    `http://j8a608.p.ssafy.io:8090/project/ddobagi`
 
   - Trigger : 위에서 설정한 Trigger 설정
 
@@ -455,6 +455,11 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
   echo "docker run start"
   docker run -dp 3000:3000 --mount type=bind,src=$(pwd)/src,target=/react/src --name ddobagi-front-dev ${IMAGE_NAME}
   echo "docker run end"
+  ```
+
+- `/fe/ddobagi/` 경로에서 `.env`을 생성 후 작성합니다. 내용은 아래와 같습니다.
+  ```
+  REACT_APP_KAKAO_KEY = {{REACT_APP_KAKAO_KEY}}
   ```
 
 - [http://{도메인}:8090/](http://j8a608.p.ssafy.io:8090/) 에서 ddobagi→구성→소스 코드 관리→ 내려서 Build Steps에 Execute shell 추가
@@ -554,7 +559,7 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
   
   spring:
     datasource:
-        url: jdbc:mysql://{{도메인}}:3306/ddobagi?useUnicode=true&characterEncoding=utf-8
+        url: jdbc:mysql://{{도메인}}:3306/{{DB이름}}?useUnicode=true&characterEncoding=utf-8
   			username: {{사용자명}}
         password: {{비밀번호}}
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -577,6 +582,40 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
       serialization:
         write-dates-as-timestamps: false
       time-zone: Asia/Seoul
+  
+    main:
+      allow-bean-definition-overriding: true
+
+    config:
+      import: classpath:hidden.yml
+
+    http:
+      multipart:
+        maxFileSize: 20MB
+        maxRequestSize: 20MB
+
+  jwt:
+    secret: {{secret for jwt}}
+  ```
+
+- `be/ddobagi/src/main/resources` 위치에서
+   `sudo vi hidden.yml` : hidden.yml을 작성합니다. 작성 내용은 아래와 같습니다.
+
+  ```yaml
+  cloud:
+    aws:
+      credentials:
+        accessKey: {awsAccessKey}
+        secretKey: {awsSecretKey}
+      s3:
+        bucket: {bucketName}
+      region:
+        static: {regionStatic}
+
+  naver:
+    client:
+      id: {naverClientId}
+      secret: {naverSecret}
   ```
 
 - [http://{도메인}:8090/](http://j8a608.p.ssafy.io:8090/) 에서 ddobagi→구성→소스 코드 관리→ 내려서 Build Steps에 Execute shell 추가
@@ -685,6 +724,11 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
     echo "docker run end"
     ```
   
+- `/fe/ddobagi/` 경로에서 `.env`을 생성 후 작성합니다. 내용은 아래와 같습니다.
+  ```
+  REACT_APP_KAKAO_KEY = {{REACT_APP_KAKAO_KEY}}
+  ```
+
   - [http://{도메인}:8090/](http://j8a608.p.ssafy.io:8090/) 에서 ddobagi→구성→소스 코드 관리→ 내려서 Build Steps에 Execute shell 추가
   
     ```bash
@@ -767,44 +811,78 @@ Dockerfile, shell script(build.sh)는 gitlab repository에 포함되어 있습�
     ```
   
   - `be/ddobagi/src/main/ && mkdir resources` : resources 디렉토리를 생성합니다.
-     `sudo vi application.yml` : application.yml을 작성합니다. 작성 내용은 아래와 같습니다.
+   `sudo vi application.yml` : application.yml을 작성합니다. 작성 내용은 아래와 같습니다.
+
+  ```yaml
+  server:
+    port: 8081
   
-    ```yaml
-    server:
-      port: 8081
-    
-      servlet:
-        context-path: /
-        encoding:
-          charset: utf-8
-          enabled: true
-    
-    spring:
-      datasource:
-          url: jdbc:mysql://{{도메인}}:3306/ddobagi?useUnicode=true&characterEncoding=utf-8
-    			username: {{사용자명}}
-          password: {{비밀번호}}
-          driver-class-name: com.mysql.cj.jdbc.Driver
-      output.ansi.enabled: always
+    servlet:
+      context-path: /
+      encoding:
+        charset: utf-8
+        enabled: true
+  
+  spring:
+    datasource:
+        url: jdbc:mysql://{{도메인}}:3306/{{DB이름}}?useUnicode=true&characterEncoding=utf-8
+  			username: {{사용자명}}
+        password: {{비밀번호}}
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    output.ansi.enabled: always
+    jpa:
+      hibernate:
+        ddl-auto: create
+        use-new-id-generator-mappings: false
+      show-sql: false
+      properties:
+        hibernate:
+          format_sql: true
       jpa:
         hibernate:
           ddl-auto: create
-          use-new-id-generator-mappings: false
-        show-sql: false
         properties:
           hibernate:
             format_sql: true
-        jpa:
-          hibernate:
-            ddl-auto: create
-          properties:
-            hibernate:
-              format_sql: true
-      jackson:
-        serialization:
-          write-dates-as-timestamps: false
-        time-zone: Asia/Seoul
-    ```
+    jackson:
+      serialization:
+        write-dates-as-timestamps: false
+      time-zone: Asia/Seoul
+  
+    main:
+      allow-bean-definition-overriding: true
+
+    config:
+      import: classpath:hidden.yml
+
+    http:
+      multipart:
+        maxFileSize: 20MB
+        maxRequestSize: 20MB
+
+  jwt:
+    secret: {{secret for jwt}}
+  ```
+
+- `be/ddobagi/src/main/resources` 위치에서
+   `sudo vi hidden.yml` : hidden.yml을 작성합니다. 작성 내용은 아래와 같습니다.
+
+  ```yaml
+  cloud:
+    aws:
+      credentials:
+        accessKey: {awsAccessKey}
+        secretKey: {awsSecretKey}
+      s3:
+        bucket: {bucketName}
+      region:
+        static: {regionStatic}
+
+  naver:
+    client:
+      id: {naverClientId}
+      secret: {naverSecret}
+  ```
   
   - [http://{도메인}:8090/](http://j8a608.p.ssafy.io:8090/) 에서 ddobagi→구성→소스 코드 관리→ 내려서 Build Steps에 Execute shell 추가
   

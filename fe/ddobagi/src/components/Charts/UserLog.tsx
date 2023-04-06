@@ -96,7 +96,7 @@ function UserLog({ statistics }: Props) {
                 }}
               >
                 {" "}
-                x {statistics.recordedScriptCount}
+                x {statistics.studiedQuizCount}
               </Typography>
             </div>
           </div>
@@ -129,7 +129,7 @@ function UserLog({ statistics }: Props) {
                 }}
               >
                 {" "}
-                x {statistics.studiedQuizCount}{" "}
+                x {statistics.recordedScriptCount}{" "}
               </Typography>
             </div>
           </div>
