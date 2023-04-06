@@ -65,7 +65,7 @@ function ParentPage1() {
     const fetchData = async () => {
       try {
         const result = await axios.get(
-          `https://j8a608.p.ssafy.io/api/users/${userId}/parents/statistics`
+          `http://j8a608.p.ssafy.io:8080/api/users/${userId}/parents/statistics`
         );
         setChartData(result.data);
       } catch (error) {

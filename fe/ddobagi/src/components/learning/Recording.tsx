@@ -26,6 +26,7 @@ async function convertWebmToWav(blob: Blob) {
 }
 
 interface Props {
+  index: number,
   situationId: number;
   scriptId: number;
   item: {
@@ -42,6 +43,8 @@ interface Props {
   play: (start: number, end: number) => void;
   recordedUrl: string;
   pronounce: number;
+  setRecord: Function;
+  record: Array<null | string>
 }
 
 const Recording = (props: Props) => {
@@ -69,7 +72,7 @@ const Recording = (props: Props) => {
       const url = URL.createObjectURL(convertedBlob);
       setBlobUrl(url);
       const response = await axios.post(
-        "https://j8a608.p.ssafy.io/api/conversations/record",
+        "http://j8a608.p.ssafy.io:8080/api/conversations/record",
         formData,
         {
           headers: {
@@ -79,6 +82,9 @@ const Recording = (props: Props) => {
       );
       const roundedNum: number = Math.round(response.data * 10) / 10; // 소수 첫째자리까지
       setScore(roundedNum);
+      const newrecords = [...props.record]
+      newrecords[props.index] = "done"
+      props.setRecord(newrecords)
     } catch (error) {
       console.error(error);
     }
@@ -151,11 +157,11 @@ const Recording = (props: Props) => {
       </div>
       {score > 2 || props.pronounce > 2 ? (
         <div className={styles.confirmMark}>
-          {props.pronounce ? props.pronounce.toFixed(1) : score}
+          {score === 0 ? props.pronounce.toFixed(1) : score}
         </div>
       ) : (
         <div className={styles.noConfirmMark}>
-          {props.pronounce ? props.pronounce.toFixed(1) : score}
+          {score === 0 ? props.pronounce.toFixed(1) : score}
         </div>
       )}
       <audio src={blobUrl} ref={audioRef}></audio>

@@ -96,28 +96,33 @@ function ConversationStudy() {
     pronounce: number;
   }
   const [scripts, setScripts] = useState<Script[]>([]);
+  const [record, setRecord] = useState<Array<null | string>>([]);
 
   useEffect(() => {
     const fetchScript = async () => {
       try {
         const response = await axios.get<Script[]>(
-          `https://j8a608.p.ssafy.io/api/conversations/${situationId}/${userId}/script`
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}/${userId}/script`
         );
         const newScripts = [];
+        const recordArray = []
         if (language === "VI") {
           for (const item of response.data) {
             if (item.lang === "VI") {
               newScripts.push(item);
+              recordArray.push(item.recordedUrl)
             }
           }
         } else {
           for (const item of response.data) {
             if (item.lang === "CN") {
               newScripts.push(item);
+              recordArray.push(item.recordedUrl)
             }
           }
         }
         setScripts(newScripts);
+        setRecord(recordArray)
       } catch (error) {
         console.error(error);
       }
@@ -153,7 +158,7 @@ function ConversationStudy() {
     const fetchVideoInfo = async () => {
       try {
         const response = await axios.get<MapType>(
-          `https://j8a608.p.ssafy.io/api/conversations/${situationId}`
+          `http://j8a608.p.ssafy.io:8080/api/conversations/${situationId}`
         );
         setVideoInfo(response.data);
       } catch (error) {
@@ -167,8 +172,6 @@ function ConversationStudy() {
   const videoId = videoInfo?.situationVideoUrl.split(".be/")[1];
   const videoDescription = videoInfo?.lang[language]?.desc;
   //
-
-  const [record, setRecord] = useState<number>(0);
 
   // 왼쪽 컨테이너에 애니메이션을 적용
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -188,22 +191,8 @@ function ConversationStudy() {
     };
   }, []);
 
-  // 녹음 결과를 가져옵니다.
-  useEffect(() => {
-    const fetchRecordInfo = async () => {
-      try {
-        const response = await axios.get<number>(
-          `https://j8a608.p.ssafy.io/api/conversations/${situationId}/${userId}/record`
-        );
-        setRecord(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchRecordInfo();
-  });
-  const Percentage = (record / scripts.length) * 100;
+  const Gage = record.filter(item => item !== null).length
+  const Percentage = (Gage / scripts.length) * 100;
 
   return (
     <>
@@ -212,6 +201,7 @@ function ConversationStudy() {
           className={styles.Pin}
           style={{
             marginLeft: `${Percentage}%`,
+            transition: "margin .5s ease-in"
           }}
         >
           <img src={"/img/running.gif"} alt="run" style={{ width: "50px" }} />
@@ -230,7 +220,7 @@ function ConversationStudy() {
             marginTop: ".5rem",
           }}
         >
-          {record} / {scripts.length}
+          {Gage} / {scripts.length}
         </div>
       </div>
       <div className={styles.FullContainer}>
@@ -295,6 +285,7 @@ function ConversationStudy() {
                     </div>
                     <div className={styles.BtnGroup}>
                       <Recording
+                        index={index}
                         situationId={situationId}
                         scriptId={item.scriptId}
                         item={item}
@@ -302,6 +293,8 @@ function ConversationStudy() {
                         play={play}
                         recordedUrl={item.recordedUrl}
                         pronounce={item.pronounce}
+                        setRecord={setRecord}
+                        record={record}
                       />
                     </div>
                   </div>

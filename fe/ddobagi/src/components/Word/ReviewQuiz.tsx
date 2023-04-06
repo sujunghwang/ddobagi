@@ -64,7 +64,7 @@ const ReviewQuiz: React.FC<QuizProps> = ({
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `https://j8a608.p.ssafy.io/api/quizzes/${userId}/question/${quizId}/`
+          `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/question/${quizId}/`
         );
         setQuizData(response.data);
         // options와 answer를 합침
@@ -99,7 +99,7 @@ const ReviewQuiz: React.FC<QuizProps> = ({
   // const quizData = quizdata3
   const CorrectWord = () => {
     axios({
-      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
+      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
@@ -120,7 +120,7 @@ const ReviewQuiz: React.FC<QuizProps> = ({
 
   const WrongWord = () => {
     axios({
-      url: `https://j8a608.p.ssafy.io/api/quizzes/${userId}/${quizId}`,
+      url: `http://j8a608.p.ssafy.io:8080/api/quizzes/${userId}/${quizId}`,
       method: "POST",
       // withCredentials: true,
       data: {
