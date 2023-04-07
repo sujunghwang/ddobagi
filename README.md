@@ -37,13 +37,13 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 
 ## 개발환경
 
-![개발환경](/uploads/114b5675068686e73ea01ac7a5e665f2/DDOBAGI_개발환경.png)
+![개발환경](./assets/DDOBAGI_개발환경.png)
 
 
 
 ## 시스템 아키텍처
 
-![아키텍처](/uploads/6bd0dae94d1dbe3378329466a8f65bad/시스템구성도.png)
+![아키텍처](./assets/시스템구성도.png)
 
 
 
@@ -238,32 +238,32 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
     <tr>
         <td align="center">
         <a href="">
-          <img src="/uploads/b4b53f04a565d5c31904758a3077e490/cjy.png" alt="최지연 프로필" width=120 height=120 />
+          <img src="./assets/cjy.png" alt="최지연 프로필" width=120 height=120 />
         </a>
       </td>
       <td align="center">
         <a href="">
-          <img src="/uploads/488d8b1bffbeb6fff1f74b88497887af/kcb.png" alt="김찬빈 프로필" width=120 height=120 />
+          <img src="./assets/kcb.png" alt="김찬빈 프로필" width=120 height=120 />
         </a>
       </td>
       <td align="center">
         <a href="">
-          <img src="/uploads/e47b69515d5e712cae733b7387c1b359/lhj.png" alt="이혜지 프로필" width=120 height=120 />
+          <img src="./assets/lhj.png" alt="이혜지 프로필" width=120 height=120 />
         </a>
       </td>
       <td align="center">
         <a href="">
-          <img src="/uploads/5f0d1b4d20e64dc2f07cb6890726034e/lsj.png" alt="임성준 프로필" width=120 height=120 />
+          <img src="./assets/lsj.png" alt="임성준 프로필" width=120 height=120 />
         </a>
       </td>
       <td align="center">
         <a href="">
-          <img src="/uploads/9334d71c7a1dac1818fbe0e407b08718/jhj.png" alt="정희주 프로필" width=120 height=120 />
+          <img src="./assets/jhj.png" alt="정희주 프로필" width=120 height=120 />
         </a>
       </td>
       <td align="center">
         <a href="">
-          <img src="/uploads/09b184e26c8790fc3040b28dcd79606c/hsj.png" alt="황수정 프로필" width=120 height=120 />
+          <img src="./assets/hsj.png" alt="황수정 프로필" width=120 height=120 />
         </a>
       </td>
     </tr>
