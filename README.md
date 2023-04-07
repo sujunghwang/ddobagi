@@ -111,7 +111,7 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 
 #### 랜딩페이지
 
-![랜딩페이지.gif](/uploads/b9dc582dc434697c773940e29f99067b/landing.gif)
+![랜딩페이지.gif](https://user-images.githubusercontent.com/64738942/230517576-dd86f21c-b74e-4424-831b-7bd7cafc94d6.gif)
 
 #### 로그인 & 로그아웃(jwt)
 
