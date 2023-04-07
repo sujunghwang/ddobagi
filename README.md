@@ -118,7 +118,7 @@ git clone https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608.git
 - 우측 상단에 로그인 버튼을 통해 로그인을 진행할 수 있습니다
 - 로그인을 한 사용자만 서비스를 이용하기 위한 스튜디오를 생성할 수 있습니다.
 
-![로그인.gif](/uploads/6eb08bfaf4915b0145dceca4b1159ce2/login.gif)
+![로그인.gif](https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A608/uploads/6eb08bfaf4915b0145dceca4b1159ce2/login.gif)
 
 
 
